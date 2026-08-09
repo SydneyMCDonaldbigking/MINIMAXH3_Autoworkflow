@@ -15,6 +15,7 @@ python -m pip install -r requirements.txt
 - `h3_server_setup.py`: SSH bootstrap for installing/updating ComfyUI and H3.
 - `h3_runner.py`: local API runner for text/image/reference video jobs.
 - `cluster_runner.py`: local SSH cluster dispatcher for batch H3 jobs.
+- `BRAND_ASSETS.md`: local brand/logo memory for Image2 and MiniMax H3 jobs.
 - `SERVER_H3_RUNBOOK.md`: distilled server environment and workflow runbook.
 - `MINIMAX_H3_15S_STORYBOARD_WORKFLOW.md`: one-shot 10s/15s storyboard + Image2 opening-frame workflow.
 - `CLUSTER_RUNNER.md`: multi-server batch runner documentation.
