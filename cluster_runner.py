@@ -46,6 +46,15 @@ DEFAULT_DURATION = 15.0
 DEFAULT_STEPS = 4
 DEFAULT_POLL = 10.0
 DEFAULT_TIMEOUT = 21600.0
+REQUIRED_MODEL_FILES = (
+    "models/diffusion_models/minimax_h3_fl2va_pruned_int8_convrot.safetensors",
+    "models/diffusion_models/minimax_h3_ref2va_pruned_int8_convrot.safetensors",
+    "models/text_encoders/qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors",
+    "models/vae/minimax_h3_video_vae_fp16.safetensors",
+    "models/vae/minimax_h3_audio_vae_fp32.safetensors",
+    "models/loras/minimax_h3_turbo_v4_step600_ema.safetensors",
+    "custom_nodes/ComfyUI-MiniMax-H3-Turbo/__init__.py",
+)
 
 
 class ClusterError(RuntimeError):
@@ -635,6 +644,113 @@ exit 4
     remote_bash(worker, script, timeout=240)
 
 
+def build_check_script(worker: Worker) -> str:
+    model_checks = "\n".join(
+        f"check_file {q(worker.comfy_dir.rstrip('/') + '/' + path)}"
+        for path in REQUIRED_MODEL_FILES
+    )
+    return f"""
+set +e
+echo "## worker={worker.label}"
+echo "## ssh_target={worker.ssh_target}:{worker.ssh_port}"
+echo "## comfy_url={worker.server_url}"
+
+check_file() {{
+  if [ -f "$1" ]; then
+    SIZE="$(du -h "$1" 2>/dev/null | awk '{{print $1}}')"
+    echo "OK file $1 $SIZE"
+  else
+    echo "MISSING file $1"
+  fi
+}}
+
+check_dir() {{
+  if [ -d "$1" ]; then
+    echo "OK dir $1"
+  else
+    echo "MISSING dir $1"
+  fi
+}}
+
+echo "== system =="
+hostname 2>/dev/null || true
+date 2>/dev/null || true
+uname -a 2>/dev/null || true
+df -h / {q(worker.comfy_dir)} 2>/dev/null || df -h / 2>/dev/null || true
+
+echo "== gpu =="
+if command -v nvidia-smi >/dev/null 2>&1; then
+  nvidia-smi --query-gpu=index,name,memory.total,memory.used,driver_version --format=csv,noheader,nounits 2>/dev/null || nvidia-smi
+else
+  echo "MISSING command nvidia-smi"
+fi
+
+echo "== conda =="
+if [ -f {q(worker.conda_sh)} ]; then
+  echo "OK conda_sh {worker.conda_sh}"
+  source {q(worker.conda_sh)}
+else
+  echo "MISSING conda_sh {worker.conda_sh}"
+fi
+if command -v conda >/dev/null 2>&1; then
+  conda env list 2>/dev/null | sed -n '1,40p'
+  if conda env list 2>/dev/null | awk '{{print $1}}' | grep -qx {q(worker.conda_env)}; then
+    echo "OK conda_env {worker.conda_env}"
+  else
+    echo "MISSING conda_env {worker.conda_env}"
+  fi
+else
+  echo "MISSING command conda"
+fi
+
+echo "== python/torch =="
+if command -v conda >/dev/null 2>&1; then
+  conda activate {q(worker.conda_env)} >/dev/null 2>&1
+fi
+{q(worker.python)} - <<'PY' 2>&1
+import sys
+print("python:", sys.version.replace("\\n", " "))
+try:
+    import torch
+    print("torch:", torch.__version__)
+    print("torch_cuda:", torch.version.cuda)
+    print("cuda_available:", torch.cuda.is_available())
+    if torch.cuda.is_available():
+        print("gpu_name:", torch.cuda.get_device_name(0))
+        props = torch.cuda.get_device_properties(0)
+        print("vram_gb:", round(props.total_memory / 1024**3, 2))
+except Exception as exc:
+    print("torch_check_error:", repr(exc))
+PY
+
+echo "== comfyui files =="
+check_dir {q(worker.comfy_dir)}
+check_file {q(worker.comfy_dir.rstrip('/') + '/main.py')}
+check_file {q(worker.comfy_dir.rstrip('/') + '/h3_runner.py')}
+{model_checks}
+
+echo "== comfyui api =="
+if curl -fsS {q(worker.server_url + "/system_stats")} >/tmp/cluster_comfy_stats.json 2>/dev/null; then
+  echo "OK comfy_running {worker.server_url}"
+  head -c 1000 /tmp/cluster_comfy_stats.json
+  echo
+  {q(worker.python)} - <<'PY' 2>&1
+import json, urllib.request
+url = {worker.server_url!r} + "/object_info"
+nodes = ["MiniMaxH3TurboLoRA", "MiniMaxH3TurboSampler", "MiniMaxH3ImageToVideo", "MiniMaxH3ReferenceToVideo"]
+try:
+    obj = json.load(urllib.request.urlopen(url, timeout=30))
+    for node in nodes:
+        print(("OK node " if node in obj else "MISSING node ") + node)
+except Exception as exc:
+    print("object_info_error:", repr(exc))
+PY
+else
+  echo "NOT_RUNNING comfy {worker.server_url}"
+fi
+"""
+
+
 def upload_runner_if_needed(worker: Worker, dry_run: bool = False) -> None:
     if not worker.upload_runner:
         return
@@ -947,6 +1063,47 @@ def command_plan(args: argparse.Namespace) -> int:
     return 0
 
 
+def check_one_worker(worker: Worker, args: argparse.Namespace) -> tuple[Worker, str, str | None]:
+    try:
+        if args.upload_runner:
+            upload_runner_if_needed(worker, dry_run=False)
+        if args.start_comfy:
+            ensure_comfy_running(worker, dry_run=False)
+        output = remote_bash(worker, build_check_script(worker), timeout=args.timeout)
+        return worker, output, None
+    except Exception as exc:  # noqa: BLE001 - surface as per-worker check result
+        return worker, "", str(exc)
+
+
+def command_check(args: argparse.Namespace) -> int:
+    workers = parse_servers(Path(args.servers))
+    if args.limit:
+        workers = workers[: args.limit]
+    max_parallel = min(len(workers), int(args.max_parallel or len(workers)))
+    print(
+        f"Checking workers={len(workers)} parallel={max_parallel} "
+        f"start_comfy={args.start_comfy} upload_runner={args.upload_runner}"
+    )
+    failures = 0
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max_parallel) as pool:
+        futures = [pool.submit(check_one_worker, worker, args) for worker in workers]
+        for future in concurrent.futures.as_completed(futures):
+            worker, output, error_text = future.result()
+            print("=" * 80)
+            print(f"CHECK {worker.label}")
+            print("=" * 80)
+            if output:
+                print(output.rstrip())
+            if error_text:
+                failures += 1
+                print(f"ERROR {worker.label}: {error_text}")
+    if failures:
+        print(f"Check completed with {failures} failed worker(s).")
+        return 1
+    print("Check completed.")
+    return 0
+
+
 def command_run(args: argparse.Namespace) -> int:
     workers = parse_servers(Path(args.servers))
     batch_id, jobs = parse_jobs(Path(args.jobs))
@@ -1053,6 +1210,15 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     add_common(plan)
     plan.add_argument("--limit", type=int, default=None)
     plan.set_defaults(func=command_plan)
+
+    check = sub.add_parser("check", help="check SSH workers, conda, ComfyUI, models, and API")
+    check.add_argument("--servers", default="servers.yaml")
+    check.add_argument("--max-parallel", type=int, default=None)
+    check.add_argument("--limit", type=int, default=None)
+    check.add_argument("--timeout", type=float, default=300)
+    check.add_argument("--start-comfy", action="store_true")
+    check.add_argument("--upload-runner", action="store_true")
+    check.set_defaults(func=command_check)
 
     run = sub.add_parser("run", help="dispatch jobs to SSH workers")
     add_common(run)

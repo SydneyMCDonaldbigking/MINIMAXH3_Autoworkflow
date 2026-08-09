@@ -519,6 +519,13 @@ sleep 3
 nvidia-smi
 ```
 
+For cluster preflight from the local controller:
+
+```powershell
+python cluster_runner.py check --servers servers.yaml
+python cluster_runner.py check --servers servers.yaml --upload-runner --start-comfy
+```
+
 ## 13. Short Boss Summary
 
 Current A100 40G MiniMax H3 Turbo result:

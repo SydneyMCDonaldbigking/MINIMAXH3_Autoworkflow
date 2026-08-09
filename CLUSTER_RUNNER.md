@@ -111,6 +111,22 @@ Edit `servers.yaml` and `jobs.yaml`, then validate:
 python cluster_runner.py validate --servers servers.yaml --jobs jobs.yaml
 ```
 
+Preflight-check SSH servers before running paid jobs:
+
+```powershell
+python cluster_runner.py check --servers servers.yaml
+```
+
+This checks SSH, GPU/driver, conda env, PyTorch/CUDA, ComfyUI files, required
+MiniMax H3 model files, Turbo LoRA files, and the ComfyUI API/node status if the
+worker port is already running.
+
+To also upload the latest `h3_runner.py` and start ComfyUI if it is down:
+
+```powershell
+python cluster_runner.py check --servers servers.yaml --upload-runner --start-comfy
+```
+
 Print the assignment plan:
 
 ```powershell

@@ -210,3 +210,12 @@ Print the remote shell commands without running them:
 ```bash
 python h3_server_setup.py --ssh user@SERVER_IP --print-only
 ```
+
+## Cluster preflight
+
+Before running a batch across old/new servers:
+
+```powershell
+python cluster_runner.py check --servers servers.yaml
+python cluster_runner.py check --servers servers.yaml --upload-runner --start-comfy
+```
