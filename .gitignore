@@ -1,0 +1,38 @@
+# Generated media and local test outputs
+server_outputs/
+tutorial_frames/
+*.mp4
+*.mov
+*.mkv
+*.avi
+*.webm
+*.jpg
+*.jpeg
+*.png
+*.gif
+
+# Large ComfyUI / model artifacts
+models/
+*.safetensors
+*.ckpt
+*.pt
+*.pth
+*.bin
+*.onnx
+
+# Python cache / virtual envs
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Local editor / OS files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Runtime logs
+*.log
+*.pid
