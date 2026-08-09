@@ -4,12 +4,21 @@ This folder contains a small Python runner that can control a remote ComfyUI
 server through the ComfyUI HTTP API. It is designed for a headless Linux A100
 server.
 
+For the SSH cluster dispatcher, install optional local dependencies:
+
+```bash
+python -m pip install -r requirements.txt
+```
+
 ## Files
 
 - `h3_server_setup.py`: SSH bootstrap for installing/updating ComfyUI and H3.
 - `h3_runner.py`: local API runner for text/image/reference video jobs.
+- `cluster_runner.py`: local SSH cluster dispatcher for batch H3 jobs.
 - `SERVER_H3_RUNBOOK.md`: distilled server environment and workflow runbook.
 - `MINIMAX_H3_15S_STORYBOARD_WORKFLOW.md`: one-shot 10s/15s storyboard + Image2 opening-frame workflow.
+- `CLUSTER_RUNNER.md`: multi-server batch runner documentation.
+- `servers.example.yaml`, `jobs.example.yaml`: cluster config templates.
 - `server_scripts/install_h3_turbo.sh`: server-side Turbo LoRA installer.
 - `server_scripts/run_h3_turbo_probe.sh`: server-side Turbo LoRA speed probe.
 - `workflows/*.json`: generated ComfyUI API JSON examples.

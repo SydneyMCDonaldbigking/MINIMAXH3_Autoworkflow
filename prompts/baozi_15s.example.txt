@@ -1,0 +1,47 @@
+Create one 15-second photorealistic premium grocery food commercial.
+
+REFERENCE USE:
+[Image 1] is the Image2-generated opening frame and strongest composition anchor.
+[Image 2] is the chef hands / model reference.
+[Image 3] is the steamed bun product and packaging reference.
+[Image 4] is the product plus company logo / official brand lockup reference.
+[Image 5] is the warm kitchen scene reference.
+Use the references to preserve the steamed bun identity, soft white dough,
+package/product shape, brand region, chef-hand style, kitchen lighting, and
+premium grocery color grade.
+
+VISUAL STYLE:
+Photorealistic premium food commercial, warm restaurant-kitchen light, realistic
+flour, dough, steam, cookware, and hand motion. No face, no subtitles, no title
+cards, no watermarks, no extra logos.
+
+STORYBOARD:
+0-3s: Medium close-up hook shot on chef hands shaping soft white steamed bun
+dough on a floured stainless counter, with the product/package and official
+brand prop visible near the edge of the frame. Slow controlled dolly-in from a
+natural 50mm product angle, ending on the bun shape and flour texture.
+3-6s: Hands lift the finished bun and move it toward a real stovetop steamer.
+Camera follows the bun gently from counter to steamer, preserving the same warm
+kitchen background and chef sleeves. End as the bun lands inside the steamer.
+6-9s: Close-up heat proof: the steamer lid lowers, condensation forms, then
+steam curls around the lid edge. Camera pushes into the steam and rack-focuses
+from lid condensation to the bun shape inside.
+9-12s: The lid opens and steam reveals plump glossy buns. A hand lifts one bun
+with tongs or fingers, showing soft surface texture and appetizing heat. End on
+a clean close-up of the bun being placed onto a plate.
+12-15s: Final hero on the same kitchen counter: plated steamed buns with soft
+steam, warm highlights, and the product/package naturally returning in the
+background if composition allows. Slow premium push-in, ending on an ad-ready
+food hero frame.
+
+CONTINUITY:
+Keep the product as steamed buns across all shots; do not turn them into soup
+dumplings, meat buns, tangyuan, or unrelated pastries. Preserve the same
+kitchen, hands, white chef sleeves, warm lighting, table layout, and product
+identity. The brand/package must read in the opening shot, but later stove and
+steam shots may focus naturally on cooking and texture.
+
+NEGATIVE:
+No face, no deformed hands, no extra fingers, no fake prices, no fake app UI,
+no misspelled logo, no floating logo overlay, no subtitles, no captions, no
+title card, no watermark, no sudden new kitchen, no product mutation.

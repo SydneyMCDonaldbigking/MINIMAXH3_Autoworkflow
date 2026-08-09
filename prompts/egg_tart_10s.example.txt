@@ -1,0 +1,38 @@
+Create one 10-second photorealistic premium bakery commercial.
+
+REFERENCE USE:
+[Image 1] is the Image2-generated opening frame and strongest composition anchor.
+[Image 2] is the egg tart product and packaging reference.
+[Image 3] is the product plus company logo / official brand lockup reference.
+[Image 4] is the warm bakery scene reference.
+Use the references to preserve the golden custard tart identity, flaky pastry
+rim, product/package shape, brand region, bakery counter, warm lighting, and
+premium grocery color grade.
+
+VISUAL STYLE:
+Photorealistic premium bakery food commercial, warm oven light, crisp pastry
+texture, glossy custard surface, realistic hand motion. No face, no subtitles,
+no title cards, no watermarks, no extra logos.
+
+STORYBOARD:
+0-2s: Opening product hook begins from the visual logic of [Image 1], with the
+egg tart package and brand prop readable near a warm bakery counter. Slow
+controlled push-in ending on the golden tart surface.
+2-4s: A hand lifts one tart from the tray with gentle motion, showing flaky
+edges and glossy custard. Camera tracks the tart from tray to plate.
+4-6s: Extreme close-up texture proof: pastry flakes break lightly and custard
+surface catches warm highlights. Rack focus from crisp rim to creamy center.
+6-8s: Lifestyle serving beat in the same bakery scene: the tart lands on a
+small plate beside coffee or tea, with soft steam and warm shadows.
+8-10s: Final hero: plated egg tart in a clean premium composition, product pack
+naturally in the background if it fits. Slow settle ending on an ad-ready frame.
+
+CONTINUITY:
+Preserve the same egg tart product, bakery counter, warm lighting, hand style,
+package shape, and brand region. Opening logo/package readability matters; later
+food close-ups should focus naturally on texture.
+
+NEGATIVE:
+No face, no deformed hands, no product mutation, no fake prices, no fake UI, no
+misspelled logo, no subtitles, no captions, no floating logo overlays, no title
+cards, no watermark, no scene teleporting.

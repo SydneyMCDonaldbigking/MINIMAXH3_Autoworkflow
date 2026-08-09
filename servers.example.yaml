@@ -1,0 +1,32 @@
+defaults:
+  user: root
+  ssh_port: 22
+  comfy_dir: /root/ComfyUI
+  conda_sh: /home/node/anaconda3/etc/profile.d/conda.sh
+  conda_env: comfy_h3_torch29_cu126
+  python: python
+  lowvram: true
+  auto_start: true
+  upload_runner: true
+  remote_job_root: cluster_jobs
+
+servers:
+  - name: a100-cn-01
+    host: 0.0.0.0
+    ssh_port: 22
+    workers:
+      - name: gpu0
+        gpu: 0
+        comfy_port: 8189
+
+  # Multi-GPU example: one ComfyUI worker per GPU.
+  # - name: six-card-box
+  #   host: 0.0.0.0
+  #   ssh_port: 22
+  #   workers:
+  #     - {name: gpu0, gpu: 0, comfy_port: 8188}
+  #     - {name: gpu1, gpu: 1, comfy_port: 8189}
+  #     - {name: gpu2, gpu: 2, comfy_port: 8190}
+  #     - {name: gpu3, gpu: 3, comfy_port: 8191}
+  #     - {name: gpu4, gpu: 4, comfy_port: 8192}
+  #     - {name: gpu5, gpu: 5, comfy_port: 8193}

@@ -1,0 +1,37 @@
+batch_id: demo-food-ads
+
+defaults:
+  mode: r2v
+  width: 1344
+  height: 768
+  duration: 15
+  steps: 4
+  turbo: true
+  turbo_low_vram: false
+  ref_image_size: match
+  poll: 10
+  timeout: 21600
+
+jobs:
+  - id: baozi-15s
+    prompt_file: prompts/baozi_15s.example.txt
+    # Image 1 should be the Image2/OpenRouter opening frame.
+    ref_images:
+      - assets/baozi/image2-opening-frame.png
+      - assets/baozi/model-or-hands.png
+      - assets/baozi/product.png
+      - assets/baozi/product-logo.png
+      - assets/baozi/scene.png
+    seed: 2026080901
+    prefix: cluster/demo-food-ads/baozi-15s
+
+  - id: egg-tart-10s
+    duration: 10
+    prompt_file: prompts/egg_tart_10s.example.txt
+    ref_images:
+      - assets/egg_tart/image2-opening-frame.png
+      - assets/egg_tart/product.png
+      - assets/egg_tart/product-logo.png
+      - assets/egg_tart/bakery-scene.png
+    seed: 2026080902
+    prefix: cluster/demo-food-ads/egg-tart-10s

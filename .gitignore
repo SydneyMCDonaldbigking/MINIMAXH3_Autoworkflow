@@ -1,5 +1,7 @@
 # Generated media and local test outputs
 server_outputs/
+cluster_outputs/
+.cluster_runtime/
 tutorial_frames/
 *.mp4
 *.mov
@@ -36,3 +38,7 @@ Thumbs.db
 # Runtime logs
 *.log
 *.pid
+
+# Local cluster configs may contain hosts or private paths
+servers.yaml
+jobs.yaml
