@@ -14,10 +14,17 @@ python -m pip install -r requirements.txt
 
 - `h3_server_setup.py`: SSH bootstrap for installing/updating ComfyUI and H3.
 - `h3_runner.py`: local API runner for text/image/reference video jobs.
+- `image2_first_frame.py`: OpenRouter GPT Image 2 first-frame runner.
 - `cluster_runner.py`: local SSH cluster dispatcher for batch H3 jobs.
+- `h3_sequence_runner.py`: runs 3x5s MiniMax H3 clips sequentially and stitches them.
+- `generate_reference_assets.ps1`: generates protagonist, scene, mid-state, and final-state Seedream references before H3.
 - `BRAND_ASSETS.md`: local brand/logo memory for Image2 and MiniMax H3 jobs.
 - `SERVER_H3_RUNBOOK.md`: distilled server environment and workflow runbook.
+- `MIGRATION_A100_H3.md`: short A100 migration and production cheat sheet.
+- `BENCHMARKS_2026-08-09.md`: A100/L40 MiniMax H3 Turbo setup and speed results.
 - `MINIMAX_H3_15S_STORYBOARD_WORKFLOW.md`: one-shot 10s/15s storyboard + Image2 opening-frame workflow.
+- `MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md`: A100-40G native vertical 1080 workaround using three stitched 5s clips.
+- `IMAGE2_FIRST_FRAME_RUNBOOK.md`: `.env.local` setup and first-frame commands.
 - `CLUSTER_RUNNER.md`: multi-server batch runner documentation.
 - `servers.example.yaml`, `jobs.example.yaml`: cluster config templates.
 - `server_scripts/install_h3_turbo.sh`: server-side Turbo LoRA installer.

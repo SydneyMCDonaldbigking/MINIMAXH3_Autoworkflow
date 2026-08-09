@@ -8,6 +8,7 @@ defaults:
   steps: 4
   turbo: true
   turbo_low_vram: false
+  no_audio: true
   ref_image_size: match
   poll: 10
   timeout: 21600

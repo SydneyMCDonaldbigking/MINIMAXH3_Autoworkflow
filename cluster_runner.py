@@ -325,6 +325,7 @@ class Job:
     seed: int | None
     turbo: bool
     turbo_low_vram: bool
+    no_audio: bool
     turbo_strength: float
     turbo_lora: str | None
     ref_image_size: str
@@ -482,6 +483,7 @@ def parse_jobs(path: Path) -> tuple[str, list[Job]]:
                 seed=int(item["seed"]) if item.get("seed") is not None else None,
                 turbo=as_bool(item.get("turbo"), True),
                 turbo_low_vram=as_bool(item.get("turbo_low_vram"), False),
+                no_audio=as_bool(item.get("no_audio"), True),
                 turbo_strength=float(item.get("turbo_strength") or 1.0),
                 turbo_lora=(
                     str(item["turbo_lora"]) if item.get("turbo_lora") else None
@@ -807,6 +809,8 @@ def build_remote_run_script(
         lines.append("  --turbo")
     if job.turbo_low_vram:
         lines.append("  --turbo-low-vram")
+    if job.no_audio:
+        lines.append("  --no-audio")
     if job.turbo_strength != 1.0:
         lines.append(f"  --turbo-strength {job.turbo_strength}")
     if job.turbo_lora:
@@ -853,6 +857,7 @@ def snapshot_job(local_dir: Path, worker: Worker, job: Job) -> None:
         "seed": job.seed,
         "turbo": job.turbo,
         "turbo_low_vram": job.turbo_low_vram,
+        "no_audio": job.no_audio,
         "prefix": job.prefix,
         "prompt_source": job.prompt_source,
         "ref_images": [str(p) for p in job.ref_images],

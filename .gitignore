@@ -1,6 +1,8 @@
 # Generated media and local test outputs
 server_outputs/
 cluster_outputs/
+sequence_outputs/
+outputs/
 .cluster_runtime/
 tutorial_frames/
 *.mp4
@@ -12,6 +14,8 @@ tutorial_frames/
 *.jpeg
 *.png
 *.gif
+*.tar.gz
+*.zip
 
 # Large ComfyUI / model artifacts
 models/
@@ -34,6 +38,10 @@ env/
 Thumbs.db
 .idea/
 .vscode/
+
+# Local secrets
+.env
+.env.local
 
 # Runtime logs
 *.log

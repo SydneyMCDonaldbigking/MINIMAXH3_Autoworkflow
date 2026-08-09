@@ -50,7 +50,9 @@ These are local sample/product references, not default logos.
 | Asset | Size | Observed Content | Suggested Job Role |
 | --- | ---: | --- | --- |
 | `sample_pictures/AGO_ducksoup/duck.png` | 951x922 | raw duck breast/duck piece on a wooden tray with herbs/spices | product or ingredient reference for AGO duck/duck soup cooking ad |
+| `sample_pictures/AGO_水煮牛肉卷(辣的）/肥牛卷.png` | 540x493 | raw rolled sliced beef with red-white fat marbling on a wooden tray | product/ingredient reference for spicy boiled beef roll ad; pair with napa cabbage and red chili broth |
 | `sample_pictures/Umall_trat/trat_pic.png` | 1057x1065 | close-up egg tarts/custard tarts with flaky pastry and glossy filling | product/texture reference for egg tart bakery ad |
+| `sample_pictures/Umall海带排骨汤/排骨.png` | 1284x1116 | raw pork rib pieces on a white plate with ginger, scallion, and shallot | product/ingredient reference for kelp pork rib soup ad; pair with soaked kelp, clay pot, family serving scene |
 
 ## Image2 Opening Frame Usage
 

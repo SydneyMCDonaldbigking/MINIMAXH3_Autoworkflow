@@ -198,6 +198,7 @@ cluster_outputs/
 
 - Use `1344x768`, `duration: 10` or `15`, `steps: 4`, `turbo: true` for batch.
 - Use `turbo_low_vram: true` for native 1080-ish runs on A100 40G.
+- Keep `no_audio: true` for MiniMax H3 food ads; finish BGM/voice/captions in editing.
 - CPU upgrades are not the main speed lever. More GPUs or more servers are.
 - Keep secrets out of YAML. Put SSH config in `~/.ssh/config` or use keys.
 - The user reviews and edits. The runner stops after local MP4 handoff.

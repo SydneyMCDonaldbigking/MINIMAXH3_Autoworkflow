@@ -180,6 +180,7 @@ def common_nodes(
     turbo_lora: str | None = None,
     turbo_strength: float = 1.0,
     turbo_low_vram: bool = False,
+    no_audio: bool = False,
 ) -> dict[str, Any]:
     model_node = "18" if turbo_lora else "6"
     nodes: dict[str, Any] = {
@@ -258,7 +259,6 @@ def common_nodes(
             "class_type": "CreateVideo",
             "inputs": {
                 "images": ["10", 0],
-                "audio": ["23", 0],
                 "fps": DEFAULT_FPS,
                 "bit_depth": 8,
             },
@@ -273,6 +273,10 @@ def common_nodes(
             },
         },
     }
+    if no_audio:
+        nodes.pop("23", None)
+    else:
+        nodes["91"]["inputs"]["audio"] = ["23", 0]
     if turbo_lora:
         nodes["18"] = {
             "class_type": "MiniMaxH3TurboLoRA",
@@ -302,6 +306,7 @@ def build_i2v_like_prompt(
     turbo_lora: str | None = None,
     turbo_strength: float = 1.0,
     turbo_low_vram: bool = False,
+    no_audio: bool = False,
 ) -> dict[str, Any]:
     nodes = common_nodes(
         "104",
@@ -314,6 +319,7 @@ def build_i2v_like_prompt(
         turbo_lora=turbo_lora,
         turbo_strength=turbo_strength,
         turbo_low_vram=turbo_low_vram,
+        no_audio=no_audio,
     )
     h3_inputs: dict[str, Any] = {
         "clip": ["13", 0],
@@ -358,6 +364,7 @@ def build_r2v_prompt(
     turbo_lora: str | None = None,
     turbo_strength: float = 1.0,
     turbo_low_vram: bool = False,
+    no_audio: bool = False,
 ) -> dict[str, Any]:
     if len(ref_image_names) > 9:
         raise SystemExit("MiniMax H3 reference-image workflow supports up to 9 images")
@@ -373,6 +380,7 @@ def build_r2v_prompt(
         turbo_lora=turbo_lora,
         turbo_strength=turbo_strength,
         turbo_low_vram=turbo_low_vram,
+        no_audio=no_audio,
     )
     h3_inputs: dict[str, Any] = {
         "clip": ["13", 0],
@@ -550,6 +558,7 @@ def build_prompt_from_args(args: argparse.Namespace) -> dict[str, Any]:
             turbo_lora=turbo_lora,
             turbo_strength=args.turbo_strength,
             turbo_low_vram=args.turbo_low_vram,
+            no_audio=args.no_audio,
         )
 
     return build_r2v_prompt(
@@ -568,12 +577,14 @@ def build_prompt_from_args(args: argparse.Namespace) -> dict[str, Any]:
         turbo_lora=turbo_lora,
         turbo_strength=args.turbo_strength,
         turbo_low_vram=args.turbo_low_vram,
+        no_audio=args.no_audio,
     )
 
 
 def add_common_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--server", default=DEFAULT_SERVER, help="ComfyUI API base URL")
-    parser.add_argument("--prompt", required=True, help="Generation prompt")
+    parser.add_argument("--prompt", default=None, help="Generation prompt")
+    parser.add_argument("--prompt-file", default=None, help="Read generation prompt from a UTF-8 text file")
     parser.add_argument("--width", type=int, default=DEFAULT_WIDTH)
     parser.add_argument("--height", type=int, default=DEFAULT_HEIGHT)
     parser.add_argument("--duration", type=float, default=DEFAULT_DURATION)
@@ -598,6 +609,7 @@ def add_common_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--turbo-lora", default=DEFAULT_TURBO_LORA)
     parser.add_argument("--turbo-strength", type=float, default=1.0)
     parser.add_argument("--turbo-low-vram", action="store_true")
+    parser.add_argument("--no-audio", action="store_true", help="Skip H3 audio decode and save a silent video")
 
 
 def parse_args(argv: list[str]) -> argparse.Namespace:
@@ -606,7 +618,16 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     )
     parser.add_argument("mode", choices=["t2v", "i2v", "flf2v", "r2v"])
     add_common_args(parser)
-    return parser.parse_args(argv)
+    args = parser.parse_args(argv)
+    if args.prompt_file:
+        prompt_path = Path(args.prompt_file)
+        if not prompt_path.exists():
+            raise SystemExit(f"Prompt file not found: {prompt_path}")
+        args.prompt = prompt_path.read_text(encoding="utf-8").strip()
+    if not args.prompt or not str(args.prompt).strip():
+        raise SystemExit("Generation prompt is required. Use --prompt or --prompt-file.")
+    args.prompt = str(args.prompt).strip()
+    return args
 
 
 def main(argv: list[str]) -> int:
