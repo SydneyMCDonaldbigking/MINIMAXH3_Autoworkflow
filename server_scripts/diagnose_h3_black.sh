@@ -27,6 +27,8 @@ set -uo pipefail
 
 COMFYUI_DIR="${COMFYUI_DIR:-/root/ComfyUI}"
 CONDA_ENV="${CONDA_ENV:-comfy_h3_torch29_cu126}"
+CONDA_SH="${CONDA_SH:-/home/node/anaconda3/etc/profile.d/conda.sh}"
+ENV_PYTHON="${ENV_PYTHON:-/home/node/anaconda3/envs/$CONDA_ENV/bin/python}"
 PORT="${PORT:-8189}"
 MODELS_DIR="${MODELS_DIR:-$COMFYUI_DIR/models}"
 NATIVE_WIDTH="${NATIVE_WIDTH:-1088}"
@@ -60,14 +62,31 @@ should_run() {
 }
 
 activate_python() {
-  if command -v conda >/dev/null 2>&1; then
+  # A non-interactive ssh shell does not have conda on PATH, so source the
+  # profile script by explicit path before falling back to PATH lookup.
+  if [ -f "$CONDA_SH" ]; then
+    # shellcheck disable=SC1091
+    source "$CONDA_SH"
+    conda activate "$CONDA_ENV" || note "WARNING: conda activate $CONDA_ENV failed"
+  elif command -v conda >/dev/null 2>&1; then
     # shellcheck disable=SC1091
     source "$(conda info --base)/etc/profile.d/conda.sh"
-    conda activate "$CONDA_ENV" || note "WARNING: conda activate $CONDA_ENV failed; using current python"
+    conda activate "$CONDA_ENV" || note "WARNING: conda activate $CONDA_ENV failed"
   elif [ -f "$COMFYUI_DIR/venv/bin/activate" ]; then
     # shellcheck disable=SC1091
     source "$COMFYUI_DIR/venv/bin/activate"
   fi
+
+  if ! command -v python >/dev/null 2>&1; then
+    if [ -x "$ENV_PYTHON" ]; then
+      note "conda activation did not put python on PATH; using $ENV_PYTHON"
+      PATH="$(dirname "$ENV_PYTHON"):$PATH"
+      export PATH
+    else
+      note "WARNING: no python on PATH and $ENV_PYTHON is missing"
+    fi
+  fi
+  note "python in use: $(command -v python || echo none)"
 }
 
 # ---------------------------------------------------------------- stage 1 ----
@@ -142,14 +161,24 @@ stage_gpu_health() {
   note "Retired / remapped pages:"
   nvidia-smi -q 2>/dev/null | grep -iA6 -E "retired pages|remapped rows" | head -40 || true
 
+  # Retired Pages is a pre-Ampere field. On A100 and newer it reports N/A and
+  # the real signal is Remapped Rows, so only treat "Yes" or a positive count
+  # as a fault and ignore N/A / [N/A] / Not Supported.
   local pending
   pending="$(nvidia-smi --query-gpu=retired_pages.pending --format=csv,noheader,nounits 2>/dev/null | head -1 | tr -d ' ')"
-  if [ "$pending" = "Yes" ] || { [ -n "$pending" ] && [ "$pending" != "N/A" ] && [ "$pending" != "0" ] && [ "$pending" != "[NotSupported]" ]; }; then
+  if [ "$pending" = "Yes" ] || printf '%s' "$pending" | grep -qE '^[1-9][0-9]*$'; then
     ecc_bad=1
     verdict "stage2" "retired pages pending = $pending - GPU memory is being retired"
   fi
 
-  if nvidia-smi -q 2>/dev/null | grep -i "remapping failure occurred *: *yes" >/dev/null; then
+  local remap_unc
+  remap_unc="$(nvidia-smi -q 2>/dev/null | awk '/Remapped Rows/,/Bank Remap/' | grep -i "uncorrectable" | head -1 | sed 's/.*: *//' | tr -d ' ')"
+  if printf '%s' "$remap_unc" | grep -qE '^[1-9][0-9]*$'; then
+    ecc_bad=1
+    verdict "stage2" "$remap_unc uncorrectable remapped rows - GPU memory is degrading"
+  fi
+
+  if nvidia-smi -q 2>/dev/null | grep -iE "remapping failure occurred *: *yes" >/dev/null; then
     ecc_bad=1
     verdict "stage2" "row remapping failure - GPU needs a reset or replacement"
   fi
@@ -302,19 +331,21 @@ for rel in targets:
             for k in sorted(picks):
                 t = f.get_tensor(k)
                 if t.dtype.is_floating_point:
-                    nan = bool(t.isnan().any()); inf = bool(t.isinf().any())
-                    zero = bool((t == 0).all())
-                    flags.append(f"{k}:{tuple(t.shape)}"
+                    # isnan/isinf are not implemented for float8 dtypes, so
+                    # promote to float32 before testing.
+                    probe = t.float() if t.dtype not in (torch.float32, torch.float64) else t
+                    nan = bool(probe.isnan().any()); inf = bool(probe.isinf().any())
+                    zero = bool((probe == 0).all())
+                    flags.append(f"{k}:{tuple(t.shape)}:{t.dtype}"
                                  f"{' NAN' if nan else ''}{' INF' if inf else ''}{' ALLZERO' if zero else ''}")
                     if nan or inf:
                         bad.append(f"{rel} tensor {k} contains nan/inf")
-                    elif zero:
-                        bad.append(f"{rel} tensor {k} is all zeros")
                 else:
                     zero = bool((t == 0).all())
                     flags.append(f"{k}:{tuple(t.shape)}:{t.dtype}{' ALLZERO' if zero else ''}")
-                    if zero:
-                        bad.append(f"{rel} quantized tensor {k} is all zeros")
+                # An all-zero tensor is reported for information only. Zeroed
+                # mask tokens and unused bias rows are normal in these files,
+                # so it is far too weak on its own to call a file corrupt.
             print(f"OK       {rel}  {size/2**30:.2f} GB  {len(keys)} tensors")
             for fl in flags:
                 print(f"           {fl}")

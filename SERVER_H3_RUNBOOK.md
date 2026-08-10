@@ -35,6 +35,50 @@ Important result:
 - Do not run multiple H3 jobs concurrently on one A100 40G. Queue jobs
   sequentially, or use one ComfyUI process per GPU on multi-GPU servers.
 
+### Never leave CUDA 13 wheels behind after a cu130 experiment
+
+Installing PyTorch cu130 on a CUDA 12 driver pulls the whole CUDA 13 NVIDIA
+runtime stack. Rolling PyTorch back to cu126 with `pip install torch==...+cu126`
+does **not** remove those wheels, and both variants install into the same
+`site-packages/nvidia/<lib>/lib/` directories, so the CUDA 13 files overwrite the
+CUDA 12 ones. On 2026-08-10 this left a single `libcudnn.so.9` from
+`nvidia-cudnn-cu13 9.13.0.50` on a `550.127.08` host, and every convolution died
+with:
+
+```text
+RuntimeError: cuDNN error: CUDNN_STATUS_NOT_INITIALIZED
+```
+
+The failure is specific and easy to misread: sampling uses matmul and attention
+and finishes normally, then `VAEDecode` fails on its first convolution. The GPU,
+the weights and plain torch math all test clean.
+
+Detect it in one line. If the reported cuDNN version does not match
+`nvidia-cudnn-cu12`, the CUDA 13 stack is shadowing it:
+
+```bash
+python -c "import torch;print(torch.backends.cudnn.version())"
+pip list | grep -iE "nvidia-(cudnn|cublas|nccl)"
+```
+
+Repair, cu12 last so it wins the shared directory:
+
+```bash
+pip uninstall -y nvidia-cudnn-cu13
+pip install --force-reinstall --no-deps nvidia-cudnn-cu12==9.10.2.21 \
+  -i https://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com
+python -c "import torch,torch.nn.functional as F;F.conv2d(torch.randn(1,32,64,64,device='cuda'),torch.randn(32,32,3,3,device='cuda'),padding=1);print('conv ok')"
+```
+
+Other `*-cu13` wheels (`nvidia-cublas`, `nvidia-nccl-cu13`, `nvidia-nvjitlink`,
+`nvidia-cusolver`) may still be installed. Only cuDNN was removed on 2026-08-10
+because that was the one blocking generation; clean the rest if new symptoms
+appear.
+
+The lesson for renting: the `cu130 optimized CUDA operations` startup warning is
+cosmetic on this driver and was present during every successful run. Do not
+chase it, and do not rent a CUDA 13 image because of it.
+
 ## 2. Required Model Files
 
 Expected server layout:

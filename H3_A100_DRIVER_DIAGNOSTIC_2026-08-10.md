@@ -1,5 +1,41 @@
 # MiniMax H3 A100 Diagnostic - 2026-08-10
 
+## CORRECTION - 2026-08-10 later the same day
+
+**The conclusion below is wrong. Do not act on it.**
+
+The same server was re-examined after a reboot. Findings:
+
+- The GPU is healthy: uncorrected ECC aggregate `0`, remapped rows `0/0`,
+  pending `No`, remapping failure `No`, and a 54 x 512MB VRAM write/read sweep
+  returned zero mismatches.
+- Plain torch math is clean: fp32/fp16/bf16 matmul and fp16 SDPA all finite.
+- All six model files open and sample clean.
+- The real fault was **cuDNN**. The cu130 attempt described below installed the
+  whole CUDA 13 NVIDIA runtime, and rolling PyTorch back to cu126 did not remove
+  it. `nvidia-cudnn-cu13 9.13.0.50` had overwritten `nvidia-cudnn-cu12 9.10.2.21`
+  in the shared `site-packages/nvidia/cudnn/lib/` directory, so every convolution
+  failed with `CUDNN_STATUS_NOT_INITIALIZED`. Sampling survived because it uses
+  matmul and attention; `VAEDecode` died on its first convolution.
+
+Fix applied: `pip uninstall -y nvidia-cudnn-cu13` then force-reinstall
+`nvidia-cudnn-cu12==9.10.2.21`. cuDNN went `91300` -> `91002`, conv2d and conv3d
+started working, and a 512x512 T2V probe produced real picture content
+(within-frame Y range `235.00`).
+
+So the recommendation below - require a CUDA 13 driver image - is backwards. The
+`550.127.08` + cu126 combination is fine and is what every successful run used.
+The damage came from introducing CUDA 13 packages onto a CUDA 12 host.
+
+Unresolved: this does not prove the 2026-08-09 black clips had the same cause.
+The symptoms differ - the failure found today is a hard error that produces no
+file, while the 2026-08-09 runs produced files that were fully black. Re-run one
+real production clip before assuming the black-video issue is closed.
+
+See `SERVER_H3_RUNBOOK.md`, section 1, for the detection and repair procedure.
+
+---
+
 ## Summary
 
 The rented A100 server did not produce usable new MiniMax H3 videos tonight.
