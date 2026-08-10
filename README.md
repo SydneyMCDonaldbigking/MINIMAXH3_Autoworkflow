@@ -19,6 +19,7 @@ before the route-specific documents below.
 ## Files
 
 - `CURRENT_WORKFLOW.md`: the current end-to-end working path. Start here.
+- `RENTAL_CHECKLIST.md`: how to accept a rented GPU and avoid the traps that cost two days.
 - `check_clip_quality.py`: technical QC gate for generated clips.
 - `server_scripts/diagnose_h3_black.sh`: staged probe ladder for black or failed output.
 - `h3_server_setup.py`: SSH bootstrap for installing/updating ComfyUI and H3.

@@ -130,9 +130,17 @@ python h3_sequence_runner.py run \
 ```
 
 Production settings, identical across all four ads and not to be varied casually:
-`r2v`, `1088x1920`, `5.0s`, `4` steps, turbo on, `turbo_low_vram` on, no audio,
-`ref_image_size: match`. About 9-10 minutes per clip, 25-30 minutes for three
-clips plus stitching.
+`r2v`, `1088x1920`, `5.0s`, **`8` steps**, turbo on, `turbo_low_vram` on, no
+audio, `ref_image_size: match`. About 13 minutes per clip, 39 minutes for three
+clips plus stitching, roughly $0.46 of A100 time at $0.713/hr.
+
+Four steps is not usable: whole objects render semi-transparent and doubled. See
+the step comparison in `MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md`.
+
+Sampling costs about 83 seconds per step and that is the floor on a 40 GB A100.
+`--lowvram` and `NORMAL_VRAM` measured 83.7 and 86.0 s/it, so keeping weights
+resident buys nothing; the cost is sequence length, not weight streaming. Keep
+`--lowvram` for the headroom.
 
 Final crop to exactly `1080x1920` is `crop=1080:1920:4:0`. This is a native-detail
 render plus a small side crop, not an upscale.
