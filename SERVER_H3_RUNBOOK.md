@@ -487,6 +487,19 @@ Measured results:
 | I2V | 1920x1088 | `comfy_h3_torch29_cu126` | success | 510.21s |
 | R2V | 1920x1088 | `comfy_h3_torch29_cu126` | incomplete | server died / SSH dropped |
 
+Re-verified on 2026-08-10 after the cuDNN repair, vertical orientation, 4-step
+Turbo, silent, measured by `server_scripts/diagnose_h3_black.sh`:
+
+| Mode | Size | Within-frame Y range | Wall time | Result |
+| --- | ---: | ---: | ---: | --- |
+| T2V | 512x512, no turbo | 235.00 | ~30s | real content |
+| T2V | 1088x1920, turbo | 244.00 | 8 min | real content |
+| R2V | 1088x1920, turbo, 3 refs | 240.00 | 10 min | real content |
+
+A black clip measures `0.00` on that metric, so these confirm the native 1080
+path end to end: resolution, Turbo LoRA and reference conditioning. The R2V row
+above that was never completed in the earlier session is now covered.
+
 Extra result:
 
 - Egg tart ad T2V, `1344x768`, 6 steps, about 5.17s output: `370.16s`.

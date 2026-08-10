@@ -1,38 +1,92 @@
 # MiniMax H3 A100 Diagnostic - 2026-08-10
 
-## CORRECTION - 2026-08-10 later the same day
+## CORRECTION - 2026-08-10, live session on the same server
 
-**The conclusion below is wrong. Do not act on it.**
+**The hardware conclusion at the bottom of this file is wrong. Do not act on it.**
+The server was re-examined over SSH after a reboot, with a seven-stage probe
+ladder. Everything this file blames turned out to be healthy.
 
-The same server was re-examined after a reboot. Findings:
+### What was measured, not guessed
 
-- The GPU is healthy: uncorrected ECC aggregate `0`, remapped rows `0/0`,
-  pending `No`, remapping failure `No`, and a 54 x 512MB VRAM write/read sweep
-  returned zero mismatches.
-- Plain torch math is clean: fp32/fp16/bf16 matmul and fp16 SDPA all finite.
-- All six model files open and sample clean.
-- The real fault was **cuDNN**. The cu130 attempt described below installed the
-  whole CUDA 13 NVIDIA runtime, and rolling PyTorch back to cu126 did not remove
-  it. `nvidia-cudnn-cu13 9.13.0.50` had overwritten `nvidia-cudnn-cu12 9.10.2.21`
-  in the shared `site-packages/nvidia/cudnn/lib/` directory, so every convolution
-  failed with `CUDNN_STATUS_NOT_INITIALIZED`. Sampling survived because it uses
-  matmul and attention; `VAEDecode` died on its first convolution.
+| Check | Result |
+| --- | --- |
+| ECC uncorrected, aggregate (survives reboot) | `0` |
+| Remapped rows correctable / uncorrectable | `0 / 0`, pending `No`, failure `No` |
+| VRAM write/read sweep, 54 x 512MB on an idle card | `0` mismatches |
+| fp32 / fp16 / bf16 matmul, fp16 SDPA | all finite, no NaN |
+| All six model files | open and sample clean |
+| Disk | 68 GB free, nothing truncated |
 
-Fix applied: `pip uninstall -y nvidia-cudnn-cu13` then force-reinstall
-`nvidia-cudnn-cu12==9.10.2.21`. cuDNN went `91300` -> `91002`, conv2d and conv3d
-started working, and a 512x512 T2V probe produced real picture content
-(within-frame Y range `235.00`).
+The GPU was never faulty and the weights were never corrupt.
 
-So the recommendation below - require a CUDA 13 driver image - is backwards. The
-`550.127.08` + cu126 combination is fine and is what every successful run used.
-The damage came from introducing CUDA 13 packages onto a CUDA 12 host.
+### What was actually broken on 2026-08-10, and fixed
 
-Unresolved: this does not prove the 2026-08-09 black clips had the same cause.
-The symptoms differ - the failure found today is a hard error that produces no
-file, while the 2026-08-09 runs produced files that were fully black. Re-run one
-real production clip before assuming the black-video issue is closed.
+cuDNN. The cu130 attempt described below pulled the entire CUDA 13 NVIDIA
+runtime, and rolling PyTorch back to cu126 did not remove those wheels. Both
+variants install into the same `site-packages/nvidia/cudnn/lib/` directory, so
+`nvidia-cudnn-cu13 9.13.0.50` had overwritten `nvidia-cudnn-cu12 9.10.2.21`,
+leaving one `libcudnn.so.9` built for CUDA 13 on a CUDA 12.4 host.
 
-See `SERVER_H3_RUNBOOK.md`, section 1, for the detection and repair procedure.
+Every convolution then failed with `CUDNN_STATUS_NOT_INITIALIZED`, on a
+completely idle GPU with 39.0 GB free, so it was never a memory problem.
+Sampling survived because it is matmul and attention; `VAEDecode` died on its
+first convolution.
+
+Fix applied:
+
+```bash
+pip uninstall -y nvidia-cudnn-cu13
+pip install --force-reinstall --no-deps nvidia-cudnn-cu12==9.10.2.21
+```
+
+cuDNN `91300` -> `91002`, conv2d and conv3d restored.
+
+### Verified working afterwards
+
+| Probe | Within-frame Y range | Wall time | Result |
+| --- | ---: | ---: | --- |
+| T2V 512x512, 4 step, no turbo | 235.00 | ~30s | real content |
+| T2V 1088x1920, 4 step, turbo | 244.00 | 8 min | real content |
+| R2V 1088x1920, 4 step, turbo, 3 synthetic refs | 240.00 | 10 min | real content |
+
+Black clips measure `0.00`. The native 1080 production path - resolution, Turbo
+LoRA and reference conditioning - is confirmed working on this machine, and the
+8 and 10 minute timings match section 10 of `SERVER_H3_RUNBOOK.md`.
+
+### What this does NOT explain
+
+**The 2026-08-09 black clips remain unexplained.** By this file's own ordering,
+the black probes were run *before* the cu130 attempt, so the CUDA 13 wheels did
+not exist yet when the black videos were produced. The cuDNN fault is a second,
+later problem, not the original one.
+
+The symptoms differ too. The 2026-08-09 runs produced playable files that were
+uniformly black; the 2026-08-10 fault produces a hard error and no file at all.
+
+The 2026-08-09 cause is still open. What is established is that the machine
+produces real video now, and that the black-frame signature is a NaN latent
+(constant `Y=16`, zero within-frame and across-frame variation), not a weak
+render.
+
+### Corrections to the recommendations below
+
+- "Require CUDA Version 13.0 or higher" is backwards. Driver `550.127.08` with
+  PyTorch cu126 is the combination every successful run used. The damage came
+  from putting CUDA 13 packages on a CUDA 12 host.
+- The `cu130 optimized CUDA operations` startup warning is cosmetic on this
+  driver and was present during every successful run. Do not chase it.
+- "Use the `compat5` sequences first on a corrected CUDA 13 / PyTorch cu130
+  server" is void. There is no need for a cu130 server.
+- The `*_ascii_rgb` sequences and `runtime_sanitized_refs/` were built on the
+  theory that non-ASCII paths or RGBA references caused the black output. That
+  theory is disproved: the failing beef references and the working duck-soup
+  references are identical in mode and size (RGB 1080x1920), and RGBA product
+  and logo images were used in the successful runs too. Those sequence files
+  also still point at a `runtime_sanitized_refs/` directory that no longer
+  exists, so they cannot run as written.
+
+See `SERVER_H3_RUNBOOK.md`, section 1, for the detection and repair procedure,
+and `server_scripts/diagnose_h3_black.sh` for the probe ladder.
 
 ---
 

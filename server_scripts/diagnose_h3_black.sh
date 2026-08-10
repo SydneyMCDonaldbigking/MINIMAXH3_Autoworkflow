@@ -250,6 +250,9 @@ try:
         bad.append(f"{errors} VRAM chunks read back wrong - bad video memory")
     del held
     torch.cuda.empty_cache()
+except torch.cuda.OutOfMemoryError:
+    # Another process (usually ComfyUI) holds the card. Not a hardware fault.
+    print("vram sweep : SKIPPED - GPU is busy, not enough free VRAM to sweep")
 except Exception as exc:
     print("vram sweep : FAILED", exc)
     bad.append(f"VRAM sweep raised {exc}")
@@ -263,6 +266,8 @@ try:
     print(f"sdpa fp16  : nan={n} absmax={o.abs().max().item():.4g}")
     if n:
         bad.append("scaled_dot_product_attention produced nan")
+except torch.cuda.OutOfMemoryError:
+    print("sdpa fp16  : SKIPPED - GPU is busy")
 except Exception as exc:
     print("sdpa fp16  : FAILED", exc)
     bad.append(f"sdpa raised {exc}")
