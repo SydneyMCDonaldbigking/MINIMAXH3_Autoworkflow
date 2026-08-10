@@ -17,6 +17,7 @@ import concurrent.futures
 import dataclasses
 import datetime as dt
 import ast
+import hashlib
 import json
 import os
 import re
@@ -646,11 +647,21 @@ exit 4
     remote_bash(worker, script, timeout=240)
 
 
+def local_runner_sha256() -> str:
+    """sha256 of the local h3_runner.py, or empty if it cannot be read."""
+    local_runner = Path(__file__).with_name("h3_runner.py")
+    try:
+        return hashlib.sha256(local_runner.read_bytes()).hexdigest()
+    except OSError:
+        return ""
+
+
 def build_check_script(worker: Worker) -> str:
     model_checks = "\n".join(
         f"check_file {q(worker.comfy_dir.rstrip('/') + '/' + path)}"
         for path in REQUIRED_MODEL_FILES
     )
+    runner_sha = local_runner_sha256()
     return f"""
 set +e
 echo "## worker={worker.label}"
@@ -671,6 +682,26 @@ check_dir() {{
     echo "OK dir $1"
   else
     echo "MISSING dir $1"
+  fi
+}}
+
+# Existence is not enough for h3_runner.py. A stale remote copy accepts the
+# job, then fails on an argument the local version added, which burns rental
+# time for nothing. Compare content against the local file.
+check_runner() {{
+  if [ ! -f "$1" ]; then
+    echo "MISSING file $1"
+    return
+  fi
+  if [ -z "$2" ]; then
+    echo "OK file $1 (local hash unavailable, freshness not checked)"
+    return
+  fi
+  REMOTE_SHA="$(sha256sum "$1" 2>/dev/null | awk '{{print $1}}')"
+  if [ "$REMOTE_SHA" = "$2" ]; then
+    echo "OK file $1 (matches local)"
+  else
+    echo "STALE file $1 (remote $REMOTE_SHA != local $2) - rerun with --upload-runner"
   fi
 }}
 
@@ -728,7 +759,7 @@ PY
 echo "== comfyui files =="
 check_dir {q(worker.comfy_dir)}
 check_file {q(worker.comfy_dir.rstrip('/') + '/main.py')}
-check_file {q(worker.comfy_dir.rstrip('/') + '/h3_runner.py')}
+check_runner {q(worker.comfy_dir.rstrip('/') + '/h3_runner.py')} {q(runner_sha)}
 {model_checks}
 
 echo "== comfyui api =="

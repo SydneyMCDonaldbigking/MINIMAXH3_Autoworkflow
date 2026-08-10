@@ -10,8 +10,17 @@ For the SSH cluster dispatcher, install optional local dependencies:
 python -m pip install -r requirements.txt
 ```
 
+## Start here
+
+`CURRENT_WORKFLOW.md` is the single operational path from renting a machine to a
+gated clip, and it marks which claims are verified and which are not. Read it
+before the route-specific documents below.
+
 ## Files
 
+- `CURRENT_WORKFLOW.md`: the current end-to-end working path. Start here.
+- `check_clip_quality.py`: technical QC gate for generated clips.
+- `server_scripts/diagnose_h3_black.sh`: staged probe ladder for black or failed output.
 - `h3_server_setup.py`: SSH bootstrap for installing/updating ComfyUI and H3.
 - `h3_runner.py`: local API runner for text/image/reference video jobs.
 - `image2_first_frame.py`: OpenRouter GPT Image 2 first-frame runner.

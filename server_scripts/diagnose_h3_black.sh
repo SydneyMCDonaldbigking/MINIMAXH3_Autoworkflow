@@ -216,6 +216,36 @@ if not torch.cuda.is_available():
 torch.manual_seed(0)
 bad = []
 
+# 0. Convolution, which means cuDNN. This is first because it is the one that
+# actually broke on 2026-08-10: sampling is matmul and attention and ran fine,
+# while VAEDecode died on its first conv. A ladder that only tests matmul walks
+# straight past the fault.
+print("cudnn ver  :", torch.backends.cudnn.version(), "enabled:", torch.backends.cudnn.enabled)
+import torch.nn.functional as F
+for name, fn in (
+    ("conv2d", lambda: F.conv2d(torch.randn(1, 32, 256, 256, device="cuda"),
+                                torch.randn(32, 32, 3, 3, device="cuda"), padding=1)),
+    ("conv3d", lambda: F.conv3d(torch.randn(1, 16, 8, 64, 64, device="cuda"),
+                                torch.randn(16, 16, 3, 3, 3, device="cuda"), padding=1)),
+):
+    try:
+        out = fn()
+        torch.cuda.synchronize()
+        n = bool(out.isnan().any())
+        print(f"{name}     : ok nan={n} absmax={out.abs().max().item():.4g}")
+        if n:
+            bad.append(f"{name} produced nan")
+    except torch.cuda.OutOfMemoryError:
+        print(f"{name}     : SKIPPED - GPU is busy")
+    except Exception as exc:
+        msg = str(exc)[:120]
+        print(f"{name}     : FAILED {type(exc).__name__}: {msg}")
+        if "CUDNN" in msg.upper() or "cudnn" in msg:
+            bad.append(f"{name} failed with a cuDNN error - check for CUDA 13 wheels "
+                       f"shadowing nvidia-cudnn-cu12 (see SERVER_H3_RUNBOOK.md section 1)")
+        else:
+            bad.append(f"{name} raised {type(exc).__name__}")
+
 # 1. Matmul in each dtype the H3 graph touches.
 for name, dt in (("fp32", torch.float32), ("fp16", torch.float16), ("bf16", torch.bfloat16)):
     try:
