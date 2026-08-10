@@ -17,14 +17,40 @@ until it is.
 | Driver 550.127.08 + PyTorch cu126 is a good combination | verified, and it is what every successful run has used |
 | A `cu130 optimized CUDA operations` startup warning is harmless here | verified, present during every successful run |
 | Black clips are a NaN latent, not a weak render | verified, constant `Y=16`, zero variation |
-| The 2026-08-09 black clips have an explanation | **NO. Still unknown.** The cuDNN fault found on 2026-08-10 came later and cannot explain them |
+| The 2026-08-09 black clips have an explanation | **YES, found later on 2026-08-10.** The A100 corrupts bf16 matrix multiplication non-deterministically. H3's Turbo LoRA runs in bf16, so sampling goes NaN and decodes to a constant frame. See `H3_A100_DRIVER_DIAGNOSTIC_2026-08-10.md` |
 | The Ref2VA prompt format produces better video than the old prose format | **UNVERIFIED.** Format and a machine repair changed together |
 | The rewritten beef clip 01 prompt fixes the jitter | **UNVERIFIED.** Not generated even once |
 
-## 0. Rent a machine
+## 0. Rent a machine, then test the GPU before anything else
 
 Ask for a CUDA 12.x driver image. Do **not** pay extra for CUDA 13 - the
 2026-08-09 diagnostic recommended that and it was wrong.
+
+**Test bf16 matrix multiplication before you trust a card.** A faulty A100 cost
+this project two days of misdiagnosis: it corrupts bf16 GEMM non-deterministically
+while fp32, fp16 and every other check stays clean, and H3's Turbo LoRA runs in
+bf16. Symptoms are black clips that arrive intermittently with no configuration
+change.
+
+```bash
+python -c "
+import torch
+torch.manual_seed(0)
+a=torch.randn(4096,4096,device='cuda',dtype=torch.bfloat16)
+b=torch.randn(4096,4096,device='cuda',dtype=torch.bfloat16)
+print('fp32 ref absmax :', (a.float()@b.float()).abs().max().item())
+print('fp16 same shape :', (a.half()@b.half()).abs().max().item())
+print('bf16 inf x3     :', [int((a@b).isinf().sum()) for _ in range(3)])
+"
+```
+
+A healthy card gives roughly `340`, `340`, and `[0, 0, 0]`. Any nonzero inf count
+means reject the machine. Stage 3 of `diagnose_h3_black.sh` runs this check for
+you, so `MAX_STAGE=3` is a sufficient acceptance test and takes about a minute.
+
+If a provider insists the card is fine because ECC is clean, ECC protects memory
+and does not cover the tensor-core compute path. The fp16 line is the argument
+that it is not a driver or installation problem.
 
 Install your SSH key before anything else. Do not use password auth for the
 tooling; `cluster_runner.py` and the scripts assume key auth.

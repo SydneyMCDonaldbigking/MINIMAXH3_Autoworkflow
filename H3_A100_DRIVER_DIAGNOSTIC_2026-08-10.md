@@ -53,20 +53,68 @@ Black clips measure `0.00`. The native 1080 production path - resolution, Turbo
 LoRA and reference conditioning - is confirmed working on this machine, and the
 8 and 10 minute timings match section 10 of `SERVER_H3_RUNBOOK.md`.
 
-### What this does NOT explain
+### ROOT CAUSE FOUND, later on 2026-08-10: the GPU corrupts bf16 GEMM
 
-**The 2026-08-09 black clips remain unexplained.** By this file's own ordering,
-the black probes were run *before* the cu130 attempt, so the CUDA 13 wheels did
-not exist yet when the black videos were produced. The cuDNN fault is a second,
-later problem, not the original one.
+The cuDNN fault above was real but was only a second, later problem. The actual
+cause of the black videos, on 2026-08-09 and again on 2026-08-10, is that
+**this A100 produces corrupt results for bf16 matrix multiplication**.
 
-The symptoms differ too. The 2026-08-09 runs produced playable files that were
-uniformly black; the 2026-08-10 fault produces a hard error and no file at all.
+Measured on an otherwise idle card:
 
-The 2026-08-09 cause is still open. What is established is that the machine
-produces real video now, and that the black-frame signature is a NaN latent
-(constant `Y=16`, zero within-frame and across-frame variation), not a weak
-render.
+| Operation | Result |
+| --- | --- |
+| fp32 matmul, 4096x4096 | absmax `339.9`, correct |
+| **fp16** matmul, same shapes and data | absmax `340`, **correct** |
+| bf16 **elementwise** multiply and sum | absmax `288`, **correct** |
+| **bf16 matmul**, same shapes and data | **909-1338 `inf` values, finite absmax `2.8e+38`** |
+
+The same input run four times gave inf counts of `1079, 983, 1022, 1053`. It is
+**non-deterministic**, which is what rules out a software bug.
+
+Every software explanation was eliminated: the process loads the correct cu12
+libraries (checked in `/proc/PID/maps`), force-reinstalling `nvidia-cublas-cu12`
+changed nothing, `CUBLAS_WORKSPACE_CONFIG` changed nothing, switching between
+the cuBLAS and cuBLASLt backends changed nothing, and toggling
+`allow_bf16_reduced_precision_reduction` changed nothing.
+
+The corruption scales with sequence length, tested at H3's own hidden dimension
+of 5376:
+
+```text
+(256x5376)@(5376x5376)   ->   46 inf
+(1024x5376)@(5376x5376)  ->  223 inf
+(4096x5376)@(5376x5376)  -> 1338 inf
+```
+
+MiniMax H3's Turbo LoRA runs in bfloat16, so its transformer projections land
+squarely on the broken path, and native `1088x1920` at 124 frames is the longest
+sequence in the pipeline and therefore the most exposed configuration.
+
+Confirmed end to end. A full three-clip beef sequence run at native resolution
+produced three black clips, `0/3` through `check_clip_quality.py`, and the
+ComfyUI log shows the mechanism directly:
+
+```text
+video_rms=0.9999 audio_rms=1.0102    <- first sampler call is clean
+video_rms=nan audio_rms=nan          <- corrupt from there on
+```
+
+That is the same line the original diagnostic recorded on 2026-08-09.
+
+### The 2026-08-09 mystery, resolved
+
+The open question was what changed between the good duck soup run at 19:45 and
+the black beef runs at 22:37, given identical configuration on the same machine.
+
+**Nothing changed, and nothing needed to.** The corruption is intermittent. Some
+runs get a clean sampling trajectory and produce real video, as one beef clip did
+on 2026-08-10 at native resolution; others hit a corrupted GEMM early and go NaN.
+ECC counters stay at zero throughout because ECC protects memory, not the
+tensor-core compute path.
+
+Do not debug prompts, references, resolution or Turbo settings on this machine.
+Replace the GPU. `--fp16-unet` is not a workaround: H3's int8 weights need bf16's
+exponent range and fp16 produced an immediately black clip.
 
 ### Corrections to the recommendations below
 
