@@ -240,6 +240,29 @@ with small amplitude at slow speed" invite micro-drift. Counter-intuitively the
 most stable third we have measured is also the one with the *largest* camera
 motion - ambiguity destabilises, movement does not.
 
+**Do not ask for a tight close-up of a hand working a tool.** This is the
+highest-value rule we have. In the first Ref2VA beef clip every object-level
+defect landed in one shot, the 85mm close-up of a knife cutting cabbage:
+
+- the vegetable changed species, a round green cabbage instead of the napa
+  cabbage the reference clearly shows;
+- the knife broke into two blade fragments with no plausible cut plane;
+- the fingertips lay flat in the blade path instead of the knuckle guard the
+  prompt asked for.
+
+The wide establishing shot and the drop-into-the-wok shot in the same clip were
+clean. At 4 steps the model handles wide framing and bulk material well, and
+fails at close-range rigid tool geometry interacting with hands. Shoot prep at
+medium distance with the forearms in frame, or skip the cutting action entirely
+and show the already-cut result, letting the Seedream prep-state reference prove
+that the processing happened. That reference exists precisely so H3 does not
+have to perform the cut on camera.
+
+**Name the distinguishing features of an ingredient in the shot text.** Marking
+a reference `fully_preserved` in `retention_analysis` did not stop the cabbage
+substitution. Where two ingredients could be confused, describe the one you want
+inside `detailed_description` and rule out the other explicitly.
+
 **Gate every clip before assembling a sequence:**
 
 ```bash
