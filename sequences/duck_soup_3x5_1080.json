@@ -19,11 +19,11 @@
       "id": "clip-01-prep-to-heat",
       "prompt_file": "../prompts/h3_3x5_1080/duck_soup_clip_01.md",
       "ref_images": [
-        "../outputs/seedream_reference_assets/duck_soup_cook_character_scene/generated/duck_soup_cook_character_scene-1.png",
-        "../outputs/seedream_reference_assets/duck_soup_actor_hands_scene/generated/duck_soup_actor_hands_scene-1.png",
-        "../outputs/seedream_reference_assets/duck_soup_prep_cut_state/generated/duck_soup_prep_cut_state-1.png",
-        "../outputs/seedream_reference_assets/duck_soup_kitchen_opening_clean/generated/duck_soup_kitchen_opening_clean-1.png",
-        "../outputs/seedream_reference_assets/duck_soup_mid_cooking_state/generated/duck_soup_mid_cooking_state-1.png",
+        "../outputs/reference_assets/04_老鸭汤/duck_soup_cook_character_scene.png",
+        "../outputs/reference_assets/04_老鸭汤/duck_soup_actor_hands_scene.png",
+        "../outputs/reference_assets/04_老鸭汤/duck_soup_prep_cut_state.png",
+        "../outputs/reference_assets/04_老鸭汤/duck_soup_kitchen_opening_clean.png",
+        "../outputs/reference_assets/04_老鸭汤/duck_soup_mid_cooking_state.png",
         "../sample_pictures/AGO_ducksoup/duck.png",
         "../company_logo/AGO.png"
       ],
@@ -35,11 +35,11 @@
       "prompt_file": "../prompts/h3_3x5_1080/duck_soup_clip_02.md",
       "use_previous_last_frame_as_ref": true,
       "ref_images": [
-        "../outputs/seedream_reference_assets/duck_soup_cook_character_scene/generated/duck_soup_cook_character_scene-1.png",
-        "../outputs/seedream_reference_assets/duck_soup_actor_hands_scene/generated/duck_soup_actor_hands_scene-1.png",
-        "../outputs/seedream_reference_assets/duck_soup_prep_cut_state/generated/duck_soup_prep_cut_state-1.png",
-        "../outputs/seedream_reference_assets/duck_soup_mid_cooking_state/generated/duck_soup_mid_cooking_state-1.png",
-        "../outputs/seedream_reference_assets/duck_soup_finished_hero_state/generated/duck_soup_finished_hero_state-1.png",
+        "../outputs/reference_assets/04_老鸭汤/duck_soup_cook_character_scene.png",
+        "../outputs/reference_assets/04_老鸭汤/duck_soup_actor_hands_scene.png",
+        "../outputs/reference_assets/04_老鸭汤/duck_soup_prep_cut_state.png",
+        "../outputs/reference_assets/04_老鸭汤/duck_soup_mid_cooking_state.png",
+        "../outputs/reference_assets/04_老鸭汤/duck_soup_finished_hero_state.png",
         "../sample_pictures/AGO_ducksoup/duck.png"
       ],
       "seed": 202608090102,
@@ -50,9 +50,9 @@
       "prompt_file": "../prompts/h3_3x5_1080/duck_soup_clip_03.md",
       "use_previous_last_frame_as_ref": true,
       "ref_images": [
-        "../outputs/seedream_reference_assets/duck_soup_cook_character_scene/generated/duck_soup_cook_character_scene-1.png",
-        "../outputs/seedream_reference_assets/duck_soup_actor_hands_scene/generated/duck_soup_actor_hands_scene-1.png",
-        "../outputs/seedream_reference_assets/duck_soup_finished_hero_state/generated/duck_soup_finished_hero_state-1.png",
+        "../outputs/reference_assets/04_老鸭汤/duck_soup_cook_character_scene.png",
+        "../outputs/reference_assets/04_老鸭汤/duck_soup_actor_hands_scene.png",
+        "../outputs/reference_assets/04_老鸭汤/duck_soup_finished_hero_state.png",
         "../sample_pictures/AGO_ducksoup/duck.png"
       ],
       "seed": 202608090103,

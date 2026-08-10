@@ -19,10 +19,10 @@
       "id": "clip-01-prep-clay-pot",
       "prompt_file": "../prompts/h3_3x5_1080/kelp_pork_rib_soup_clip_01.md",
       "ref_images": [
-        "../outputs/seedream_reference_assets/kelp_pork_rib_soup_mom_family_scene/generated/kelp_pork_rib_soup_mom_family_scene-1.png",
-        "../outputs/seedream_reference_assets/kelp_pork_rib_soup_prep_state/generated/kelp_pork_rib_soup_prep_state-1.png",
-        "../outputs/seedream_reference_assets/kelp_pork_rib_soup_simmer_state/generated/kelp_pork_rib_soup_simmer_state-1.png",
-        "../outputs/seedream_reference_assets/kelp_pork_rib_soup_family_hero_state/generated/kelp_pork_rib_soup_family_hero_state-1.png",
+        "../outputs/reference_assets/02_海带排骨汤/kelp_pork_rib_soup_mom_family_scene.png",
+        "../outputs/reference_assets/02_海带排骨汤/kelp_pork_rib_soup_prep_state.png",
+        "../outputs/reference_assets/02_海带排骨汤/kelp_pork_rib_soup_simmer_state.png",
+        "../outputs/reference_assets/02_海带排骨汤/kelp_pork_rib_soup_family_hero_state.png",
         "../sample_pictures/Umall海带排骨汤/排骨.png",
         "../company_logo/AGO.png"
       ],
@@ -34,10 +34,10 @@
       "prompt_file": "../prompts/h3_3x5_1080/kelp_pork_rib_soup_clip_02.md",
       "use_previous_last_frame_as_ref": true,
       "ref_images": [
-        "../outputs/seedream_reference_assets/kelp_pork_rib_soup_mom_family_scene/generated/kelp_pork_rib_soup_mom_family_scene-1.png",
-        "../outputs/seedream_reference_assets/kelp_pork_rib_soup_prep_state/generated/kelp_pork_rib_soup_prep_state-1.png",
-        "../outputs/seedream_reference_assets/kelp_pork_rib_soup_simmer_state/generated/kelp_pork_rib_soup_simmer_state-1.png",
-        "../outputs/seedream_reference_assets/kelp_pork_rib_soup_family_hero_state/generated/kelp_pork_rib_soup_family_hero_state-1.png",
+        "../outputs/reference_assets/02_海带排骨汤/kelp_pork_rib_soup_mom_family_scene.png",
+        "../outputs/reference_assets/02_海带排骨汤/kelp_pork_rib_soup_prep_state.png",
+        "../outputs/reference_assets/02_海带排骨汤/kelp_pork_rib_soup_simmer_state.png",
+        "../outputs/reference_assets/02_海带排骨汤/kelp_pork_rib_soup_family_hero_state.png",
         "../sample_pictures/Umall海带排骨汤/排骨.png"
       ],
       "seed": 202608090402,
@@ -48,9 +48,9 @@
       "prompt_file": "../prompts/h3_3x5_1080/kelp_pork_rib_soup_clip_03.md",
       "use_previous_last_frame_as_ref": true,
       "ref_images": [
-        "../outputs/seedream_reference_assets/kelp_pork_rib_soup_mom_family_scene/generated/kelp_pork_rib_soup_mom_family_scene-1.png",
-        "../outputs/seedream_reference_assets/kelp_pork_rib_soup_simmer_state/generated/kelp_pork_rib_soup_simmer_state-1.png",
-        "../outputs/seedream_reference_assets/kelp_pork_rib_soup_family_hero_state/generated/kelp_pork_rib_soup_family_hero_state-1.png",
+        "../outputs/reference_assets/02_海带排骨汤/kelp_pork_rib_soup_mom_family_scene.png",
+        "../outputs/reference_assets/02_海带排骨汤/kelp_pork_rib_soup_simmer_state.png",
+        "../outputs/reference_assets/02_海带排骨汤/kelp_pork_rib_soup_family_hero_state.png",
         "../sample_pictures/Umall海带排骨汤/排骨.png",
         "../company_logo/AGO.png"
       ],

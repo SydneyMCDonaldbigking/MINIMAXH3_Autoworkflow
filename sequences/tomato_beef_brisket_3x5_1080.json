@@ -19,10 +19,10 @@
       "id": "clip-01-prep-to-sear",
       "prompt_file": "../prompts/h3_3x5_1080/tomato_beef_brisket_clip_01.md",
       "ref_images": [
-        "../outputs/seedream_reference_assets/tomato_beef_brisket_cook_character_scene/generated/tomato_beef_brisket_cook_character_scene-1.png",
-        "../outputs/seedream_reference_assets/tomato_beef_brisket_prep_state/generated/tomato_beef_brisket_prep_state-1.png",
-        "../outputs/seedream_reference_assets/tomato_beef_brisket_braise_state/generated/tomato_beef_brisket_braise_state-1.png",
-        "../outputs/seedream_reference_assets/tomato_beef_brisket_finished_hero_state/generated/tomato_beef_brisket_finished_hero_state-1.png",
+        "../outputs/reference_assets/03_番茄烧牛腩/tomato_beef_brisket_cook_character_scene.png",
+        "../outputs/reference_assets/03_番茄烧牛腩/tomato_beef_brisket_prep_state.png",
+        "../outputs/reference_assets/03_番茄烧牛腩/tomato_beef_brisket_braise_state.png",
+        "../outputs/reference_assets/03_番茄烧牛腩/tomato_beef_brisket_finished_hero_state.png",
         "../sample_pictures/AGO_番茄烧牛腩/beef.png",
         "../company_logo/AGO.png"
       ],
@@ -34,10 +34,10 @@
       "prompt_file": "../prompts/h3_3x5_1080/tomato_beef_brisket_clip_02.md",
       "use_previous_last_frame_as_ref": true,
       "ref_images": [
-        "../outputs/seedream_reference_assets/tomato_beef_brisket_cook_character_scene/generated/tomato_beef_brisket_cook_character_scene-1.png",
-        "../outputs/seedream_reference_assets/tomato_beef_brisket_prep_state/generated/tomato_beef_brisket_prep_state-1.png",
-        "../outputs/seedream_reference_assets/tomato_beef_brisket_braise_state/generated/tomato_beef_brisket_braise_state-1.png",
-        "../outputs/seedream_reference_assets/tomato_beef_brisket_finished_hero_state/generated/tomato_beef_brisket_finished_hero_state-1.png",
+        "../outputs/reference_assets/03_番茄烧牛腩/tomato_beef_brisket_cook_character_scene.png",
+        "../outputs/reference_assets/03_番茄烧牛腩/tomato_beef_brisket_prep_state.png",
+        "../outputs/reference_assets/03_番茄烧牛腩/tomato_beef_brisket_braise_state.png",
+        "../outputs/reference_assets/03_番茄烧牛腩/tomato_beef_brisket_finished_hero_state.png",
         "../sample_pictures/AGO_番茄烧牛腩/beef.png"
       ],
       "seed": 202608110102,
@@ -48,9 +48,9 @@
       "prompt_file": "../prompts/h3_3x5_1080/tomato_beef_brisket_clip_03.md",
       "use_previous_last_frame_as_ref": true,
       "ref_images": [
-        "../outputs/seedream_reference_assets/tomato_beef_brisket_cook_character_scene/generated/tomato_beef_brisket_cook_character_scene-1.png",
-        "../outputs/seedream_reference_assets/tomato_beef_brisket_braise_state/generated/tomato_beef_brisket_braise_state-1.png",
-        "../outputs/seedream_reference_assets/tomato_beef_brisket_finished_hero_state/generated/tomato_beef_brisket_finished_hero_state-1.png",
+        "../outputs/reference_assets/03_番茄烧牛腩/tomato_beef_brisket_cook_character_scene.png",
+        "../outputs/reference_assets/03_番茄烧牛腩/tomato_beef_brisket_braise_state.png",
+        "../outputs/reference_assets/03_番茄烧牛腩/tomato_beef_brisket_finished_hero_state.png",
         "../sample_pictures/AGO_番茄烧牛腩/beef.png",
         "../company_logo/AGO.png"
       ],

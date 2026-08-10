@@ -19,10 +19,10 @@
       "id": "clip-01-chef-prep-heat",
       "prompt_file": "../prompts/h3_3x5_1080/shuizhu_beef_roll_clip_01.md",
       "ref_images": [
-        "../outputs/seedream_reference_assets/shuizhu_beef_roll_chef_character_scene/generated/shuizhu_beef_roll_chef_character_scene-1.png",
-        "../outputs/seedream_reference_assets/shuizhu_beef_roll_cabbage_prep_state/generated/shuizhu_beef_roll_cabbage_prep_state-1.png",
-        "../outputs/seedream_reference_assets/shuizhu_beef_roll_spicy_broth_state/generated/shuizhu_beef_roll_spicy_broth_state-1.png",
-        "../outputs/seedream_reference_assets/shuizhu_beef_roll_finished_hero_state_v2/generated/shuizhu_beef_roll_finished_hero_state_v2-1.png",
+        "../outputs/reference_assets/01_水煮牛肉卷/shuizhu_beef_roll_chef_character_scene.png",
+        "../outputs/reference_assets/01_水煮牛肉卷/shuizhu_beef_roll_cabbage_prep_state.png",
+        "../outputs/reference_assets/01_水煮牛肉卷/shuizhu_beef_roll_spicy_broth_state.png",
+        "../outputs/reference_assets/01_水煮牛肉卷/shuizhu_beef_roll_finished_hero_state_v2.png",
         "../sample_pictures/AGO_水煮牛肉卷(辣的）/肥牛卷.png",
         "../company_logo/AGO.png"
       ],
@@ -34,10 +34,10 @@
       "prompt_file": "../prompts/h3_3x5_1080/shuizhu_beef_roll_clip_02.md",
       "use_previous_last_frame_as_ref": true,
       "ref_images": [
-        "../outputs/seedream_reference_assets/shuizhu_beef_roll_chef_character_scene/generated/shuizhu_beef_roll_chef_character_scene-1.png",
-        "../outputs/seedream_reference_assets/shuizhu_beef_roll_cabbage_prep_state/generated/shuizhu_beef_roll_cabbage_prep_state-1.png",
-        "../outputs/seedream_reference_assets/shuizhu_beef_roll_spicy_broth_state/generated/shuizhu_beef_roll_spicy_broth_state-1.png",
-        "../outputs/seedream_reference_assets/shuizhu_beef_roll_finished_hero_state_v2/generated/shuizhu_beef_roll_finished_hero_state_v2-1.png",
+        "../outputs/reference_assets/01_水煮牛肉卷/shuizhu_beef_roll_chef_character_scene.png",
+        "../outputs/reference_assets/01_水煮牛肉卷/shuizhu_beef_roll_cabbage_prep_state.png",
+        "../outputs/reference_assets/01_水煮牛肉卷/shuizhu_beef_roll_spicy_broth_state.png",
+        "../outputs/reference_assets/01_水煮牛肉卷/shuizhu_beef_roll_finished_hero_state_v2.png",
         "../sample_pictures/AGO_水煮牛肉卷(辣的）/肥牛卷.png"
       ],
       "seed": 202608090302,
@@ -48,9 +48,9 @@
       "prompt_file": "../prompts/h3_3x5_1080/shuizhu_beef_roll_clip_03.md",
       "use_previous_last_frame_as_ref": true,
       "ref_images": [
-        "../outputs/seedream_reference_assets/shuizhu_beef_roll_chef_character_scene/generated/shuizhu_beef_roll_chef_character_scene-1.png",
-        "../outputs/seedream_reference_assets/shuizhu_beef_roll_spicy_broth_state/generated/shuizhu_beef_roll_spicy_broth_state-1.png",
-        "../outputs/seedream_reference_assets/shuizhu_beef_roll_finished_hero_state_v2/generated/shuizhu_beef_roll_finished_hero_state_v2-1.png",
+        "../outputs/reference_assets/01_水煮牛肉卷/shuizhu_beef_roll_chef_character_scene.png",
+        "../outputs/reference_assets/01_水煮牛肉卷/shuizhu_beef_roll_spicy_broth_state.png",
+        "../outputs/reference_assets/01_水煮牛肉卷/shuizhu_beef_roll_finished_hero_state_v2.png",
         "../sample_pictures/AGO_水煮牛肉卷(辣的）/肥牛卷.png",
         "../company_logo/AGO.png"
       ],
