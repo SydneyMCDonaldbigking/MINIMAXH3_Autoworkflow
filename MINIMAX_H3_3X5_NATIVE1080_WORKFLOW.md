@@ -128,21 +128,123 @@ outputs/seedream_reference_assets/egg_tart_family_people_final_hero/generated/eg
 
 ## Director Prompt Pattern
 
+Clip prompts follow the official MiniMax H3 `Ref2VA` prompt format from
+`MiniMax-AI/MiniMax-H3`, directory `skills/h3-prompt-writing`. Our production
+route is `r2v`, which is Ref2VA, so every clip prompt is a full-reference prompt
+and uses all six sections, in this exact order, as plain labeled sections. No
+JSON, no XML wrapper:
+
+```text
+subject_definitions:
+summary:
+retention_analysis:
+detailed_description:
+overall_soundscape:
+non_diegetic_music:
+```
+
+### Bind labels to our reference stack
+
+`<Picture N>` must be declared in the same order the sequence JSON lists
+`ref_images`. `h3_runner.py` maps that list positionally onto
+`ref_images.ref_image_0..8`, so `<Picture 1>` is the first entry of
+`ref_images`, `<Picture 2>` the second, and so on. Reorder the JSON without
+reordering the prompt and every reference in the prompt silently re-binds to the
+wrong image.
+
+Clips with `use_previous_last_frame_as_ref` shift by one. `h3_sequence_runner.py`
+*prepends* the carried-over last frame with `refs.insert(0, previous_last_frame)`,
+so on clips 02 and 03 `<Picture 1>` is the last frame of the previous clip and
+everything listed in that clip's `ref_images` moves down one slot:
+
+```text
+clip 01   <Picture 1> = ref_images[0]
+clip 02   <Picture 1> = last frame of clip 01,  <Picture 2> = ref_images[0]
+clip 03   <Picture 1> = last frame of clip 02,  <Picture 2> = ref_images[0]
+```
+
+Declare that carried frame explicitly, because it is the continuity anchor:
+
+```text
+<Picture 1> is the final frame of the previous clip, showing the red chili broth
+at a full simmer with steam rising.
+```
+
+Declare each recurring person as `<Subject N>` and anchor them to the picture
+they come from, then use that label everywhere instead of re-describing them:
+
+```text
+<Subject 1> is the professional chef in <Picture 1>, mid-thirties, black chef
+coat, short dark hair.
+<Picture 5> is the raw rolled beef product image on a dark wooden tray.
+```
+
+A label means the same thing in all six sections. Never introduce a label in
+`detailed_description` that was not declared in `subject_definitions`.
+
+### Section rules
+
+- `summary`: open with the task type, then one paragraph on how the references
+  relate to the target clip. For our ads the task type is `reference generation`.
+- `retention_analysis`: one line per reference, stating how strongly it is
+  carried into the video. Allowed markers for visible references are
+  `fully_preserved`, `partially_preserved`, `attribute_transfer`, and
+  `weak_reference`. Use `fully_preserved` for the protagonist and the product,
+  `attribute_transfer` for scene and lighting bibles, `weak_reference` for the
+  brand cue.
+- `detailed_description`: the shot-by-shot body, 350-500 words for a generation
+  task. Number shots `[Shot 1]`, `[Shot 2]`, `[Shot 3]`. The first shot carries
+  no timestamp; every later shot opens with its cut time as
+  `At MM:SS.mmm,`. Timings must add up to the requested duration.
+- `overall_soundscape`: ambient and physical sound across the whole clip.
+- `non_diegetic_music`: score the characters cannot hear.
+
+Keep both audio sections even though production runs pass `--no-audio`. H3
+samples video and audio in one joint latent, so the sound description still
+shapes motion, pacing, and impact timing. `--no-audio` only skips the audio
+decode when saving the file, it does not remove audio from sampling.
+
+### Camera and dialogue
+
+Write camera as a sentence combining motion type, amplitude, and speed, for
+example `the camera pushes in with small amplitude at slow speed`. Do not stack
+abbreviations or invent shorthand.
+
+Our food ads are silent, so normally there is no dialogue. If a clip ever needs
+a line, wrap it as `<d>[Language] line text</d>`, keep the original language and
+punctuation verbatim inside the tag while all description around it stays
+English, and give each speaker a stable ID `(S1)`, `(S2)` assigned in order of
+first vocal appearance.
+
+### Story shape
+
 Write each clip as one physical commercial beat:
 
 1. Clip 01: product hook and first action.
 2. Clip 02: cooking/texture/share transformation.
 3. Clip 03: serving/family/product hero.
 
-Each 5s prompt uses:
+Inside a 5s clip use three shots:
 
-- `0-1.6s`: establish the action and spatial context.
-- `1.6-3.3s`: close-up insert, heat/steam/texture, or object movement.
-- `3.3-5.0s`: endpoint and transition handle.
+- `[Shot 1]` 0-1.6s: establish the action and spatial context.
+- `[Shot 2]` from about 00:01.600: close-up insert, heat/steam/texture, or
+  object movement.
+- `[Shot 3]` from about 00:03.400: endpoint and transition handle into the next
+  clip.
 
-Always name shot size, angle, lens/focus feel, start frame, camera move, end frame, physical hand/tool/food motion, and the handoff mechanism. Keep it silent, no subtitles, no generated overlays. People are allowed when they are fictional commercial characters and are supplied as character references; preserve them deliberately instead of cropping all faces by default.
+Always name shot size, angle, lens/focus feel, start state, camera move, end
+state, physical hand/tool/food motion, and the handoff mechanism. Describe
+composition, subjects, environment, actions, camera, and sound. Do not write
+plot summary or motivation, and do not leave a reference unresolved.
+
+No subtitles, no generated overlays, no floating logo. People are allowed when
+they are fictional commercial characters supplied as character references;
+preserve them deliberately instead of cropping all faces by default.
 
 For cooking videos, do not trust H3 to invent ingredient processing. If the story includes cutting, peeling, washing, marinating, soaking, blanching, or portioning, generate a dedicated prep-state reference first. The prep-state image should show the exact cut size, tool, hand position, cutting board, and already-processed ingredients. Then write clip 01 as `prep/cut -> gather -> pot/pan`, not as a vague "prepare ingredients" beat.
+
+Worked example in the new format:
+`prompts/h3_3x5_1080/shuizhu_beef_roll_clip_01.md`.
 
 ## Soup Reference Lesson
 
