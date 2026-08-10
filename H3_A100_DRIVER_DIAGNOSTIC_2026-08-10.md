@@ -113,8 +113,53 @@ ECC counters stay at zero throughout because ECC protects memory, not the
 tensor-core compute path.
 
 Do not debug prompts, references, resolution or Turbo settings on this machine.
-Replace the GPU. `--fp16-unet` is not a workaround: H3's int8 weights need bf16's
-exponent range and fp16 produced an immediately black clip.
+`--fp16-unet` is not a workaround: H3's int8 weights need bf16's exponent range
+and fp16 produced an immediately black clip.
+
+### Proven at the instruction level, software fully exonerated
+
+A second instance was provisioned by full-disk copy and failed identically, so
+the first conclusion of "replace this one card" was wrong. Everything below was
+then eliminated by measurement, not argument:
+
+| Suspicion | How it was ruled out |
+| --- | --- |
+| That one A100's silicon | New instance, same disk, identical failure |
+| cu13 wheels shadowing cu12 | `/proc/PID/maps` shows only cu12 loaded |
+| cuBLAS version | 12.4 via LD_PRELOAD and 12.6 both fail |
+| cuBLAS vs cuBLASLt | Both fail when selected explicitly |
+| bf16 reduced-precision reduction | Fails with the flag on and off |
+| JIT / compile caches | Cleared, plus `CUDA_CACHE_DISABLE=1`; still fails |
+| Clock or power margin | Locked to 900 MHz; still fails |
+| Shape alignment or tiling heuristics | N sweep 4080-4112 all fail |
+| Uninitialized memory | Bad values are only `0x7f80` and `0xff80`, exact bf16 ±Inf |
+| Deterministic kernel indexing bug | 50 runs on fixed A and B: intersection 0, Jaccard 0.000000 |
+| MIG or vGPU slicing | MIG Mode Disabled, full physical GPU |
+
+The decisive test calls the Ampere tensor-core instruction directly, compiled to
+a native `sm_80` cubin with no PTX JIT, bypassing PyTorch, ATen, cuBLAS,
+cuBLASLt, Triton and Inductor. Same kernel, same `HMMA.16816` instruction, same
+shapes and iteration count, only the input dtype differs:
+
+```text
+bf16: 2.097e+11 MACs -> 40 wrong accumulators, all inf, 1.91e-10 per MAC   FAIL
+fp16: 2.097e+11 MACs ->  0 wrong accumulators                              PASS
+```
+
+Inputs are all `1.0` and the expected accumulator is `320000`, so no legitimate
+path reaches infinity. The reproducer is `server_scripts/bf16_mma_acceptance.cu`,
+run by `server_scripts/check_bf16_mma.sh`.
+
+The fault is therefore in GPU execution, the driver, or the virtualization layer,
+and not in any user-space library. What is still not separated is silicon from
+driver `550.127.08`, because both instances ran the same driver and the original
+GPU UUID was never recorded. Record `nvidia-smi --query-gpu=uuid,serial` on every
+machine from now on; `check_bf16_mma.sh` does it automatically.
+
+Send providers the fp16-versus-bf16 pair. It is not arguable: identical
+instruction family, identical workload, one dtype clean and the other not, with
+ECC at zero throughout because ECC covers memory and not the tensor-core
+datapath.
 
 ### Corrections to the recommendations below
 

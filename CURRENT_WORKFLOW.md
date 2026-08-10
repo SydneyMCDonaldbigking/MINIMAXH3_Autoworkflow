@@ -33,24 +33,30 @@ bf16. Symptoms are black clips that arrive intermittently with no configuration
 change.
 
 ```bash
-python -c "
-import torch
-torch.manual_seed(0)
-a=torch.randn(4096,4096,device='cuda',dtype=torch.bfloat16)
-b=torch.randn(4096,4096,device='cuda',dtype=torch.bfloat16)
-print('fp32 ref absmax :', (a.float()@b.float()).abs().max().item())
-print('fp16 same shape :', (a.half()@b.half()).abs().max().item())
-print('bf16 inf x3     :', [int((a@b).isinf().sum()) for _ in range(3)])
-"
+bash server_scripts/check_bf16_mma.sh
 ```
 
-A healthy card gives roughly `340`, `340`, and `[0, 0, 0]`. Any nonzero inf count
-means reject the machine. Stage 3 of `diagnose_h3_black.sh` runs this check for
-you, so `MAX_STAGE=3` is a sufficient acceptance test and takes about a minute.
+It records the GPU UUID and serial, builds a native `sm_80` cubin that calls the
+tensor-core instruction directly, and reports bf16 against fp16. **bf16 must say
+PASS.** A failing machine looks like this:
 
-If a provider insists the card is fine because ECC is clean, ECC protects memory
-and does not cover the tensor-core compute path. The fp16 line is the argument
-that it is not a driver or installation problem.
+```text
+bf16   MACs=2.097e+11  bad=40  inf=40  rate/MAC=1.91e-10  FAIL
+fp16   MACs=2.097e+11  bad=0   inf=0   rate/MAC=0         PASS
+```
+
+Reject the machine on any bf16 failure, and do not start debugging prompts,
+models or PyTorch. Because the test bypasses PyTorch, cuBLAS and PTX JIT
+entirely, a failure cannot be argued away as a software problem.
+
+If a provider insists the card is fine because ECC is clean, ECC covers memory
+and not the tensor-core datapath. The fp16 line is the argument that this is
+neither a driver installation nor a library problem: same instruction family,
+same workload, one dtype clean and the other not.
+
+Always record the UUID and serial the script prints. Two instances were compared
+on 2026-08-10 without them, which made it impossible to tell whether the second
+machine was even a different card.
 
 Install your SSH key before anything else. Do not use password auth for the
 tooling; `cluster_runner.py` and the scripts assume key auth.
