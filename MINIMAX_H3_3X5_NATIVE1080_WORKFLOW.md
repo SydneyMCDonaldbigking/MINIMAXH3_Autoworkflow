@@ -216,6 +216,41 @@ punctuation verbatim inside the tag while all description around it stays
 English, and give each speaker a stable ID `(S1)`, `(S2)` assigned in order of
 first vocal appearance.
 
+### House rules the official skill does not cover
+
+The official format governs structure. It says nothing about what survives a
+4-step distilled Turbo LoRA at 1088x1920, which is a far thinner sampling budget
+than the full-step inference it was written for. These rules come from measuring
+our own output on 2026-08-10 with `check_clip_quality.py`.
+
+**Every beat must be a directional action that completes inside its window.**
+Never end a shot on a state to hold. The first Ref2VA beef clip closed on "the
+camera tilts down, the broth bubbles and steam rises" - a state, not an action.
+The hand stalled above the wok for the last 1.5 seconds and the model filled 40
+frames of nothing with noise: 45% of frames in that third reversed direction.
+The egg tart clip, which closes on a real move, fell to 7.5%.
+
+**One action, one actor, per shot.** That same beat asked for two simultaneous
+hand actions in 1.6 seconds, carrying cabbage and stirring with a ladle. The
+model performed neither and hovered instead.
+
+**Commit the camera or lock it off.** Write a definite move, or write that the
+camera does not move and say it explicitly. Hedged instructions like "tilts down
+with small amplitude at slow speed" invite micro-drift. Counter-intuitively the
+most stable third we have measured is also the one with the *largest* camera
+motion - ambiguity destabilises, movement does not.
+
+**Gate every clip before assembling a sequence:**
+
+```bash
+python check_clip_quality.py sequence_outputs/<id>/<run>/clip-01/*.mp4
+```
+
+It fails a clip on a constant frame (the NaN signature) or on camera jitter
+above 20% overall / 25% in the last third. Do not gate on sharpness: the clip
+judged bad measured *sharper* per frame than the clip judged good, so per-frame
+sharpness does not separate the cases.
+
 ### Story shape
 
 Write each clip as one physical commercial beat:
