@@ -21,27 +21,68 @@ set -uo pipefail
 #   REPS=5
 
 NVCC="${NVCC:-}"
-ARCH="${ARCH:-80}"
 REPS="${REPS:-5}"
 SRC="$(dirname "$0")/bf16_mma_acceptance.cu"
 BIN="/tmp/bf16_mma_acceptance"
+
+echo "== GPU identity (record this; you cannot compare cards later without it) =="
+nvidia-smi --query-gpu=name,uuid,serial,pci.bus_id,driver_version --format=csv,noheader || true
+nvidia-smi -q 2>/dev/null | grep -A1 -i "MIG Mode" | head -2 || true
+
+# Compute capability decides the -gencode target. Ask the GPU rather than making
+# the caller know it: 8.0 = A100, 8.6 = A10/3090, 8.9 = 4090/L40S, 9.0 = H100.
+if [ -z "${ARCH:-}" ]; then
+  cap="$(nvidia-smi --query-gpu=compute_cap --format=csv,noheader 2>/dev/null | head -1 | tr -d ' .')"
+  ARCH="${cap:-80}"
+fi
+echo "   compute capability -> building for sm_${ARCH}"
+
+if [ "$ARCH" -lt 80 ] 2>/dev/null; then
+  echo "ERROR: bf16 tensor-core MMA needs sm_80 or newer. This GPU is sm_${ARCH}." >&2
+  exit 2
+fi
 
 if [ -z "$NVCC" ]; then
   NVCC="$(command -v nvcc 2>/dev/null || true)"
   [ -z "$NVCC" ] && NVCC="$(ls /usr/local/cuda*/bin/nvcc 2>/dev/null | head -1)"
 fi
+
+# Without nvcc, fall back to the PyTorch-level check. It is less airtight, since
+# it cannot prove the fault is below the libraries, but it is still decisive
+# enough to reject a machine: a healthy GPU returns zero inf.
 if [ -z "$NVCC" ] || [ ! -x "$NVCC" ]; then
-  echo "ERROR: nvcc not found. Set NVCC=/path/to/nvcc." >&2
-  exit 2
+  echo
+  echo "== nvcc not found, falling back to the PyTorch-level check =="
+  python - <<'PY' || exit 2
+import sys
+try:
+    import torch
+except Exception as exc:
+    print("Neither nvcc nor a usable PyTorch is present:", exc)
+    print("Use a CUDA devel image, or copy in a prebuilt binary.")
+    sys.exit(2)
+torch.manual_seed(0)
+a = torch.randn(4096, 4096, device="cuda", dtype=torch.bfloat16)
+b = torch.randn(4096, 4096, device="cuda", dtype=torch.bfloat16)
+print("  torch %s / cuda %s on %s" % (torch.__version__, torch.version.cuda,
+                                      torch.cuda.get_device_name(0)))
+print("  fp32 reference absmax :", round((a.float() @ b.float()).abs().max().item(), 1))
+print("  fp16 same shape absmax:", round((a.half() @ b.half()).abs().max().item(), 1))
+inf = [int((a @ b).isinf().sum()) for _ in range(3)]
+print("  bf16 inf counts x3    :", inf)
+print()
+if any(inf):
+    print("  FAIL - bf16 matmul produces inf. Reject this machine.")
+    sys.exit(1)
+print("  PASS - bf16 matmul is clean. fp32 and fp16 should both read about 340.")
+PY
+  exit $?
 fi
+
 if [ ! -f "$SRC" ]; then
   echo "ERROR: missing $SRC" >&2
   exit 2
 fi
-
-echo "== GPU identity (record this; you cannot compare cards later without it) =="
-nvidia-smi --query-gpu=name,uuid,serial,pci.bus_id,driver_version --format=csv,noheader || true
-nvidia-smi -q 2>/dev/null | grep -A1 -i "MIG Mode" | head -2 || true
 
 echo
 echo "== Building native sm_${ARCH} cubin =="
