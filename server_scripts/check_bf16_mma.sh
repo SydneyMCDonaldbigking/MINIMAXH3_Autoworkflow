@@ -45,7 +45,10 @@ nvidia-smi -q 2>/dev/null | grep -A1 -i "MIG Mode" | head -2 || true
 
 echo
 echo "== Building native sm_${ARCH} cubin =="
-"$NVCC" "$SRC" -O3 -gencode "arch=compute_${ARCH},code=sm_${ARCH}" -o "$BIN" || exit 2
+# -cudart static makes the binary self-contained: it then runs on any machine
+# with an NVIDIA driver and needs no CUDA toolkit, Python or PyTorch. Build it
+# once on a machine that has nvcc and scp the ~1 MB result to bare images.
+"$NVCC" "$SRC" -O3 -gencode "arch=compute_${ARCH},code=sm_${ARCH}" -cudart static -o "$BIN" || exit 2
 
 CUOBJ="$(dirname "$NVCC")/cuobjdump"
 if [ -x "$CUOBJ" ]; then

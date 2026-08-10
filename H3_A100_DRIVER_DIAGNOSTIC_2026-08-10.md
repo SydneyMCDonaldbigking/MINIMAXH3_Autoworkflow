@@ -135,6 +135,13 @@ then eliminated by measurement, not argument:
 | Uninitialized memory | Bad values are only `0x7f80` and `0xff80`, exact bf16 ±Inf |
 | Deterministic kernel indexing bug | 50 runs on fixed A and B: intersection 0, Jaccard 0.000000 |
 | MIG or vGPU slicing | MIG Mode Disabled, full physical GPU |
+| PyTorch version | 2.6.0+cu124, the driver-matched old baseline, fails identically to 2.9.1+cu126 |
+| Broken driver install | Kernel module, NVML and libcuda all 550.127.08 from the same build date; no Xid, no errors in dmesg |
+
+The PyTorch 2.6 result matters because the earlier reasoning that "the old
+`comfy_h3` env ran 720p successfully, so 2.6 is a known-good baseline" does not
+hold: a successful 720p render does not prove that specific GEMM shape was ever
+exercised. Tested directly on the same shape, 2.6 fails the same way.
 
 The decisive test calls the Ampere tensor-core instruction directly, compiled to
 a native `sm_80` cubin with no PTX JIT, bypassing PyTorch, ATen, cuBLAS,
