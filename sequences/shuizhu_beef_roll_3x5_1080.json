@@ -6,7 +6,7 @@
     "width": 1088,
     "height": 1920,
     "duration": 5.0,
-    "steps": 4,
+    "steps": 8,
     "turbo": true,
     "turbo_low_vram": true,
     "no_audio": true,

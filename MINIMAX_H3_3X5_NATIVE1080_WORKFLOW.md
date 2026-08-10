@@ -216,6 +216,36 @@ punctuation verbatim inside the tag while all description around it stays
 English, and give each speaker a stable ID `(S1)`, `(S2)` assigned in order of
 first vocal appearance.
 
+### Use 8 steps, not 4
+
+Production runs at `steps: 8`. Four steps is not usable and the difference is not
+subtle. Measured on 2026-08-10 on a verified-healthy A100, same seed, same
+prompt, same references, step count the only variable:
+
+| | 4 steps | 8 steps |
+| --- | ---: | ---: |
+| Camera flip rate, overall | 7.4% | **1.6%** |
+| Camera flip rate, opening third | 17.5% | **2.5%** |
+| Sampling time | 5:30 | 11:08 |
+| Clip wall time | 7.4 min | 13 min |
+
+The visible defect at 4 steps is worse than the numbers suggest. Whole objects
+render semi-transparent and doubled: in the beef clip the cutting board, the
+beef tray and the brand card were all ghosted at once, and you could see the
+tray through the board. At 8 steps the same frame is solid.
+
+`check_clip_quality.py` passed the 4-step clip. It gates on constant frames and
+camera jitter and has no ghosting detector, so a PASS is necessary but not
+sufficient - still look at frames.
+
+Cost: a three-clip ad goes from about 22 to about 39 minutes, roughly $0.26 to
+$0.46 of A100 time. That is the cheapest quality fix available here.
+
+An earlier conclusion in this file was wrong and is retracted: the opening
+camera shake was blamed on the model being unable to execute a smooth push, with
+"lock the camera off" proposed as the fix. It executes the push fine at 8 steps.
+The shake was undersampling.
+
 ### House rules the official skill does not cover
 
 The official format governs structure. It says nothing about what survives a
