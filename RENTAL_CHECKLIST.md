@@ -117,10 +117,16 @@ Measured 2026-08-10 at `$0.713/hr`:
 | One clip, 8 steps, `1088x1920` | 13 min | $0.15 |
 | One three-clip 15s ad | 39 min | $0.46 |
 
-Sampling costs about 83 seconds per step and that is the floor. `--lowvram` and
-`NORMAL_VRAM` measured 83.7 and 86.0 s/it respectively, so keeping weights
-resident buys nothing: the cost is the sequence length of `1088x1920` at 124
-frames, not weight streaming. Keep `--lowvram` for the headroom.
+Sampling costs about 83 seconds per step **with no attention acceleration in the
+graph**. `--lowvram` and `NORMAL_VRAM` measured 83.7 and 86.0 s/it respectively,
+so keeping weights resident buys nothing: the cost is not weight streaming. Keep
+`--lowvram` for the headroom.
+
+This was first written as "that is the floor", which overstated what had been
+measured. Two vram modes only rule out weight movement; they say nothing about
+the attention path, which is where a `1088x1920` by 124-frame sequence actually
+spends its time. Sage attention, chunked feed-forward and sigma shift are all
+untested here. See `EXPERIMENT_PLAN_ACCELERATION.md`.
 
 ## Process lessons, mostly mine
 

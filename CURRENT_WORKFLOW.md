@@ -137,10 +137,15 @@ clips plus stitching, roughly $0.46 of A100 time at $0.713/hr.
 Four steps is not usable: whole objects render semi-transparent and doubled. See
 the step comparison in `MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md`.
 
-Sampling costs about 83 seconds per step and that is the floor on a 40 GB A100.
-`--lowvram` and `NORMAL_VRAM` measured 83.7 and 86.0 s/it, so keeping weights
-resident buys nothing; the cost is sequence length, not weight streaming. Keep
-`--lowvram` for the headroom.
+Sampling costs about 83 seconds per step on a 40 GB A100 **with no attention
+acceleration in the graph**. `--lowvram` and `NORMAL_VRAM` measured 83.7 and
+86.0 s/it, so keeping weights resident buys nothing; the cost is not weight
+streaming. Keep `--lowvram` for the headroom.
+
+This was previously written here as "the floor", which was wrong. That pair of
+measurements only rules out weight movement. The graph runs plain attention with
+no Sage, no chunked feed-forward and no sigma shift, and none of those has been
+tested. See `EXPERIMENT_PLAN_ACCELERATION.md`.
 
 Final crop to exactly `1080x1920` is `crop=1080:1920:4:0`. This is a native-detail
 render plus a small side crop, not an upscale.
