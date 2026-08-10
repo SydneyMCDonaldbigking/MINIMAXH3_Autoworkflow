@@ -545,16 +545,27 @@ def run_command(
     input_text: str | None = None,
     timeout: float | None = None,
 ) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(
+    # stdin goes out as bytes with explicit LF. In text mode Python translates
+    # "\n" to os.linesep on write, so from Windows a remote bash script would
+    # arrive with CRLF and die on its first line with $'\r': command not found.
+    payload = (
+        input_text.replace("\r\n", "\n").encode("utf-8")
+        if input_text is not None
+        else None
+    )
+    proc = subprocess.run(
         args,
-        input=input_text,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
+        input=payload,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
         timeout=timeout,
         check=False,
+    )
+    return subprocess.CompletedProcess(
+        proc.args,
+        proc.returncode,
+        proc.stdout.decode("utf-8", errors="replace") if proc.stdout else "",
+        None,
     )
 
 
