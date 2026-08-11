@@ -19,5 +19,15 @@
     "mince browns, eggplant softens in the sauce",
     "plated, spring onion scattered"
   ],
-  "negatives_global": "ratatouille, tomato sauce, cheese, deep-fried battered eggplant, mushy collapsed eggplant, grey unbrowned mince"
+  "negatives_global": "ratatouille, tomato sauce, cheese, deep-fried battered eggplant, mushy collapsed eggplant, grey unbrowned mince",
+  "seed_base": 202608120600,
+  "first_heat": "The minced pork hits the wok and spreads out, breaking into loose crumbs as it starts to brown, fat rendering out and steam lifting from the metal.",
+  "transform": "the mince browns from pale pink to deep golden, the eggplant batons go in and soften visibly, their cut faces turning translucent and golden as they drink up the dark sauce, which thickens and clings.",
+  "lift": "A wooden spatula enters from the left, lifts one eggplant baton coated in sauce and browned mince clear of the wok, and holds it at the centre of frame while sauce runs off it slowly.",
+  "plate": "The hands of <Subject 1> enter from the top of frame holding the wok, tip it once over the bowl, and the eggplant and mince slide out together with the thick sauce following slowly. The hands withdraw out of frame.",
+  "final_lift": "A hand enters from the right holding chopsticks, takes one soft eggplant baton, lifts it clear of the bowl and holds it steady at the centre of frame, sauce and mince clinging to it.",
+  "sound_01": "A warm home kitchen with a low room tone and a rice cooker ticking quietly. In the first shot, a tray set down on a wooden counter. In the second shot, cut eggplant shifting on a board. In the third shot, a gas burner rising, then the dense sizzle of mince meeting hot metal. No speech.",
+  "sound_02": "A steady frying sound throughout, the scrape of a wooden spatula, then a softer wetter bubbling as the eggplant releases moisture and the sauce thickens. No speech.",
+  "sound_03": "A quiet home. In the first shot, soft eggplant and thick sauce sliding into a ceramic bowl. In the second shot, chopped spring onion landing. In the third shot, chopsticks lifting a soft baton, and a rice bowl set down on wood. No speech.",
+  "music": "A warm maternal bed: piano over low strings, slow and unhurried, the feeling of an ordinary weeknight dinner."
 }

@@ -19,5 +19,15 @@
     "ribs into hot oil, turning golden",
     "stacked and glazed, chilli scattered"
   ],
-  "negatives_global": "western barbecue ribs, sweet red bbq sauce, boiled meat, batter, ketchup colour, cheese"
+  "negatives_global": "western barbecue ribs, sweet red bbq sauce, boiled meat, batter, ketchup colour, cheese",
+  "seed_base": 202608120200,
+  "first_heat": "The ribs enter the oil and it erupts around them in a rolling boil of bubbles, their surface stiffening and beginning to colour almost at once, steam and haze rising above the wok.",
+  "transform": "the ribs turn from pale marinated red to deep golden-brown, their surface crisping and blistering, while the oil settles from a violent boil to a steady vigorous bubble around them.",
+  "lift": "A pair of long tongs enters from the left, closes on one rib, lifts it clear of the oil and holds it at the centre of frame while oil runs off it in fine threads. The crust is deep golden and crisp.",
+  "plate": "The hands of <Subject 1> enter from the top of frame with tongs, lift the ribs from the wok two at a time and stack them upright into a tall pile on the plate, then withdraw out of frame.",
+  "final_lift": "A hand enters from the right holding chopsticks, takes one rib from the top of the stack, lifts it clear and holds it steady at the centre of frame, glaze running slowly from its end.",
+  "sound_01": "A professional kitchen with a low extractor hum. In the first shot, a steel tray sliding on a stainless counter. In the second shot, lemongrass and chilli being gathered, and the wet sound of marinated ribs shifting. In the third shot, a gas burner roaring, then a violent burst of sizzling as the ribs hit hot oil. No speech.",
+  "sound_02": "A heavy rolling fry throughout, oil crackling and popping. In the second shot the crackle sharpens as the crust forms. In the third shot, tongs closing, and oil running off in fine streams back into the wok. No speech.",
+  "sound_03": "A kitchen with a low extractor hum. In the first shot, ribs stacking against each other on a hard plate. In the second shot, fried garlic and chilli scattering. In the third shot, chopsticks closing on a rib and a thread of glaze falling. No speech.",
+  "music": "A tropical percussion bed: hand drums and bamboo blocks over a syncopated bass line, hot and driving without being frantic."
 }

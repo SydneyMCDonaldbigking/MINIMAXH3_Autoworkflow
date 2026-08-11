@@ -19,5 +19,15 @@
     "into the wok, chillies and peanuts",
     "plated, spring onion scattered"
   ],
-  "negatives_global": "sweet and sour sauce, battered chicken, broccoli, carrots, western takeaway orange chicken, cheese, ketchup colour"
+  "negatives_global": "sweet and sour sauce, battered chicken, broccoli, carrots, western takeaway orange chicken, cheese, ketchup colour",
+  "seed_base": 202608120500,
+  "first_heat": "The chicken cubes hit the wok and sear immediately, their outsides beginning to whiten and gold at the edges, dried chillies darkening around them as steam lifts from the metal.",
+  "transform": "the chicken turns from pale to golden on every side, the sauce goes in and thickens rapidly from thin to glossy, clinging to each cube, while peanuts and dried chillies tumble among them.",
+  "lift": "A wok spatula enters from the left, lifts a portion of chicken and peanuts clear of the wok and holds it at the centre of frame. Sauce runs off in slow glossy threads.",
+  "plate": "The hands of <Subject 1> enter from the top of frame holding the wok, tip it once over the bowl, and the chicken slides out with peanuts and chillies following. The hands withdraw out of frame.",
+  "final_lift": "A hand enters from the right holding chopsticks, takes one glazed chicken cube, lifts it clear of the bowl and holds it steady at the centre of frame, sauce running from it.",
+  "sound_01": "A warm home kitchen with a low room tone. In the first shot, a ceramic plate sliding on a wooden counter. In the second shot, dried chillies and peanuts rattling in a small dish. In the third shot, a gas burner rising, then a sharp sizzle as the chicken hits the wok. No speech.",
+  "sound_02": "A continuous stir fry throughout, the scrape of a spatula against carbon steel, sauce hitting hot metal with a hiss and settling into a thick bubble. No speech.",
+  "sound_03": "A home kitchen. In the first shot, chicken and peanuts sliding into a ceramic bowl. In the second shot, chopped spring onion landing lightly. In the third shot, chopsticks closing, and a rice bowl set down. No speech.",
+  "music": "A bright domestic bed: plucked strings with a pentatonic figure over light percussion, cheerful and familiar without being twee."
 }
