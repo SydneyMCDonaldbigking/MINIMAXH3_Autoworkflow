@@ -10,4 +10,4 @@ COMPOSITION: vertical 9:16, medium shot from a slightly high three-quarter angle
 
 STYLE: photorealistic commercial food cinematography, high quality, realistic hands, natural textures, rich but clean colour grade.
 
-NEGATIVE: subtitles, title cards, watermarks, floating logo, any printed card, any brand text, invented lettering, fake app UI, distorted face, extra fingers, warped cookware, messy kitchen, deep frying, a wok of hot oil, dark caramelised crust, barbecue glaze, dry roast ribs, thick brown gravy, restaurant kitchen, plastic packaging, sealed tray, product label, printed nutrition panel, barcode.
+NEGATIVE: subtitles, title cards, watermarks, floating logo, any printed card, any brand text, invented lettering, fake app UI, distorted face, extra fingers, warped cookware, messy kitchen, raw or pink meat, red uncooked muscle, deep frying, a wok of hot oil, dark caramelised crust, barbecue glaze, dry roast ribs, thick brown gravy, a brand card carrying a photograph or product image, invented packaging artwork, restaurant kitchen, plastic packaging, sealed tray, product label, printed nutrition panel, barcode.
