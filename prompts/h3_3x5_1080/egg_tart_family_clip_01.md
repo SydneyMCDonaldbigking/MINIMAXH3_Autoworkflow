@@ -16,7 +16,7 @@ retention_analysis:
 <Subject 2>: fully_preserved. Same face, build and clothing throughout, and never handling anything hot.
 <Picture 1>: attribute_transfer. Kitchen layout, light direction and material palette carry over; exact framing does not.
 <Picture 2>: fully_preserved. Every component keeps the size and cut this image defines.
-<Picture 3>: partially_preserved. The cooking vessel keeps its shape and position, but holds only the beginning of the cook at this stage.
+<Picture 3>: weak_reference. Only the vessel's shape, material and position carry over. Its contents do not: the vessel is empty when this clip begins, and the food that image shows is where clip 02 ends up, not where clip 01 starts.
 <Picture 4>: weak_reference. Colour and texture target only, not composed in frame.
 <Picture 5>: fully_preserved. The raw ingredient keeps its colour and surface exactly.
 <Picture 6>: weak_reference. May appear once as a small printed card far back on the counter, never as an overlay.

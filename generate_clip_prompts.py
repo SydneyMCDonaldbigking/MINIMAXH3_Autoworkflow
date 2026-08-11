@@ -110,10 +110,18 @@ def clip01(cfg: dict) -> str:
     c1s3 = beat(c, "c1s3",
                 "The hands of <Subject 1> enter from the top of frame carrying the ingredient, "
                 "tip it in once, and withdraw straight up out of frame empty.")
+    # <Picture 3> is the working state, so the photograph shows the vessel FULL of a
+    # nearly finished dish. Pointing the model at it and saying "the vessel, already
+    # hot" got a wok of finished food with raw mince being tipped onto it - the
+    # reference beat the wording, the same way the product photo's label did. The
+    # vessel's starting state now has to be stated positively, and <Picture 3> is
+    # explicitly reduced to the vessel itself for this shot.
+    vessel_start = c.get("vessel_start", "empty and already hot, with nothing in it yet")
     shot3 = c.get("clip01_shot3") or (
         "[Shot 3] At 00:03.400, the shot cuts to a locked-off close-up at cooking height. "
-        "The vessel of <Picture 3> fills the lower two thirds of frame over its heat source, "
-        f"already hot. {c1s3} {c['first_heat']} "
+        f"The vessel of <Picture 3> fills the lower two thirds of frame over its heat source, "
+        f"{vessel_start}. <Picture 3> supplies this vessel's shape and position only, never its "
+        f"contents. {c1s3} {c['first_heat']} "
         "The camera does not move at any point in this shot.")
     return f"""subject_definitions:
 <Subject 1> is {c['cook']}, working at the counter of the kitchen in <Picture 1>.{subject2(c)}
@@ -131,7 +139,7 @@ retention_analysis:
 <Subject 1>: fully_preserved. Same face, build and clothing throughout.{fully_preserved2(c)}
 <Picture 1>: attribute_transfer. Kitchen layout, light direction and material palette carry over; exact framing does not.
 <Picture 2>: fully_preserved. Every component keeps the size and cut this image defines.
-<Picture 3>: partially_preserved. The cooking vessel keeps its shape and position, but holds only the beginning of the cook at this stage.
+<Picture 3>: weak_reference. Only the vessel's shape, material and position carry over. Its contents do not: the vessel is empty when this clip begins, and the food that image shows is where clip 02 ends up, not where clip 01 starts.
 <Picture 4>: weak_reference. Colour and texture target only, not composed in frame.
 <Picture 5>: fully_preserved. The raw ingredient keeps its colour and surface exactly.
 <Picture 6>: weak_reference. May appear once as a small printed card far back on the counter, never as an overlay.

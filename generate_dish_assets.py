@@ -145,8 +145,23 @@ def product_path(cfg: dict) -> pathlib.Path:
 
 
 def generated(cfg: dict, kind: str) -> pathlib.Path:
+    """Where an upstream asset in the chain can be read from.
+
+    Fresh output lands under _generated/. Reviewed output gets filed into the
+    numbered group directories, and the _generated copy does not survive that.
+    A partial re-render with --kinds therefore has to look in both, or the chain
+    breaks on the very reference the flag exists to preserve.
+    """
     stem = f"{cfg['slug']}_{kind}"
-    return OUT_ROOT / stem / "generated" / f"{stem}-1.png"
+    fresh = OUT_ROOT / stem / "generated" / f"{stem}-1.png"
+    if fresh.is_file():
+        return fresh
+    for group in (ROOT / "outputs" / "reference_assets").iterdir():
+        if group.is_dir():
+            filed = group / f"{stem}.png"
+            if filed.is_file():
+                return filed
+    return fresh
 
 
 def build_jobs(cfg: dict, prompts: dict[str, pathlib.Path]) -> list[dict]:
@@ -165,6 +180,7 @@ def build_jobs(cfg: dict, prompts: dict[str, pathlib.Path]) -> list[dict]:
     for kind in ORDER:
         stem = f"{cfg['slug']}_{kind}"
         jobs.append({
+            "kind": kind,
             "stem": stem,
             "prompt": prompts[kind],
             "out": OUT_ROOT / stem,
@@ -200,6 +216,11 @@ def main(argv: list[str]) -> int:
     parser.add_argument("--list", action="store_true", help="list available configs and exit")
     parser.add_argument("--print-only", action="store_true",
                         help="write the prompts and show the commands, generate nothing")
+    parser.add_argument("--kinds", default="",
+                        help="comma-separated subset to regenerate, e.g. prep_state,cook_state,"
+                             "hero_state. Default is all four. Use this when a recipe changed but "
+                             "the cook and kitchen did not, so the character reference stays put "
+                             "and the ad keeps the same face across a re-render.")
     args = parser.parse_args(argv)
 
     available = sorted(p.stem for p in CONFIG_DIR.glob("*.json"))
@@ -218,7 +239,10 @@ def main(argv: list[str]) -> int:
         print(f"\n{cfg['dish_cn']} ({slug})")
         prompts = render(cfg)
         print(f"  wrote {len(prompts)} prompts to {PROMPT_DIR.relative_to(ROOT).as_posix()}/")
+        wanted = [k.strip() for k in args.kinds.split(",") if k.strip()]
         for job in build_jobs(cfg, prompts):
+            if wanted and job["kind"] not in wanted:
+                continue
             run(job, args.print_only)
     return 0
 
