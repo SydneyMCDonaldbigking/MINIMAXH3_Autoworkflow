@@ -1,0 +1,23 @@
+{
+  "slug": "minced_pork_eggplant",
+  "dish_en": "braised eggplant with minced pork",
+  "dish_cn": "肉末茄子",
+  "product_dir": "肉末茄子",
+  "product_file": "肉末.png",
+  "product_desc": "raw minced pork in a black retail tray with a UMALL Meat label reading 半肥瘦肉碎 / PORK MINCE, coarse texture with visible fat",
+  "cook": "a mother in her forties, apron over a plain shirt, hair tied back, warm and practical",
+  "kitchen": "a warm Chinese home kitchen, wood cabinets, a gas wok range, a rice cooker on the counter, soft afternoon light",
+  "prep_subject": "long purple Chinese eggplant cut into thick batons about six centimetres long, their cut faces pale cream and slightly porous, arranged on a wooden board. Beside them the raw minced pork on a white plate, plus chopped garlic, ginger and cut spring onion. A knife rests flat at the far side of the board",
+  "prep_defines": "the eggplant baton size and the coarse texture of the mince",
+  "cook_vessel": "a carbon steel wok over a blue gas flame",
+  "cook_subject": "the minced pork browning in the wok and breaking into loose crumbs, the eggplant batons added and softening, their edges turning translucent and golden as they absorb the dark savoury sauce. The sauce is thick and clings rather than pooling",
+  "cook_negatives": "grey unbrowned mince, eggplant collapsing into mush, thin watery sauce, tomato sauce colour, western ratatouille, deep-fried eggplant in batter",
+  "hero_subject": "the finished dish in a shallow ceramic bowl, soft golden eggplant batons coated in dark glossy sauce with browned minced pork throughout, chopped spring onion green scattered on top",
+  "hero_setting": "a warm home dining table, a bowl of steamed rice beside, soft evening light",
+  "story": [
+    "eggplant cut and mince ready",
+    "mince browns, eggplant softens in the sauce",
+    "plated, spring onion scattered"
+  ],
+  "negatives_global": "ratatouille, tomato sauce, cheese, deep-fried battered eggplant, mushy collapsed eggplant, grey unbrowned mince"
+}

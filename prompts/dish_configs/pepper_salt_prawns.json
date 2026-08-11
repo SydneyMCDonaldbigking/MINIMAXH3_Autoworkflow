@@ -1,0 +1,23 @@
+{
+  "slug": "pepper_salt_prawns",
+  "dish_en": "salt and pepper prawns",
+  "dish_cn": "胡椒盐虾",
+  "product_dir": "胡椒盐虾",
+  "product_file": "fresh_prawns.png",
+  "product_desc": "raw whole white prawns, shells translucent grey, heads and tails intact",
+  "cook": "a professional chef in their thirties, dark chef coat with sleeves rolled to the forearm, quick and confident hands",
+  "kitchen": "a Chinese-style professional kitchen, a gas wok range with a visible blue ring flame, dark stainless surfaces, warm overhead light",
+  "prep_subject": "raw whole prawns arranged on a white ceramic plate, shells intact and glossy, beside a small dish of coarse salt and cracked black pepper, chopped garlic, sliced red chilli and cut spring onion. A wok spatula rests flat at the far side",
+  "prep_defines": "the prawn size and the seasoning components",
+  "cook_vessel": "a carbon steel wok over a roaring blue gas flame",
+  "cook_subject": "the prawns searing in the wok, shells turning from translucent grey to bright orange-red, curling as they cook, garlic and chilli tossed among them, a little smoke rising from the wok edge",
+  "cook_negatives": "pale grey uncooked prawns, breadcrumb coating, deep-fried batter, soupy liquid in the wok, prawns swimming in sauce",
+  "hero_subject": "the finished prawns piled on a white oval plate, shells bright orange-red and lightly blistered, coated in coarse salt, black pepper, fried garlic and chilli rings, spring onion scattered on top",
+  "hero_setting": "a dark wooden table, warm restaurant lighting, a small dish of lime beside",
+  "story": [
+    "prawns and seasoning laid out",
+    "prawns hit the wok and turn orange",
+    "plated, garlic and chilli scattered"
+  ],
+  "negatives_global": "battered fried prawns, tempura, prawns in gravy, western shrimp cocktail, pale undercooked shells, cheese"
+}

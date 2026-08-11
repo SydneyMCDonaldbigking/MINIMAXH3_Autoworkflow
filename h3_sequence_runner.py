@@ -240,6 +240,13 @@ def concat_videos(
                 raise
             print("Concat copy failed; falling back to high-quality re-encode.", flush=True)
 
+    # H3 samples video and audio in one latent, so the clips carry a real
+    # soundtrack whenever the sequence does not ask for silence. Dropping it
+    # here would throw away work that was already paid for. Default stays
+    # silent so existing sequences are unaffected.
+    keep_audio = as_bool(final_options.get("keep_audio"), False)
+    audio_args = ["-c:a", "aac", "-b:a", "192k"] if keep_audio else ["-an"]
+
     vf_args: list[str] = []
     input_path: Path | None = None
     if crop and raw_concat.exists():
@@ -273,7 +280,7 @@ def concat_videos(
             preset,
             "-pix_fmt",
             "yuv420p",
-            "-an",
+            *audio_args,
             "-movflags",
             "+faststart",
             str(final_path),
@@ -297,7 +304,7 @@ def concat_videos(
             preset,
             "-pix_fmt",
             "yuv420p",
-            "-an",
+            *audio_args,
             "-movflags",
             "+faststart",
             str(final_path),

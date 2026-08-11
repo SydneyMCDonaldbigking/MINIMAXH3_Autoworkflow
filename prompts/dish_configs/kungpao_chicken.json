@@ -1,0 +1,23 @@
+{
+  "slug": "kungpao_chicken",
+  "dish_en": "Kung Pao chicken",
+  "dish_cn": "宫保鸡丁",
+  "product_dir": "宫保鸡丁",
+  "product_file": "鸡胸肉.png",
+  "product_desc": "raw skinless chicken breast fillets on a dark plate, pale pink and smooth",
+  "cook": "a home cook in their forties, apron over a plain shirt, the unhurried competence of someone who has made this a hundred times",
+  "kitchen": "a warm Chinese home kitchen, wood cabinets, a gas wok range, a few jars of seasoning on an open shelf, afternoon light from the left",
+  "prep_subject": "raw chicken breast already cut into even cubes about two centimetres across, arranged on a white plate. Beside them a small dish of dried red chillies and Sichuan peppercorns, another of raw peanuts, cut spring onion whites, ginger and garlic slices. A knife rests flat at the far side of the board",
+  "prep_defines": "the chicken cube size and the aromatics",
+  "cook_vessel": "a carbon steel wok over a blue gas flame",
+  "cook_subject": "the chicken cubes searing in the wok among dried red chillies and Sichuan peppercorns, the outside turning golden while the sauce begins to glaze and cling, peanuts tossed in. The sauce coats the cubes rather than pooling",
+  "cook_negatives": "thin watery sauce, sweet and sour orange sauce, battered chicken, boiled pale chicken, western stir fry with broccoli and carrots",
+  "hero_subject": "the finished dish in a shallow ceramic bowl, golden chicken cubes glossy with dark savoury sauce, dried red chillies and roasted peanuts throughout, chopped spring onion green on top",
+  "hero_setting": "a warm home dining table, a bowl of steamed rice slightly out of focus behind",
+  "story": [
+    "chicken cubes and aromatics laid out",
+    "into the wok, chillies and peanuts",
+    "plated, spring onion scattered"
+  ],
+  "negatives_global": "sweet and sour sauce, battered chicken, broccoli, carrots, western takeaway orange chicken, cheese, ketchup colour"
+}

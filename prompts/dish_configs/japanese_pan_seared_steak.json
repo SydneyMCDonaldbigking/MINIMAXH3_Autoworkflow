@@ -1,0 +1,23 @@
+{
+  "slug": "japanese_pan_seared_steak",
+  "dish_en": "Japanese pan-seared beef steak",
+  "dish_cn": "日式煎牛扒",
+  "product_dir": "日式煎牛扒",
+  "product_file": "steak.png",
+  "product_desc": "thick-cut marbled beef steak pieces on a light wooden tray, deep red meat with fine white marbling",
+  "cook": "a person in their thirties cooking alone, plain dark shirt with sleeves rolled, calm and unhurried, the mood of a quiet dinner for one",
+  "kitchen": "a small refined Japanese-style home kitchen, pale wood and dark stone, a cast iron pan on an induction hob, low warm evening light, very few objects on the counter",
+  "prep_subject": "thick marbled beef steak resting on a wooden board at room temperature, its fine white marbling clearly visible against deep red meat, seasoned simply with coarse salt and cracked pepper. Beside it a sprig of thyme, a knob of butter and a whole garlic clove. A knife rests flat at the far side of the board",
+  "prep_defines": "the steak thickness and the marbling pattern",
+  "cook_vessel": "a heavy cast iron pan",
+  "cook_subject": "the steak searing in the pan, a deep brown crust forming on its underside, butter foaming around it with thyme and garlic, the chef spooning butter over the top. Steam and a little smoke rising",
+  "cook_negatives": "grey boiled meat, grill marks from a barbecue, breadcrumb coating, sauce flooding the pan, well-done dry meat",
+  "hero_subject": "the finished steak sliced across the grain on a warm plate, the cut faces showing an even pink centre with a dark seared crust, resting juices pooling slightly, flaked salt on top",
+  "hero_setting": "a dark ceramic plate on pale wood, a small bowl of rice and pickles slightly out of focus behind, low warm light",
+  "story": [
+    "steak seasoned and resting",
+    "into the cast iron pan, butter basting",
+    "sliced open, pink centre revealed"
+  ],
+  "negatives_global": "barbecue grill marks, well-done grey meat, breadcrumb coating, western steakhouse plating with chips, ketchup, cheese"
+}

@@ -1,0 +1,29 @@
+{
+  "slug": "aoerliang_chicken_wings",
+  "dish_en": "New Orleans marinated chicken wings",
+  "dish_cn": "奥尔良鸡翅",
+  "product_dir": "奥尔良鸡翅",
+  "product_file": "frozen_wings.png",
+  "product_desc": "pre-marinated chicken wings in a sealed UMALL retail bag, deep orange-red marinade coating every wing",
+  "extra_product_file": "wings_finished.png",
+
+  "cook": "a young home cook in their late twenties, casual clothes, sleeves pushed up, relaxed and a little playful",
+  "kitchen": "a bright modern apartment kitchen, pale counters, a small built-in oven, warm afternoon light from a window on the left, clean and uncluttered",
+
+  "prep_subject": "marinated chicken wings laid out in a single layer on a foil-lined baking tray, each wing glossy with orange-red marinade, spaced so they do not touch. Beside the tray sit a small dish of white sesame seeds and a wedge of lemon. A pair of tongs rests flat at the far side of the tray",
+  "prep_defines": "the wing spacing and the marinade coating",
+
+  "cook_vessel": "a baking tray inside a lit oven",
+  "cook_subject": "the wings partway through baking, the marinade darkened to a deep caramel red and beginning to blister at the edges, the skin tightening and rendering. Visible heat haze inside the oven, the tray sitting on the middle rack",
+  "cook_negatives": "raw pale skin, burnt black wings, deep-fried batter, barbecue grill marks, sauce pooling on the tray",
+
+  "hero_subject": "the finished wings piled on a round ceramic plate, skin glossy and caramelised, sprinkled with white sesame and chopped spring onion, a lemon wedge at the edge. A cold drink slightly out of focus behind",
+  "hero_setting": "a small dining table in the same apartment, warm evening light",
+
+  "story": [
+    "wings out of the bag and onto the tray",
+    "into the oven, marinade caramelising",
+    "onto the plate, sesame scattered, one wing lifted"
+  ],
+  "negatives_global": "barbecue grill, deep-fried batter, western buffalo wings with blue cheese, raw pale skin, burnt black, canned sauce, restaurant kitchen"
+}
