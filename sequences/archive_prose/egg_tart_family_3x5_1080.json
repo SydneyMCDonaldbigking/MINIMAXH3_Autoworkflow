@@ -1,0 +1,80 @@
+{
+  "sequence_id": "egg_tart_family_3x5_native1080",
+  "server": "http://127.0.0.1:8189",
+  "defaults": {
+    "mode": "r2v",
+    "width": 1088,
+    "height": 1920,
+    "duration": 5.0,
+    "steps": 8,
+    "turbo": true,
+    "turbo_low_vram": true,
+    "no_audio": true,
+    "ref_image_size": "match",
+    "poll": 10,
+    "timeout": 10800
+  },
+  "clips": [
+    {
+      "id": "clip-01-fridge-to-oven",
+      "prompt_file": "../prompts/h3_3x5_1080/egg_tart_family_clip_01.md",
+      "ref_images": [
+        "../outputs/reference_assets/05_蛋挞家庭/egg_tart_family_people_character_scene.png",
+        "../outputs/reference_assets/05_蛋挞家庭/egg_tart_family_fridge_to_oven_opening.png",
+        "../outputs/reference_assets/05_蛋挞家庭/egg_tart_family_oven_baking_state.png",
+        "../outputs/reference_assets/05_蛋挞家庭/egg_tart_family_protagonist_hands.png",
+        "../outputs/reference_assets/05_蛋挞家庭/egg_tart_family_table_scene_clean.png",
+        "../outputs/reference_assets/05_蛋挞家庭/egg_tart_family_afternoon_tea_hands_only.png",
+        "../sample_pictures/Umall_trat/trat_pic.png",
+        "../company_logo/AGO.png"
+      ],
+      "seed": 202608090201,
+      "prefix": "sequence/egg_tart_family_3x5_native1080/clip-01"
+    },
+    {
+      "id": "clip-02-oven-baking",
+      "prompt_file": "../prompts/h3_3x5_1080/egg_tart_family_clip_02.md",
+      "use_previous_last_frame_as_ref": true,
+      "ref_images": [
+        "../outputs/reference_assets/05_蛋挞家庭/egg_tart_family_people_character_scene.png",
+        "../outputs/reference_assets/05_蛋挞家庭/egg_tart_family_oven_baking_state.png",
+        "../outputs/reference_assets/05_蛋挞家庭/egg_tart_family_people_final_hero.png",
+        "../outputs/reference_assets/05_蛋挞家庭/egg_tart_family_protagonist_hands.png",
+        "../outputs/reference_assets/05_蛋挞家庭/egg_tart_family_table_scene_clean.png",
+        "../outputs/reference_assets/05_蛋挞家庭/egg_tart_family_final_hero_state.png",
+        "../sample_pictures/Umall_trat/trat_pic.png"
+      ],
+      "seed": 202608090202,
+      "prefix": "sequence/egg_tart_family_3x5_native1080/clip-02"
+    },
+    {
+      "id": "clip-03-family-hero",
+      "prompt_file": "../prompts/h3_3x5_1080/egg_tart_family_clip_03.md",
+      "use_previous_last_frame_as_ref": true,
+      "ref_images": [
+        "../outputs/reference_assets/05_蛋挞家庭/egg_tart_family_people_character_scene.png",
+        "../outputs/reference_assets/05_蛋挞家庭/egg_tart_family_oven_baking_state.png",
+        "../outputs/reference_assets/05_蛋挞家庭/egg_tart_family_people_final_hero.png",
+        "../outputs/reference_assets/05_蛋挞家庭/egg_tart_family_protagonist_hands.png",
+        "../outputs/reference_assets/05_蛋挞家庭/egg_tart_family_table_scene_clean.png",
+        "../outputs/reference_assets/05_蛋挞家庭/egg_tart_family_final_hero_state.png",
+        "../outputs/reference_assets/05_蛋挞家庭/egg_tart_family_afternoon_tea_hands_only.png",
+        "../sample_pictures/Umall_trat/trat_pic.png"
+      ],
+      "seed": 202608090203,
+      "prefix": "sequence/egg_tart_family_3x5_native1080/clip-03"
+    }
+  ],
+  "final": {
+    "filename": "egg_tart_family_3x5_native_1080x1920.mp4",
+    "concat_mode": "both",
+    "crop": {
+      "width": 1080,
+      "height": 1920,
+      "x": 4,
+      "y": 0
+    },
+    "crf": 16,
+    "preset": "medium"
+  }
+}

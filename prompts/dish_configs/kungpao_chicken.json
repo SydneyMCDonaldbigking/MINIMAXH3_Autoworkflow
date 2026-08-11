@@ -1,0 +1,33 @@
+{
+  "slug": "kungpao_chicken",
+  "dish_en": "Kung Pao chicken",
+  "dish_cn": "宫保鸡丁",
+  "product_dir": "宫保鸡丁",
+  "product_file": "鸡胸肉.png",
+  "product_desc": "raw skinless chicken breast fillets on a dark plate, pale pink and smooth",
+  "cook": "a home cook in their forties, apron over a plain shirt, the unhurried competence of someone who has made this a hundred times",
+  "kitchen": "a warm Chinese home kitchen, wood cabinets, a gas wok range, a few jars of seasoning on an open shelf, afternoon light from the left",
+  "prep_subject": "raw chicken breast already cut into even cubes about two centimetres across, arranged on a white plate. Beside them a small dish of dried red chillies and Sichuan peppercorns, another of raw peanuts, cut spring onion whites, ginger and garlic slices. A knife rests flat at the far side of the board",
+  "prep_defines": "the chicken cube size and the aromatics",
+  "cook_vessel": "a carbon steel wok over a blue gas flame",
+  "cook_subject": "the chicken cubes searing in the wok among dried red chillies and Sichuan peppercorns, the outside turning golden while the sauce begins to glaze and cling, peanuts tossed in. The sauce coats the cubes rather than pooling",
+  "cook_negatives": "thin watery sauce, sweet and sour orange sauce, battered chicken, boiled pale chicken, western stir fry with broccoli and carrots",
+  "hero_subject": "the finished dish in a shallow ceramic bowl, golden chicken cubes glossy with dark savoury sauce, dried red chillies and roasted peanuts throughout, chopped spring onion green on top",
+  "hero_setting": "a warm home dining table, a bowl of steamed rice slightly out of focus behind",
+  "story": [
+    "chicken cubes and aromatics laid out",
+    "into the wok, chillies and peanuts",
+    "plated, spring onion scattered"
+  ],
+  "negatives_global": "sweet and sour sauce, battered chicken, broccoli, carrots, western takeaway orange chicken, cheese, ketchup colour",
+  "seed_base": 202608120500,
+  "first_heat": "The chicken cubes hit the wok and sear immediately, their outsides beginning to whiten and gold at the edges, dried chillies darkening around them as steam lifts from the metal.",
+  "transform": "the chicken turns from pale to golden on every side, the sauce goes in and thickens rapidly from thin to glossy, clinging to each cube, while peanuts and dried chillies tumble among them.",
+  "lift": "A wok spatula enters from the left, lifts a portion of chicken and peanuts clear of the wok and holds it at the centre of frame. Sauce runs off in slow glossy threads.",
+  "plate": "The hands of <Subject 1> enter from the top of frame holding the wok, tip it once over the bowl, and the chicken slides out with peanuts and chillies following. The hands withdraw out of frame.",
+  "final_lift": "A hand enters from the right holding chopsticks, takes one glazed chicken cube, lifts it clear of the bowl and holds it steady at the centre of frame, sauce running from it.",
+  "sound_01": "A warm home kitchen with a low room tone. In the first shot, a ceramic plate sliding on a wooden counter. In the second shot, dried chillies and peanuts rattling in a small dish. In the third shot, a gas burner rising, then a sharp sizzle as the chicken hits the wok. No speech.",
+  "sound_02": "A continuous stir fry throughout, the scrape of a spatula against carbon steel, sauce hitting hot metal with a hiss and settling into a thick bubble. No speech.",
+  "sound_03": "A home kitchen. In the first shot, chicken and peanuts sliding into a ceramic bowl. In the second shot, chopped spring onion landing lightly. In the third shot, chopsticks closing, and a rice bowl set down. No speech.",
+  "music": "A bright domestic bed: plucked strings with a pentatonic figure over light percussion, cheerful and familiar without being twee."
+}

@@ -1,0 +1,33 @@
+{
+  "slug": "japanese_pan_seared_steak",
+  "dish_en": "Japanese pan-seared beef steak",
+  "dish_cn": "日式煎牛扒",
+  "product_dir": "日式煎牛扒",
+  "product_file": "steak.png",
+  "product_desc": "thick-cut marbled beef steak pieces on a light wooden tray, deep red meat with fine white marbling",
+  "cook": "a person in their thirties cooking alone, plain dark shirt with sleeves rolled, calm and unhurried, the mood of a quiet dinner for one",
+  "kitchen": "a small refined Japanese-style home kitchen, pale wood and dark stone, a cast iron pan on an induction hob, low warm evening light, very few objects on the counter",
+  "prep_subject": "thick marbled beef steak resting on a wooden board at room temperature, its fine white marbling clearly visible against deep red meat, seasoned simply with coarse salt and cracked pepper. Beside it a sprig of thyme, a knob of butter and a whole garlic clove. A knife rests flat at the far side of the board",
+  "prep_defines": "the steak thickness and the marbling pattern",
+  "cook_vessel": "a heavy cast iron pan",
+  "cook_subject": "the steak searing in the pan, a deep brown crust forming on its underside, butter foaming around it with thyme and garlic, the chef spooning butter over the top. Steam and a little smoke rising",
+  "cook_negatives": "grey boiled meat, grill marks from a barbecue, breadcrumb coating, sauce flooding the pan, well-done dry meat",
+  "hero_subject": "the finished steak sliced across the grain on a warm plate, the cut faces showing an even pink centre with a dark seared crust, resting juices pooling slightly, flaked salt on top",
+  "hero_setting": "a dark ceramic plate on pale wood, a small bowl of rice and pickles slightly out of focus behind, low warm light",
+  "story": [
+    "steak seasoned and resting",
+    "into the cast iron pan, butter basting",
+    "sliced open, pink centre revealed"
+  ],
+  "negatives_global": "barbecue grill marks, well-done grey meat, breadcrumb coating, western steakhouse plating with chips, ketchup, cheese",
+  "seed_base": 202608120400,
+  "first_heat": "The steak settles into the pan and sears at once with a deep sustained hiss, its underside beginning to brown, a curl of smoke rising from the edge of the iron.",
+  "transform": "a dark even crust forms across the underside, butter foams golden around the steak with thyme and garlic turning in it, and the cook spoons the foaming butter over the top again and again.",
+  "lift": "A pair of tongs enters from the left, lifts the steak onto its edge to show the crust, holds it at the centre of frame, then sets it down. The crust is deep brown and even.",
+  "plate": "The hands of <Subject 1> enter from the top of frame with tongs, lift the rested steak onto a board, and a knife slices it across the grain into thick pieces that fan open to show an even pink centre.",
+  "final_lift": "A hand enters from the right holding chopsticks, takes one slice by its edge, lifts it clear and holds it steady at the centre of frame, the pink interior and dark crust both visible.",
+  "sound_01": "A very quiet home kitchen, almost silent, with a faint room tone. In the first shot, a wooden board set down on stone. In the second shot, salt being ground, and the soft sound of a hand pressing seasoning into meat. In the third shot, a deep sustained sear as the steak meets hot iron. No speech.",
+  "sound_02": "A steady heavy sear throughout, butter foaming and crackling, the small metallic sound of a spoon against the pan as butter is basted. In the third shot, tongs closing on meat. No speech.",
+  "sound_03": "A quiet room. In the first shot, a knife cutting cleanly through meat against a board. In the second shot, flaked salt falling. In the third shot, chopsticks lifting a slice, and a bowl settling on wood. No speech.",
+  "music": "A restrained solo bed: a single piano or cello, slow, with long silences between phrases, precise and solitary rather than warm."
+}

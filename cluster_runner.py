@@ -17,6 +17,7 @@ import concurrent.futures
 import dataclasses
 import datetime as dt
 import ast
+import hashlib
 import json
 import os
 import re
@@ -325,6 +326,7 @@ class Job:
     seed: int | None
     turbo: bool
     turbo_low_vram: bool
+    no_audio: bool
     turbo_strength: float
     turbo_lora: str | None
     ref_image_size: str
@@ -482,6 +484,7 @@ def parse_jobs(path: Path) -> tuple[str, list[Job]]:
                 seed=int(item["seed"]) if item.get("seed") is not None else None,
                 turbo=as_bool(item.get("turbo"), True),
                 turbo_low_vram=as_bool(item.get("turbo_low_vram"), False),
+                no_audio=as_bool(item.get("no_audio"), True),
                 turbo_strength=float(item.get("turbo_strength") or 1.0),
                 turbo_lora=(
                     str(item["turbo_lora"]) if item.get("turbo_lora") else None
@@ -542,16 +545,27 @@ def run_command(
     input_text: str | None = None,
     timeout: float | None = None,
 ) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(
+    # stdin goes out as bytes with explicit LF. In text mode Python translates
+    # "\n" to os.linesep on write, so from Windows a remote bash script would
+    # arrive with CRLF and die on its first line with $'\r': command not found.
+    payload = (
+        input_text.replace("\r\n", "\n").encode("utf-8")
+        if input_text is not None
+        else None
+    )
+    proc = subprocess.run(
         args,
-        input=input_text,
-        text=True,
-        encoding="utf-8",
-        errors="replace",
+        input=payload,
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
         timeout=timeout,
         check=False,
+    )
+    return subprocess.CompletedProcess(
+        proc.args,
+        proc.returncode,
+        proc.stdout.decode("utf-8", errors="replace") if proc.stdout else "",
+        None,
     )
 
 
@@ -644,11 +658,21 @@ exit 4
     remote_bash(worker, script, timeout=240)
 
 
+def local_runner_sha256() -> str:
+    """sha256 of the local h3_runner.py, or empty if it cannot be read."""
+    local_runner = Path(__file__).with_name("h3_runner.py")
+    try:
+        return hashlib.sha256(local_runner.read_bytes()).hexdigest()
+    except OSError:
+        return ""
+
+
 def build_check_script(worker: Worker) -> str:
     model_checks = "\n".join(
         f"check_file {q(worker.comfy_dir.rstrip('/') + '/' + path)}"
         for path in REQUIRED_MODEL_FILES
     )
+    runner_sha = local_runner_sha256()
     return f"""
 set +e
 echo "## worker={worker.label}"
@@ -669,6 +693,26 @@ check_dir() {{
     echo "OK dir $1"
   else
     echo "MISSING dir $1"
+  fi
+}}
+
+# Existence is not enough for h3_runner.py. A stale remote copy accepts the
+# job, then fails on an argument the local version added, which burns rental
+# time for nothing. Compare content against the local file.
+check_runner() {{
+  if [ ! -f "$1" ]; then
+    echo "MISSING file $1"
+    return
+  fi
+  if [ -z "$2" ]; then
+    echo "OK file $1 (local hash unavailable, freshness not checked)"
+    return
+  fi
+  REMOTE_SHA="$(sha256sum "$1" 2>/dev/null | awk '{{print $1}}')"
+  if [ "$REMOTE_SHA" = "$2" ]; then
+    echo "OK file $1 (matches local)"
+  else
+    echo "STALE file $1 (remote $REMOTE_SHA != local $2) - rerun with --upload-runner"
   fi
 }}
 
@@ -726,7 +770,7 @@ PY
 echo "== comfyui files =="
 check_dir {q(worker.comfy_dir)}
 check_file {q(worker.comfy_dir.rstrip('/') + '/main.py')}
-check_file {q(worker.comfy_dir.rstrip('/') + '/h3_runner.py')}
+check_runner {q(worker.comfy_dir.rstrip('/') + '/h3_runner.py')} {q(runner_sha)}
 {model_checks}
 
 echo "== comfyui api =="
@@ -807,6 +851,8 @@ def build_remote_run_script(
         lines.append("  --turbo")
     if job.turbo_low_vram:
         lines.append("  --turbo-low-vram")
+    if job.no_audio:
+        lines.append("  --no-audio")
     if job.turbo_strength != 1.0:
         lines.append(f"  --turbo-strength {job.turbo_strength}")
     if job.turbo_lora:
@@ -853,6 +899,7 @@ def snapshot_job(local_dir: Path, worker: Worker, job: Job) -> None:
         "seed": job.seed,
         "turbo": job.turbo,
         "turbo_low_vram": job.turbo_low_vram,
+        "no_audio": job.no_audio,
         "prefix": job.prefix,
         "prompt_source": job.prompt_source,
         "ref_images": [str(p) for p in job.ref_images],

@@ -1,0 +1,13 @@
+MiniMax H3 reference-to-video, 5-second vertical premium family egg-tart commercial.
+Use the supplied fictional parent/child character reference, fridge-to-oven reference, oven-baking reference, product image, and later family table references as the visual bible. Preserve the same parent and child appearance, warm neutral outfits, clean home kitchen, egg tart product identity, and warm afternoon light. Use the official ASIAN GROCER ONLINE / powered by UMALL logo only as a real printed small bag, package cue, or tabletop card if it naturally appears; never generate a floating logo, corner overlay, subtitle, label, or title card.
+
+Clip 01 story beat: take egg tarts from the refrigerator/freezer and put them into the oven.
+Use exactly three stable shots. Do not add extra cuts or continuous camera drifting.
+
+0.0-1.6s: Establishing action, medium shot, eye-level home-kitchen angle, natural 50mm lens. START FRAME: the fictional parent opens a clean refrigerator or freezer drawer while the child stands safely nearby watching. The parent lifts out a tray or package of egg tarts; the cold shelf, egg tart tray, parent, and child are all legible. CAMERA: locked-off for the first moment, then one small dolly-in 6 cm toward the hands and package. END FRAME: the package/tray clears the fridge with the child still visible.
+
+1.6-3.4s: Product proof insert, close-up, high three-quarter angle, 85mm shallow depth of field. START FRAME: parent hands open the package or tray on the kitchen counter; cold condensation, foil cups, pale custard surface, and flaky pastry rims are visible. ACTION: parent transfers the tarts onto a dark baking tray lined with parchment. CAMERA: one short push-in 4 cm, no pan, no tilt. END FRAME: egg tarts are neatly arranged on the tray in crisp detail.
+
+3.4-5.0s: Heat handoff shot, close-up at oven height, warm amber oven light. START FRAME: the oven door is open and the tray is aligned in front of it; the child remains safely behind the counter or softly blurred. ACTION: the parent slides the tray into the oven using careful hands or mitts. CAMERA: locked-off with a tiny inward push only as the tray enters. END FRAME: oven door closes and warm amber oven light fills the frame as a clean heat-glow bridge for clip 02.
+
+Preserve the fictional parent and child identity, realistic hands, safe child distance from heat, refrigerator/freezer start, package/tray-to-oven logic, true egg tart shape, warm kitchen light, and crisp commercial close-ups. Avoid distorted faces, extra fingers, unsafe child behavior, warped oven, melted tart shapes, invented text, captions, watermarks, floating logos, rapid camera shake, or scene jumps.

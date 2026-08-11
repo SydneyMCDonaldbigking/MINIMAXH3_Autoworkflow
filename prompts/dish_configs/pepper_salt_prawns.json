@@ -1,0 +1,33 @@
+{
+  "slug": "pepper_salt_prawns",
+  "dish_en": "salt and pepper prawns",
+  "dish_cn": "胡椒盐虾",
+  "product_dir": "胡椒盐虾",
+  "product_file": "fresh_prawns.png",
+  "product_desc": "raw whole white prawns, shells translucent grey, heads and tails intact",
+  "cook": "a professional chef in their thirties, dark chef coat with sleeves rolled to the forearm, quick and confident hands",
+  "kitchen": "a Chinese-style professional kitchen, a gas wok range with a visible blue ring flame, dark stainless surfaces, warm overhead light",
+  "prep_subject": "raw whole prawns arranged on a white ceramic plate, shells intact and glossy, beside a small dish of coarse salt and cracked black pepper, chopped garlic, sliced red chilli and cut spring onion. A wok spatula rests flat at the far side",
+  "prep_defines": "the prawn size and the seasoning components",
+  "cook_vessel": "a carbon steel wok over a roaring blue gas flame",
+  "cook_subject": "the prawns searing in the wok, shells turning from translucent grey to bright orange-red, curling as they cook, garlic and chilli tossed among them, a little smoke rising from the wok edge",
+  "cook_negatives": "pale grey uncooked prawns, breadcrumb coating, deep-fried batter, soupy liquid in the wok, prawns swimming in sauce",
+  "hero_subject": "the finished prawns piled on a white oval plate, every shell fully cooked to a deep orange-red with lightly charred blistered edges and curled tails, none of them pale or grey, coated in coarse salt, cracked black pepper, golden fried garlic and red chilli rings, spring onion scattered on top",
+  "hero_setting": "a dark wooden table, warm restaurant lighting, a small dish of lime beside",
+  "story": [
+    "prawns and seasoning laid out",
+    "prawns hit the wok and turn orange",
+    "plated, garlic and chilli scattered"
+  ],
+  "negatives_global": "battered fried prawns, tempura, prawns in gravy, western shrimp cocktail, pale undercooked shells, cheese, raw grey shells, translucent uncooked prawns, pale pink undercooked prawns",
+  "seed_base": 202608120300,
+  "first_heat": "The prawns hit the wok and sear instantly, their shells beginning to turn from translucent grey toward orange at the edges, a burst of steam rising off the metal.",
+  "transform": "the shells turn fully from translucent grey to bright orange-red, the bodies curling tight, while garlic and chilli darken and crisp among them and a little smoke lifts from the wok edge.",
+  "lift": "A wok spatula enters from the left, slides under a cluster of prawns, lifts them clear of the wok and holds them at the centre of frame. The shells are bright orange-red and lightly blistered.",
+  "plate": "The hands of <Subject 1> enter from the top of frame holding the wok by its handle, tip it once over the plate, and the prawns slide out in one motion with the garlic and chilli following. The hands withdraw out of frame.",
+  "final_lift": "A hand enters from the right holding chopsticks, takes one prawn by its tail, lifts it clear of the plate and holds it steady at the centre of frame, salt and pepper visible on its shell.",
+  "sound_01": "A professional Chinese kitchen with a low extractor hum. In the first shot, a ceramic plate sliding on stainless steel. In the second shot, prawns shifting wetly against each other. In the third shot, a gas burner roaring to full, then a sharp explosive sizzle as the prawns hit the wok. No speech.",
+  "sound_02": "A loud continuous sear throughout, punctuated by the metallic scrape of a spatula and the crack of shells tightening. In the third shot the sizzle continues beneath as the spatula lifts. No speech.",
+  "sound_03": "A kitchen winding down. In the first shot, prawns sliding from a wok onto a ceramic plate. In the second shot, the dry patter of coarse salt and fried garlic landing. In the third shot, chopsticks closing on a shell. No speech.",
+  "music": "A sharp percussive bed: fast shakers and tight hand drums with short string stabs landing on the sear, energetic and precise."
+}

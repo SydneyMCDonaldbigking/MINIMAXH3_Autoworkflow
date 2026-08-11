@@ -1,5 +1,9 @@
 # MiniMax H3 15s Storyboard Workflow
 
+## A100 40G Native 1080 Update
+
+A100 40G can run 15s at `768x1344`, but native vertical 1080-class `1088x1920` 15s R2V OOMs. For production on 40G, use `MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md`: three `5s` clips at `1088x1920`, then crop the stitched result to exact `1080x1920`. This is the current stable native-detail route.
+
 Purpose: adapt the useful storyboard and first-frame method from
 `viral-social-remix` to MiniMax H3. This workflow is intentionally simpler than
 the Seedance three-clip route: write one strong 10s/15s storyboard, generate a
@@ -88,11 +92,16 @@ Recommended sizes:
 
 - Fast batch: `1344x768`
 - Native 1080-ish landscape: `1920x1088`
-- Vertical social video, if the H3 model/workflow is stable with it:
-  `1088x1920`
+- Tested vertical social production: `768x1344`
+- Native 1080-ish vertical: `1088x1920`, but A100 40G OOMed at sampler for
+  15s R2V. Treat this as unsupported in the current env.
 
-For the current A100 40G server, 720P-ish batch is the practical route. Native
-1080P can run in the `comfy_h3_torch29_cu126` env but is slow.
+For the current A100 40G server, `768x1344` 15s vertical R2V is the practical
+one-shot ad route, but it is not a native 1080p route. Upscaling/reframing a
+stable `768x1344` output can create a `1080x1920` delivery file, but it is only
+a proxy and may look softer than real 1080p generation. Native 1080p should be
+retested only on a larger/faster setup such as 80G VRAM or a proven 5090-class
+local workflow.
 
 ## 4. Image2 Opening Frame
 
@@ -350,7 +359,7 @@ python h3_runner.py r2v `
   --ref-image C:\path\product.png `
   --ref-image C:\path\product-logo.png `
   --ref-image C:\path\scene.png `
-  --width 1344 --height 768 `
+  --width 768 --height 1344 `
   --duration 15 `
   --steps 4 `
   --seed 2026080901 `
