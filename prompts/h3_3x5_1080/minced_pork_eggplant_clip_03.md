@@ -4,7 +4,7 @@ subject_definitions:
 <Picture 2> is the cook and kitchen bible: a warm Chinese home kitchen, wood cabinets, a gas wok range, a rice cooker on the counter, soft afternoon light.
 <Picture 3> is the working state: the minced pork browning in the wok and breaking into loose crumbs, the eggplant batons added and softening, their edges turning translucent and golden as they absorb the dark savoury sauce. The sauce is thick and clings rather than pooling.
 <Picture 4> is the finished hero state, the target of this clip: the finished dish in a shallow ceramic bowl, soft golden eggplant batons coated in dark glossy sauce with browned minced pork throughout, chopped spring onion green scattered on top.
-<Picture 5> is the product image: raw minced pork in a black retail tray, coarse texture with visible fat. Frame the meat and the bare tray rim only: the printed label and barcode sit outside the shot, and no text of any kind appears in frame.
+<Picture 5> is the product image: raw minced pork filling a plain black tray, coarse texture with clearly visible white fat through the lean, the tray bare and unlabelled with no text or barcode anywhere on it.
 <Picture 6> is the ASIAN GROCER ONLINE / POWERED BY UMALL brand lockup, allowed only as a real printed card standing on the table.
 
 summary:

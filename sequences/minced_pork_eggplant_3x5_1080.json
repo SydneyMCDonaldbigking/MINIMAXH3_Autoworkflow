@@ -23,7 +23,7 @@
         "../outputs/reference_assets/11_肉末茄子/minced_pork_eggplant_prep_state.png",
         "../outputs/reference_assets/11_肉末茄子/minced_pork_eggplant_cook_state.png",
         "../outputs/reference_assets/11_肉末茄子/minced_pork_eggplant_hero_state.png",
-        "../sample_pictures/肉末茄子/肉末.png",
+        "../sample_pictures/肉末茄子/pork_mince_clean.png",
         "../company_logo/AGO.png"
       ],
       "seed": 202608120601,
@@ -38,7 +38,7 @@
         "../outputs/reference_assets/11_肉末茄子/minced_pork_eggplant_prep_state.png",
         "../outputs/reference_assets/11_肉末茄子/minced_pork_eggplant_cook_state.png",
         "../outputs/reference_assets/11_肉末茄子/minced_pork_eggplant_hero_state.png",
-        "../sample_pictures/肉末茄子/肉末.png"
+        "../sample_pictures/肉末茄子/pork_mince_clean.png"
       ],
       "seed": 202608120602,
       "prefix": "sequence/minced_pork_eggplant_3x5_native1080/clip-02"
@@ -51,7 +51,7 @@
         "../outputs/reference_assets/11_肉末茄子/minced_pork_eggplant_character_scene.png",
         "../outputs/reference_assets/11_肉末茄子/minced_pork_eggplant_cook_state.png",
         "../outputs/reference_assets/11_肉末茄子/minced_pork_eggplant_hero_state.png",
-        "../sample_pictures/肉末茄子/肉末.png",
+        "../sample_pictures/肉末茄子/pork_mince_clean.png",
         "../company_logo/AGO.png"
       ],
       "seed": 202608120603,
