@@ -30,6 +30,7 @@ before the route-specific documents below.
 - `cluster_runner.py`: local SSH cluster dispatcher for batch H3 jobs.
 - `h3_sequence_runner.py`: runs 3x5s MiniMax H3 clips sequentially and stitches them.
 - `generate_reference_assets.ps1`: generates protagonist, scene, mid-state, and final-state Seedream references before H3.
+- `prompts/COOKING_PROMPT_PRODUCTION_STANDARD.md`: recipe-grounded prompt package standard, including H3 prompts, Reels caption, subtitles, and source notes.
 - `BRAND_ASSETS.md`: local brand/logo memory for Image2 and MiniMax H3 jobs.
 - `SERVER_H3_RUNBOOK.md`: distilled server environment and workflow runbook.
 - `MIGRATION_A100_H3.md`: short A100 migration and production cheat sheet.

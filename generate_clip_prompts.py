@@ -2,6 +2,10 @@
 """
 Generate the three Ref2VA clip prompts and the sequence JSON for a dish.
 
+For any new dish config, first build the recipe-grounded package described in
+prompts/COOKING_PROMPT_PRODUCTION_STANDARD.md. Do not create dish configs from
+memory when real recipe steps, temperatures, textures, and doneness matter.
+
 The three-shot shape here is not a guess. It is the one that measured 2.5%,
 0.0% and 0.8% camera flip rates on the beef, kelp and tomato ads, against 33.6%
 for the version that preceded it. Every rule it encodes was paid for:

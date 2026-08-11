@@ -2,6 +2,10 @@
 """
 Generate the Seedream reference bible for a dish from a config file.
 
+For any new cooking dish, search real recipes and write the source notes and
+recipe bible required by prompts/COOKING_PROMPT_PRODUCTION_STANDARD.md before
+writing or generating reference prompts.
+
 Hand-writing four prompts and a PowerShell script per dish does not scale past
 about three dishes, and the parts that actually matter are the same four every
 time: who is cooking, what the prep looks like, what the working state looks

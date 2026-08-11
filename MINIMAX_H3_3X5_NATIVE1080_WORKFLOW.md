@@ -128,6 +128,12 @@ outputs/seedream_reference_assets/egg_tart_family_people_final_hero/generated/eg
 
 ## Director Prompt Pattern
 
+Before writing a cooking prompt, follow
+`prompts/COOKING_PROMPT_PRODUCTION_STANDARD.md`: search real recipes, distill
+the cooking logic into `recipe_bible.md`, save `recipe_sources.md`, write
+reference prompts, write the three H3 Ref2VA clip prompts, and draft the English
+Reels caption/subtitle assets in the same `sequence_outputs/<dish>/...` package.
+
 Clip prompts follow the official MiniMax H3 `Ref2VA` prompt format from
 `MiniMax-AI/MiniMax-H3`, directory `skills/h3-prompt-writing`. Our production
 route is `r2v`, which is Ref2VA, so every clip prompt is a full-reference prompt

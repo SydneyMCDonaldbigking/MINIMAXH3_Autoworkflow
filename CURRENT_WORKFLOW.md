@@ -152,6 +152,13 @@ render plus a small side crop, not an upscale.
 
 ## 5. Write prompts to the official format, with our house rules on top
 
+For every new cooking dish, first apply
+`prompts/COOKING_PROMPT_PRODUCTION_STANDARD.md`. The prompt package must be
+recipe-grounded: search real recipes, record source URLs and production facts,
+distill them into a `recipe_bible.md`, and save the H3 prompts plus English
+Instagram Reels caption/subtitles under the real `sequence_outputs/<dish>/...`
+output tree.
+
 The container is the official MiniMax Ref2VA format from
 `MiniMax-AI/MiniMax-H3`, `skills/h3-prompt-writing`: six plain labeled sections
 in order, `<Picture N>` bound positionally to `ref_images`, `[Shot N]` headings
@@ -183,6 +190,32 @@ the clip we judged bad measured *sharper* per frame than the clip we judged
 good, so sharpness does not separate the cases.
 
 Do not stitch a sequence until every clip passes.
+
+**A pass is necessary, not sufficient, and the clearest proof arrived
+2026-08-11.** A 6-step clip was 33% faster, passed the gate, and scored a
+*better* flip rate than the 8-step control (1.6% vs 2.5%). On frames 40, 60, 75
+and 100 the napa cabbage was whole and uncut, destroying the one thing clip 01
+exists to prove. The gate measures luminance and motion; it cannot read the
+picture. **Look at frames 40, 60, 75, 100 of every clip before assembling.**
+
+## 6b. Audio
+
+H3 samples audio in the same pass as video. `--no-audio` only discards it at save
+time, so keeping it costs nothing: re-rendering the identical clip with audio on
+took 35 s against 907 s, because ComfyUI reused the cached sampling and only had
+to decode the audio VAE and mux. Verified 2026-08-11 by md5-comparing decoded
+frames of the two outputs.
+
+To keep it through stitching a sequence needs both:
+
+```json
+"defaults": { "no_audio": false },
+"final":    { "keep_audio": true }
+```
+
+The result is AAC stereo at 32 kHz, matching the video duration, and it survives
+the concat and the final crop. Every ad before this date was hand-dubbed over
+audio the pipeline had already generated and thrown away.
 
 ## 7. Brand rules
 

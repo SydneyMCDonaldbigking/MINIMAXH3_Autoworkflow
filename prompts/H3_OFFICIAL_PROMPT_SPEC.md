@@ -12,6 +12,12 @@ This file covers **structure only** — what the model expects. What survives ou
 4-step... now 8-step distilled Turbo LoRA is a separate matter, and those rules
 live in `MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md` under "House rules".
 
+For cooking-commercial production, use
+`prompts/COOKING_PROMPT_PRODUCTION_STANDARD.md` before writing any clip prompt.
+That standard requires real recipe web research, `recipe_sources.md`,
+`recipe_bible.md`, reference prompts, H3 prompts, and English Reels
+caption/subtitle assets in the output package.
+
 ## Which mode maps to which runner command
 
 | Official mode | `h3_runner.py` | What it conditions on |

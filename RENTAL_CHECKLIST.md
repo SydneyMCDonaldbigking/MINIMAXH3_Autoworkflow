@@ -156,4 +156,16 @@ untested here. See `EXPERIMENT_PLAN_ACCELERATION.md`.
   script piped to remote `bash`, `pkill -f` matching its own command line, and
   `pgrep` not existing in Git Bash so a wait loop never waited. Prefer polling an
   HTTP endpoint over process-name matching, and send remote scripts as bytes with
-  explicit LF.
+  explicit LF. `pkill -f` matched its own SSH command line again on 2026-08-11;
+  kill by PID from `ps -eo pid,args` filtered with `grep -v grep` instead.
+- **`ssh host 'setsid nohup cmd &'` does not return.** The SSH client waits for
+  the channel's file descriptors to close even with `> log 2>&1 < /dev/null`, so
+  the call hangs until the tool times out. This happened four times on
+  2026-08-11 and each time it was misread as "the transfer is slow" - once
+  reported to the user as their upload being the bottleneck, when in fact a
+  chained `scp` after the `;` had never started at all. Launch with
+  `ssh -n host '... & disown; exit 0'` and verify the effect on the server
+  (`curl` the port, `ls` the file) rather than trusting the client's silence.
+- **Measure the link before blaming it.** The payload upload really did run at
+  4.8 Mbps to Malaysia, but that is a cross-border path number, not the user's
+  line speed. Time the transfer and quote the figure; do not infer a cause.

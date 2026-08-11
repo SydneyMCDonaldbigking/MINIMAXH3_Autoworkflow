@@ -1,6 +1,67 @@
 # Acceleration and sampling experiments
 
-Written 2026-08-11, to be run on the H200. Everything here is untested by us.
+Written 2026-08-11 as a plan. Run the same day on an A100 PCIE 40 GB and then an
+H100 SXM 80 GB. **Results are at the top; the plan below is kept because two of
+its four questions are still open and the reasoning still holds.**
+
+## Results, 2026-08-11
+
+Same clip throughout: `shuizhu_beef_roll_clip_01`, seed `202608090301`, six
+references in sequence order, `1088x1920`, 5.0s, 8 steps, turbo.
+
+| Run | Card | Wall | vs that card's baseline | $/clip |
+| --- | --- | ---: | ---: | ---: |
+| baseline | A100 PCIE 40 GB | 907 s | - | $0.211 |
+| baseline | H100 SXM 80 GB | 471 s | - | $0.302 |
+| **+ Sage attention (fp8)** | H100 SXM | **401 s** | **-15%** | **$0.257** |
+| + Sigma Shift 12.0 | A100 PCIE | 862 s | no-op, see below | - |
+| 6 steps | A100 PCIE | 602 s | -33%, **rejected** | - |
+
+**Sage attention is the only real win of the day.** 15% off every clip on Hopper,
+with QC metrics unchanged (flip rate 2.5% -> 1.6%) and no ghosting or content
+error visible on frames 40, 60, 75 and 100. Power draw goes from 333 W to 606 W,
+which is the fp8 kernels actually loading the tensor cores. Getting there needs
+three things that are easy to miss, all covered in `H200_DAY_PLAN.md`: KJNodes
+for `PathchSageAttentionKJ`, SageAttention **2.x built from source** because PyPI
+ships 1.x without the `sageattn_qk_int8_pv_*` entry points, and **sm_89 or newer**
+- on the A100 this experiment could not be run at all.
+
+**Six steps is rejected, and the way it failed is the point.** It was 33% faster
+and `check_clip_quality.py` *passed* it with a better flip rate than the 8-step
+control (1.6% vs 2.5%). Looking at frames showed the napa cabbage rendered
+**whole and uncut**, destroying the one thing clip 01 exists to prove. The gate
+has no semantic or ghosting detector and never will catch this. Look at frames.
+
+**Sigma shift was not actually tested.** `MiniMaxH3SigmaShift` declares
+`shift_video` default 12.0, and the sampler is *already* running shift 12. Proof:
+the ComfyUI log prints its sigmas, and feeding `s' = k*s/(1+(k-1)*s)` with k=12
+reproduces `[1.0, 0.9882, 0.973, 0.9524, 0.9231, 0.878, 0.8, 0.6316, 0.0]`
+exactly. Setting the node to 12.0 changes nothing, and the output was
+**pixel-identical to baseline** on decoded frames. The 862 s against 907 s was a
+warm weight cache, not a speedup, and would have been reported as a 5% win if the
+md5s had not been checked. A real test needs k != 12; k=3.0 crashed
+`SamplerCustomAdvanced` with "size of tensor a (2) must match tensor b (3)" after
+461 s of work, which is still unexplained.
+
+**The full Unified chain is still untested.** `JR_H3_UnifiedAcceleration` also
+delegates Sol-Attn to `SolAttnPatch` from `ComfyUI-SolAttn_triton`, which was not
+installed. Worth noting as a design error on our side: `h3_accel_runner.py`'s
+`--accel` turns on Sage *and* Sol-Attn together, so experiment 2 could not be run
+in isolation until `--accel-set enable_sol_attn=false` was passed. A flag that
+means "the author's defaults" and a flag that means "one factor" are not the same
+flag.
+
+### Still open
+
+1. Sigma shift at a value other than 12, and why 3.0 crashes the sampler.
+2. The full Unified chain, after installing `ComfyUI-SolAttn_triton`.
+3. Whether Sage attention holds up across all three clip shapes, not just clip 01.
+4. Wiring Sage into `h3_sequence_runner.py`, which still calls `h3_runner.py` and
+   therefore produces at 471 s/clip rather than 401 s.
+
+---
+
+The original plan follows.
 
 ## Where this came from
 
