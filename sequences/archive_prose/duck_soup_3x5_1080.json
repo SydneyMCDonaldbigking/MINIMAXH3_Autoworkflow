@@ -20,27 +20,29 @@
       "prompt_file": "../prompts/h3_3x5_1080/duck_soup_clip_01.md",
       "ref_images": [
         "../outputs/reference_assets/04_老鸭汤/duck_soup_cook_character_scene.png",
+        "../outputs/reference_assets/04_老鸭汤/duck_soup_actor_hands_scene.png",
         "../outputs/reference_assets/04_老鸭汤/duck_soup_prep_cut_state.png",
+        "../outputs/reference_assets/04_老鸭汤/duck_soup_kitchen_opening_clean.png",
         "../outputs/reference_assets/04_老鸭汤/duck_soup_mid_cooking_state.png",
-        "../outputs/reference_assets/04_老鸭汤/duck_soup_finished_hero_state.png",
         "../sample_pictures/AGO_ducksoup/duck.png",
         "../company_logo/AGO.png"
       ],
-      "seed": 202608120701,
+      "seed": 202608090101,
       "prefix": "sequence/duck_soup_3x5_native1080/clip-01"
     },
     {
-      "id": "clip-02-cook",
+      "id": "clip-02-simmer-transform",
       "prompt_file": "../prompts/h3_3x5_1080/duck_soup_clip_02.md",
       "use_previous_last_frame_as_ref": true,
       "ref_images": [
         "../outputs/reference_assets/04_老鸭汤/duck_soup_cook_character_scene.png",
+        "../outputs/reference_assets/04_老鸭汤/duck_soup_actor_hands_scene.png",
         "../outputs/reference_assets/04_老鸭汤/duck_soup_prep_cut_state.png",
         "../outputs/reference_assets/04_老鸭汤/duck_soup_mid_cooking_state.png",
         "../outputs/reference_assets/04_老鸭汤/duck_soup_finished_hero_state.png",
         "../sample_pictures/AGO_ducksoup/duck.png"
       ],
-      "seed": 202608120702,
+      "seed": 202608090102,
       "prefix": "sequence/duck_soup_3x5_native1080/clip-02"
     },
     {
@@ -49,12 +51,11 @@
       "use_previous_last_frame_as_ref": true,
       "ref_images": [
         "../outputs/reference_assets/04_老鸭汤/duck_soup_cook_character_scene.png",
-        "../outputs/reference_assets/04_老鸭汤/duck_soup_mid_cooking_state.png",
+        "../outputs/reference_assets/04_老鸭汤/duck_soup_actor_hands_scene.png",
         "../outputs/reference_assets/04_老鸭汤/duck_soup_finished_hero_state.png",
-        "../sample_pictures/AGO_ducksoup/duck.png",
-        "../company_logo/AGO.png"
+        "../sample_pictures/AGO_ducksoup/duck.png"
       ],
-      "seed": 202608120703,
+      "seed": 202608090103,
       "prefix": "sequence/duck_soup_3x5_native1080/clip-03"
     }
   ],
@@ -68,7 +69,6 @@
       "y": 0
     },
     "crf": 16,
-    "preset": "medium",
-    "keep_audio": false
+    "preset": "medium"
   }
 }

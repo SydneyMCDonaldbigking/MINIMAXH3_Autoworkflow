@@ -1,0 +1,40 @@
+{
+  "slug": "duck_soup",
+  "dish_en": "clear old duck soup with white daikon",
+  "dish_cn": "老鸭汤",
+  "product_dir": "AGO_ducksoup",
+  "product_file": "duck.png",
+  "product_desc": "two raw duck breasts on a round wooden plate, one skin-on with pale dimpled skin and one trimmed to show deep red meat, with coriander sprigs, star anise and pink peppercorns scattered around them, no packaging anywhere in frame",
+  "assets": {
+    "character_scene": "duck_soup_cook_character_scene",
+    "prep_state": "duck_soup_prep_cut_state",
+    "cook_state": "duck_soup_mid_cooking_state",
+    "hero_state": "duck_soup_finished_hero_state"
+  },
+  "cook": "a woman cook in her thirties in a clean white chef-style jacket with the sleeves rolled to the forearm, calm and practiced",
+  "kitchen": "a warm home kitchen with stainless surfaces, a gas hob at the centre, wooden boards along the counter, and soft daylight from a window on the left",
+  "prep_subject": "thick chunks of peeled white daikon, cut duck pieces, thin ginger slices and scallion sections arranged in separate groups on a wooden board, the daikon cut into pieces roughly the size of the duck. A chef knife rests flat at the far side of the board",
+  "prep_defines": "the daikon chunk size and the duck piece size",
+  "cook_vessel": "a deep metal pot over a blue gas flame",
+  "cook_subject": "the soup partway through cooking, clear golden broth at a slow rolling simmer with duck pieces and translucent daikon chunks turning under the surface, ginger and scallion among them, a light bead of fat at the rim. The lid rests to one side and the blue flame is visible under the pot",
+  "cook_negatives": "cloudy grey or milky broth, a hard rolling boil, a boiled-dry pot, daikon still opaque and raw, burnt aromatics, thick sauce",
+  "hero_subject": "the finished soup in a pale ceramic bowl, the broth clear gold, tender duck pieces and translucent daikon visible under the surface, fresh scallion scattered on top, a bowl of plain rice and one simple side dish beside it",
+  "hero_setting": "a warm wooden kitchen table in the same home, late afternoon light",
+  "story": [
+    "duck and daikon lowered into the pot over the flame",
+    "the broth turns clear gold and the daikon goes translucent",
+    "poured into the bowl, scallion scattered, one spoonful lifted"
+  ],
+  "negatives_global": "restaurant kitchen, cloudy or milky broth, thick sauce, roast duck, crispy duck skin, whole uncut vegetables, plastic packaging, sealed tray, product label, printed nutrition panel, barcode",
+  "seed_base": 202608120700,
+  "first_heat": "The duck pieces and daikon chunks settle into the water, which darkens around them for a moment and then begins to clear, and a first thread of steam lifts from the surface.",
+  "clip02_shot1": "[Shot 1] Locked-off close-up at pot height, 50mm feel, continuing directly from <Picture 1>. The pot of <Picture 4> fills the lower two thirds of frame over its blue flame, which stays visible at the bottom of frame throughout, the lid seated on top with steam escaping steadily around its rim. The hand of <Subject 1> enters from the top of frame, takes the lid handle, lifts the lid clear of the pot in one continuous movement and carries it out of the top of frame, releasing a full wave of steam as it goes. Behind the steam the surface of the broth is revealed at a slow rolling simmer, duck pieces and daikon chunks turning under it. The camera does not move at any point in this shot, and the framing does not drift.",
+  "transform": "the broth clears from cloudy to a clean gold, the daikon chunks turn from opaque white to translucent at the edges and then through, and the surface settles from a hard boil into a slow rolling simmer with fat beading at the rim.",
+  "lift": "A ladle enters from the left, dips once and lifts clear of the pot holding clear broth with one duck piece and one chunk of translucent daikon, and holds at the centre of frame while broth runs back into the pot in a thin unbroken stream.",
+  "plate": "The hands of <Subject 1> enter from the top of frame with the ladle, pour clear broth, duck and daikon into the bowl in one steady stream until it is full, and withdraw straight up out of frame with the empty ladle.",
+  "final_lift": "A hand enters from the right holding a ceramic spoon, dips it into the bowl, lifts a spoonful of clear broth with one chunk of translucent daikon and holds it steady at the centre of frame, steam curling off the surface.",
+  "sound_01": "A quiet home kitchen with a low room tone and a clock somewhere far off. In the first shot, a wooden board set down on a stainless counter. In the second shot, a knife going cleanly through daikon against wood, and cut chunks being swept together. In the third shot, a gas burner catching and settling to a steady low roar, then the soft heavy sound of duck and daikon going into water. No speech, no music from within the room.",
+  "sound_02": "A low steady simmer throughout with the gas burner beneath it. In the first shot, a metal lid lifting free with a soft ring and a rush of escaping steam. In the second shot, the simmer alone, water turning over slowly. In the third shot, a ladle dipping and broth running back into the pot in a thin stream. No speech.",
+  "sound_03": "A quiet home. In the first shot, hot broth pouring steadily into a ceramic bowl. In the second shot, the light sound of chopped scallion landing on the surface. In the third shot, a ceramic spoon touching the rim of the bowl, and a rice bowl set down on wood. No speech.",
+  "music": "A patient home bed: a plucked string figure over soft sustained low strings, slow and unhurried, with long spaces between phrases, the sound of something that has been on the stove for hours."
+}

@@ -1,0 +1,13 @@
+MiniMax H3 reference-to-video, 5-second vertical premium cooking commercial.
+Use the supplied fictional cook character reference and kitchen/action references for the same warm stainless-home-kitchen look, raw duck identity, ingredient-prep logic, and official ASIAN GROCER ONLINE / powered by UMALL brand context. The cook may appear as the protagonist, especially in opening and handoff shots; close-ups should cut into hands, knife, ingredients, pot, flame, steam, and broth texture. The logo may appear only as a real small tabletop sign in the opening environment if it naturally fits; never create a floating logo, overlay, subtitle, label, or title card.
+
+Clip 01 story beat: show real prep first, then move cut duck and white daikon into active heat.
+Use exactly three stable shots. Do not add extra cuts or continuous camera drifting.
+
+0.0-1.6s: Prep context and knife proof, medium shot into close-up, high three-quarter angle, natural 50mm lens. START FRAME: the fictional cook stands at the clean prep counter beside a stove, wearing the same white chef-style jacket; raw duck pieces, peeled white daikon, ginger, and scallion are arranged clearly. ACTION: chef knife finishes one clean downward cut through peeled white daikon; already-cut chunks sit in the foreground. CAMERA: locked-off for the cut, then one tiny rack focus from knife edge to daikon cross-section. END FRAME: cut daikon pieces are clearly visible.
+
+1.6-3.4s: Ingredient transfer, close-up from tabletop angle, 85mm food texture lens. START FRAME: prepared duck pieces, daikon chunks, ginger slices, and scallion sections sit together on the board. ACTION: cook's hand gathers the prepared ingredients and moves them toward the metal pot. CAMERA: one small follow-pan with the hand, less than 8 cm, no zoom and no tilt. END FRAME: ingredients reach the pot rim.
+
+3.4-5.0s: Stovetop heat handoff, close-up at pot rim. START FRAME: metal pot sits over a visible blue gas flame. ACTION: the right hand lowers prepared duck pieces and thick daikon chunks into the pot; ginger and scallion follow; early steam rises as the lid begins to enter from the side. CAMERA: locked-off with a short downward tilt only as ingredients enter. END FRAME: lid rim and steam fill the frame as a clean transition handle for clip 02.
+
+Preserve the fictional cook character, realistic hands, cookware, knife safety, prepared duck pieces, cut daikon chunks, ginger slices, scallion sections, warm kitchen lighting, visible heat, and one coherent color grade. Avoid distorted face, extra fingers, warped utensils, invented text, captions, watermarks, floating logo, missing cutting action, whole uncut ingredients, rapid camera shake, or scene jumps.
