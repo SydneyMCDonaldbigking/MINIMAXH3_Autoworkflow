@@ -26,8 +26,23 @@ cd /root/ComfyUI/custom_nodes
 git clone --depth 1 https://github.com/comfyanonymous/ComfyUI.git /root/ComfyUI_src   # if the image has no ComfyUI
 git clone --depth 1 https://github.com/Larryvrh/ComfyUI-MiniMax-H3-Turbo.git
 git clone --depth 1 https://github.com/Goldlionren/ComfyUI_JR_MiniMaxH3Node.git
+git clone --depth 1 https://github.com/kijai/ComfyUI-KJNodes.git
 pip install -r ComfyUI_JR_MiniMaxH3Node/requirements.txt
+pip install -r ComfyUI-KJNodes/requirements.txt
 ```
+
+**KJNodes is not optional.** `JR_H3_UnifiedAcceleration` does not implement Sage
+attention itself; it delegates to `PathchSageAttentionKJ` from KJNodes and raises
+`H3AccelerationCompatibilityError` at execution time if that node is not
+registered. Found 2026-08-11 by losing three queued runs to it, five seconds each.
+
+Sage attention also needs kernels, and **the PyPI package is not the one the node
+wants**. `pip install sageattention` gives 1.x, which exports only `sageattn` and
+`sageattn_varlen`; the node asks for `sageattn_qk_int8_pv_fp8_cuda`, a
+SageAttention 2.x symbol that has to be built from source. Before spending time on
+that build, check the architecture: **the fp8 modes need sm_89 or newer**, so on
+an A100 (sm_80) they cannot run at all and the fp16 modes are the only candidates.
+On Hopper the fp8 path is native, which is the case worth testing.
 
 Models, about 60 GB, roughly ten minutes on a fast link:
 

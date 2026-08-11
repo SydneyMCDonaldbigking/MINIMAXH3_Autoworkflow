@@ -125,6 +125,7 @@ def insert_model_patches(
     nodes: dict[str, Any],
     available: dict[str, Any],
     sigma_shift: float | None,
+    sigma_shift_audio: float | None,
     accel: bool,
     accel_overrides: dict[str, Any],
 ) -> list[str]:
@@ -148,11 +149,33 @@ def insert_model_patches(
                 "no sigma-shift node on this server; tried "
                 + ", ".join(SIGMA_SHIFT_CANDIDATES)
                 + ". Run --probe to see what is installed.")
+        # The shift parameter is neither named nor scaled the same on every
+        # candidate node: ModelSamplingSD3 takes one "shift", MiniMaxH3SigmaShift
+        # takes "shift_video" (default 12.0) and "shift_audio" (default 3.0).
+        # Those defaults differ by 4x, so forcing one number onto both is a guess
+        # dressed up as a fix. Read the names AND the declared defaults off the
+        # server, and override only what was asked for.
+        required = (available[name].get("input", {}) or {}).get("required", {}) or {}
+        shift_inputs = [k for k in required if k == "shift" or k.startswith("shift_")]
+        if not shift_inputs:
+            raise base.ComfyError(
+                f"{name} has no shift-like input; its inputs are "
+                + ", ".join(required) + ". Run --probe.")
         node_id = str(next_id); next_id += 1
-        nodes[node_id] = {"class_type": name,
-                          "inputs": {"model": [source, 0], "shift": sigma_shift}}
+        inputs: dict[str, Any] = {"model": [source, 0]}
+        for key in shift_inputs:
+            spec = required[key]
+            default = spec[1].get("default") if len(spec) > 1 else None
+            if key == "shift_audio" and sigma_shift_audio is not None:
+                inputs[key] = sigma_shift_audio
+            elif key == "shift_audio":
+                inputs[key] = default          # leave audio on the node's default
+            else:
+                inputs[key] = sigma_shift       # "shift" / "shift_video"
+        nodes[node_id] = {"class_type": name, "inputs": inputs}
         source = node_id
-        applied.append(f"{name}(shift={sigma_shift})")
+        applied.append(f"{name}(" + ", ".join(
+            f"{k}={v}" for k, v in inputs.items() if k != "model") + ")")
 
     if accel:
         name = pick(available, ACCEL_CANDIDATES)
@@ -191,7 +214,9 @@ def main(argv: list[str]) -> int:
     parser.add_argument("--probe", action="store_true",
                         help="report which experimental nodes the server has, then exit")
     parser.add_argument("--sigma-shift", type=float, default=None,
-                        help="enable the sampling-schedule node with this shift")
+                        help="enable the sampling-schedule node with this video shift")
+    parser.add_argument("--sigma-shift-audio", type=float, default=None,
+                        help="audio shift; omitted means the node's own default")
     parser.add_argument("--accel", action="store_true",
                         help="enable JR_H3_UnifiedAcceleration with its own defaults")
     parser.add_argument("--accel-set", action="append", default=[], metavar="KEY=VALUE",
@@ -235,6 +260,7 @@ def main(argv: list[str]) -> int:
     if args.sigma_shift is not None or args.accel:
         applied = insert_model_patches(
             prompt, fetch_object_info(args.server), args.sigma_shift,
+            args.sigma_shift_audio,
             args.accel, overrides)
 
     print(f"MiniMax H3 mode={args.mode} seed={args.seed} "

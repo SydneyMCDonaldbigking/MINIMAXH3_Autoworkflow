@@ -94,7 +94,15 @@ not prove a particular kernel path was ever exercised.
 ## Choosing a machine
 
 - **40 GB is enough.** Native `1088x1920` peaks around 30 GB. Paying for 80 GB
-  buys nothing here.
+  buys nothing here. Confirmed again 2026-08-11: 33.1 GB peak on a 40 GB card.
+- **Read the power limit, not the TFLOPS number.** An A100 SXM4 and an A100 PCIE
+  are the same silicon with the same memory bandwidth (1314.9 vs 1312.4 GB/s,
+  0.2% apart) and both list 15.6 TFLOPS, but SXM4 is a 400 W part and PCIE is a
+  250 W part. The PCIE card sat at 247 W of its 250 W cap for an entire clip,
+  clocking 1080 MHz against a 1410 MHz maximum, and rendered the identical clip
+  in 907 s against the SXM4's 780 s. That is 16% slower for 17% more per hour, so
+  **$0.210 per clip against $0.154** - a 36% worse buy chosen by reading the
+  spec sheet instead of the power budget. Compare on $/clip, never $/hr.
 - **Check available disk, not just the price.** The cheapest A100 we found had
   46 GB free; the models alone are 60 GB.
 - **Check disk bandwidth and download speed.** They decide setup time, not
