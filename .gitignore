@@ -52,6 +52,7 @@ Thumbs.db
 # Runtime logs
 *.log
 *.pid
+local_artifacts/
 
 # Local cluster configs may contain hosts or private paths
 servers.yaml

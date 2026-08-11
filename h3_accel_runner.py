@@ -4,7 +4,7 @@ Experimental MiniMax H3 runner with sigma shift and attention acceleration.
 
 Separate from h3_runner.py on purpose. That one produces the ads and must keep
 working; this one exists to answer the questions in
-EXPERIMENT_PLAN_ACCELERATION.md and will change shape as they get answered.
+docs/history/EXPERIMENT_PLAN_ACCELERATION.md and will change shape as they get answered.
 
 Two things this adds to the graph, neither of which the production runner has:
 

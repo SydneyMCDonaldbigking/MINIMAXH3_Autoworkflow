@@ -10,7 +10,7 @@ could not reach when we needed it.
 
 This file covers **structure only** — what the model expects. What survives our
 4-step... now 8-step distilled Turbo LoRA is a separate matter, and those rules
-live in `MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md` under "House rules".
+live in `docs/runbooks/MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md` under "House rules".
 
 For cooking-commercial production, use
 `prompts/COOKING_PROMPT_PRODUCTION_STANDARD.md` before writing any clip prompt.

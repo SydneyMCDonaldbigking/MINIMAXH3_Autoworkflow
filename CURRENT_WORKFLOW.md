@@ -17,7 +17,7 @@ until it is.
 | Driver 550.127.08 + PyTorch cu126 is a good combination | verified, and it is what every successful run has used |
 | A `cu130 optimized CUDA operations` startup warning is harmless here | verified, present during every successful run |
 | Black clips are a NaN latent, not a weak render | verified, constant `Y=16`, zero variation |
-| The 2026-08-09 black clips have an explanation | **YES, found later on 2026-08-10.** The A100 corrupts bf16 matrix multiplication non-deterministically. H3's Turbo LoRA runs in bf16, so sampling goes NaN and decodes to a constant frame. See `H3_A100_DRIVER_DIAGNOSTIC_2026-08-10.md` |
+| The 2026-08-09 black clips have an explanation | **YES, found later on 2026-08-10.** The A100 corrupts bf16 matrix multiplication non-deterministically. H3's Turbo LoRA runs in bf16, so sampling goes NaN and decodes to a constant frame. See `docs/history/H3_A100_DRIVER_DIAGNOSTIC_2026-08-10.md` |
 | The Ref2VA prompt format produces better video than the old prose format | **UNVERIFIED.** Format and a machine repair changed together |
 | The rewritten beef clip 01 prompt fixes the jitter | **UNVERIFIED.** Not generated even once |
 
@@ -93,7 +93,7 @@ The convolution check is the important one. On 2026-08-10 matmul and attention
 were perfectly healthy while every convolution failed, because CUDA 13 wheels
 left behind by a cu130 rollback had overwritten `nvidia-cudnn-cu12` in the
 shared `site-packages/nvidia/cudnn/lib/` directory. Sampling ran, `VAEDecode`
-died. Repair is in `SERVER_H3_RUNBOOK.md` section 1.
+died. Repair is in `docs/runbooks/SERVER_H3_RUNBOOK.md` section 1.
 
 If stages 1-4 are clean, run the paid stages:
 
@@ -115,7 +115,7 @@ machine; never skip stage 5.
 Every 3x5s ad needs its protagonist, scene, prep-state, mid-state and
 final-state references generated first. The sequence JSONs refuse to run when
 these are missing, which is deliberate: A100 time is far more expensive than
-Seedream time. See `MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md`.
+Seedream time. See `docs/runbooks/MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md`.
 
 The prep-state reference carries real weight. It exists so H3 does not have to
 perform knife work on camera, which it does badly - see step 5.
@@ -135,7 +135,7 @@ audio, `ref_image_size: match`. About 13 minutes per clip, 39 minutes for three
 clips plus stitching, roughly $0.46 of A100 time at $0.713/hr.
 
 Four steps is not usable: whole objects render semi-transparent and doubled. See
-the step comparison in `MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md`.
+the step comparison in `docs/runbooks/MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md`.
 
 Sampling costs about 83 seconds per step on a 40 GB A100 **with no attention
 acceleration in the graph**. `--lowvram` and `NORMAL_VRAM` measured 83.7 and
@@ -145,7 +145,7 @@ streaming. Keep `--lowvram` for the headroom.
 This was previously written here as "the floor", which was wrong. That pair of
 measurements only rules out weight movement. The graph runs plain attention with
 no Sage, no chunked feed-forward and no sigma shift, and none of those has been
-tested. See `EXPERIMENT_PLAN_ACCELERATION.md`.
+tested. See `docs/history/EXPERIMENT_PLAN_ACCELERATION.md`.
 
 Final crop to exactly `1080x1920` is `crop=1080:1920:4:0`. This is a native-detail
 render plus a small side crop, not an upscale.
@@ -167,7 +167,7 @@ with `At MM:SS.mmm` cut times.
 The content rules are ours, derived from measuring our own output, because the
 official spec was written for full-step inference and we run a distilled Turbo
 LoRA at 8 steps. All of them live in
-`MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md`:
+`docs/runbooks/MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md`:
 
 - every beat is a directional action that completes inside its window, never a
   state to hold;
@@ -220,7 +220,7 @@ audio the pipeline had already generated and thrown away.
 
 ## 7. Brand rules
 
-Non-negotiable, from `BRAND_ASSETS.md`. English-region default is
+Non-negotiable, from `docs/reference/BRAND_ASSETS.md`. English-region default is
 `company_logo/AGO.png`, brand written as `ASIAN GROCER ONLINE / POWERED BY
 UMALL`. `UMALL.png` only when Chinese-region or mother-brand output is asked for
 explicitly. The logo may appear only as a real printed prop inside the scene,

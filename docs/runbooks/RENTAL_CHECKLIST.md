@@ -134,7 +134,7 @@ This was first written as "that is the floor", which overstated what had been
 measured. Two vram modes only rule out weight movement; they say nothing about
 the attention path, which is where a `1088x1920` by 124-frame sequence actually
 spends its time. Sage attention, chunked feed-forward and sigma shift are all
-untested here. See `EXPERIMENT_PLAN_ACCELERATION.md`.
+untested here. See `docs/history/EXPERIMENT_PLAN_ACCELERATION.md`.
 
 ## Process lessons, mostly mine
 

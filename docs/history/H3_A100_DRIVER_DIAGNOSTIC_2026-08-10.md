@@ -51,7 +51,7 @@ cuDNN `91300` -> `91002`, conv2d and conv3d restored.
 
 Black clips measure `0.00`. The native 1080 production path - resolution, Turbo
 LoRA and reference conditioning - is confirmed working on this machine, and the
-8 and 10 minute timings match section 10 of `SERVER_H3_RUNBOOK.md`.
+8 and 10 minute timings match section 10 of `docs/runbooks/SERVER_H3_RUNBOOK.md`.
 
 ### ROOT CAUSE FOUND, later on 2026-08-10: the GPU corrupts bf16 GEMM
 
@@ -185,7 +185,7 @@ datapath.
   also still point at a `runtime_sanitized_refs/` directory that no longer
   exists, so they cannot run as written.
 
-See `SERVER_H3_RUNBOOK.md`, section 1, for the detection and repair procedure,
+See `docs/runbooks/SERVER_H3_RUNBOOK.md`, section 1, for the detection and repair procedure,
 and `server_scripts/diagnose_h3_black.sh` for the probe ladder.
 
 ---

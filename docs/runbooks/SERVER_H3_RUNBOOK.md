@@ -244,7 +244,7 @@ Important files:
 ```text
 h3_runner.py                         # ComfyUI API runner: t2v/i2v/flf2v/r2v
 h3_server_setup.py                   # Older remote bootstrap helper
-SERVER_H3_RUNBOOK.md                 # This handoff runbook
+docs/runbooks/SERVER_H3_RUNBOOK.md   # This handoff runbook
 server_scripts/install_h3_turbo.sh   # Server-side Turbo custom node + LoRA installer
 server_scripts/run_h3_turbo_probe.sh # Server-side probe script
 workflows/*.json                     # Generated ComfyUI API workflow JSON examples
@@ -609,7 +609,7 @@ Fast migration:
 
 First-frame and reference workflow:
 
-- Use the commercial/storyboard rules from `MINIMAX_H3_15S_STORYBOARD_WORKFLOW.md`.
+- Use the commercial/storyboard rules from `docs/runbooks/MINIMAX_H3_15S_STORYBOARD_WORKFLOW.md`.
 - Generate a clean high-quality opening frame first.
 - The company logo is allowed as a company-owned brand asset. Put it into the
   scene as a real printed package, tabletop sign, store sign, brand card, or

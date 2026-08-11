@@ -16,7 +16,7 @@ param(
 #
 # H3 is bad at inventing ingredient processing, so the prep state exists
 # precisely so no clip has to show a knife doing close-up work. See the house
-# rules in MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md.
+# rules in docs/runbooks/MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md.
 
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot

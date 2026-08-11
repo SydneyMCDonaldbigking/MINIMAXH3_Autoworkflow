@@ -21,7 +21,7 @@ references in sequence order, `1088x1920`, 5.0s, 8 steps, turbo.
 with QC metrics unchanged (flip rate 2.5% -> 1.6%) and no ghosting or content
 error visible on frames 40, 60, 75 and 100. Power draw goes from 333 W to 606 W,
 which is the fp8 kernels actually loading the tensor cores. Getting there needs
-three things that are easy to miss, all covered in `H200_DAY_PLAN.md`: KJNodes
+three things that are easy to miss, all covered in `docs/runbooks/H200_DAY_PLAN.md`: KJNodes
 for `PathchSageAttentionKJ`, SageAttention **2.x built from source** because PyPI
 ships 1.x without the `sageattn_qk_int8_pv_*` entry points, and **sm_89 or newer**
 - on the A100 this experiment could not be run at all.

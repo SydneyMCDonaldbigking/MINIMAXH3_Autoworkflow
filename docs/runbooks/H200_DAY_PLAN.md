@@ -141,7 +141,7 @@ To keep audio through stitching, a sequence needs both:
 
 ## 5. Acceleration experiments
 
-Full design in `EXPERIMENT_PLAN_ACCELERATION.md`. One factor at a time, same
+Full design in `docs/history/EXPERIMENT_PLAN_ACCELERATION.md`. One factor at a time, same
 seed, same prompt, same references, one run at a time.
 
 | # | Change | Question |
