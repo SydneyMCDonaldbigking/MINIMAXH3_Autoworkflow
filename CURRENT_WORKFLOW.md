@@ -13,7 +13,7 @@ until it is.
 
 | Claim | Status |
 | --- | --- |
-| Native 1088x1920, 4-step Turbo, R2V with references produces real video | verified 2026-08-10 |
+| Native 1088x1920, 8-step Turbo, R2V with references produces usable production video | verified 2026-08-10 |
 | Driver 550.127.08 + PyTorch cu126 is a good combination | verified, and it is what every successful run has used |
 | A `cu130 optimized CUDA operations` startup warning is harmless here | verified, present during every successful run |
 | Black clips are a NaN latent, not a weak render | verified, constant `Y=16`, zero variation |
@@ -165,8 +165,9 @@ in order, `<Picture N>` bound positionally to `ref_images`, `[Shot N]` headings
 with `At MM:SS.mmm` cut times.
 
 The content rules are ours, derived from measuring our own output, because the
-official spec was written for full-step inference and we run a 4-step distilled
-LoRA. All of them live in `MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md`:
+official spec was written for full-step inference and we run a distilled Turbo
+LoRA at 8 steps. All of them live in
+`MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md`:
 
 - every beat is a directional action that completes inside its window, never a
   state to hold;

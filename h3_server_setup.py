@@ -167,7 +167,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     parser.add_argument("--start", action="store_true")
     parser.add_argument("--instances", type=int, default=1)
     parser.add_argument("--listen", default="127.0.0.1")
-    parser.add_argument("--port", type=int, default=8188)
+    parser.add_argument("--port", type=int, default=8189)
     parser.add_argument("--print-only", action="store_true")
     return parser.parse_args(argv)
 

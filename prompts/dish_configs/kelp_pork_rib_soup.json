@@ -1,0 +1,41 @@
+{
+  "slug": "kelp_pork_rib_soup",
+  "dish_en": "kelp pork rib soup",
+  "dish_cn": "海带排骨汤",
+  "product_dir": "Umall海带排骨汤",
+  "product_file": "排骨.png",
+  "product_desc": "raw pork rib pieces on a white plate with pale meat, clean bone ends, ginger slices, scallion and shallot beside them, no packaging anywhere in frame",
+  "assets": {
+    "character_scene": "kelp_pork_rib_soup_mom_family_scene",
+    "prep_state": "kelp_pork_rib_soup_prep_state",
+    "cook_state": "kelp_pork_rib_soup_simmer_state",
+    "hero_state": "kelp_pork_rib_soup_family_hero_state"
+  },
+  "cook": "a mother in her early fifties, dark hair tied back, simple warm-toned home clothes and an apron, calm and practiced",
+  "cook2": "the elderly parent from the family kitchen reference, grey hair, soft cardigan, calm and unhurried, seated at the dining table",
+  "kitchen": "a warm domestic kitchen with wooden counter, a brown clay pot on a gas stove, home dining table visible behind, and soft window light from the left",
+  "prep_subject": "soaked dark green kelp already cut into flat squares on a cutting board, beside clean pork rib pieces, pale ginger slices and cut scallion sections. A knife rests flat at the far side of the board",
+  "prep_defines": "the kelp square size, the pork rib bone shape, and the ginger and scallion cut form",
+  "cook_vessel": "a brown clay pot over a low blue gas flame",
+  "cook_subject": "the brown clay pot holding clear pale-golden broth with pork ribs, dark green kelp squares and ginger slices visible under the surface, gentle steam above it",
+  "cook_negatives": "red spicy broth, cloudy or muddy soup, noodles, western stew, missing kelp, missing ribs, a warped pot",
+  "hero_subject": "a small ceramic bowl of clear kelp pork rib soup on the family table, tender pork ribs and dark green kelp squares visible under the clear broth, the brown clay pot beside it",
+  "hero_setting": "a warm family dining table in the same home, late afternoon window light, elderly parent seated nearby",
+  "story": [
+    "ribs and kelp lowered into the clay pot",
+    "the broth stays clear as the ribs and kelp simmer",
+    "soup ladled into a bowl and handed to the elderly parent"
+  ],
+  "negatives_global": "red spicy broth, cloudy or muddy water, whole uncut seaweed sheets, noodles, western stew, plastic packaging, sealed tray, product label, printed nutrition panel, barcode",
+  "seed_base": 202608090400,
+  "first_heat": "The ribs settle to the bottom, the kelp squares drift down after them, and the water closes over everything with a slow swell.",
+  "clip02_shot1": "[Shot 1] Locked-off close-up at stove height, 50mm feel, continuing directly from <Picture 1>. The brown clay pot of <Picture 4> fills the lower two thirds of frame over a low visible blue gas flame, its lid seated on top with a thin steady line of steam escaping from under the rim. The hand of <Subject 1> enters from the right of frame, closes on the stove control, turns it down a quarter turn in one movement, and withdraws to the right out of frame. The blue flame visibly shortens as the hand turns it. The camera does not move at any point in this shot, and the framing does not drift.",
+  "transform": "the clear broth turns pale golden while staying transparent, dark green kelp squares soften at the edges, pork ribs become tender and pale, and ginger slices float among them.",
+  "lift": "A ceramic ladle enters from the left already submerged, sweeps once under the surface, lifts a rib piece and a kelp square clear of the broth at the right of frame, and holds them while clear broth runs off in visible threads.",
+  "plate": "The ceramic ladle enters from the left already full, crosses to the bowl in one continuous movement, tips and pours clear broth, a pork rib and one dark green kelp square into the bowl, then withdraws to the left out of frame.",
+  "final_lift": "The elderly parent closes both hands around the warm bowl, lifts it toward their mouth in one continuous movement, takes a first sip, lowers the bowl back to the table, and a small warm smile forms.",
+  "sound_01": "A quiet home kitchen with a low room tone. In the first shot, the soft slide of a plate and a bowl across a wooden counter. In the second shot, the light rustle of kelp squares being gathered and the dull tap of the pile settling against the board. In the third shot, the steady low hiss of a gas burner, the soft heavy drop of rib pieces into water, and the swell and settle of water closing over them. No speech, no music from within the room.",
+  "sound_02": "A quiet home kitchen with a low room tone. In the first shot, the steady low hiss of a gas burner, the small mechanical click of a stove control turning, and the hiss dropping in pitch as the flame lowers. In the second shot, the soft ceramic scrape of a lid lifting free and the rise of escaping steam. In the third shot, a slow gentle simmer, the wet sweep of a ladle through broth, and broth running back into the pot in thin streams. No speech, no music from within the room.",
+  "sound_03": "A quiet warm home with a low room tone. In the first shot, broth pouring in a steady stream into a ceramic bowl and the small settle of a rib piece landing. In the second shot, soft footsteps on a wooden floor, the gentle knock of a ceramic bowl set down on a wooden table, and the light brush of two pairs of hands meeting around it. In the third shot, a quiet sip, the bowl returning to the table, and a soft exhale. No speech, no music from within the room.",
+  "music": "A gentle domestic bed: warm low strings under a slow soft piano figure, unhurried and affectionate rather than energetic."
+}

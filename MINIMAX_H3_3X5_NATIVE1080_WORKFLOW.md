@@ -5,7 +5,7 @@ Use this route when a 40GB A100 cannot hold one native vertical 15s MiniMax H3 j
 ## Core Decision
 
 - Do not generate one `15s` native vertical job on A100 40G; it OOMs at `1088x1920`.
-- Generate three `5s` clips at `1088x1920`, 4-step Turbo, silent/no-audio.
+- Generate three `5s` clips at `1088x1920`, 8-step Turbo, silent/no-audio.
 - Extract each clip's last frame and prepend it as the next clip's first reference.
 - Concatenate the three clips.
 - Crop `1088x1920` to exact `1080x1920` with `crop=1080:1920:4:0`.
@@ -18,8 +18,8 @@ MiniMax H3's 5s request becomes 124 frames, about 5.17s at 24 fps, so three clip
 
 On A100-PCIE-40GB, based on the successful 5s 1080-class R2V tests:
 
-- One `1088x1920`, 5s, 4-step Turbo clip: about 8-9 minutes.
-- Three sequential clips: about 25-30 minutes plus ffmpeg stitching.
+- One `1088x1920`, 5s, 8-step Turbo clip: about 13 minutes.
+- Three sequential clips: about 39 minutes plus ffmpeg stitching.
 
 If using multiple servers, run different ads on different machines. For one ad, keep its three clips on one machine unless you are deliberately accepting weaker continuity.
 
@@ -75,7 +75,7 @@ sequence_outputs/<sequence_id>/<run_id>/sequence-manifest.json
 - `width`: `1088`
 - `height`: `1920`
 - `duration`: `5.0`
-- `steps`: `4`
+- `steps`: `8`
 - `turbo`: `true`
 - `turbo_low_vram`: `true`
 - `no_audio`: `true`
@@ -255,9 +255,9 @@ The shake was undersampling.
 ### House rules the official skill does not cover
 
 The official format governs structure. It says nothing about what survives a
-4-step distilled Turbo LoRA at 1088x1920, which is a far thinner sampling budget
-than the full-step inference it was written for. These rules come from measuring
-our own output on 2026-08-10 with `check_clip_quality.py`.
+distilled Turbo LoRA at native 1088x1920. Production uses 8 steps because 4
+steps was visibly under-sampled. These rules come from measuring our own output
+on 2026-08-10 with `check_clip_quality.py`.
 
 **Every beat must be a directional action that completes inside its window.**
 Never end a shot on a state to hold. The first Ref2VA beef clip closed on "the
@@ -287,8 +287,8 @@ defect landed in one shot, the 85mm close-up of a knife cutting cabbage:
   prompt asked for.
 
 The wide establishing shot and the drop-into-the-wok shot in the same clip were
-clean. At 4 steps the model handles wide framing and bulk material well, and
-fails at close-range rigid tool geometry interacting with hands. Shoot prep at
+clean. The model handles wide framing and bulk material better than close-range
+rigid tool geometry interacting with hands. Shoot prep at
 medium distance with the forearms in frame, or skip the cutting action entirely
 and show the already-cut result, letting the Seedream prep-state reference prove
 that the processing happened. That reference exists precisely so H3 does not

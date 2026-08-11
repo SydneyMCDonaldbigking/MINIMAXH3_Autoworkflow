@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "language": "en",
+  "source_clip": "clip-02",
+  "timing_basis": "clip-relative",
+  "style": "editable centered white text with subtle dark stroke/shadow, no colored box",
+  "cues": [
+    {"start": 0.4, "end": 1.6, "text": "TODO"},
+    {"start": 1.8, "end": 3.2, "text": "TODO"},
+    {"start": 3.5, "end": 4.8, "text": "TODO"}
+  ]
+}

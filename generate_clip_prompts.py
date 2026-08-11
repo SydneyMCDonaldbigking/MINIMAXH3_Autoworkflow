@@ -28,6 +28,7 @@ thing, so the sequence is generated here too rather than written by hand.
 
 Usage:
   python generate_clip_prompts.py --all
+  python generate_clip_prompts.py --all --check
   python generate_clip_prompts.py kungpao_chicken
 """
 
@@ -37,6 +38,7 @@ import argparse
 import json
 import pathlib
 import sys
+import tempfile
 
 ROOT = pathlib.Path(__file__).resolve().parent
 CONFIG_DIR = ROOT / "prompts" / "dish_configs"
@@ -85,16 +87,34 @@ def product_rel(cfg: dict) -> str:
     return "../" + p.relative_to(ROOT).as_posix()
 
 
+def beat(cfg: dict, key: str, default: str) -> str:
+    """The action inside a shot, which the recipe decides.
+
+    The camera grammar around it does not move: shot 1 of a clip establishes,
+    shot 2 carries the single committed push, shot 3 locks off and ends on a
+    physical stop. Those measured 2.5%, 0.0% and 0.8% flip rates and are not
+    a dish's business. What happens in front of the lens is.
+
+    The generic defaults describe a stir-fry, because that is what the first six
+    dishes were. They are wrong for a dish that is simmered for an hour, or one
+    that is fried, drained and then tossed. A config supplies "beats" to say what
+    its recipe actually does; anything it omits falls back to the generic beat.
+    """
+    return (cfg.get("beats") or {}).get(key) or default
+
+
 def clip01(cfg: dict) -> str:
     c = cfg
     # Overridable because the default beat tips an ingredient into a vessel, and a
     # tray of egg tarts is placed, not tipped.
+    c1s3 = beat(c, "c1s3",
+                "The hands of <Subject 1> enter from the top of frame carrying the ingredient, "
+                "tip it in once, and withdraw straight up out of frame empty.")
     shot3 = c.get("clip01_shot3") or (
         "[Shot 3] At 00:03.400, the shot cuts to a locked-off close-up at cooking height. "
-        f"The vessel of <Picture 3> fills the lower two thirds of frame over its heat source, "
-        f"already hot. The hands of <Subject 1> enter from the top of frame carrying the "
-        f"ingredient, tip it in once, and withdraw straight up out of frame empty. "
-        f"{c['first_heat']} The camera does not move at any point in this shot.")
+        "The vessel of <Picture 3> fills the lower two thirds of frame over its heat source, "
+        f"already hot. {c1s3} {c['first_heat']} "
+        "The camera does not move at any point in this shot.")
     return f"""subject_definitions:
 <Subject 1> is {c['cook']}, working at the counter of the kitchen in <Picture 1>.{subject2(c)}
 <Picture 1> is the cook and kitchen bible: {c['kitchen']}.
@@ -117,9 +137,9 @@ retention_analysis:
 <Picture 6>: weak_reference. May appear once as a small printed card far back on the counter, never as an overlay.
 
 detailed_description:
-[Shot 1] Medium shot at eye level, 50mm feel. <Subject 1> stands at the counter of the kitchen from <Picture 1>, the cooking vessel of <Picture 3> at their right. Laid out in front of them are the raw ingredient of <Picture 5> and the prepared components of <Picture 2>, with the small printed card of <Picture 6> far back near the wall, legible but never dominant. Directional light rakes across the ingredient so its surface reads clearly. <Subject 1> draws the ingredients toward them across the counter in one movement.{" " + c["cook2_open"] if c.get("cook2_open") else ""} The camera pushes in toward the counter steadily and continuously across the whole shot, one single move that never pauses or reverses. The shot ends with every component readable in frame.
+[Shot 1] Medium shot at eye level, 50mm feel. <Subject 1> stands at the counter of the kitchen from <Picture 1>, the cooking vessel of <Picture 3> at their right. Laid out in front of them are the raw ingredient of <Picture 5> and the prepared components of <Picture 2>, with the small printed card of <Picture 6> far back near the wall, legible but never dominant. Directional light rakes across the ingredient so its surface reads clearly. {beat(c, "c1s1", "<Subject 1> draws the ingredients toward them across the counter in one movement.")}{" " + c["cook2_open"] if c.get("cook2_open") else ""} The camera pushes in toward the counter steadily and continuously across the whole shot, one single move that never pauses or reverses. The shot ends with every component readable in frame.
 
-[Shot 2] At 00:01.600, the shot cuts to a medium-close shot over the work surface, high three-quarter angle, 50mm feel, holding both forearms of <Subject 1> and the whole surface. On it are the prepared components of <Picture 2>, exactly as that image defines them. Any knife rests flat at the far side and is never lifted. Both hands of <Subject 1> gather the components into one pile and slide them to the near edge, beside the ingredient of <Picture 5>. The camera does not move and the focus does not rack. The shot ends with the prepared components and the raw ingredient together in the near half of frame, both sharp.
+[Shot 2] At 00:01.600, the shot cuts to a medium-close shot over the work surface, high three-quarter angle, 50mm feel, holding both forearms of <Subject 1> and the whole surface. On it are the prepared components of <Picture 2>, exactly as that image defines them. Any knife rests flat at the far side and is never lifted. {beat(c, "c1s2", "Both hands of <Subject 1> gather the components into one pile and slide them to the near edge, beside the ingredient of <Picture 5>.")} The camera does not move and the focus does not rack. The shot ends with the prepared components and the raw ingredient together in the near half of frame, both sharp.
 
 {shot3}
 
@@ -199,7 +219,7 @@ retention_analysis:
 detailed_description:
 [Shot 1] Locked-off close food angle, 50mm feel, continuing directly from <Picture 1>. The vessel of <Picture 3> sits at the left of frame, the serving dish of <Picture 4> waiting at the right on the table. {c['plate']} The camera does not move at any point in this shot. The shot ends on the filled dish with individual pieces clearly visible.
 
-[Shot 2] At 00:01.600, the shot cuts to a close hero food angle over the dish, 50mm feel. The hand of <Subject 1> enters from the top of frame holding a small dish of garnish, scatters it once across the surface in a single pass, and withdraws straight up out of frame. The garnish lands bright against the finished dish. Steam rises steadily behind. The setting of <Picture 4> is established around it. The camera pushes in toward the dish steadily and continuously across the whole shot, one single move that never pauses or reverses. The shot ends with the finished dish centred and sharp.
+[Shot 2] At 00:01.600, the shot cuts to a close hero food angle over the dish, 50mm feel. {beat(c, "c3s2", "The hand of <Subject 1> enters from the top of frame holding a small dish of garnish, scatters it once across the surface in a single pass, and withdraws straight up out of frame. The garnish lands bright against the finished dish.")} Steam rises steadily behind. The setting of <Picture 4> is established around it. The camera pushes in toward the dish steadily and continuously across the whole shot, one single move that never pauses or reverses. The shot ends with the finished dish centred and sharp.
 
 [Shot 3] At 00:03.400, the shot cuts to a locked-off medium close-up of the table. The finished dish of <Picture 4> sits in the foreground, the small printed card of <Picture 6> standing far back near the edge, legible but never dominant, <Subject 1> present behind in soft focus.{" " + c["cook2_close"] if c.get("cook2_close") else ""} {c['final_lift']} The camera does not move and the focus does not rack. The shot ends with the piece held above the finished dish.
 
@@ -257,16 +277,53 @@ def build_sequence(cfg: dict) -> dict:
     }
 
 
+def check_rendered_prompts(cfg: dict) -> list[tuple[str, list[str]]]:
+    """Render prompts without writing production files, then run the validator."""
+    from prompts.validate_prompt import check, refs_for_clip
+
+    seq = build_sequence(cfg)
+    funcs = ((1, clip01), (2, clip02), (3, clip03))
+    failures: list[tuple[str, list[str]]] = []
+    with tempfile.TemporaryDirectory() as tmp:
+        tmp_dir = pathlib.Path(tmp)
+        for index, (n, fn) in enumerate(funcs):
+            path = tmp_dir / f"{cfg['slug']}_clip_0{n}.md"
+            path.write_text(fn(cfg), encoding="utf-8", newline="\n")
+            problems = check(path, refs_for_clip(seq["clips"][index]))
+            if problems:
+                failures.append((path.name, problems))
+    return failures
+
+
 def main(argv: list[str]) -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n")[1])
     parser.add_argument("slugs", nargs="*")
     parser.add_argument("--all", action="store_true")
+    parser.add_argument("--check", action="store_true",
+                        help="render to a temporary directory and validate without writing output files")
     args = parser.parse_args(argv)
 
     available = sorted(p.stem for p in CONFIG_DIR.glob("*.json"))
     slugs = available if args.all else args.slugs
     if not slugs:
         parser.error("name a dish, or use --all")
+
+    if args.check:
+        failed = 0
+        for slug in slugs:
+            cfg = json.loads((CONFIG_DIR / f"{slug}.json").read_text(encoding="utf-8"))
+            label = f"{cfg['slug']} ({cfg['dish_en']})"
+            failures = check_rendered_prompts(cfg)
+            if not failures:
+                print(f"  ok   {label}: rendered prompts validate")
+                continue
+            failed += 1
+            print(f"  FAIL {label}")
+            for name, problems in failures:
+                print(f"       {name}")
+                for problem in problems:
+                    print(f"         ! {problem}")
+        return 1 if failed else 0
 
     PROMPT_DIR.mkdir(parents=True, exist_ok=True)
     for slug in slugs:
@@ -277,7 +334,7 @@ def main(argv: list[str]) -> int:
         seq_path = SEQ_DIR / f"{slug}_3x5_1080.json"
         seq_path.write_text(json.dumps(build_sequence(cfg), ensure_ascii=False, indent=2) + "\n",
                             encoding="utf-8", newline="\n")
-        print(f"  {cfg['dish_cn']}: 3 prompts + {seq_path.name}")
+        print(f"  {cfg['slug']}: 3 prompts + {seq_path.name}")
     return 0
 
 

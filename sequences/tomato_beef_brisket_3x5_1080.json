@@ -16,7 +16,7 @@
   },
   "clips": [
     {
-      "id": "clip-01-prep-to-sear",
+      "id": "clip-01-prep-to-heat",
       "prompt_file": "../prompts/h3_3x5_1080/tomato_beef_brisket_clip_01.md",
       "ref_images": [
         "../outputs/reference_assets/03_番茄烧牛腩/tomato_beef_brisket_cook_character_scene.png",
@@ -30,7 +30,7 @@
       "prefix": "sequence/tomato_beef_brisket_3x5_native1080/clip-01"
     },
     {
-      "id": "clip-02-tomato-braise",
+      "id": "clip-02-cook",
       "prompt_file": "../prompts/h3_3x5_1080/tomato_beef_brisket_clip_02.md",
       "use_previous_last_frame_as_ref": true,
       "ref_images": [
@@ -68,6 +68,7 @@
       "y": 0
     },
     "crf": 16,
-    "preset": "medium"
+    "preset": "medium",
+    "keep_audio": false
   }
 }

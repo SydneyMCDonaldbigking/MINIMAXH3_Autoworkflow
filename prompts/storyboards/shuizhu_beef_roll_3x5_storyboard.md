@@ -10,7 +10,7 @@ Production route:
 
 - Generate reference images first with Image2/Seedream high quality.
 - Run MiniMax H3 Turbo LoRA as three independent 5s R2V clips.
-- Native render size: `1088x1920`, 4 steps, crop final review copies to exact `1080x1920` with `crop=1080:1920:4:0`.
+- Native render size: `1088x1920`, 8 steps, crop final review copies to exact `1080x1920` with `crop=1080:1920:4:0`.
 - Each 5s clip uses exactly three stable shots: `0.0-1.6`, `1.6-3.4`, `3.4-5.0`.
 
 ## Reference Images To Generate

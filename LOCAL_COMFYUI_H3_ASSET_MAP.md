@@ -104,7 +104,7 @@ The Turbo API templates in this repo use:
 ```text
 MiniMaxH3TurboLoRA
 MiniMaxH3TurboSampler
-steps: 4 by production default
+steps: 8 by production default
 ```
 
 Examples:
@@ -118,6 +118,6 @@ workflows\h3_t2v_turbo_api.json
 ## Practical Distinction
 
 - Official Comfy Desktop H3 local workflow: native H3 nodes, no external Turbo LoRA file, usually 20 steps unless edited.
-- Our fast server workflow: external Turbo custom node plus `minimax_h3_turbo_v4_step600_ema.safetensors`, usually 4 steps.
+- Our fast server workflow: external Turbo custom node plus `minimax_h3_turbo_v4_step600_ema.safetensors`, production 8 steps.
 - If a server is missing `MiniMaxH3TurboLoRA` or `MiniMaxH3TurboSampler`, install/copy the Turbo custom node.
 - If a server is missing `minimax_h3_turbo_v4_step600_ema.safetensors`, copy/download it into `models/loras`.
