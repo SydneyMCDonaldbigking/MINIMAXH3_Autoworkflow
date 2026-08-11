@@ -5,7 +5,7 @@ subject_definitions:
 <Picture 3> is the prep state: long purple Chinese eggplant cut into thick batons about six centimetres long, their cut faces pale cream and slightly porous, arranged on a wooden board. Beside them the raw minced pork on a white plate, plus chopped garlic, ginger and cut spring onion. A knife rests flat at the far side of the board.
 <Picture 4> is the working state, the target of this clip: the minced pork browning in the wok and breaking into loose crumbs, the eggplant batons added and softening, their edges turning translucent and golden as they absorb the dark savoury sauce. The sauce is thick and clings rather than pooling.
 <Picture 5> is the finished hero state, the colour and texture target.
-<Picture 6> is the product image: raw minced pork in a black retail tray with a UMALL Meat label reading 半肥瘦肉碎 / PORK MINCE, coarse texture with visible fat.
+<Picture 6> is the product image: raw minced pork in a black retail tray, coarse texture with visible fat. Frame the meat and the bare tray rim only: the printed label and barcode sit outside the shot, and no text of any kind appears in frame.
 
 summary:
 reference generation. A five-second vertical premium cooking commercial, clip 02 of three, for braised eggplant with minced pork. It opens on the state <Picture 1> left behind and carries the cook to the established working state of <Picture 4>, which is the single teaching point: mince browns, eggplant softens in the sauce. <Subject 1> appears only through their hands. The clip ends mid-cook so clip 03 can begin plating.

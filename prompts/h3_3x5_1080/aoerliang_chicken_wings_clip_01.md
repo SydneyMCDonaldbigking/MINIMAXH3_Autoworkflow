@@ -4,7 +4,7 @@ subject_definitions:
 <Picture 2> is the prep state, which defines the wing spacing and the marinade coating: marinated chicken wings laid out in a single layer on a foil-lined baking tray, each wing glossy with orange-red marinade, spaced so they do not touch. Beside the tray sit a small dish of white sesame seeds and a wedge of lemon. A pair of tongs rests flat at the far side of the tray.
 <Picture 3> is the working state: the wings partway through baking, the marinade darkened to a deep caramel red and beginning to blister at the edges, the skin tightening and rendering. Visible heat haze inside the oven, the tray sitting on the middle rack.
 <Picture 4> is the finished hero state, used here only as a colour and texture target.
-<Picture 5> is the product image: marinated chicken wings tipped out of their packaging into a white ceramic bowl, each wing glossy with deep orange-red marinade, no bag or wrapper anywhere in frame.
+<Picture 5> is the product image: marinated chicken wings in a clear vacuum pack, the meat deep orange-red and glossy through the plastic. Frame the meat only: the printed label, nutrition panel and barcode sit outside the shot, and no text of any kind appears in frame.
 <Picture 6> is the ASIAN GROCER ONLINE / POWERED BY UMALL brand lockup, allowed only as a real printed card standing on the counter.
 
 summary:

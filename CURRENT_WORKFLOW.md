@@ -226,6 +226,30 @@ explicitly. The logo may appear only as a real printed prop inside the scene,
 never as an overlay, and never fixed up locally after the fact. No invented
 prices, UI, store claims or availability.
 
+**A product photo of a packaged product is a text hazard, and negatives will not
+save you.** Half our product images are retail packs carrying a UMALL label, a
+nutrition panel and a barcode. H3 cannot render small text legibly at
+`1088x1920`, so whatever it does with that label comes out as pseudo-text - the
+same failure that made Seedream write "UMANE". Three of the six 2026-08-11 ads
+shipped with a fake label and a fake barcode in the opening shot.
+
+`<Picture 5>` is marked `fully_preserved`. That marker beats any wording in the
+negatives list, so the fix is not to forbid what the image contains:
+
+- **Wrong, and what we shipped:** describing wings "tipped out of their
+  packaging, no bag or wrapper anywhere in frame" while the image is a sealed
+  bag. The description contradicts the reference and the reference wins.
+- **Also wrong:** naming the tray but not the label, which leaves the model to
+  invent one.
+- **Worst:** spelling out the label text for it to render, which is asking
+  directly for the failure.
+- **Right:** describe what the photograph actually shows, then control the
+  *framing* - "frame the meat and the bare tray rim only: the printed label and
+  barcode sit outside the shot, and no text of any kind appears in frame".
+
+Better still, crop the reference so only food is in it. A reference that cannot
+show text cannot have its text invented.
+
 ## Open items
 
 - The 2026-08-09 black-video cause is unknown. Run one clip and gate it before

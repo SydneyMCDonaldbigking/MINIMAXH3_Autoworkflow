@@ -4,7 +4,7 @@ subject_definitions:
 <Picture 2> is the prep state, which defines the eggplant baton size and the coarse texture of the mince: long purple Chinese eggplant cut into thick batons about six centimetres long, their cut faces pale cream and slightly porous, arranged on a wooden board. Beside them the raw minced pork on a white plate, plus chopped garlic, ginger and cut spring onion. A knife rests flat at the far side of the board.
 <Picture 3> is the working state: the minced pork browning in the wok and breaking into loose crumbs, the eggplant batons added and softening, their edges turning translucent and golden as they absorb the dark savoury sauce. The sauce is thick and clings rather than pooling.
 <Picture 4> is the finished hero state, used here only as a colour and texture target.
-<Picture 5> is the product image: raw minced pork in a black retail tray with a UMALL Meat label reading 半肥瘦肉碎 / PORK MINCE, coarse texture with visible fat.
+<Picture 5> is the product image: raw minced pork in a black retail tray, coarse texture with visible fat. Frame the meat and the bare tray rim only: the printed label and barcode sit outside the shot, and no text of any kind appears in frame.
 <Picture 6> is the ASIAN GROCER ONLINE / POWERED BY UMALL brand lockup, allowed only as a real printed card standing on the counter.
 
 summary:

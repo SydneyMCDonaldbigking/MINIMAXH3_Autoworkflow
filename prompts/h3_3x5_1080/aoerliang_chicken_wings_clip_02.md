@@ -5,7 +5,7 @@ subject_definitions:
 <Picture 3> is the prep state: marinated chicken wings laid out in a single layer on a foil-lined baking tray, each wing glossy with orange-red marinade, spaced so they do not touch. Beside the tray sit a small dish of white sesame seeds and a wedge of lemon. A pair of tongs rests flat at the far side of the tray.
 <Picture 4> is the working state, the target of this clip: the wings partway through baking, the marinade darkened to a deep caramel red and beginning to blister at the edges, the skin tightening and rendering. Visible heat haze inside the oven, the tray sitting on the middle rack.
 <Picture 5> is the finished hero state, the colour and texture target.
-<Picture 6> is the product image: marinated chicken wings tipped out of their packaging into a white ceramic bowl, each wing glossy with deep orange-red marinade, no bag or wrapper anywhere in frame.
+<Picture 6> is the product image: marinated chicken wings in a clear vacuum pack, the meat deep orange-red and glossy through the plastic. Frame the meat only: the printed label, nutrition panel and barcode sit outside the shot, and no text of any kind appears in frame.
 
 summary:
 reference generation. A five-second vertical premium cooking commercial, clip 02 of three, for New Orleans marinated chicken wings. It opens on the state <Picture 1> left behind and carries the cook to the established working state of <Picture 4>, which is the single teaching point: into the oven, marinade caramelising. <Subject 1> appears only through their hands. The clip ends mid-cook so clip 03 can begin plating.

@@ -4,7 +4,7 @@ subject_definitions:
 <Picture 2> is the cook and kitchen bible: a clean semi-professional kitchen with stainless surfaces and a gas wok range, warm directional light, a few Thai aromatics visible in small bowls.
 <Picture 3> is the working state: the ribs frying, their surface turning deep golden-brown and crisp, oil bubbling vigorously around them, steam rising. The ribs sit proud of the oil rather than submerged.
 <Picture 4> is the finished hero state, the target of this clip: the finished ribs stacked in a tall pile on a dark plate, glazed in a glossy red-orange sauce, scattered with fried garlic, sliced red chilli and coriander, a lime wedge at the edge.
-<Picture 5> is the product image: raw cut pork ribs in a black retail tray, meaty and pale pink with clean white bone ends.
+<Picture 5> is the product image: raw cut pork ribs in a black retail tray, meaty and pale pink with clean white bone ends. Frame the meat and the bare tray rim only: the printed label and barcode sit outside the shot, and no text of any kind appears in frame.
 <Picture 6> is the ASIAN GROCER ONLINE / POWERED BY UMALL brand lockup, allowed only as a real printed card standing on the table.
 
 summary:

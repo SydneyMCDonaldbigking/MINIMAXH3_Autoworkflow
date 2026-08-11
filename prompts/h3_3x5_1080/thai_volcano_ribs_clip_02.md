@@ -5,7 +5,7 @@ subject_definitions:
 <Picture 3> is the prep state: raw pork rib pieces marinating in a shallow steel tray, coated in a red-orange marinade, with lemongrass stalks, sliced red chilli, kaffir lime leaves and garlic arranged beside them. A pair of tongs rests flat at the far side.
 <Picture 4> is the working state, the target of this clip: the ribs frying, their surface turning deep golden-brown and crisp, oil bubbling vigorously around them, steam rising. The ribs sit proud of the oil rather than submerged.
 <Picture 5> is the finished hero state, the colour and texture target.
-<Picture 6> is the product image: raw cut pork ribs in a black retail tray, meaty and pale pink with clean white bone ends.
+<Picture 6> is the product image: raw cut pork ribs in a black retail tray, meaty and pale pink with clean white bone ends. Frame the meat and the bare tray rim only: the printed label and barcode sit outside the shot, and no text of any kind appears in frame.
 
 summary:
 reference generation. A five-second vertical premium cooking commercial, clip 02 of three, for Thai volcano pork ribs. It opens on the state <Picture 1> left behind and carries the cook to the established working state of <Picture 4>, which is the single teaching point: ribs into hot oil, turning golden. <Subject 1> appears only through their hands. The clip ends mid-cook so clip 03 can begin plating.

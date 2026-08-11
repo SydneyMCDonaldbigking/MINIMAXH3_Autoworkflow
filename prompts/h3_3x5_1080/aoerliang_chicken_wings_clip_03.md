@@ -4,7 +4,7 @@ subject_definitions:
 <Picture 2> is the cook and kitchen bible: a bright modern apartment kitchen, pale counters, a small built-in oven, warm afternoon light from a window on the left, clean and uncluttered.
 <Picture 3> is the working state: the wings partway through baking, the marinade darkened to a deep caramel red and beginning to blister at the edges, the skin tightening and rendering. Visible heat haze inside the oven, the tray sitting on the middle rack.
 <Picture 4> is the finished hero state, the target of this clip: the finished wings piled on a round ceramic plate, skin glossy and caramelised, sprinkled with white sesame and chopped spring onion, a lemon wedge at the edge. A cold drink slightly out of focus behind.
-<Picture 5> is the product image: marinated chicken wings tipped out of their packaging into a white ceramic bowl, each wing glossy with deep orange-red marinade, no bag or wrapper anywhere in frame.
+<Picture 5> is the product image: marinated chicken wings in a clear vacuum pack, the meat deep orange-red and glossy through the plastic. Frame the meat only: the printed label, nutrition panel and barcode sit outside the shot, and no text of any kind appears in frame.
 <Picture 6> is the ASIAN GROCER ONLINE / POWERED BY UMALL brand lockup, allowed only as a real printed card standing on the table.
 
 summary:

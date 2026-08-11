@@ -4,7 +4,7 @@ subject_definitions:
 <Picture 2> is the prep state, which defines the rib size and the marinade colour: raw pork rib pieces marinating in a shallow steel tray, coated in a red-orange marinade, with lemongrass stalks, sliced red chilli, kaffir lime leaves and garlic arranged beside them. A pair of tongs rests flat at the far side.
 <Picture 3> is the working state: the ribs frying, their surface turning deep golden-brown and crisp, oil bubbling vigorously around them, steam rising. The ribs sit proud of the oil rather than submerged.
 <Picture 4> is the finished hero state, used here only as a colour and texture target.
-<Picture 5> is the product image: raw cut pork ribs in a black retail tray, meaty and pale pink with clean white bone ends.
+<Picture 5> is the product image: raw cut pork ribs in a black retail tray, meaty and pale pink with clean white bone ends. Frame the meat and the bare tray rim only: the printed label and barcode sit outside the shot, and no text of any kind appears in frame.
 <Picture 6> is the ASIAN GROCER ONLINE / POWERED BY UMALL brand lockup, allowed only as a real printed card standing on the counter.
 
 summary:
