@@ -20,6 +20,7 @@ before the route-specific documents below.
 
 - `CURRENT_WORKFLOW.md`: the current end-to-end working path. Start here.
 - `RENTAL_CHECKLIST.md`: how to accept a rented GPU and avoid the traps that cost two days.
+- `H200_DAY_PLAN.md`: one page, in order, for the next render session.
 - `EXPERIMENT_PLAN_ACCELERATION.md`: untested acceleration and sigma-shift experiments, with the baseline to beat.
 - `check_clip_quality.py`: technical QC gate for generated clips.
 - `server_scripts/diagnose_h3_black.sh`: staged probe ladder for black or failed output.
