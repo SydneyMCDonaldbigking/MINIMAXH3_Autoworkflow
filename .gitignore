@@ -1,7 +1,12 @@
 # Generated media and local test outputs
 server_outputs/
 cluster_outputs/
-sequence_outputs/
+sequence_outputs/**
+# ...but the recipe-grounded preproduction package is source material, not
+# output. It is what COOKING_PROMPT_PRODUCTION_STANDARD.md requires be kept,
+# and the *.mp4 / *.png rules below still keep media out of it.
+!sequence_outputs/**/
+!sequence_outputs/**/preproduction/**
 outputs/
 .cluster_runtime/
 tutorial_frames/
