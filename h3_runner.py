@@ -34,14 +34,14 @@ TEXT_ENCODER = "qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors"
 VIDEO_VAE = "minimax_h3_video_vae_fp16.safetensors"
 AUDIO_VAE = "minimax_h3_audio_vae_fp32.safetensors"
 
-DEFAULT_SERVER = "http://127.0.0.1:8188"
+DEFAULT_SERVER = "http://127.0.0.1:8189"
 DEFAULT_PREFIX = "video/MiniMax_H3"
 DEFAULT_FPS = 24.0
 DEFAULT_WIDTH = 1344
 DEFAULT_HEIGHT = 768
 DEFAULT_DURATION = 5.0
 DEFAULT_STEPS = 20
-DEFAULT_TURBO_STEPS = 6
+DEFAULT_TURBO_STEPS = 8
 DEFAULT_SAMPLER = "res_multistep"
 DEFAULT_SCHEDULER = "simple"
 DEFAULT_TURBO_LORA = "minimax_h3_turbo_v4_step600_ema.safetensors"

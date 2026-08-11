@@ -1,0 +1,40 @@
+{
+  "slug": "shuizhu_beef_roll",
+  "dish_en": "spicy boiled beef rolls with napa cabbage",
+  "dish_cn": "水煮牛肉卷",
+  "product_dir": "AGO_水煮牛肉卷(辣的）",
+  "product_file": "肥牛卷.png",
+  "product_desc": "raw rolled beef with red-white fat marbling, arranged on a dark wooden tray",
+  "assets": {
+    "character_scene": "shuizhu_beef_roll_chef_character_scene",
+    "prep_state": "shuizhu_beef_roll_cabbage_prep_state",
+    "cook_state": "shuizhu_beef_roll_spicy_broth_state",
+    "hero_state": "shuizhu_beef_roll_finished_hero_state_v2"
+  },
+  "cook": "a professional chef in his mid-thirties, dark chef coat with sleeves rolled to the forearm, short black hair, clean-shaven, focused and precise",
+  "kitchen": "a renovated Chinese-style home kitchen with a wok stove, visible burner, tiled backsplash, clean wooden prep counter and warm commercial key light from the left",
+  "prep_subject": "a wooden cutting board holding a chef knife, a halved napa cabbage, and already-cut broad cabbage pieces with wide white ribs and ruffled pale yellow-green leaf edges",
+  "prep_defines": "the napa cabbage broad piece size, white rib and green leaf ratio, and the cutting board layout",
+  "cook_vessel": "a wok of red chili broth over a visible blue gas flame",
+  "cook_subject": "red chili broth simmering in a wok with dried peppers and bright chili oil moving on the surface over a blue gas flame",
+  "cook_negatives": "noodles, tofu, tomato-coloured broth, cloudy or muddy broth, raw-only beef, round green cabbage",
+  "hero_subject": "the completed spicy boiled beef roll dish in a deep white bowl, glossy red broth, cooked beef rolls and napa cabbage visible, chopped scallion garnish on top",
+  "hero_setting": "a clean wooden counter in the same renovated Chinese-style kitchen, warm commercial key light from the left",
+  "story": [
+    "napa cabbage lowered into bubbling red broth",
+    "rolled beef slides into the broth and cooks through",
+    "beef, cabbage and red broth land in the hero bowl"
+  ],
+  "negatives_global": "round green cabbage, noodles, tofu, tomato-coloured broth, cloudy or muddy broth, distorted utensils, plastic packaging, sealed tray, product label, printed nutrition panel, barcode",
+  "seed_base": 202608090300,
+  "first_heat": "The cabbage drops below the surface, the broth closes over it, and a burst of steam rises from the point of entry.",
+  "clip02_shot1": "[Shot 1] Locked-off close-up at pot rim, 50mm feel, continuing directly from <Picture 1>. The wok of <Picture 4> fills the lower two thirds of frame over a blue gas flame, red broth at a rolling boil with dried peppers turning and chili oil catching the light, the cabbage of <Picture 3> already half submerged at the far side. The hand of <Subject 1> enters from the top of frame holding the dark wooden tray of <Picture 6>, tilts it once over the near side of the wok, and the raw rolled beef slides off the tray into the broth in one continuous movement. The hand withdraws straight up out of frame with the empty tray. The beef spirals drop below the surface and the broth swells and closes over them. The camera does not move at any point in this shot.",
+  "transform": "the raw beef roll edges unfurl and open, their colour turns from red-white marbling to pale cooked brown, and chili oil beads across the red broth surface around the napa cabbage.",
+  "lift": "A pair of long chopsticks enters from the right already submerged, closes on one beef roll, lifts it clear of the broth at the centre of frame, holds it, and red broth runs off it back into the wok in visible threads.",
+  "plate": "The hands of <Subject 1> enter from the top of frame holding a wide ladle already loaded with cooked beef rolls and napa cabbage, carry it across to the bowl in one continuous movement, tip it, and the beef and cabbage slide into the bowl.",
+  "final_lift": "The hands of <Subject 1> enter from the left holding a small dish of chopped scallion, scatter it once across the surface of the broth in a single pass, and withdraw to the left out of frame.",
+  "sound_01": "A quiet renovated home kitchen with a low room tone. In the first shot, the soft settle of a hand on a wooden counter and the faint shift of the beef tray. In the second shot, one clean knife stroke through cabbage into the board, crisp and close, followed by the light rustle of cut leaves. In the third shot, the steady low hiss of a gas burner, the thickening bubble of simmering broth, a single wet stir of a ladle, and the first soft rise of steam. No speech, no crowd, no music from within the room.",
+  "sound_02": "A working kitchen with a low room tone. In the first shot, the steady low hiss of a gas burner, the slide of meat leaving a wooden tray, and the heavy wet drop of the beef entering boiling broth. In the second shot, a full rolling boil with fat and chili oil crackling at the surface. In the third shot, the boil continuing beneath, the small click of chopsticks closing, and broth running off in thin streams back into the wok. No speech, no music from within the room.",
+  "sound_03": "A working kitchen with a low room tone. In the first shot, a boil continuing behind, broth dripping from a ladle onto a counter, and the soft slide of beef and cabbage into a ceramic bowl. In the second shot, broth pouring in a steady stream into the bowl and settling. In the third shot, the quiet of a finished dish, the light patter of chopped scallion landing on the surface, and steam rising. No speech, no music from within the room.",
+  "music": "A restrained modern kitchen bed: warm low strings under a light plucked pulse, slow enough to feel premium rather than energetic."
+}

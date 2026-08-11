@@ -24,9 +24,9 @@ servers:
   #   host: 0.0.0.0
   #   ssh_port: 22
   #   workers:
-  #     - {name: gpu0, gpu: 0, comfy_port: 8188}
-  #     - {name: gpu1, gpu: 1, comfy_port: 8189}
-  #     - {name: gpu2, gpu: 2, comfy_port: 8190}
-  #     - {name: gpu3, gpu: 3, comfy_port: 8191}
-  #     - {name: gpu4, gpu: 4, comfy_port: 8192}
-  #     - {name: gpu5, gpu: 5, comfy_port: 8193}
+  #     - {name: gpu0, gpu: 0, comfy_port: 8189}
+  #     - {name: gpu1, gpu: 1, comfy_port: 8190}
+  #     - {name: gpu2, gpu: 2, comfy_port: 8191}
+  #     - {name: gpu3, gpu: 3, comfy_port: 8192}
+  #     - {name: gpu4, gpu: 4, comfy_port: 8193}
+  #     - {name: gpu5, gpu: 5, comfy_port: 8194}

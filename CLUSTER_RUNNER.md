@@ -48,9 +48,9 @@ servers:
   - name: six-card-box
     host: 0.0.0.0
     workers:
-      - {name: gpu0, gpu: 0, comfy_port: 8188}
-      - {name: gpu1, gpu: 1, comfy_port: 8189}
-      - {name: gpu2, gpu: 2, comfy_port: 8190}
+      - {name: gpu0, gpu: 0, comfy_port: 8189}
+      - {name: gpu1, gpu: 1, comfy_port: 8190}
+      - {name: gpu2, gpu: 2, comfy_port: 8191}
 ```
 
 Each worker runs one H3 job at a time. Do not run several H3 jobs through one
@@ -67,7 +67,7 @@ jobs:
     duration: 15
     width: 1344
     height: 768
-    steps: 4
+    steps: 8
     turbo: true
     prompt_file: prompts/baozi_15s.example.txt
     ref_images:
@@ -196,7 +196,7 @@ cluster_outputs/
 
 ## Production Notes
 
-- Use `1344x768`, `duration: 10` or `15`, `steps: 4`, `turbo: true` for batch.
+- Use `1344x768`, `duration: 10` or `15`, `steps: 8`, `turbo: true` for batch quality.
 - Use `turbo_low_vram: true` for native 1080-ish runs on A100 40G.
 - Keep `no_audio: true` for MiniMax H3 food ads; finish BGM/voice/captions in editing.
 - CPU upgrades are not the main speed lever. More GPUs or more servers are.

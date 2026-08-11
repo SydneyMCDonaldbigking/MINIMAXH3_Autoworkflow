@@ -16,7 +16,7 @@
   },
   "clips": [
     {
-      "id": "clip-01-prep-clay-pot",
+      "id": "clip-01-prep-to-heat",
       "prompt_file": "../prompts/h3_3x5_1080/kelp_pork_rib_soup_clip_01.md",
       "ref_images": [
         "../outputs/reference_assets/02_海带排骨汤/kelp_pork_rib_soup_mom_family_scene.png",
@@ -30,7 +30,7 @@
       "prefix": "sequence/kelp_pork_rib_soup_3x5_native1080/clip-01"
     },
     {
-      "id": "clip-02-simmer-clear-broth",
+      "id": "clip-02-cook",
       "prompt_file": "../prompts/h3_3x5_1080/kelp_pork_rib_soup_clip_02.md",
       "use_previous_last_frame_as_ref": true,
       "ref_images": [
@@ -44,7 +44,7 @@
       "prefix": "sequence/kelp_pork_rib_soup_3x5_native1080/clip-02"
     },
     {
-      "id": "clip-03-family-serving-hero",
+      "id": "clip-03-serving-hero",
       "prompt_file": "../prompts/h3_3x5_1080/kelp_pork_rib_soup_clip_03.md",
       "use_previous_last_frame_as_ref": true,
       "ref_images": [
@@ -68,6 +68,7 @@
       "y": 0
     },
     "crf": 16,
-    "preset": "medium"
+    "preset": "medium",
+    "keep_audio": false
   }
 }

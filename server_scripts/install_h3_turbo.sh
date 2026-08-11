@@ -11,13 +11,13 @@ set -euo pipefail
 #
 # Optional env:
 #   COMFYUI_DIR=/root/ComfyUI
-#   CONDA_ENV=comfy_h3
+#   CONDA_ENV=comfy_h3_torch29_cu126
 #   HF_ENDPOINT=https://hf-mirror.com
 #   TURBO_LORA_SOURCE=/path/to/minimax_h3_turbo_v4_step600_ema.safetensors
 #   TURBO_NODE_ZIP=/path/to/ComfyUI-MiniMax-H3-Turbo-main.zip
 
 COMFYUI_DIR="${COMFYUI_DIR:-/root/ComfyUI}"
-CONDA_ENV="${CONDA_ENV:-comfy_h3}"
+CONDA_ENV="${CONDA_ENV:-comfy_h3_torch29_cu126}"
 HF_ENDPOINT="${HF_ENDPOINT:-https://hf-mirror.com}"
 TURBO_REPO="larryvrh/MiniMax-H3-Turbo-Lora"
 TURBO_LORA_NAME="${TURBO_LORA_NAME:-minimax_h3_turbo_v4_step600_ema.safetensors}"

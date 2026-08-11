@@ -5,7 +5,7 @@ defaults:
   width: 1344
   height: 768
   duration: 15
-  steps: 4
+  steps: 8
   turbo: true
   turbo_low_vram: false
   no_audio: true

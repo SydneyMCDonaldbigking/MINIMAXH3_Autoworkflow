@@ -5,21 +5,21 @@ set -euo pipefail
 #
 # Optional env:
 #   COMFYUI_DIR=/root/ComfyUI
-#   CONDA_ENV=comfy_h3
-#   PORT=8188
+#   CONDA_ENV=comfy_h3_torch29_cu126
+#   PORT=8189
 #   WIDTH=768
 #   HEIGHT=448
 #   DURATION=5
-#   STEPS=6
+#   STEPS=8
 #   TURBO_LOW_VRAM=0
 
 COMFYUI_DIR="${COMFYUI_DIR:-/root/ComfyUI}"
-CONDA_ENV="${CONDA_ENV:-comfy_h3}"
-PORT="${PORT:-8188}"
+CONDA_ENV="${CONDA_ENV:-comfy_h3_torch29_cu126}"
+PORT="${PORT:-8189}"
 WIDTH="${WIDTH:-768}"
 HEIGHT="${HEIGHT:-448}"
 DURATION="${DURATION:-5}"
-STEPS="${STEPS:-6}"
+STEPS="${STEPS:-8}"
 TURBO_LOW_VRAM="${TURBO_LOW_VRAM:-0}"
 PROMPT="${PROMPT:-A cinematic product-style shot, slow camera push in, soft practical light, synchronized ambient room tone.}"
 PREFIX="${PREFIX:-test_outputs/h3_turbo_probe_${WIDTH}x${HEIGHT}_${STEPS}step}"
