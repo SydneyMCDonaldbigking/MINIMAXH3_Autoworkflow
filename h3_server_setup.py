@@ -20,7 +20,7 @@ from textwrap import dedent
 
 DEFAULT_INSTALL_DIR = "/opt/ComfyUI"
 DEFAULT_PYPI_INDEX = "https://mirrors.aliyun.com/pypi/simple/"
-DEFAULT_TORCH_INDEX = "https://download.pytorch.org/whl/cu124"
+DEFAULT_TORCH_INDEX = "https://download.pytorch.org/whl/cu126"
 DEFAULT_HF_ENDPOINT = "https://hf-mirror.com"
 DEFAULT_COMFY_REF = "v0.30.2"
 

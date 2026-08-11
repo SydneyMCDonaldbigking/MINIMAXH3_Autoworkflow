@@ -111,7 +111,7 @@ Examples:
 
 ```text
 workflows\h3_r2v_turbo_api.json
-workflows\h3_i2v_turbo_4step_api.json
+workflows\h3_i2v_turbo_8step_api.json
 workflows\h3_t2v_turbo_api.json
 ```
 

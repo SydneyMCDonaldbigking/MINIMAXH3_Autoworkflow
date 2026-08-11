@@ -289,8 +289,8 @@ bash server_scripts/install_h3_turbo.sh
 
 Common settings:
 
-- Speed first: `--steps 4 --turbo`
-- Safer quality: `--steps 6 --turbo`
+- Production quality: `--steps 8 --turbo`
+- Lower-step probes are for benchmarking quality loss only, not production.
 - Native 1080P: add `--turbo-low-vram`
 - 720P-ish landscape: `1344x768`
 - 1080P-ish landscape: `1920x1088`
@@ -318,9 +318,9 @@ conda activate comfy_h3_torch29_cu126
   --prompt "A fast commercial video for handmade steamed buns, chef hands shaping soft white baozi dough on a floured kitchen table, warm restaurant light, appetizing food advertising style, realistic texture, gentle steam, slow camera push-in, no text, no logo, no watermark." \
   --width 1344 --height 768 \
   --duration 5 \
-  --steps 4 \
+  --steps 8 \
   --seed 2026080830 \
-  --prefix test_outputs/baozi_t2v_720_turbo_4step \
+  --prefix test_outputs/baozi_t2v_720_turbo_8step \
   --output-dir test_outputs \
   --turbo \
   --poll 10 \
@@ -344,9 +344,9 @@ Run:
   --first-frame baozi_reference.png \
   --width 1344 --height 768 \
   --duration 5 \
-  --steps 4 \
+  --steps 8 \
   --seed 2026080831 \
-  --prefix test_outputs/baozi_i2v_720_turbo_4step \
+  --prefix test_outputs/baozi_i2v_720_turbo_8step \
   --output-dir test_outputs \
   --overwrite-upload \
   --turbo \
@@ -365,9 +365,9 @@ For reference video, mention `<Picture 1>` in the prompt:
   --ref-image baozi_reference.png \
   --width 1344 --height 768 \
   --duration 5 \
-  --steps 4 \
+  --steps 8 \
   --seed 2026080832 \
-  --prefix test_outputs/baozi_r2v_720_turbo_4step \
+  --prefix test_outputs/baozi_r2v_720_turbo_8step \
   --output-dir test_outputs \
   --overwrite-upload \
   --turbo \
@@ -385,9 +385,9 @@ Use the new env and `--turbo-low-vram`:
   --prompt "A fast commercial video for handmade steamed buns, chef hands shaping soft white baozi dough on a floured kitchen table, warm restaurant light, appetizing food advertising style, realistic texture, gentle steam, slow camera push-in, no text, no logo, no watermark." \
   --width 1920 --height 1088 \
   --duration 5 \
-  --steps 4 \
+  --steps 8 \
   --seed 2026080830 \
-  --prefix test_outputs/baozi_t2v_1080_turbo_4step_torch29_lowvram \
+  --prefix test_outputs/baozi_t2v_1080_turbo_8step_torch29_lowvram \
   --output-dir test_outputs \
   --turbo \
   --turbo-low-vram \
@@ -404,9 +404,9 @@ Use the new env and `--turbo-low-vram`:
   --first-frame baozi_reference.png \
   --width 1920 --height 1088 \
   --duration 5 \
-  --steps 4 \
+  --steps 8 \
   --seed 2026080831 \
-  --prefix test_outputs/baozi_i2v_1080_turbo_4step_torch29_lowvram \
+  --prefix test_outputs/baozi_i2v_1080_turbo_8step_torch29_lowvram \
   --output-dir test_outputs \
   --overwrite-upload \
   --turbo \
@@ -427,9 +427,9 @@ with the new env, no other ComfyUI process, and `--turbo-low-vram`.
   --ref-image baozi_reference.png \
   --width 1920 --height 1088 \
   --duration 5 \
-  --steps 4 \
+  --steps 8 \
   --seed 2026080832 \
-  --prefix test_outputs/baozi_r2v_1080_turbo_4step_torch29_lowvram \
+  --prefix test_outputs/baozi_r2v_1080_turbo_8step_torch29_lowvram \
   --output-dir test_outputs \
   --overwrite-upload \
   --turbo \
@@ -638,7 +638,7 @@ conda activate comfy_h3_torch29_cu126
   --ref-image-size match \
   --width 768 --height 1344 \
   --duration 15 \
-  --steps 4 \
+  --steps 8 \
   --turbo \
   --prefix video/<job_name>_15s_vertical_r2v \
   --output-dir /root/ComfyUI/outputs_h3_jobs/<job_name> \
