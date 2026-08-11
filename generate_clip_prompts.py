@@ -130,7 +130,7 @@ def clip01(cfg: dict) -> str:
 <Picture 3> is the working state: {c['cook_subject']}.
 <Picture 4> is the finished hero state, used here only as a colour and texture target.
 <Picture 5> is the product image: {c['product_desc']}.
-<Picture 6> is the ASIAN GROCER ONLINE / POWERED BY UMALL brand lockup, allowed only as a real printed card standing on the counter.
+<Picture 6> is the ASIAN GROCER ONLINE / POWERED BY UMALL brand lockup, allowed only as a real printed card standing on the counter, carrying that wordmark and nothing else: no photograph, no product image, no illustration, no other graphic.
 
 summary:
 reference generation. A five-second vertical premium cooking commercial, clip 01 of a three-clip sequence for {c['dish_en']}. <Subject 1> and the kitchen of <Picture 1> establish the setting, <Picture 5> supplies the raw ingredient identity, and <Picture 2> supplies the already-prepared components that prove real preparation happened. The clip carries the ingredients from the counter to first heat, ending as {c['story'][0]}, so clip 02 can open on cooking already under way. <Picture 4> is not staged here.
@@ -145,7 +145,7 @@ retention_analysis:
 <Picture 6>: weak_reference. May appear once as a small printed card far back on the counter, never as an overlay.
 
 detailed_description:
-[Shot 1] Medium shot at eye level, 50mm feel. <Subject 1> stands at the counter of the kitchen from <Picture 1>, the cooking vessel of <Picture 3> at their right. Laid out in front of them are the raw ingredient of <Picture 5> and the prepared components of <Picture 2>, with the small printed card of <Picture 6> far back near the wall, legible but never dominant. Directional light rakes across the ingredient so its surface reads clearly. {beat(c, "c1s1", "<Subject 1> draws the ingredients toward them across the counter in one movement.")}{" " + c["cook2_open"] if c.get("cook2_open") else ""} The camera pushes in toward the counter steadily and continuously across the whole shot, one single move that never pauses or reverses. The shot ends with every component readable in frame.
+[Shot 1] Medium shot at eye level, 50mm feel. <Subject 1> stands at the counter of the kitchen from <Picture 1>, the cooking vessel of <Picture 3> at their right. Laid out in front of them are the raw ingredient of <Picture 5> and the prepared components of <Picture 2>, with the small printed card of <Picture 6> against the back wall and out of focus, never beside or among the food and never part of the food display. Directional light rakes across the ingredient. {beat(c, "c1s1", "<Subject 1> draws the ingredients toward them across the counter in one movement.")}{" " + c["cook2_open"] if c.get("cook2_open") else ""} The camera pushes in toward the counter steadily and continuously across the whole shot, one single move that never pauses or reverses. The shot ends with every component readable in frame.
 
 [Shot 2] At 00:01.600, the shot cuts to a medium-close shot over the work surface, high three-quarter angle, 50mm feel, holding both forearms of <Subject 1> and the whole surface. On it are the prepared components of <Picture 2>, exactly as that image defines them. Any knife rests flat at the far side and is never lifted. {beat(c, "c1s2", "Both hands of <Subject 1> gather the components into one pile and slide them to the near edge, beside the ingredient of <Picture 5>.")} The camera does not move and the focus does not rack. The shot ends with the prepared components and the raw ingredient together in the near half of frame, both sharp.
 
@@ -210,7 +210,7 @@ def clip03(cfg: dict) -> str:
 <Picture 3> is the working state: {c['cook_subject']}.
 <Picture 4> is the finished hero state, the target of this clip: {c['hero_subject']}.
 <Picture 5> is the product image: {c['product_desc']}.
-<Picture 6> is the ASIAN GROCER ONLINE / POWERED BY UMALL brand lockup, allowed only as a real printed card standing on the table.
+<Picture 6> is the ASIAN GROCER ONLINE / POWERED BY UMALL brand lockup, allowed only as a real printed card standing on the table, carrying that wordmark and nothing else: no photograph, no product image, no illustration, no other graphic.
 
 summary:
 reference generation. A five-second vertical premium cooking commercial, clip 03 of three, the closing beat for {c['dish_en']}. It continues from <Picture 1> and carries the dish from the vessel to the table, landing on the hero state of <Picture 4>. The product job is that the ingredient of <Picture 5> stays identifiable in its finished form. The clip ends on a still composed hero frame that can be held or trimmed in the edit.
@@ -229,7 +229,7 @@ detailed_description:
 
 [Shot 2] At 00:01.600, the shot cuts to a close hero food angle over the dish, 50mm feel. {beat(c, "c3s2", "The hand of <Subject 1> enters from the top of frame holding a small dish of garnish, scatters it once across the surface in a single pass, and withdraws straight up out of frame. The garnish lands bright against the finished dish.")} Steam rises steadily behind. The setting of <Picture 4> is established around it. The camera pushes in toward the dish steadily and continuously across the whole shot, one single move that never pauses or reverses. The shot ends with the finished dish centred and sharp.
 
-[Shot 3] At 00:03.400, the shot cuts to a locked-off medium close-up of the table. The finished dish of <Picture 4> sits in the foreground, the small printed card of <Picture 6> standing far back near the edge, legible but never dominant, <Subject 1> present behind in soft focus.{" " + c["cook2_close"] if c.get("cook2_close") else ""} {c['final_lift']} The camera does not move and the focus does not rack. The shot ends with the piece held above the finished dish.
+[Shot 3] At 00:03.400, the shot cuts to a locked-off medium close-up of the table. The finished dish of <Picture 4> sits in the foreground, the small printed card of <Picture 6> well behind and out of focus, never beside or touching the dish and never part of the food styling, <Subject 1> present behind in soft focus.{" " + c["cook2_close"] if c.get("cook2_close") else ""} {c['final_lift']} The camera does not move and the focus does not rack. The shot ends with the piece held above the finished dish.
 
 Preserve across all shots: the identity of <Subject 1>, realistic hands, the ingredient of <Picture 5> in finished form, the plating and setting of <Picture 4>, and one coherent colour grade. Avoid {c['negatives_global']}, {NEG_COMMON}.
 

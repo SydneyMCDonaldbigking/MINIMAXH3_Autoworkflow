@@ -150,6 +150,51 @@ tested. See `docs/history/EXPERIMENT_PLAN_ACCELERATION.md`.
 Final crop to exactly `1080x1920` is `crop=1080:1920:4:0`. This is a native-detail
 render plus a small side crop, not an upscale.
 
+## 4b. The one rule that cost a whole day: a reference beats your wording
+
+Every `<Picture N>` you attach is a fact the model will render. Text that merely
+*fails to mention* what the picture contains does not remove it, and text that
+*contradicts* the picture loses. On 2026-08-11 this same law broke five separate
+things before it was recognised as one law.
+
+| What the picture actually held | What the prompt said | What rendered |
+| --- | --- | --- |
+| A UMALL bag with a label and barcode | "no bag or wrapper anywhere in frame" | a bag with a fake label and a fake barcode |
+| The working state, so a wok **full** of the finished dish | "the vessel of `<Picture 3>`, already hot" | a wok of finished food, with raw mince tipped onto it |
+| The brand lockup | "allowed only as a real printed card" | a card with an invented product photograph on it |
+| The brand lockup | "far back near the wall" | the card sitting among the ingredients like a price tag |
+| Ribs described with the word "pale" | (nothing wrong, just the word) | pink, raw-looking meat |
+
+The fixes all have the same shape, and none of them is a negative:
+
+- **Describe what the photograph actually shows**, then control the framing.
+  "Frame the meat and the bare tray rim only: the printed label and barcode sit
+  outside the shot" works. "No packaging in frame" does not.
+- **State the starting state positively.** `vessel_start` exists because "already
+  hot" said nothing about whether the pan was empty. Now each dish says: cold
+  water and not yet lit; clear oil at temperature and nothing else; a film of oil
+  and no food yet.
+- **Demote the reference explicitly where it should not apply.** Clip 01 now
+  says `<Picture 3>` supplies the vessel's shape and position only, never its
+  contents, and its retention marker dropped to `weak_reference`.
+- **Say where a thing is not.** The brand card is "against the back wall and out
+  of focus, never beside or among the food and never part of the food display."
+- **Watch your adjectives.** "Pale" is accurate for simmered pork and it invited
+  pink. "Opaque grey-brown, fibres separating, no pink anywhere" does not.
+
+Best of all, **crop the reference so the wrong thing cannot be in it.** The pork
+mince photo had two trays, one labelled and one bare; cropping to the bare one
+ended that problem permanently. A reference that cannot show text cannot have its
+text invented.
+
+### And check the footage you are keeping
+
+When a fix only re-renders one clip, the new clip must match the clips that
+survive. A change to the prawn aromatics was written as "spring onion, ginger and
+Sichuan peppercorn, no garlic and no chilli" - while the already-shot clip 01 laid
+garlic and chilli out on the counter in plain view. Pull a frame from the
+surviving clips and write against what is in it, not against the config.
+
 ## 5. Write prompts to the official format, with our house rules on top
 
 For every new cooking dish, first apply
