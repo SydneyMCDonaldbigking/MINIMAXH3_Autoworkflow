@@ -3,9 +3,11 @@
 Validate Ref2VA clip prompts against the official MiniMax H3 structure.
 
 Checks what a misread spec actually costs: section presence and order, the
-350-500 word window, labels used but never declared, shot numbering and cut-time
-format, and - the one that silently ruins a clip - whether the highest
-<Picture N> matches the number of references the sequence JSON really binds.
+350-500 word window, labels used but never declared, shot numbering, cut times as
+arithmetic and not just as formatting, the summary opening with its task type and
+staying free of motivation language, and - the one that silently ruins a clip -
+whether the highest <Picture N> matches the number of references the sequence
+JSON really binds.
 
 That last check needs the sequence, because clips with
 use_previous_last_frame_as_ref get the carried frame prepended, so every
@@ -41,8 +43,21 @@ VISIBLE_MARKERS = {
 }
 AUDIO_MARKERS = {"fully_copy", "partially_copy", "reference", "weak_reference"}
 
+# The spec says summary "opens with the task type, then one paragraph on how the
+# references relate to the target clip", and separately that a prompt must not
+# "write plot summary or motivation". Motivation cannot be detected properly, but
+# the words that carry it can, and they are words no shot description needs.
+TASK_TYPES = {"reference generation", "text to video", "image to video",
+              "first last frame to video", "last frame to video"}
+MOTIVATION_WORDS = [
+    "wants to", "wanted to", "decides to", "decided to", "hopes", "hoping",
+    "in order to", "so that they", "because they", "remembers", "dreams of",
+    "feels proud", "feels nostalgic", "is excited", "is nervous",
+]
 
-def check(path: Path, expected_refs: int | None = None) -> list[str]:
+
+def check(path: Path, expected_refs: int | None = None,
+          duration: float | None = None) -> list[str]:
     text = path.read_text(encoding="utf-8")
     problems: list[str] = []
 
@@ -90,6 +105,33 @@ def check(path: Path, expected_refs: int | None = None) -> list[str]:
         if marker and marker not in VISIBLE_MARKERS | AUDIO_MARKERS:
             problems.append(f"unknown retention marker {marker!r}")
 
+    # Cut times, as arithmetic rather than as formatting. The format check above
+    # only proves the stamps look like stamps; it would pass a clip whose shots
+    # cut at 00:03.400 and then 00:01.600, or one whose last shot starts after
+    # the clip has already ended.
+    cuts = [float(m[0]) * 60 + float(m[1])
+            for m in re.findall(r"At (\d\d):(\d\d\.\d\d\d),", body)]
+    for earlier, later in zip(cuts, cuts[1:]):
+        if later <= earlier:
+            problems.append(f"cut times are not increasing: {earlier:.3f} then {later:.3f}")
+    if cuts and cuts[0] <= 0:
+        problems.append(f"first cut is at {cuts[0]:.3f}s, which is not after the clip starts")
+    if duration is not None and cuts and cuts[-1] >= duration:
+        problems.append(
+            f"last shot cuts at {cuts[-1]:.3f}s but the sequence asks for a "
+            f"{duration:.3f}s clip, so it has no time to play")
+
+    # summary: task type first, one paragraph, no motivation.
+    summary = text.split("summary:")[1].split("retention_analysis:")[0].strip()
+    if not any(summary.lower().startswith(t) for t in TASK_TYPES):
+        problems.append(f"summary must open with a task type, got {summary[:40]!r}")
+    if "\n\n" in summary:
+        problems.append("summary is more than one paragraph")
+    found_motivation = [w for w in MOTIVATION_WORDS if w in text.lower()]
+    if found_motivation:
+        problems.append("motivation language, which the spec forbids: "
+                        + ", ".join(repr(w) for w in found_motivation))
+
     return problems
 
 
@@ -126,7 +168,8 @@ def main(argv: list[str]) -> int:
                     print(f"  MISSING {clip['prompt_file']}")
                     failed += 1
                     continue
-                problems = check(prompt, refs_for_clip(clip))
+                problems = check(prompt, refs_for_clip(clip),
+                                 seq.get("defaults", {}).get("duration"))
                 status = "ok  " if not problems else "FAIL"
                 print(f"  {status} {prompt.name}")
                 for p in problems:
