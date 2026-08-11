@@ -257,7 +257,9 @@ show text cannot have its text invented.
   committing to a batch on any machine.
 - The rewritten `prompts/h3_3x5_1080/shuizhu_beef_roll_clip_01.md` has never
   been generated. Validate it before converting the other 17 prompt files.
-- `sequences/*_ascii_rgb.json` point at a deleted `runtime_sanitized_refs/`
-  directory and are based on a disproved theory. They cannot run as written.
+- ~~`sequences/*_ascii_rgb.json` point at a deleted `runtime_sanitized_refs/`
+  directory~~ Deleted 2026-08-11. All seven pointed at references that no longer
+  exist and encoded a theory the bf16 work disproved. Every remaining sequence
+  resolves all of its references.
 - Other `*-cu13` wheels remain installed on that server image. Only cuDNN was
   repaired, because that was the one blocking generation.
