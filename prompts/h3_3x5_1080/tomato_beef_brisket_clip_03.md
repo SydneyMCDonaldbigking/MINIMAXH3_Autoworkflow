@@ -2,7 +2,7 @@ subject_definitions:
 <Picture 1> is the final frame of clip 02, showing a piece of the dish lifted clear of the vessel with sauce or juices running from it.
 <Subject 1> is a home cook in their late thirties, dark hair tied back, plain shirt with sleeves rolled to the forearm under a dark apron.
 <Picture 2> is the cook and kitchen bible: a warm renovated Chinese home kitchen with warm wood cabinets, light tile backsplash, gas stove, heavy braising pot, warm window light from the left, and a wooden prep counter.
-<Picture 3> is the working state: beef cubes and tomato wedges cooking in a thick glossy red-orange sauce in the braising pot over a low blue flame, tomatoes partly collapsed, sauce clinging rather than watery.
+<Picture 3> is beef cubes and tomato wedges cooking in a thick glossy red-orange sauce in the braising pot over a low blue flame, tomatoes partly collapsed, sauce clinging rather than watery.
 <Picture 4> is the finished hero state, the target of this clip: the finished dish in a wide shallow ceramic bowl, tender beef cubes coated in thick glossy red-orange tomato sauce, spring onion scattered on top, a bowl of steamed white rice behind.
 <Picture 5> is the product image: raw cubed beef flank, deep red with white fat marbling, as sold in a supermarket tray.
 <Picture 6> is the ASIAN GROCER ONLINE / POWERED BY UMALL brand lockup, allowed only as a real printed card standing on the table, carrying that wordmark and nothing else: no photograph, no product image, no illustration, no other graphic.

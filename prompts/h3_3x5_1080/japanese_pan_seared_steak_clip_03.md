@@ -2,7 +2,7 @@ subject_definitions:
 <Picture 1> is the final frame of clip 02, showing a piece of the dish lifted clear of the vessel with sauce or juices running from it.
 <Subject 1> is a person in their thirties cooking alone, plain dark shirt with sleeves rolled, calm and unhurried, the mood of a quiet dinner for one.
 <Picture 2> is the cook and kitchen bible: a small refined Japanese-style home kitchen, pale wood and dark stone, a cast iron pan on an induction hob, low warm evening light, very few objects on the counter.
-<Picture 3> is the working state: the steak searing in the pan, a deep brown crust forming on its underside, butter foaming around it with thyme and garlic, the chef spooning butter over the top. Steam and a little smoke rising.
+<Picture 3> is the steak searing in the pan, a deep brown crust forming on its underside, butter foaming around it with thyme and garlic, the chef spooning butter over the top. Steam and a little smoke rising.
 <Picture 4> is the finished hero state, the target of this clip: the finished steak sliced across the grain on a warm plate, the cut faces showing an even pink centre with a dark seared crust, resting juices pooling slightly, flaked salt on top.
 <Picture 5> is the product image: thick-cut marbled beef steak pieces on a light wooden tray, deep red meat with fine white marbling.
 <Picture 6> is the ASIAN GROCER ONLINE / POWERED BY UMALL brand lockup, allowed only as a real printed card standing on the table, carrying that wordmark and nothing else: no photograph, no product image, no illustration, no other graphic.

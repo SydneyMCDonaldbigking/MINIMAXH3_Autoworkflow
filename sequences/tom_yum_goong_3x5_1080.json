@@ -49,7 +49,7 @@
       "use_previous_last_frame_as_ref": true,
       "ref_images": [
         "../outputs/reference_assets/12_冬阴功/tom_yum_goong_character_scene.png",
-        "../outputs/reference_assets/12_冬阴功/tom_yum_goong_cook_state.png",
+        "../outputs/reference_assets/12_冬阴功/tom_yum_goong_extra_state.png",
         "../outputs/reference_assets/12_冬阴功/tom_yum_goong_hero_state.png",
         "../sample_pictures/冬阴功/虾.png",
         "../company_logo/AGO.png"

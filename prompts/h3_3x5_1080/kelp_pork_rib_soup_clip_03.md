@@ -3,7 +3,7 @@ subject_definitions:
 <Subject 1> is a mother in her early fifties, dark hair tied back, simple warm-toned home clothes and an apron, calm and practiced.
 <Subject 2> is the elderly parent from the family kitchen reference, grey hair, soft cardigan, calm and unhurried, seated at the dining table.
 <Picture 2> is the cook and kitchen bible: a warm domestic kitchen with wooden counter, a brown clay pot on a gas stove, home dining table visible behind, and soft window light from the left.
-<Picture 3> is the working state: the brown clay pot holding clear pale-golden broth with pork ribs, dark green kelp squares and ginger slices visible under the surface, gentle steam above it.
+<Picture 3> is the brown clay pot holding clear pale-golden broth with pork ribs, dark green kelp squares and ginger slices visible under the surface, gentle steam above it.
 <Picture 4> is the finished hero state, the target of this clip: a small ceramic bowl of clear kelp pork rib soup on the family table, tender pork ribs and dark green kelp squares visible under the clear broth, the brown clay pot beside it.
 <Picture 5> is the product image: raw pork rib pieces on a white plate with pale meat, clean bone ends, ginger slices, scallion and shallot beside them, no packaging anywhere in frame.
 <Picture 6> is the ASIAN GROCER ONLINE / POWERED BY UMALL brand lockup, allowed only as a real printed card standing on the table, carrying that wordmark and nothing else: no photograph, no product image, no illustration, no other graphic.

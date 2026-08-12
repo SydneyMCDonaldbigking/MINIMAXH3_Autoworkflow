@@ -40,6 +40,13 @@ import pathlib
 import sys
 import tempfile
 
+# Dish names carry Chinese, Japanese and Korean. On Windows stdout defaults to the
+# system codepage, so printing a Korean dish name raised UnicodeEncodeError and
+# took the whole --check run down with it. Reconfigure rather than strip the name.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 ROOT = pathlib.Path(__file__).resolve().parent
 CONFIG_DIR = ROOT / "prompts" / "dish_configs"
 PROMPT_DIR = ROOT / "prompts" / "h3_3x5_1080"
@@ -48,6 +55,14 @@ ASSET_DIRS = {p.name.split("_", 1)[1]: p for p in (ROOT / "outputs" / "reference
               if p.is_dir()} if (ROOT / "outputs" / "reference_assets").is_dir() else {}
 
 KINDS = ["character_scene", "prep_state", "cook_state", "hero_state"]
+
+# A dish whose main ingredient goes in during clip 03 has no reference for that
+# moment: clip 03's only cooking anchor is cook_state, which shows the pot mid
+# simmer, and its other anchor is the finished bowl. Tom yum tipped raw prawns
+# into a plated soup because the bowl was the nearest picture. A config with
+# "extra_subject" gets a fifth asset of the moment itself, and clip 03 binds it
+# in place of cook_state, because what clip 03 needs to see is the action.
+EXTRA_KIND = "extra_state"
 
 NEG_COMMON = ("distorted faces, extra fingers, invented text or lettering on any surface "
               "including burners and cookware, retail packaging, labels and barcodes, captions, "
@@ -208,7 +223,7 @@ def clip03(cfg: dict) -> str:
 <Picture 1> is the final frame of clip 02, showing a piece of the dish lifted clear of the vessel with sauce or juices running from it.
 <Subject 1> is {c['cook']}.{subject2(c)}
 <Picture 2> is the cook and kitchen bible: {c['kitchen']}.
-<Picture 3> is the working state: {c['cook_subject']}.
+<Picture 3> is {c.get('extra_subject') or c['cook_subject']}.
 <Picture 4> is the finished hero state, the target of this clip: {c['hero_subject']}.
 <Picture 5> is the product image: {c['product_desc']}.
 <Picture 6> is the ASIAN GROCER ONLINE / POWERED BY UMALL brand lockup, allowed only as a real printed card standing on the table, carrying that wordmark and nothing else: no photograph, no product image, no illustration, no other graphic.
@@ -245,6 +260,10 @@ non_diegetic_music:
 def build_sequence(cfg: dict) -> dict:
     slug = cfg["slug"]
     a = {k: asset_rel(cfg, k) for k in KINDS}
+    clip3_working = a["cook_state"]
+    if cfg.get("extra_subject"):
+        a[EXTRA_KIND] = asset_rel(cfg, EXTRA_KIND)
+        clip3_working = a[EXTRA_KIND]
     product = product_rel(cfg)
     logo = "../company_logo/AGO.png"
     return {
@@ -272,7 +291,7 @@ def build_sequence(cfg: dict) -> dict:
             {"id": "clip-03-serving-hero",
              "prompt_file": f"../prompts/h3_3x5_1080/{slug}_clip_03.md",
              "use_previous_last_frame_as_ref": True,
-             "ref_images": [a["character_scene"], a["cook_state"],
+             "ref_images": [a["character_scene"], clip3_working,
                             a["hero_state"], product, logo],
              "seed": cfg["seed_base"] + 3,
              "prefix": f"sequence/{slug}_3x5_native1080/clip-03"},

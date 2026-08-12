@@ -108,8 +108,9 @@ machine; never skip stage 5.
 ## 3. Generate references before touching the A100
 
 ```powershell
-.\generate_reference_assets.ps1 -PrintOnly   # cost preview
-.\generate_reference_assets.ps1
+python generate_dish_assets.py <slug> --print-only   # cost preview
+python generate_dish_assets.py <slug>
+python generate_dish_assets.py <slug> --kinds cook_state,hero_state   # partial re-render
 ```
 
 Every 3x5s ad needs its protagonist, scene, prep-state, mid-state and

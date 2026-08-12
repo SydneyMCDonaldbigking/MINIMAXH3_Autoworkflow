@@ -2,7 +2,7 @@ subject_definitions:
 <Picture 1> is the final frame of clip 02, showing a piece of the dish lifted clear of the vessel with sauce or juices running from it.
 <Subject 1> is a professional chef in their thirties, dark chef coat with sleeves rolled to the forearm, quick and confident hands.
 <Picture 2> is the cook and kitchen bible: a Chinese-style professional kitchen, a gas wok range with a visible blue ring flame, dark stainless surfaces, warm overhead light.
-<Picture 3> is the working state: the prawns partway through frying in a wok of clear hot oil, the shells turning from translucent grey toward bright orange-red and beginning to blister and crisp, the bodies curling tight, oil moving fast around them. No aromatics are in the oil at this stage.
+<Picture 3> is the prawns partway through frying in a wok of clear hot oil, the shells turning from translucent grey toward bright orange-red and beginning to blister and crisp, the bodies curling tight, oil moving fast around them. No aromatics are in the oil at this stage.
 <Picture 4> is the finished hero state, the target of this clip: the finished prawns piled on a white platter, shells bright orange-red and visibly crisp and dry rather than saucy, crusted with coarse salt and white pepper and studded with blistered spring onion, gold garlic cloves, shredded ginger, red chilli and dark Sichuan peppercorns, a wedge of lemon at the edge.
 <Picture 5> is the product image: raw whole white prawns, shells translucent grey, heads and tails intact.
 <Picture 6> is the ASIAN GROCER ONLINE / POWERED BY UMALL brand lockup, allowed only as a real printed card standing on the table, carrying that wordmark and nothing else: no photograph, no product image, no illustration, no other graphic.

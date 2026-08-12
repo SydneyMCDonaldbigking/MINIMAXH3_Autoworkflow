@@ -4,7 +4,7 @@ PURPOSE: finished hero state for MiniMax H3 Tom Yum Goong, Thai hot and sour pra
 
 SCENE: a plain wooden table in the same kitchen, neutral daylight.
 
-SUBJECT: the finished soup in a wide bowl, the broth a deep red-orange from the roasted chilli paste with a visible layer of red chilli oil floating on the surface, distinctly red rather than pale or yellow. Five or six whole orange prawns are crowded at the surface with their shells bright and their heads and tails showing, filling much of the bowl, with straw mushrooms, lemongrass and lime leaves visible in the liquid between them, fresh coriander scattered over and a lime wedge at the rim. Keep all printed cards, packaging and brand text out of frame.
+SUBJECT: the finished soup in a wide bowl, the broth a deep red-orange from the roasted chilli paste with a visible layer of red chilli oil floating on the surface, distinctly red rather than pale or yellow. Five or six whole orange prawns are crowded at the surface with their shells bright and their heads and tails showing, filling much of the bowl, with straw mushrooms, lemongrass and lime leaves visible in the liquid between them, fresh coriander scattered over and a lime wedge at the rim. There is no printed card, no sign, no packaging and no brand text anywhere in this image, including out of focus in the background. The only things in frame are the food, its vessel and the table it stands on.
 
 COMPOSITION: vertical 9:16, close hero food angle from about 30 degrees above. The texture and gloss of the finished dish are the subject.
 

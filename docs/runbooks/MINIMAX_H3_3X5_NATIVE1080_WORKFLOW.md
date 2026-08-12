@@ -28,13 +28,13 @@ If using multiple servers, run different ads on different machines. For one ad, 
 Generate director reference assets first:
 
 ```powershell
-.\generate_reference_assets.ps1
+python generate_dish_assets.py <slug>
 ```
 
 Print the planned Image2/Seedream commands without spending API credits:
 
 ```powershell
-.\generate_reference_assets.ps1 -PrintOnly
+python generate_dish_assets.py <slug> --print-only
 ```
 
 Start ComfyUI on the server:

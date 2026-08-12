@@ -113,7 +113,7 @@ production stack needs protagonist/hands, scene, mid-state, and final-state
 references before H3:
 
 ```powershell
-.\generate_reference_assets.ps1
+python generate_dish_assets.py <slug>
 ```
 
 This generates:

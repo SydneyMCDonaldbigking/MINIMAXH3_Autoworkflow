@@ -105,13 +105,27 @@ COMPOSITION: vertical 9:16, close-up at vessel height looking slightly down. The
 
 NEGATIVE: {neg}, {cook_negatives}, {negatives_global}.
 """,
+    "extra_state": """Create a clean high-quality vertical reference image for a premium cooking commercial, 1080x1920.
+
+PURPOSE: an extra process-state reference for MiniMax H3 {dish_en}, covering a moment the four standard references do not: {extra_purpose}.
+
+SCENE: {cook_vessel} in the kitchen described by the character reference.
+
+SUBJECT: {extra_subject}.
+
+COMPOSITION: vertical 9:16, close-up at vessel height looking slightly down. The action and the heat source are both legible.
+
+{style}
+
+NEGATIVE: {neg}, hands in frame, a finished plated dish, a serving bowl, {negatives_global}.
+""",
     "hero_state": """Create a clean high-quality vertical reference image for a premium cooking commercial, 1080x1920.
 
 PURPOSE: finished hero state for MiniMax H3 {dish_en}. This is the final frame the whole ad lands on.
 
 SCENE: {hero_setting}.
 
-SUBJECT: {hero_subject}. Keep all printed cards, packaging and brand text out of frame.
+SUBJECT: {hero_subject}. There is no printed card, no sign, no packaging and no brand text anywhere in this image, including out of focus in the background. The only things in frame are the food, its vessel and the table it stands on.
 
 COMPOSITION: vertical 9:16, close hero food angle from about 30 degrees above. The texture and gloss of the finished dish are the subject.
 
@@ -123,6 +137,14 @@ NEGATIVE: {neg}, hands in frame, {negatives_global}.
 
 ORDER = ["character_scene", "prep_state", "cook_state", "hero_state"]
 
+# Optional fifth asset, generated only when a config defines "extra_subject".
+# COOKING_PROMPT_PRODUCTION_STANDARD.md allows extra process-state references
+# (oven_tray_state, simmer_state and so on); this is the generic hook for them.
+# Tom yum is why it exists: its prawns go in during clip 03, whose only visual
+# context is the finished bowl, so the model plated raw prawns into a finished
+# soup. A reference of the moment itself is the fix.
+EXTRA = "extra_state"
+
 
 def load(slug: str) -> dict:
     path = CONFIG_DIR / f"{slug}.json"
@@ -131,10 +153,14 @@ def load(slug: str) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def kinds_for(cfg: dict) -> list[str]:
+    return ORDER + ([EXTRA] if cfg.get("extra_subject") else [])
+
+
 def render(cfg: dict) -> dict[str, pathlib.Path]:
     PROMPT_DIR.mkdir(parents=True, exist_ok=True)
     written = {}
-    for kind in ORDER:
+    for kind in kinds_for(cfg):
         text = TEMPLATES[kind].format(style=COMMON_STYLE, neg=COMMON_NEG, **cfg)
         path = PROMPT_DIR / f"{cfg['slug']}_{kind}.md"
         path.write_text(text, encoding="utf-8", newline="\n")
@@ -181,8 +207,10 @@ def build_jobs(cfg: dict, prompts: dict[str, pathlib.Path]) -> list[dict]:
         "hero_state": [generated(cfg, "character_scene"),
                        generated(cfg, "cook_state"), product],
     }
+    chain[EXTRA] = [generated(cfg, "character_scene"),
+                    generated(cfg, "cook_state"), product]
     jobs = []
-    for kind in ORDER:
+    for kind in kinds_for(cfg):
         stem = f"{cfg['slug']}_{kind}"
         jobs.append({
             "kind": kind,

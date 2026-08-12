@@ -27,7 +27,11 @@ before the route-specific documents below.
 - `image2_first_frame.py`: OpenRouter GPT Image 2 first-frame runner.
 - `cluster_runner.py`: local SSH cluster dispatcher for batch H3 jobs.
 - `h3_sequence_runner.py`: runs 3x5s MiniMax H3 clips sequentially and stitches them.
-- `generate_reference_assets.ps1`: generates protagonist, scene, mid-state, and final-state Seedream references before H3.
+- `generate_dish_assets.py`: generates the four (or five) reference images for a dish from its
+  config, chained so the cook and kitchen carry across. Replaces the per-dish PowerShell
+  scripts now in `scripts/superseded/`.
+- `generate_clip_prompts.py`: writes the three Ref2VA prompts and the sequence JSON from the
+  same config, so reference binding is never hand-written.
 - `prompts/COOKING_PROMPT_PRODUCTION_STANDARD.md`: recipe-grounded prompt package standard, including H3 prompts, Reels caption, subtitles, and source notes.
 - `prompts/templates/preproduction_package/`: tracked skeleton for the ignored `sequence_outputs/<dish>/preproduction/` package.
 - `docs/README.md`: index for runbooks, reference docs, and historical diagnostics.

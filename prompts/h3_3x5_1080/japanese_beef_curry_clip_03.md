@@ -2,7 +2,7 @@ subject_definitions:
 <Picture 1> is the final frame of clip 02, showing a piece of the dish lifted clear of the vessel with sauce or juices running from it.
 <Subject 1> is a home cook in his forties in a plain apron, methodical, in no hurry.
 <Picture 2> is the cook and kitchen bible: a Japanese home kitchen with pale wood and a heavy pot on a gas hob, neutral daylight from a window on the left, warm only in the shadows.
-<Picture 3> is the working state: the pot partway through, seared beef cubes and deeply caramelised onions simmering in a pale brown stock with carrot and potato among them, the surface barely moving and steam sitting over it. No curry roux is in the pot yet and the liquid is not brown curry colour.
+<Picture 3> is the pot partway through, seared beef cubes and deeply caramelised onions simmering in a pale brown stock with carrot and potato among them, the surface barely moving and steam sitting over it. No curry roux is in the pot yet and the liquid is not brown curry colour.
 <Picture 4> is the finished hero state, the target of this clip: the finished curry served over rice on a wide plate, sauce deep glossy brown and thick enough to hold its edge against the rice, large tender beef cubes and soft carrot and potato in it, a scattering of chopped parsley, with a spoon resting at the side.
 <Picture 5> is the product image: raw beef flank in a plain black tray, deep red muscle with pale fat marbling running along the grain, the tray bare and unlabelled with no text or barcode anywhere on it.
 <Picture 6> is the ASIAN GROCER ONLINE / POWERED BY UMALL brand lockup, allowed only as a real printed card standing on the table, carrying that wordmark and nothing else: no photograph, no product image, no illustration, no other graphic.

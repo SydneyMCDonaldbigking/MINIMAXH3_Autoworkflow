@@ -2,7 +2,7 @@ subject_definitions:
 <Picture 1> is the final frame of clip 02, showing a piece of the dish lifted clear of the vessel with sauce or juices running from it.
 <Subject 1> is a professional chef in his mid-thirties, dark chef coat with sleeves rolled to the forearm, short black hair, clean-shaven, focused and precise.
 <Picture 2> is the cook and kitchen bible: a renovated Chinese-style home kitchen with a wok stove, visible burner, tiled backsplash, clean wooden prep counter and warm commercial key light from the left.
-<Picture 3> is the working state: red chili broth simmering in a wok with dried peppers and bright chili oil moving on the surface over a blue gas flame.
+<Picture 3> is red chili broth simmering in a wok with dried peppers and bright chili oil moving on the surface over a blue gas flame.
 <Picture 4> is the finished hero state, the target of this clip: the completed spicy boiled beef roll dish in a deep white bowl, glossy red broth, cooked beef rolls and napa cabbage visible, chopped scallion garnish on top.
 <Picture 5> is the product image: raw rolled beef with red-white fat marbling, arranged on a dark wooden tray.
 <Picture 6> is the ASIAN GROCER ONLINE / POWERED BY UMALL brand lockup, allowed only as a real printed card standing on the table, carrying that wordmark and nothing else: no photograph, no product image, no illustration, no other graphic.
