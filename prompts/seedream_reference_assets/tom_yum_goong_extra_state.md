@@ -1,6 +1,6 @@
 Create a clean high-quality vertical reference image for a premium cooking commercial, 1080x1920.
 
-PURPOSE: an extra process-state reference for MiniMax H3 Tom Yum Goong, Thai hot and sour prawn soup, covering a moment the four standard references do not: the raw prawns going into the finished broth, which happens in the last clip.
+PURPOSE: an extra process-state reference for MiniMax H3 Tom Yum Goong, Thai hot and sour prawn soup, covering a moment the four standard references do not: the raw prawns going into the finished broth, which happens at the end of clip 02.
 
 SCENE: a wide steel pot over a gas flame in the kitchen described by the character reference.
 

@@ -38,11 +38,11 @@ told apart, each entering at a different moment. It took three passes.
 
 ## The three things that actually break a dish
 
-1. **A beat with no reference image.** If an action happens in a clip and no
-   reference shows that action, it will not happen. Tom yum's prawns go in during
-   clip 03, whose only cooking anchor was the finished bowl, so the ad tipped raw
-   prawns into a plated soup. A fifth reference of prawns dropping into the pot
-   fixed it in one pass. See `extra_subject` in the dish config.
+1. **A beat assigned to the wrong clip.** A clip has an identity, and its whole
+   reference set votes on what that identity is. An action that contradicts it
+   will not render there, however many references you add or how plainly you word
+   it. This is the strongest rule on the page and it was learned the expensive
+   way; the section below is the whole story.
 2. **An adjective with a raw/cooked ambiguity.** "Pale" is accurate for simmered
    pork and rendered it pink. "Pink" is accurate for cooked salmon and rendered
    sashimi. Both times the fix was a positive statement of the cooked state -
@@ -60,11 +60,53 @@ When a config is drafted, before generating references:
 
 - Count the distinguishable things in the planned `cook_state`. If it is over
   five, simplify the dish or split the beat.
-- List every action that happens in clip 03. If any of them is a cooking action
-  rather than a plating action, the dish needs an `extra_subject` reference.
+- List every action in each clip and check it against that clip's reference set.
+  A cooking action in clip 03 is not fixed by adding a reference; **move it into
+  clip 02**. See the section below.
 - Grep the config for `pale`, `pink`, `light`, `soft`, `golden` and check each one
   cannot be read as undercooked.
 - For every ingredient whose size matters, check it is described relative to
   another thing in the same frame, not in absolute units alone.
 
 Two minutes here against 24 minutes of GPU time plus a review round trip.
+
+
+## Move the beat, do not out-argue the clip
+
+Tom yum took three renders. The first two failed the same way and the second is
+the useful one, because it did exactly what this page used to recommend and still
+failed.
+
+| | Change | Result |
+| --- | --- | --- |
+| v1 | - | Prawns never entered the pot; clip 03 tipped raw prawns into a finished bowl |
+| v2 | Added an `extra_state` reference of prawns dropping into the pot, bound it into clip 03, rewrote the beat to say "into the boiling pot" | **Still tipped them into the bowl.** The pot appeared only in the second shot |
+| v3 | Moved the prawns into clip 02. Added nothing | Correct throughout |
+
+Clip 03 binds character, working-state, hero bowl and product. Those four
+together say *this is the end*. Dropping one contrary picture into that set is
+one vote against three, and the model resolved it the way the majority pointed:
+it plated first, then grudgingly showed the pot. The reference was not ignored,
+it was outvoted.
+
+Clip 02 binds nothing but pot and heat. The same action costs nothing there.
+
+**So the diagnostic is not "does this beat have a reference" but "does this beat
+belong to this clip".** Read each clip's reference list and name what stage of
+cooking it depicts. If a beat names a different stage, the beat is in the wrong
+clip. Adding pictures cannot fix that; moving the beat costs nothing.
+
+The same run showed the other half of the split. Clip 01 was running the chilli
+paste, which is clip 02's job, so every later stage shifted one beat late and the
+prawns were squeezed out of the cooking clips entirely. **A beat that arrives too
+early in clip 01 pushes the dish's real subject out of the far end.** Check both
+ends of the split, not just the one that failed.
+
+### And the leftover
+
+Removing a reference is not the same as excluding a thing. With the brand logo
+unbound from clip 03, the model invented its own signboard - a blue "TOM YUMS"
+placard - in the final frame. Absence of a picture is not a statement. The clip
+now says what the frame contains: the dish, its vessel, the table, the cook. That
+is the same fix as the burner that came back stamped "Mini Max H3", and it is the
+same fix every time.
