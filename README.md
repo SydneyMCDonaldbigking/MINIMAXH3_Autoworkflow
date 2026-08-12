@@ -123,10 +123,27 @@ python -m pip config set global.index-url https://mirrors.aliyun.com/pypi/simple
 python -m pip config set global.trusted-host mirrors.aliyun.com
 ```
 
-Use the PyTorch CUDA wheel that matches the current runbook:
+Use the PyTorch CUDA wheel that matches the current runbook, from a mirror.
+**`download.pytorch.org` is not usable from inside China.** This line used to
+point at it and cost a full hour of paid rental on 2026-08-12; the wheel is about
+2.5 GB and never finished. Measured on that machine, same moment, same box:
+
+| Index | Speed |
+| --- | ---: |
+| `download.pytorch.org` | 5 KB/s |
+| `pypi.tuna.tsinghua.edu.cn` | 337 KB/s |
+| **`mirrors.aliyun.com/pytorch-wheels`** | **952 KB/s** |
 
 ```bash
-python -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126 --extra-index-url https://mirrors.aliyun.com/pypi/simple/
+python -m pip install torch torchvision torchaudio   --index-url https://mirrors.aliyun.com/pytorch-wheels/cu124/   --extra-index-url https://mirrors.aliyun.com/pypi/simple/
+```
+
+Match the cu-version to what the driver reports. Test the index before starting,
+which takes eight seconds and would have saved that hour:
+
+```bash
+curl -s -o /dev/null -w "%{http_code} %{speed_download} B/s
+" --max-time 8   https://mirrors.aliyun.com/pytorch-wheels/cu124/
 ```
 
 Use Hugging Face mirror for the H3 model repo:
