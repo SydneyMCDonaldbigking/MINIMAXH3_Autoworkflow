@@ -19,7 +19,7 @@
     "the salted eggplant goes in on top of the browned pork and braises in the sauce",
     "bowled, scattered with spring onion, one soft baton lifted"
   ],
-  "negatives_global": "raw pink mince, mince and eggplant raw in the wok together, eggplant added before the pork browns, battered or deep-fried eggplant, a thin watery sauce, bell peppers, restaurant kitchen, plastic packaging, sealed tray, product label, printed nutrition panel, barcode",
+  "negatives_global": "raw pink mince, mince and eggplant raw in the wok together, eggplant added before the pork browns, battered or deep-fried eggplant, a thin watery sauce, bell peppers, restaurant kitchen",
   "seed_base": 202608120600,
   "first_heat": "The mince spreads out across the bare hot steel and begins to sizzle hard and colour at the edges, fat starting to render out of it.",
   "transform": "the pork crumb finishes browning from pink to deep golden and dry, the eggplant batons go in on top of it and collapse from firm and matt to soft and translucent, their cut faces drinking up the dark sauce until the whole wok turns glossy and the sauce thickens and clings.",
@@ -33,7 +33,7 @@
   "vessel_start": "empty except for a film of oil just beginning to shimmer, no food in it yet",
   "beats": {
     "c1s1": "<Subject 1> draws the colander of salted eggplant, the bowl of minced pork and the dish of aromatics toward them across the counter in one movement.",
-    "c1s2": "Both hands of <Subject 1> press the last water out of the eggplant batons and slide them to the near edge beside the bowl of raw minced pork, keeping the two apart rather than mixing them, because the pork goes into the wok first and alone.",
+    "c1s2": "Both hands of <Subject 1> press the last water out of the eggplant batons and slide them to the near edge beside the bowl of raw minced pork, keeping the two apart.",
     "c1s3": "The hands of <Subject 1> enter from the top of frame carrying the bowl of minced pork alone, tip it into the empty wok in one movement, and withdraw straight up out of frame empty. No eggplant goes in during this shot.",
     "c3s2": "The hand of <Subject 1> enters from the top of frame holding a small dish of chopped spring onion, scatters it once across the surface in a single pass, and withdraws straight up out of frame. The green lands bright against the dark glossy sauce."
   },

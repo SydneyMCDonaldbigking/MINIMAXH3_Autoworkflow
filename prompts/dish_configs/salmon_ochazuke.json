@@ -1,0 +1,41 @@
+{
+  "slug": "salmon_ochazuke",
+  "dish_cn": "三文鱼茶泡饭",
+  "dish_en": "Sake Chazuke, salmon ochazuke",
+  "product_dir": "三文鱼茶泡饭",
+  "product_file": "三文鱼.png",
+  "seed_base": 202608130400,
+  "product_desc": "raw salmon fillets on crushed ice, flesh deep orange with clean white fat lines running through it and the skin silver at one edge, no packaging anywhere in frame",
+  "cook": "a Japanese cook in her thirties in a plain indigo apron, unhurried and precise",
+  "kitchen": "a small Japanese home kitchen with pale wood and a single gas ring, a tokoname teapot on the counter, neutral daylight from a window on the left, warm only in the shadows",
+  "prep_subject": "salmon fillets patted dry and salted on both sides, resting skin-side up so the surface looks matt rather than wet. Beside them a bowl of hot rice, two wrinkled dark red umeboshi in a small dish, shredded nori, sliced spring onion, arare crackers and a teapot of pale green sencha",
+  "prep_defines": "the salting on the fillets and their dry matt surface, and the umeboshi kept whole in their own dish",
+  "cook_vessel": "a small iron pan over a single gas ring",
+  "cook_subject": "the salmon partway through, skin-side down in a dry iron pan, the skin tightening and blistering to a deep gold while the flesh above it turns from translucent orange to opaque pale pink from the bottom up",
+  "cook_negatives": "raw sashimi-style salmon, salmon poached or steamed, a wet grey surface, breadcrumbs or batter, the tea poured before the salmon is flaked",
+  "vessel_start": "empty and already hot, dry with no oil in it yet",
+  "hero_subject": "the finished bowl, hot rice topped with flaked pink salmon and a piece of crisp gold skin, one wrinkled dark red umeboshi plum sitting whole at the centre, shredded nori, sliced spring onion and a few arare crackers around it, with pale green tea poured over so it pools clear around the rice and the steam lifts",
+  "hero_setting": "a low wooden table in the same home, a small teapot beside the bowl, neutral daylight",
+  "story": [
+    "salted salmon skin-side down into a dry hot pan",
+    "skin blisters gold and the flesh turns opaque, then it is flaked",
+    "flakes and an umeboshi over rice, then the tea poured over"
+  ],
+  "first_heat": "The salmon settles skin-side down onto the bare hot iron and holds still, the skin tightening against the pan and a first thread of steam lifting from the edges of the flesh.",
+  "transform": "the skin tightens and blisters from silver to a deep crisp gold, and the flesh above it turns from translucent deep orange to opaque pale pink, the change travelling visibly up through the fillet from the pan side.",
+  "lift": "A pair of chopsticks and a spatula enter from the left, lift the fillet clear of the pan and hold it at the centre of frame skin-side out, the skin crisp and gold and the flesh flaking apart slightly at the edge.",
+  "plate": "The hands of <Subject 1> enter from the top of frame with chopsticks and break the cooked fillet into large flakes directly over the bowl of hot rice, letting them fall where they land, then set the crisp skin and one whole dark red umeboshi plum on top and withdraw out of frame.",
+  "final_lift": "A hand enters from the right holding chopsticks, lifts one large flake of salmon with a strand of nori clear of the bowl, and holds it steady at the centre of frame, tea running off it, the whole umeboshi still sitting in the rice below.",
+  "beats": {
+    "c1s1": "<Subject 1> draws the plate of salted salmon and the bowl of hot rice toward them in one movement.",
+    "c1s2": "Both hands of <Subject 1> press the last moisture from the salmon with kitchen paper and turn the fillets skin-side up, then slide the plate to the near edge beside the rice and the dish of whole umeboshi.",
+    "c1s3": "The hands of <Subject 1> enter from the top of frame carrying the salted fillets, lay them skin-side down into the dry hot pan one at a time, and withdraw straight up out of frame empty. No oil goes in and no tea is poured in this shot.",
+    "c3s2": "The hand of <Subject 1> enters from the top of frame holding the teapot and pours pale green tea over the rice in one steady stream until it pools clear around it, then withdraws straight up out of frame. The tea goes in last, after the salmon and the toppings are already on."
+  },
+  "clip02_shot1": "[Shot 1] Locked-off close-up at pan height, 50mm feel, continuing directly from <Picture 1>. The iron pan of <Picture 4> fills the lower two thirds of frame over its gas ring, which stays visible at the bottom of frame throughout. The fillets from clip 01 are skin-side down and the skin is already tightening against the metal. A spatula enters from the top of frame, presses each fillet flat against the pan for a moment so the skin makes full contact, and withdraws straight up out of frame. Nothing is added and nothing is turned. The camera does not move at any point in this shot, and the framing does not drift.",
+  "negatives_global": "raw sashimi salmon, poached or steamed salmon, breadcrumbs or batter, tea poured before the salmon is on, a soup bowl full of broth, umeboshi mashed or chopped",
+  "sound_01": "A very quiet home kitchen with a faint room tone. In the first shot, a ceramic plate set down on wood. In the second shot, kitchen paper pressing against fish and salt being sprinkled. In the third shot, a gas ring catching, then a sharp clean sizzle as salted skin meets dry hot iron. No speech.",
+  "sound_02": "A steady clean sizzle throughout, sharpening as the skin crisps, with the small metallic sound of a spatula pressing the fillet flat. No oil spitting. No speech.",
+  "sound_03": "A quiet room. In the first shot, salmon flaking apart under chopsticks and falling onto rice. In the second shot, tea pouring in a steady stream and pooling. In the third shot, chopsticks lifting a flake, and a teapot set down on wood. No speech.",
+  "music": "A spare Japanese bed: a single koto or plucked string with long silences between phrases, calm and unhurried."
+}

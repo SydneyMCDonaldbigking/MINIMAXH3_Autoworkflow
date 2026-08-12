@@ -1,0 +1,41 @@
+{
+  "slug": "kimchi_beef_fried_rice",
+  "dish_cn": "辣白菜牛肉炒饭",
+  "dish_en": "Kimchi beef fried rice, 김치볶음밥",
+  "product_dir": "韩式部队锅",
+  "product_file": "kimchi_clean.png",
+  "seed_base": 202608130300,
+  "product_desc": "sliced napa cabbage kimchi in a shallow white bowl, leaves deep red with chilli paste and the white stems still crisp, red brine pooling at the base, no jar and no packaging anywhere in frame",
+  "cook": "a young Korean cook in his twenties in a plain apron, quick and relaxed",
+  "kitchen": "a small apartment kitchen with pale tiles and a gas hob, a wooden board on the counter, neutral daylight from a window on the left, warm only in the shadows",
+  "prep_subject": "aged kimchi chopped small into rough one-centimetre pieces and heaped in a bowl with a little of its red brine, beside a plate of thinly sliced beef, a bowl of plain steamed white rice that is clearly the largest quantity on the counter, chopped spring onion, and a small dish of gochujang with sesame oil",
+  "prep_defines": "the small one-centimetre chop of the kimchi, and the rice being the largest quantity of the three",
+  "cook_vessel": "a carbon steel wok over a gas flame",
+  "cook_subject": "the wok partway through, holding exactly two ingredients and nothing else at all. On one side, thin slices of beef already browned. On the other, kimchi chopped small into rough one-centimetre pieces, red-stained with pale crisp stem flecks through it, in a modest amount that covers less of the wok than the beef does. Those two things are the entire contents of the wok. No rice, no vegetables and no other ingredient of any kind is in the wok",
+  "cook_negatives": "whole or large kimchi leaves, kimchi in long strips, more kimchi than rice, rice cakes, tteok, tteokbokki, stick or cylinder shapes, rice added before the kimchi is fried, wet clumped rice, pale unfried kimchi, a soupy look, a deep pot",
+  "vessel_start": "empty except for a film of oil just beginning to shimmer, no food in it yet",
+  "hero_subject": "the finished fried rice, everything tossed together and completely mixed so it is one uniform orange-red mass with no separate sections and no ingredients arranged in piles. Rice is clearly the bulk of the dish; small one-centimetre pieces of kimchi and browned beef are distributed evenly through it as flecks rather than dominating it. Every grain is separate and stained orange-red. It is mounded in a shallow bowl with a single fried egg laid on the centre, chopped spring onion and toasted sesame scattered over",
+  "hero_setting": "a wooden dining table away from the cooking area, laid for eating: the bowl sits on the table top with a spoon and chopsticks beside it and a glass of water behind. There is no stove, no hob, no gas burner, no wok and no cooking equipment anywhere in frame, and the table is clearly a place to eat rather than a place to cook. Neutral daylight from a window",
+  "story": [
+    "thin beef into an empty hot wok and browned",
+    "chopped kimchi in beside it and fried until dark and glossy",
+    "steamed rice last, tossed until every grain is stained red"
+  ],
+  "first_heat": "The thin beef slices hit the bare hot steel and sear at once, curling and browning at their edges with a hard fast sizzle.",
+  "transform": "the beef finishes browning and is pushed aside, the small chopped kimchi goes in beside it and fries from bright red to a darker glossy red as its brine cooks off, and then the steamed rice goes in, far more of it than either, and is tossed until every grain takes the colour and turns orange-red.",
+  "lift": "A wok spatula enters from the left, lifts a portion of fried rice clear of the wok and holds it at the centre of frame. The grains fall loose and separate off the edge of the spatula, kimchi and browned beef visible through them.",
+  "plate": "The hands of <Subject 1> enter from the top of frame holding the wok by its handle, tip it once over the shallow bowl, and the fried rice slides out in one mound. The hands withdraw out of frame.",
+  "final_lift": "A hand enters from the right holding a spoon, breaks the soft egg yolk over the rice and lifts one spoonful clear of the bowl, holding it steady at the centre of frame with the yolk running through the grains.",
+  "beats": {
+    "c1s1": "<Subject 1> draws the bowl of chopped kimchi and the plate of sliced beef toward them in one movement.",
+    "c1s2": "Both hands of <Subject 1> loosen the steamed rice with a spoon until the grains fall apart rather than holding together, then slide the bowl to the near edge beside the kimchi and the beef.",
+    "c1s3": "The hands of <Subject 1> enter from the top of frame carrying the sliced beef alone, tip it into the empty hot wok in one movement, and withdraw straight up out of frame empty. No kimchi and no rice go in during this shot.",
+    "c3s2": "The hand of <Subject 1> enters from the top of frame with a spatula and lays a fried egg with a soft unbroken yolk on top of the mounded rice in one movement, then withdraws straight up out of frame. The yolk stays whole where it lands."
+  },
+  "clip02_shot1": "[Shot 1] Locked-off close-up at wok height, 50mm feel, continuing directly from <Picture 1>. The wok of <Picture 4> fills the lower two thirds of frame over its burner, which stays visible at the bottom of frame throughout. The beef from clip 01 is browned and pushed to one side of the wok. The hands of <Subject 1> enter from the top of frame carrying the bowl of chopped kimchi from <Picture 3>, tip it into the clear side of the wok in one movement, and withdraw straight up out of frame empty. The kimchi hits the hot steel and its brine begins to cook off at once. No rice is in this shot. The camera does not move at any point in this shot, and the framing does not drift.",
+  "negatives_global": "bibimbap, ingredients arranged in separate sections or piles, rice cakes, tteokbokki, a stew or hot pot, a deep pot, soup or broth, wet clumped rice, instant noodles, processed cheese",
+  "sound_01": "A small apartment kitchen with a low room tone. In the first shot, a bowl set down on a wooden board. In the second shot, a spoon loosening steamed rice in a bowl. In the third shot, a gas burner rising, then a hard fast sizzle as thin beef meets bare hot steel. No speech.",
+  "sound_02": "A hard continuous stir fry throughout, the scrape of a spatula against carbon steel. In the first shot, wet kimchi hitting hot metal with a sharp burst of steam. In the second shot the sound dries out as the brine cooks off and the rice goes in. No speech.",
+  "sound_03": "An apartment kitchen. In the first shot, fried rice sliding from a wok into a ceramic bowl in one mass. In the second shot, an egg being laid on top and sesame scattering. In the third shot, a spoon breaking a yolk, and the bowl settling on wood. No speech.",
+  "music": "A bright young bed: a clipped drum groove under a warm bass line, quick and easy, the feeling of a fast weeknight meal."
+}

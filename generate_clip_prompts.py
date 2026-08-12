@@ -49,8 +49,9 @@ ASSET_DIRS = {p.name.split("_", 1)[1]: p for p in (ROOT / "outputs" / "reference
 
 KINDS = ["character_scene", "prep_state", "cook_state", "hero_state"]
 
-NEG_COMMON = ("distorted faces, extra fingers, invented text, captions, watermarks, "
-              "floating logos, camera shake, and scene jumps")
+NEG_COMMON = ("distorted faces, extra fingers, invented text or lettering on any surface "
+              "including burners and cookware, retail packaging, labels and barcodes, captions, "
+              "watermarks, floating logos, camera shake, and scene jumps")
 
 
 def asset_rel(cfg: dict, kind: str) -> str:

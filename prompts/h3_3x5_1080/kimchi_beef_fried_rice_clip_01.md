@@ -1,0 +1,35 @@
+subject_definitions:
+<Subject 1> is a young Korean cook in his twenties in a plain apron, quick and relaxed, working at the counter of the kitchen in <Picture 1>.
+<Picture 1> is the cook and kitchen bible: a small apartment kitchen with pale tiles and a gas hob, a wooden board on the counter, neutral daylight from a window on the left, warm only in the shadows.
+<Picture 2> is the prep state, which defines the small one-centimetre chop of the kimchi, and the rice being the largest quantity of the three: aged kimchi chopped small into rough one-centimetre pieces and heaped in a bowl with a little of its red brine, beside a plate of thinly sliced beef, a bowl of plain steamed white rice that is clearly the largest quantity on the counter, chopped spring onion, and a small dish of gochujang with sesame oil.
+<Picture 3> is the working state: the wok partway through, holding exactly two ingredients and nothing else at all. On one side, thin slices of beef already browned. On the other, kimchi chopped small into rough one-centimetre pieces, red-stained with pale crisp stem flecks through it, in a modest amount that covers less of the wok than the beef does. Those two things are the entire contents of the wok. No rice, no vegetables and no other ingredient of any kind is in the wok.
+<Picture 4> is the finished hero state, used here only as a colour and texture target.
+<Picture 5> is the product image: sliced napa cabbage kimchi in a shallow white bowl, leaves deep red with chilli paste and the white stems still crisp, red brine pooling at the base, no jar and no packaging anywhere in frame.
+<Picture 6> is the ASIAN GROCER ONLINE / POWERED BY UMALL brand lockup, allowed only as a real printed card standing on the counter, carrying that wordmark and nothing else: no photograph, no product image, no illustration, no other graphic.
+
+summary:
+reference generation. A five-second vertical premium cooking commercial, clip 01 of a three-clip sequence for Kimchi beef fried rice, 김치볶음밥. <Subject 1> and the kitchen of <Picture 1> establish the setting, <Picture 5> supplies the raw ingredient identity, and <Picture 2> supplies the already-prepared components that prove real preparation happened. The clip carries the ingredients from the counter to first heat, ending as thin beef into an empty hot wok and browned, so clip 02 can open on cooking already under way. <Picture 4> is not staged here.
+
+retention_analysis:
+<Subject 1>: fully_preserved. Same face, build and clothing throughout.
+<Picture 1>: attribute_transfer. Kitchen layout, light direction and material palette carry over; exact framing does not.
+<Picture 2>: fully_preserved. Every component keeps the size and cut this image defines.
+<Picture 3>: weak_reference. Only the vessel's shape, material and position carry over. Its contents do not: the vessel is empty when this clip begins, and the food that image shows is where clip 02 ends up, not where clip 01 starts.
+<Picture 4>: weak_reference. Colour and texture target only, not composed in frame.
+<Picture 5>: fully_preserved. The raw ingredient keeps its colour and surface exactly.
+<Picture 6>: weak_reference. May appear once as a small printed card far back on the counter, never as an overlay.
+
+detailed_description:
+[Shot 1] Medium shot at eye level, 50mm feel. <Subject 1> stands at the counter of the kitchen from <Picture 1>, the cooking vessel of <Picture 3> at their right. Laid out in front of them are the raw ingredient of <Picture 5> and the prepared components of <Picture 2>, with the small printed card of <Picture 6> against the back wall and out of focus, never beside or among the food and never part of the food display. Directional light rakes across the ingredient. <Subject 1> draws the bowl of chopped kimchi and the plate of sliced beef toward them in one movement. The camera pushes in toward the counter steadily and continuously across the whole shot, one single move that never pauses or reverses. The shot ends with every component readable in frame.
+
+[Shot 2] At 00:01.600, the shot cuts to a medium-close shot over the work surface, high three-quarter angle, 50mm feel, holding both forearms of <Subject 1> and the whole surface. On it are the prepared components of <Picture 2>, exactly as that image defines them. Any knife rests flat at the far side and is never lifted. Both hands of <Subject 1> loosen the steamed rice with a spoon until the grains fall apart rather than holding together, then slide the bowl to the near edge beside the kimchi and the beef. The camera does not move and the focus does not rack. The shot ends with the prepared components and the raw ingredient together in the near half of frame, both sharp.
+
+[Shot 3] At 00:03.400, the shot cuts to a locked-off close-up at cooking height. The vessel of <Picture 3> fills the lower two thirds of frame over its heat source, empty except for a film of oil just beginning to shimmer, no food in it yet. <Picture 3> supplies this vessel's shape and position only, never its contents. The hands of <Subject 1> enter from the top of frame carrying the sliced beef alone, tip it into the empty hot wok in one movement, and withdraw straight up out of frame empty. No kimchi and no rice go in during this shot. The thin beef slices hit the bare hot steel and sear at once, curling and browning at their edges with a hard fast sizzle. The camera does not move at any point in this shot.
+
+Preserve across all shots: the identity of <Subject 1>, realistic hands, the ingredient of <Picture 5>, the component sizes of <Picture 2>, the vessel of <Picture 3>, and one coherent colour grade. Avoid bibimbap, ingredients arranged in separate sections or piles, rice cakes, tteokbokki, a stew or hot pot, a deep pot, soup or broth, wet clumped rice, instant noodles, processed cheese, distorted faces, extra fingers, invented text or lettering on any surface including burners and cookware, retail packaging, labels and barcodes, captions, watermarks, floating logos, camera shake, and scene jumps.
+
+overall_soundscape:
+A small apartment kitchen with a low room tone. In the first shot, a bowl set down on a wooden board. In the second shot, a spoon loosening steamed rice in a bowl. In the third shot, a gas burner rising, then a hard fast sizzle as thin beef meets bare hot steel. No speech.
+
+non_diegetic_music:
+A bright young bed: a clipped drum groove under a warm bass line, quick and easy, the feeling of a fast weeknight meal. It sits under the physical sounds and lifts as the ingredient meets heat, resolving on an unfinished phrase so clip 02 can continue.

@@ -19,7 +19,7 @@
     "an hour of slow simmering until the meat pulls back from the bone",
     "stacked into a volcano and the raw dressing poured down over it"
   ],
-  "negatives_global": "raw or pink meat, red uncooked muscle, deep frying, a wok of hot oil, dark caramelised crust, barbecue glaze, dry roast ribs, thick brown gravy, a brand card carrying a photograph or product image, invented packaging artwork, restaurant kitchen, plastic packaging, sealed tray, product label, printed nutrition panel, barcode",
+  "negatives_global": "raw or pink meat, red uncooked muscle, deep frying, a wok of hot oil, dark caramelised crust, barbecue glaze, dry roast ribs, thick brown gravy, a brand card carrying a photograph or product image, invented packaging artwork, restaurant kitchen",
   "seed_base": 202608120200,
   "first_heat": "The water is still cold and clear around them, and the lemongrass and ginger lift and turn as the ribs settle to the bottom of the pot.",
   "transform": "the broth clouds from clear to milky, the meat turns from raw pink to a completely opaque grey-brown and visibly shrinks back from the bone ends until the clean white tips stand proud, and the surface settles from a first boil into a slow lazy roll under a skin of steam.",
@@ -32,7 +32,7 @@
   "music": "A tropical percussion bed: hand drums and bamboo blocks over a syncopated bass line, hot and driving without being frantic.",
   "beats": {
     "c1s1": "<Subject 1> draws the ribs and the bruised aromatics together across the counter in one movement.",
-    "c1s2": "Both hands of <Subject 1> gather the lemongrass, ginger, spring onion and coriander root into one pile and slide them to the near edge beside the ribs, so the aromatics and the meat sit together ready to go into the water at the same moment.",
+    "c1s2": "Both hands of <Subject 1> gather the lemongrass, ginger, spring onion and coriander root into one pile at the near edge beside the ribs, so aromatics and meat go into the water together.",
     "c1s3": "The hands of <Subject 1> enter from the top of frame carrying the ribs, lower them into the cold water of the pot until they are submerged, follow them with the bruised lemongrass, ginger and spring onion, and withdraw straight up out of frame empty.",
     "c3s2": "The hand of <Subject 1> enters from the top of frame with a small jug of thick red-orange dressing made from the rib broth, and pours it in one steady stream onto the peak of the stack, enough that it runs over every rib and down all four sides and pools around the base, then withdraws straight up out of frame. The dressing is never cooked and never goes near the heat."
   },

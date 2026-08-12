@@ -1,0 +1,74 @@
+{
+  "sequence_id": "lu_chicken_drumsticks_3x5_native1080",
+  "server": "http://127.0.0.1:8189",
+  "defaults": {
+    "mode": "r2v",
+    "width": 1088,
+    "height": 1920,
+    "duration": 5.0,
+    "steps": 8,
+    "turbo": true,
+    "turbo_low_vram": true,
+    "no_audio": true,
+    "ref_image_size": "match",
+    "poll": 10,
+    "timeout": 10800
+  },
+  "clips": [
+    {
+      "id": "clip-01-prep-to-heat",
+      "prompt_file": "../prompts/h3_3x5_1080/lu_chicken_drumsticks_clip_01.md",
+      "ref_images": [
+        "../outputs/reference_assets/16_卤鸡腿/lu_chicken_drumsticks_character_scene.png",
+        "../outputs/reference_assets/16_卤鸡腿/lu_chicken_drumsticks_prep_state.png",
+        "../outputs/reference_assets/16_卤鸡腿/lu_chicken_drumsticks_cook_state.png",
+        "../outputs/reference_assets/16_卤鸡腿/lu_chicken_drumsticks_hero_state.png",
+        "../sample_pictures/卤鸡腿/鸡腿.png",
+        "../company_logo/AGO.png"
+      ],
+      "seed": 202608130501,
+      "prefix": "sequence/lu_chicken_drumsticks_3x5_native1080/clip-01"
+    },
+    {
+      "id": "clip-02-cook",
+      "prompt_file": "../prompts/h3_3x5_1080/lu_chicken_drumsticks_clip_02.md",
+      "use_previous_last_frame_as_ref": true,
+      "ref_images": [
+        "../outputs/reference_assets/16_卤鸡腿/lu_chicken_drumsticks_character_scene.png",
+        "../outputs/reference_assets/16_卤鸡腿/lu_chicken_drumsticks_prep_state.png",
+        "../outputs/reference_assets/16_卤鸡腿/lu_chicken_drumsticks_cook_state.png",
+        "../outputs/reference_assets/16_卤鸡腿/lu_chicken_drumsticks_hero_state.png",
+        "../sample_pictures/卤鸡腿/鸡腿.png"
+      ],
+      "seed": 202608130502,
+      "prefix": "sequence/lu_chicken_drumsticks_3x5_native1080/clip-02"
+    },
+    {
+      "id": "clip-03-serving-hero",
+      "prompt_file": "../prompts/h3_3x5_1080/lu_chicken_drumsticks_clip_03.md",
+      "use_previous_last_frame_as_ref": true,
+      "ref_images": [
+        "../outputs/reference_assets/16_卤鸡腿/lu_chicken_drumsticks_character_scene.png",
+        "../outputs/reference_assets/16_卤鸡腿/lu_chicken_drumsticks_cook_state.png",
+        "../outputs/reference_assets/16_卤鸡腿/lu_chicken_drumsticks_hero_state.png",
+        "../sample_pictures/卤鸡腿/鸡腿.png",
+        "../company_logo/AGO.png"
+      ],
+      "seed": 202608130503,
+      "prefix": "sequence/lu_chicken_drumsticks_3x5_native1080/clip-03"
+    }
+  ],
+  "final": {
+    "filename": "lu_chicken_drumsticks_3x5_native_1080x1920.mp4",
+    "concat_mode": "both",
+    "crop": {
+      "width": 1080,
+      "height": 1920,
+      "x": 4,
+      "y": 0
+    },
+    "crf": 16,
+    "preset": "medium",
+    "keep_audio": false
+  }
+}

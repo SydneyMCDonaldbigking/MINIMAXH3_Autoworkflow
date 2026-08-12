@@ -1,0 +1,41 @@
+{
+  "slug": "japanese_beef_curry",
+  "dish_cn": "日式咖喱牛肉",
+  "dish_en": "Japanese beef curry",
+  "product_dir": "日式咖喱牛肉i",
+  "product_file": "beef_flank_clean.png",
+  "seed_base": 202608130600,
+  "product_desc": "raw beef flank in a plain black tray, deep red muscle with pale fat marbling running along the grain, the tray bare and unlabelled with no text or barcode anywhere on it",
+  "cook": "a home cook in his forties in a plain apron, methodical, in no hurry",
+  "kitchen": "a Japanese home kitchen with pale wood and a heavy pot on a gas hob, neutral daylight from a window on the left, warm only in the shadows",
+  "prep_subject": "beef cut into large cubes and patted dry, beside a mound of thinly sliced onion, carrot in rough chunks, potato in large pieces, and a block of dark brown Japanese curry roux broken into squares on a small dish",
+  "prep_defines": "the size of the beef cubes and the thin even slicing of the onion",
+  "cook_vessel": "a heavy lidded pot over a gas flame",
+  "cook_subject": "the pot partway through, seared beef cubes and deeply caramelised onions simmering in a pale brown stock with carrot and potato among them, the surface barely moving and steam sitting over it. No curry roux is in the pot yet and the liquid is not brown curry colour",
+  "cook_negatives": "roux added at the start, a bright yellow Indian curry colour, raw pale onions, beef boiled without searing, a hard rolling boil, curry powder instead of roux blocks",
+  "vessel_start": "empty except for a film of oil just beginning to smoke, no food in it yet",
+  "hero_subject": "the finished curry served over rice on a wide plate, sauce deep glossy brown and thick enough to hold its edge against the rice, large tender beef cubes and soft carrot and potato in it, a scattering of chopped parsley, with a spoon resting at the side",
+  "hero_setting": "a wooden dining table in the same home, neutral daylight",
+  "story": [
+    "beef cubes seared hard in an empty pot, then lifted out",
+    "onions cooked down to deep brown, beef back in, stock and a long simmer",
+    "roux blocks stirred in last until the sauce turns glossy and thick"
+  ],
+  "first_heat": "The beef cubes settle onto the bare hot metal and sear at once with a deep sustained hiss, their undersides beginning to brown and a curl of smoke lifting from the edge of the pot.",
+  "transform": "the sliced onions cook down from pale and raw through gold to a deep glowing brown, collapsing to a fraction of their volume, the seared beef returns with stock and the pot settles to a bare simmer, and only at the end do the dark roux blocks go in and melt, turning the pale stock to a thick glossy brown sauce.",
+  "lift": "A wooden spoon enters from the left, lifts one large beef cube out of the sauce and holds it at the centre of frame. The meat sags and begins to pull apart under its own weight, thick brown sauce running off it slowly.",
+  "plate": "The hands of <Subject 1> enter from the top of frame with a ladle, pour the curry over one half of the plate of rice in one steady stream so the sauce holds its edge against the white rice rather than flooding it, and withdraw out of frame.",
+  "final_lift": "A hand enters from the right holding a spoon, lifts a spoonful of curry with one beef cube and a piece of potato clear of the plate, and holds it steady at the centre of frame, sauce running slowly off the edge.",
+  "beats": {
+    "c1s1": "<Subject 1> draws the tray of beef cubes and the sliced onion toward them in one movement.",
+    "c1s2": "Both hands of <Subject 1> gather the onion into one pile and the carrot and potato into another at the near edge. The dish of curry roux blocks stays well back at the far side.",
+    "c1s3": "The hands of <Subject 1> enter from the top of frame carrying the dried beef cubes, lay them into the empty smoking pot in a single layer without crowding, and withdraw straight up out of frame empty. No onion and no roux go in during this shot.",
+    "c3s2": "The hand of <Subject 1> enters from the top of frame holding a small dish of chopped parsley, scatters it once across the sauce in a single pass, and withdraws straight up out of frame. The green lands bright against the deep brown."
+  },
+  "clip02_shot1": "[Shot 1] Locked-off close-up at pot height, 50mm feel, continuing directly from <Picture 1>. The pot of <Picture 4> fills the lower two thirds of frame over its flame, which stays visible at the bottom of frame throughout. The beef from clip 01 has been seared and lifted out, and the pot holds only the thin sliced onion, already softening in the beef fat. The hands of <Subject 1> enter from the top of frame with a wooden spoon and turn the onions over once, then withdraw straight up out of frame. Nothing else is added. The onions keep cooking down and darkening. No roux is anywhere in this shot. The camera does not move at any point in this shot, and the framing does not drift.",
+  "negatives_global": "roux added at the start, a bright yellow curry, curry powder, raw pale onion, unseared boiled beef, a thin watery sauce, a hard rolling boil",
+  "sound_01": "A quiet home kitchen with a low room tone. In the first shot, a tray set down on a wooden counter. In the second shot, a knife going through onion against a board and slices being swept into a pile. In the third shot, a gas burner rising, then a deep sustained sear as dried beef meets bare hot metal. No speech.",
+  "sound_02": "A soft steady frying at first as the onions cook down, the scrape of a wooden spoon against the pot, then a long low simmer with almost no movement in it. No hard boiling. No speech.",
+  "sound_03": "A quiet home. In the first shot, thick sauce ladled over rice with a soft heavy pour. In the second shot, chopped parsley landing lightly. In the third shot, a spoon lifted, and a plate set down on wood. No speech.",
+  "music": "A warm domestic bed: piano over low sustained strings, slow and comfortable, the feeling of a pot that has been going all afternoon."
+}

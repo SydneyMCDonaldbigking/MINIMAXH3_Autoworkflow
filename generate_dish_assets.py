@@ -55,7 +55,12 @@ COMMON_STYLE = (
 COMMON_NEG = (
     "subtitles, title cards, watermarks, floating logo, any printed card, "
     "any brand text, invented lettering, fake app UI, distorted face, "
-    "extra fingers, warped cookware, messy kitchen")
+    "extra fingers, warped cookware, messy kitchen, "
+    # "any brand text" alone was not enough: a portable gas burner came back with
+    # "Mini Max H3" printed on it, which is the model signing its own work. The
+    # surfaces have to be named.
+    "no lettering, logos or model names on burners, stoves, pots, pans, "
+    "appliances, packaging or containers, no readable text anywhere in frame")
 
 TEMPLATES = {
     "character_scene": """Create a clean high-quality vertical reference image for a premium cooking commercial, 1080x1920.
@@ -64,7 +69,7 @@ PURPOSE: character and kitchen style reference for MiniMax H3 {dish_en}.
 
 SCENE: {kitchen}.
 
-SUBJECT: {cook}, standing at a prep counter. The raw ingredient is clearly presented on the counter: {product_desc}. Keep all printed cards, packaging and brand text out of frame.
+SUBJECT: {cook}, standing at a prep counter. The raw ingredient is clearly presented on the counter: {product_desc}. The ingredient sits directly on a plate, board or bowl. There is no retail packaging anywhere in the room: no trays with labels, no boxes, no punnets, no bags, no cling film, nothing with a sticker or a barcode on it, not even at the edge of frame or out of focus in the background.
 
 COMPOSITION: vertical 9:16, medium shot from a slightly high three-quarter angle. Cook, ingredient, cooking vessel and kitchen style all legible. Leave room for hand motion.
 

@@ -1,0 +1,41 @@
+{
+  "slug": "lu_chicken_drumsticks",
+  "dish_cn": "卤鸡腿",
+  "dish_en": "Lu Ji Tui, red-braised soy sauce chicken drumsticks",
+  "product_dir": "卤鸡腿",
+  "product_file": "鸡腿.png",
+  "seed_base": 202608130500,
+  "product_desc": "raw skin-on chicken drumsticks arranged in a ring on a white plate, skin pale cream and unbroken, no packaging anywhere in frame",
+  "cook": "a woman cook in her fifties in a plain apron, calm and practiced, the kind who has made this a hundred times",
+  "kitchen": "a warm home kitchen with stainless surfaces and a gas hob, a heavy clay pot on the counter, neutral daylight from a window on the left, warm only in the shadows",
+  "prep_subject": "blanched chicken drumsticks resting in a colander, skin taut and pale with the scum rinsed off. Beside them thick ginger coins, spring onions cut into long lengths, and a small dish of whole spices: star anise, cassia bark, bay leaves, black cardamom and peppercorns",
+  "prep_defines": "the blanched drumsticks with clean taut skin, and the whole spices left whole rather than ground",
+  "cook_vessel": "a heavy pot over a low gas flame",
+  "cook_subject": "the drumsticks partway through braising, half submerged in a dark glossy soy braising liquid at a bare simmer, the skin already turned from pale cream to a deep amber-brown, star anise and cassia bark floating among them, steam sitting over the surface",
+  "cook_negatives": "deep frying, dry roasting, a thin watery sauce, pale unbrowned skin, ground spice powder instead of whole spices, boiling hard enough to tear the skin",
+  "vessel_start": "empty except for a film of oil just beginning to shimmer, no food in it yet",
+  "hero_subject": "the finished drumsticks piled on a dark plate, skin deep glossy amber-brown and unbroken, the meat visibly shrunk back from the bone end, a spoonful of the reduced braising liquid over them, fresh coriander and sliced chilli at the edge, a bowl of plain rice beside",
+  "hero_setting": "a wooden kitchen table in the same home, neutral daylight",
+  "story": [
+    "ginger and spring onion into an empty hot pot, then the blanched drumsticks",
+    "soy and whole spices in, water to cover, then forty minutes at a bare simmer",
+    "lifted out glossy, sauce spooned over, one drumstick picked up"
+  ],
+  "first_heat": "The ginger coins and spring onion lengths hit the thin film of hot oil and go fragrant at once, curling and colouring at their edges.",
+  "transform": "the pale skin takes colour from the soy and turns steadily through tan to a deep glossy amber-brown, the liquid darkens and reduces around the drumsticks at a bare simmer with whole spices turning slowly among them, and the meat draws back from the bone ends.",
+  "lift": "A pair of tongs enters from the left, closes on one drumstick and lifts it clear of the braising liquid to the centre of frame. The skin is deep amber and glossy and unbroken, and sauce runs off it in a slow thread.",
+  "plate": "The hands of <Subject 1> enter from the top of frame with tongs, lift the drumsticks from the pot one at a time and stand them against each other on the dark plate, then withdraw out of frame with the empty tongs.",
+  "final_lift": "A hand enters from the right, takes one drumstick by its bone end, lifts it clear of the plate and holds it steady at the centre of frame, the skin glossy and a thread of sauce running from it.",
+  "beats": {
+    "c1s1": "<Subject 1> draws the colander of blanched drumsticks and the dish of spices toward them in one movement.",
+    "c1s2": "Both hands of <Subject 1> gather the ginger, spring onion and whole spices into one pile at the near edge beside the colander. The spices stay whole and none are crushed.",
+    "c1s3": "The hands of <Subject 1> enter from the top of frame carrying the ginger coins and spring onion lengths, tip them into the empty hot pot first, and withdraw straight up out of frame empty. The drumsticks do not go in during this shot.",
+    "c3s2": "The hand of <Subject 1> enters from the top of frame with a spoon of the dark reduced braising liquid and spoons it over the drumsticks in one pass so it runs down over the skin, then withdraws straight up out of frame. The sauce catches the light where it lands."
+  },
+  "clip02_shot1": "[Shot 1] Locked-off close-up at pot height, 50mm feel, continuing directly from <Picture 1>. The pot of <Picture 4> fills the lower two thirds of frame over its low flame, which stays visible at the bottom of frame throughout, the ginger and spring onion from clip 01 already fragrant in the oil. The hands of <Subject 1> enter from the top of frame and lay the blanched drumsticks in one at a time, then pour dark soy over them and add the whole star anise, cassia bark and bay leaves, and withdraw straight up out of frame empty. The liquid rises to half cover the drumsticks and settles to a bare simmer. The camera does not move at any point in this shot, and the framing does not drift.",
+  "negatives_global": "deep frying, dry roasting, barbecue char, a thin watery sauce, pale unbrowned skin, ground spice powder, torn or split skin",
+  "sound_01": "A warm home kitchen with a low room tone. In the first shot, a colander set down on a stainless counter. In the second shot, whole spices rattling into a small dish and ginger being sliced against wood. In the third shot, a gas burner rising, then ginger and spring onion hitting hot oil with a short sharp sizzle. No speech.",
+  "sound_02": "A low bare simmer throughout, liquid barely moving, with the gas flame beneath it. In the first shot, soy pouring and drumsticks being laid into liquid. In the second shot, the simmer alone. In the third shot, tongs closing and sauce running off in a slow thread. No hard boiling and no frying. No speech.",
+  "sound_03": "A quiet home. In the first shot, drumsticks knocking gently against a hard plate. In the second shot, a spoon of thick sauce being poured over. In the third shot, one drumstick lifted, and a rice bowl set down on wood. No speech.",
+  "music": "A patient home bed: low plucked strings over soft sustained tones, slow and unhurried, the sound of something that has been on the stove a long time."
+}
