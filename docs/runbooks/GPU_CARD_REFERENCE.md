@@ -70,10 +70,39 @@ in `H200_DAY_PLAN.md`; the parts people miss:
 - Models are about 60 GB. Download time is set by the host's link, not the card:
   13 minutes at 620 Mbps, under a minute at 15 Gbps.
 
+## Cheap suppliers, and what the cheapness is buying
+
+The 2026-08-09 provider was materially cheaper than Vast and supplied, per the
+client, ex-mining cards. That is very likely the explanation for the two days
+lost on 2026-08-10: two A100s from that provider, one after the other, corrupted
+bf16 tensor-core GEMM at about 1.91e-10 per MAC while fp32, fp16 and bf16
+elementwise stayed perfect. At the time the second failure looked like evidence
+that the diagnosis was wrong, because replacing a faulty card is not supposed to
+reproduce the fault exactly. A retired mining batch explains it: same wear, same
+thermal history, same defect.
+
+None of this is provable about those specific cards, and it does not need to be.
+The operational conclusion is the same either way, and it inverts the intuition:
+
+**A cheaper card needs the bf16 test more, not less.** The failure is silent. It
+does not show up in nvidia-smi, in ECC counters, in Xid, in remapped rows, or in
+a full VRAM sweep - all of those were clean. It shows up as a black clip after
+thirteen minutes of paid sampling, intermittently, so a machine can pass one clip
+and fail the next three. One minute of testing against hours of that.
+
+Price the risk honestly when comparing suppliers: a card that is 40% cheaper and
+fails one render in four is more expensive than the dear one.
+
 ## Before anything else
 
 `bash server_scripts/check_bf16_mma.sh` must print `bf16 ... PASS`. It builds for
 the card's own compute capability, so it handles sm_90 by itself; the prebuilt
 `tools/bf16_check_sm80` binary is A100-only. Run it on every machine, every time,
-including after a stop/start of the same instance - the fault that cost two days
-was intermittent. See `RENTAL_CHECKLIST.md`.
+including after a stop/start of the same instance.
+
+That last clause is not caution, it is a measurement. On 2026-08-12 the H100 was
+stopped and restarted, and came back with the same instance id, the same disk and
+all 60 GB of models intact - but a different GPU. The UUID went from
+`GPU-ffb151f0-...` to `GPU-c945196c-...`. Vast reassigns the physical card on
+restart, so "same machine, already tested" is false, and only reading the UUID
+reveals it. Record the UUID every time and compare it to the last one.
