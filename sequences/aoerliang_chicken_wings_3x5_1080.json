@@ -51,8 +51,7 @@
         "../outputs/reference_assets/06_奥尔良鸡翅/aoerliang_chicken_wings_character_scene.png",
         "../outputs/reference_assets/06_奥尔良鸡翅/aoerliang_chicken_wings_cook_state.png",
         "../outputs/reference_assets/06_奥尔良鸡翅/aoerliang_chicken_wings_hero_state.png",
-        "../sample_pictures/奥尔良鸡翅/frozen_wings.png",
-        "../company_logo/AGO.png"
+        "../sample_pictures/奥尔良鸡翅/frozen_wings.png"
       ],
       "seed": 202608120103,
       "prefix": "sequence/aoerliang_chicken_wings_3x5_native1080/clip-03"

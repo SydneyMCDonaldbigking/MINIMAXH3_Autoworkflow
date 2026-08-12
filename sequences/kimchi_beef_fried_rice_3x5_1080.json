@@ -51,8 +51,7 @@
         "../outputs/reference_assets/14_辣白菜牛肉炒饭/kimchi_beef_fried_rice_character_scene.png",
         "../outputs/reference_assets/14_辣白菜牛肉炒饭/kimchi_beef_fried_rice_cook_state.png",
         "../outputs/reference_assets/14_辣白菜牛肉炒饭/kimchi_beef_fried_rice_hero_state.png",
-        "../sample_pictures/韩式部队锅/kimchi_clean.png",
-        "../company_logo/AGO.png"
+        "../sample_pictures/韩式部队锅/kimchi_clean.png"
       ],
       "seed": 202608130303,
       "prefix": "sequence/kimchi_beef_fried_rice_3x5_native1080/clip-03"

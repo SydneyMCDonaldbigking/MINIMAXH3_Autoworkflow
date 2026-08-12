@@ -51,8 +51,7 @@
         "../outputs/reference_assets/05_蛋挞家庭/egg_tart_family_people_character_scene.png",
         "../outputs/reference_assets/05_蛋挞家庭/egg_tart_family_oven_baking_state.png",
         "../outputs/reference_assets/05_蛋挞家庭/egg_tart_family_final_hero_state.png",
-        "../sample_pictures/Umall_trat/trat_pic.png",
-        "../company_logo/AGO.png"
+        "../sample_pictures/Umall_trat/trat_pic.png"
       ],
       "seed": 202608120803,
       "prefix": "sequence/egg_tart_family_3x5_native1080/clip-03"

@@ -198,17 +198,27 @@ def generated(cfg: dict, kind: str) -> pathlib.Path:
 def build_jobs(cfg: dict, prompts: dict[str, pathlib.Path]) -> list[dict]:
     product = product_path(cfg)
     chain = {
-        # Each asset sees the product plus whatever was already established,
-        # so the cook and kitchen carry through instead of being reinvented.
+        # Each asset sees whatever was already established, so the cook and the
+        # kitchen carry through instead of being reinvented.
+        #
+        # The product photo is deliberately NOT attached to every asset. Half the
+        # product photos are retail packs - a UMALL bag, a labelled tray, a Jongga
+        # jar - so they are themselves a flat composition of "brand mark plus
+        # product photograph". Feeding one into every generation taught the model
+        # that such an object belongs in the scene, and it kept obliging: printed
+        # cards carrying invented product shots, in ad after ad. The model was not
+        # inventing a logo, it was reproducing the picture we kept showing it.
+        #
+        # So the product goes only where the raw ingredient's identity actually
+        # has to be right, and never into the two that show cooked food.
         "character_scene": [product],
         "prep_state": [generated(cfg, "character_scene"), product],
         "cook_state": [generated(cfg, "character_scene"),
-                       generated(cfg, "prep_state"), product],
+                       generated(cfg, "prep_state")],
         "hero_state": [generated(cfg, "character_scene"),
-                       generated(cfg, "cook_state"), product],
+                       generated(cfg, "cook_state")],
     }
-    chain[EXTRA] = [generated(cfg, "character_scene"),
-                    generated(cfg, "cook_state"), product]
+    chain[EXTRA] = [generated(cfg, "character_scene"), generated(cfg, "cook_state")]
     jobs = []
     for kind in kinds_for(cfg):
         stem = f"{cfg['slug']}_{kind}"

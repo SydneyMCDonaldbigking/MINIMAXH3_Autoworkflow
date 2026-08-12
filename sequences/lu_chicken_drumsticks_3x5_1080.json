@@ -51,8 +51,7 @@
         "../outputs/reference_assets/16_卤鸡腿/lu_chicken_drumsticks_character_scene.png",
         "../outputs/reference_assets/16_卤鸡腿/lu_chicken_drumsticks_cook_state.png",
         "../outputs/reference_assets/16_卤鸡腿/lu_chicken_drumsticks_hero_state.png",
-        "../sample_pictures/卤鸡腿/鸡腿.png",
-        "../company_logo/AGO.png"
+        "../sample_pictures/卤鸡腿/鸡腿.png"
       ],
       "seed": 202608130503,
       "prefix": "sequence/lu_chicken_drumsticks_3x5_native1080/clip-03"

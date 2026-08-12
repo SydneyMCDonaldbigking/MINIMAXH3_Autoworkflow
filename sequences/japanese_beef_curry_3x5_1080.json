@@ -51,8 +51,7 @@
         "../outputs/reference_assets/17_日式咖喱牛肉/japanese_beef_curry_character_scene.png",
         "../outputs/reference_assets/17_日式咖喱牛肉/japanese_beef_curry_cook_state.png",
         "../outputs/reference_assets/17_日式咖喱牛肉/japanese_beef_curry_hero_state.png",
-        "../sample_pictures/日式咖喱牛肉i/beef_flank_clean.png",
-        "../company_logo/AGO.png"
+        "../sample_pictures/日式咖喱牛肉i/beef_flank_clean.png"
       ],
       "seed": 202608130603,
       "prefix": "sequence/japanese_beef_curry_3x5_native1080/clip-03"

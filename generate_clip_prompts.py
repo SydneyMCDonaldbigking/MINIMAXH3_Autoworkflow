@@ -226,7 +226,6 @@ def clip03(cfg: dict) -> str:
 <Picture 3> is {c.get('extra_subject') or c['cook_subject']}.
 <Picture 4> is the finished hero state, the target of this clip: {c['hero_subject']}.
 <Picture 5> is the product image: {c['product_desc']}.
-<Picture 6> is the ASIAN GROCER ONLINE / POWERED BY UMALL brand lockup, allowed only as a real printed card standing on the table, carrying that wordmark and nothing else: no photograph, no product image, no illustration, no other graphic.
 
 summary:
 reference generation. A five-second vertical premium cooking commercial, clip 03 of three, the closing beat for {c['dish_en']}. It continues from <Picture 1> and carries the dish from the vessel to the table, landing on the hero state of <Picture 4>. The product job is that the ingredient of <Picture 5> stays identifiable in its finished form. The clip ends on a still composed hero frame that can be held or trimmed in the edit.
@@ -238,14 +237,13 @@ retention_analysis:
 <Picture 3>: partially_preserved. The vessel travels to the table and stays recognisable, but leaves the heat.
 <Picture 4>: fully_preserved. The plating, the surface texture and the setting are the target of this clip.
 <Picture 5>: fully_preserved. The ingredient keeps its identity in cooked form.
-<Picture 6>: weak_reference. May appear once as a small printed card at the back of the table, never as an overlay.
 
 detailed_description:
 [Shot 1] Locked-off close food angle, 50mm feel, continuing directly from <Picture 1>. The vessel of <Picture 3> sits at the left of frame, the serving dish of <Picture 4> waiting at the right on the table. {c['plate']} The camera does not move at any point in this shot. The shot ends on the filled dish with individual pieces clearly visible.
 
 [Shot 2] At 00:01.600, the shot cuts to a close hero food angle over the dish, 50mm feel. {beat(c, "c3s2", "The hand of <Subject 1> enters from the top of frame holding a small dish of garnish, scatters it once across the surface in a single pass, and withdraws straight up out of frame. The garnish lands bright against the finished dish.")} Steam rises steadily behind. The setting of <Picture 4> is established around it. The camera pushes in toward the dish steadily and continuously across the whole shot, one single move that never pauses or reverses. The shot ends with the finished dish centred and sharp.
 
-[Shot 3] At 00:03.400, the shot cuts to a locked-off medium close-up of the table. The finished dish of <Picture 4> sits in the foreground, the small printed card of <Picture 6> well behind and out of focus, never beside or touching the dish and never part of the food styling, <Subject 1> present behind in soft focus.{" " + c["cook2_close"] if c.get("cook2_close") else ""} {c['final_lift']} The camera does not move and the focus does not rack. The shot ends with the piece held above the finished dish.
+[Shot 3] At 00:03.400, the shot cuts to a locked-off medium close-up of the table. The finished dish of <Picture 4> sits in the foreground with <Subject 1> present behind in soft focus. There is no printed card, no sign and no brand mark anywhere in this shot; the brand appeared in clip 01 and does not return.{" " + c["cook2_close"] if c.get("cook2_close") else ""} {c['final_lift']} The camera does not move and the focus does not rack. The shot ends with the piece held above the finished dish.
 
 Preserve across all shots: the identity of <Subject 1>, realistic hands, the ingredient of <Picture 5> in finished form, the plating and setting of <Picture 4>, and one coherent colour grade. Avoid {c['negatives_global']}, {NEG_COMMON}.
 
@@ -265,6 +263,9 @@ def build_sequence(cfg: dict) -> dict:
         a[EXTRA_KIND] = asset_rel(cfg, EXTRA_KIND)
         clip3_working = a[EXTRA_KIND]
     product = product_rel(cfg)
+    # Clip 01 only. "The physical sign must read in clip 1's opening reference
+    # only. Do not force logo/sign continuity in later cooking clips." Binding it
+    # to clip 03 too is what put a brand card beside the hero dish in every ad.
     logo = "../company_logo/AGO.png"
     return {
         "sequence_id": f"{slug}_3x5_native1080",
@@ -292,7 +293,7 @@ def build_sequence(cfg: dict) -> dict:
              "prompt_file": f"../prompts/h3_3x5_1080/{slug}_clip_03.md",
              "use_previous_last_frame_as_ref": True,
              "ref_images": [a["character_scene"], clip3_working,
-                            a["hero_state"], product, logo],
+                            a["hero_state"], product],
              "seed": cfg["seed_base"] + 3,
              "prefix": f"sequence/{slug}_3x5_native1080/clip-03"},
         ],

@@ -51,8 +51,7 @@
         "../outputs/reference_assets/03_番茄烧牛腩/tomato_beef_brisket_cook_character_scene.png",
         "../outputs/reference_assets/03_番茄烧牛腩/tomato_beef_brisket_braise_state.png",
         "../outputs/reference_assets/03_番茄烧牛腩/tomato_beef_brisket_finished_hero_state.png",
-        "../sample_pictures/AGO_番茄烧牛腩/beef.png",
-        "../company_logo/AGO.png"
+        "../sample_pictures/AGO_番茄烧牛腩/beef.png"
       ],
       "seed": 202608110103,
       "prefix": "sequence/tomato_beef_brisket_3x5_native1080/clip-03"

@@ -51,8 +51,7 @@
         "../outputs/reference_assets/10_宫保鸡丁/kungpao_chicken_character_scene.png",
         "../outputs/reference_assets/10_宫保鸡丁/kungpao_chicken_cook_state.png",
         "../outputs/reference_assets/10_宫保鸡丁/kungpao_chicken_hero_state.png",
-        "../sample_pictures/宫保鸡丁/鸡胸肉.png",
-        "../company_logo/AGO.png"
+        "../sample_pictures/宫保鸡丁/鸡胸肉.png"
       ],
       "seed": 202608120503,
       "prefix": "sequence/kungpao_chicken_3x5_native1080/clip-03"

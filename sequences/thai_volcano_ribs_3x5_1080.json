@@ -51,8 +51,7 @@
         "../outputs/reference_assets/07_泰式火山排骨/thai_volcano_ribs_character_scene.png",
         "../outputs/reference_assets/07_泰式火山排骨/thai_volcano_ribs_cook_state.png",
         "../outputs/reference_assets/07_泰式火山排骨/thai_volcano_ribs_hero_state.png",
-        "../sample_pictures/泰式火山排骨/ribs.png",
-        "../company_logo/AGO.png"
+        "../sample_pictures/泰式火山排骨/ribs.png"
       ],
       "seed": 202608120203,
       "prefix": "sequence/thai_volcano_ribs_3x5_native1080/clip-03"

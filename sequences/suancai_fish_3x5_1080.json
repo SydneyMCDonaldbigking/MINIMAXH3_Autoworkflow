@@ -51,8 +51,7 @@
         "../outputs/reference_assets/13_酸菜鱼/suancai_fish_character_scene.png",
         "../outputs/reference_assets/13_酸菜鱼/suancai_fish_cook_state.png",
         "../outputs/reference_assets/13_酸菜鱼/suancai_fish_hero_state.png",
-        "../sample_pictures/酸菜鱼/suancaiyu_clean.png",
-        "../company_logo/AGO.png"
+        "../sample_pictures/酸菜鱼/suancaiyu_clean.png"
       ],
       "seed": 202608130203,
       "prefix": "sequence/suancai_fish_3x5_native1080/clip-03"

@@ -10,4 +10,4 @@ COMPOSITION: vertical 9:16, medium shot from a slightly high three-quarter angle
 
 STYLE: photorealistic commercial food cinematography, high quality, realistic hands, natural textures, rich but clean colour grade.
 
-NEGATIVE: subtitles, title cards, watermarks, floating logo, any printed card, any brand text, invented lettering, fake app UI, distorted face, extra fingers, warped cookware, messy kitchen, no lettering, logos or model names on burners, stoves, pots, pans, appliances, packaging or containers, no readable text anywhere in frame, thick steak-cut beef, grey boiled meat, beef stewed in liquid, a thick gravy, sauce added before searing, a broken egg yolk.
+NEGATIVE: subtitles, title cards, watermarks, floating logo, any printed card, any brand text, invented lettering, fake app UI, distorted face, extra fingers, warped cookware, messy kitchen, no lettering, logos or model names on burners, stoves, pots, pans, appliances, packaging or containers, no readable text anywhere in frame, rare or pink beef, red meat centres, thick steak-cut beef, grey boiled meat, beef stewed in liquid, a thick gravy, sauce added before searing, a broken egg yolk.

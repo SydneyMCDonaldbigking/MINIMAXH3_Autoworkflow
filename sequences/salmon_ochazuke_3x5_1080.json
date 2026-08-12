@@ -51,8 +51,7 @@
         "../outputs/reference_assets/15_三文鱼茶泡饭/salmon_ochazuke_character_scene.png",
         "../outputs/reference_assets/15_三文鱼茶泡饭/salmon_ochazuke_cook_state.png",
         "../outputs/reference_assets/15_三文鱼茶泡饭/salmon_ochazuke_hero_state.png",
-        "../sample_pictures/三文鱼茶泡饭/三文鱼.png",
-        "../company_logo/AGO.png"
+        "../sample_pictures/三文鱼茶泡饭/三文鱼.png"
       ],
       "seed": 202608130403,
       "prefix": "sequence/salmon_ochazuke_3x5_native1080/clip-03"

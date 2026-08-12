@@ -51,8 +51,7 @@
         "../outputs/reference_assets/01_水煮牛肉卷/shuizhu_beef_roll_chef_character_scene.png",
         "../outputs/reference_assets/01_水煮牛肉卷/shuizhu_beef_roll_spicy_broth_state.png",
         "../outputs/reference_assets/01_水煮牛肉卷/shuizhu_beef_roll_finished_hero_state_v2.png",
-        "../sample_pictures/AGO_水煮牛肉卷(辣的）/肥牛卷.png",
-        "../company_logo/AGO.png"
+        "../sample_pictures/AGO_水煮牛肉卷(辣的）/肥牛卷.png"
       ],
       "seed": 202608090303,
       "prefix": "sequence/shuizhu_beef_roll_3x5_native1080/clip-03"

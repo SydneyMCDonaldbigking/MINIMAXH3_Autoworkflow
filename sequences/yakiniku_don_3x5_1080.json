@@ -49,10 +49,9 @@
       "use_previous_last_frame_as_ref": true,
       "ref_images": [
         "../outputs/reference_assets/18_日式烤肉饭/yakiniku_don_character_scene.png",
-        "../outputs/reference_assets/18_日式烤肉饭/yakiniku_don_cook_state.png",
+        "../outputs/reference_assets/18_日式烤肉饭/yakiniku_don_extra_state.png",
         "../outputs/reference_assets/18_日式烤肉饭/yakiniku_don_hero_state.png",
-        "../sample_pictures/日式烤肉饭配洋葱/和牛.png",
-        "../company_logo/AGO.png"
+        "../sample_pictures/日式烤肉饭配洋葱/和牛.png"
       ],
       "seed": 202608130703,
       "prefix": "sequence/yakiniku_don_3x5_native1080/clip-03"
