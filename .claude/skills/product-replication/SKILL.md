@@ -15,20 +15,57 @@ For original cooking ads see `dish-difficulty` instead. What the two share is on
 the H3 prompt format (`prompts/H3_OFFICIAL_PROMPT_SPEC.md`), the validator, and the
 runners.
 
-## The split that has to hold
+## What actually transfers: the shooting, not the set
 
-| Borrow from the template | Never inherit |
-| --- | --- |
-| set: backdrop sweep, surface, risers | their brand, logo, end card |
-| camera grammar: locked-off, one small push, hard cuts | their product, and every variant of it |
-| beat order: place, prove, land | their flavour semantics (their fruit, their tea, their claims) |
-| the *technique* of dressing the base with raw material | the specific raw material they dressed with |
+The thing worth copying is **how the template shoots a product**, not what its
+studio looked like. Shot types and their order, how the camera behaves, where the
+cuts fall, how the product enters and is turned to the lens, what kind of proof it
+stages. A viewer who has seen both should recognise the *filmmaking*, not the
+backdrop.
 
-That last row is the one that gets half-applied. The template dressed the foot of
-every shot with the raw material of that flavour - pears, limes, dry oolong leaves.
-Excluding their pears is correct. Leaving the surface bare is not: **borrow the
-technique and swap in our product's own raw material.** For a Ceylon straight tea
-that is dry black tea leaves, which is also what the label claims.
+| Copy this | Approximate this | Never inherit |
+| --- | --- | --- |
+| shot type per beat: wide establish, macro insert, packshot | palette family, roughly | their brand, logo, end card |
+| camera behaviour: locked-off, at most one small push, never stacked | surface and riser material | their product and every variant |
+| where the cuts fall and what each cut buys | prop density | their flavour semantics, their claims |
+| how the product enters frame and turns to the lens | lighting direction | the specific raw material they dressed with |
+| the *category* of proof it stages: ice, pour, condensation | negative space for post text | their exact colours |
+| the technique of dressing the base with the product's raw material | | |
+
+**The set does not have to match.** Getting the backdrop within a few RGB points
+of the template is over-fitting: it costs iterations and buys nothing a viewer
+notices. Land in the right family - a pale studio sweep, a muted surface - and
+move on. What a viewer registers is that the bottle was placed by a hand, held
+still, cut to hard, and landed on a readable packshot.
+
+Two rows deserve their own note.
+
+**The proof mechanic is a category, not a prop.** The template proved its drink
+with tongs, ice, a pour and condensation. Copy that *kind* of proof for a cold
+drink. Do not copy its lemon.
+
+**The base dressing is a technique with our own ingredient.** The template dressed
+the foot of every shot with the raw material of that flavour - pears, limes, dry
+oolong leaves. Excluding their pears is correct; leaving the surface bare is not.
+Swap in our product's own raw material. For a Ceylon straight tea that is dry
+black tea leaves, which is also what the label claims.
+
+## Two rules worth stealing from elsewhere
+
+From the H3 community's own reading of the official guidance, and both are things
+we had been doing by instinct without writing down:
+
+**Every sentence must bind to one of five things**: an identity, a spatial
+relationship, a state change, a sound event, or a reference constraint. A sentence
+that binds to none of them is decoration and should be cut. This is a sharper test
+than "can you shoot it" because it can be applied sentence by sentence.
+
+**Cut for new information; move the camera to keep one composition.** We hard-cut
+everything by convention and have never written down why. The rule is: if the next
+beat introduces something the viewer has not seen, cut to it. If it develops what
+is already on screen, hold the frame and use focus, blocking or a small move
+instead. A cut that shows the same thing again wastes one of only two cuts a
+five-second clip has.
 
 ## Get the reference images out of the template
 
@@ -83,6 +120,12 @@ of red** and turned a muted studio surface into a green screen.
 The lesson is not "avoid saturated". It is that **intensity adjectives - saturated,
 deep, rich, vivid, bright, pale, soft - are numbers, and if you have not looked at
 the number you are guessing.** Sampling the reference costs one line of Pillow.
+
+**Sample to make your wording honest, not to match the template.** The goal is not
+RGB(181,213,147); it is to avoid writing a word that lands 130 points of red away
+from anything you meant. A pale muted surface is the target, and any pale muted
+surface will do. Chasing the template's exact swatch is over-fitting - it costs
+iterations and no viewer can tell.
 
 ### And the reference beats the adjective anyway
 

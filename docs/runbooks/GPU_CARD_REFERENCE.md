@@ -183,3 +183,33 @@ Windows 上 Python 的文本模式把 `\n` 写成了 `\r\n`，远端 bash 收到
 **三次都是拿间接信号代替直接验证。** 唯一有效的做法是每一步都去看那个东西本身：
 实例状态看 Instances 页，装没装成看 `ls` 和 `find`，torch 能不能用就真去
 `import torch; torch.cuda.is_available()`。退出码、页面横幅、进度条都不算数。
+
+## 也要验收权重，不只是卡
+
+`check_bf16_mma.sh` 验收的是这张卡算得对不对。**权重本身有没有下坏，我们从来没查过。**
+63 GB 落到一台没用过的机器上，一个静默截断或损坏的文件不会报错——它表现为几分钟付费
+采样之后出来一条坏片，和八月那次硬件问题的失败形态一模一样。
+
+```bash
+bash server_scripts/check_model_integrity.sh          # 对照 manifest 校验
+bash server_scripts/check_model_integrity.sh --write  # 在已知良好的机器上生成 manifest
+```
+
+manifest 是 `server_scripts/model_manifest.sha256`，**要在一台产出已经过目验收的机器上
+生成一次然后提交**。在它存在之前脚本直接退出，不假装验证过。
+
+`h3_server_setup.py` 已经把这步接成 `[7/8]`。
+
+一条不显然的理由：mismatch 不是警告。权重和本仓库所有测量所依据的那份不同，
+**下游任何数字都不再可比** ——471s、320s、-11.4% 全部作废。
+
+### 顺带修掉的一个 bug
+
+`h3_server_setup.py` 的 `[7/7] Import check` 一直在报
+`here-document delimited by end-of-file` 加 `IndentationError`。原因是整个远端脚本是
+一个 `dedent()` 过的 f-string，但插值块从第 0 列开始，`dedent` 找不到公共前缀因此什么
+都没去掉——**每一行都留着八个空格，包括 heredoc 的终止符和 Python 正文**。改成单行
+`python -c` 就没有终止符也没有需要缩进的正文了。
+
+这个 bug 无害（只是自检步骤失败），但它是今天 CRLF 那条教训的同一类：**远端脚本的
+空白字符会静默改变语义**。
