@@ -1,0 +1,19 @@
+{
+  "rehearsal": true,
+  "summary": "示例彩排结果：这里展示的是内置西瓜果饮样例视频，用于无成本回放用户确认 brief 后的结果体验。本次彩排不会调用 MiniMax H3 或 ComfyUI。",
+  "provider": "minimax_h3_rehearsal",
+  "h3_run_id": "rehearsal-example-no-gpu-run",
+  "h3_clip_paths": [
+    "./assets/examples/rehearsal_result_video.mp4"
+  ],
+  "rewritten_video_url": "",
+  "rewritten_video_local_path": "./assets/examples/rehearsal_result_video.mp4",
+  "preview_image_path": "./assets/examples/rehearsal_result_video.mp4",
+  "manual_review_checklist": [
+    "先看内置真实西瓜果饮样例视频，再看任务信息。",
+    "确认产品身份来自商品图里的西瓜果饮，而不是模板视频里的葡萄饮料。",
+    "确认没有字幕、价格标签、购物按钮、贴纸或模板品牌残留。",
+    "确认 clip 01 有明确 hook，clip 02-03 延展了产品质感、使用场景和视觉收尾。",
+    "确认 H3 包会以独立片段方式检查后再进入手动剪辑。"
+  ]
+}

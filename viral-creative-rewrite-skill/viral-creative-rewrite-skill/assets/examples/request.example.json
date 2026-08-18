@@ -1,0 +1,23 @@
+{
+  "viral_video": "./assets/examples/viral_video.mp4",
+  "source_image": "./assets/examples/source_product.jpg",
+  "viral_media_type": "video",
+  "source_media_type": "image",
+  "ui_language": "auto",
+  "target_audience": "female_20_30",
+  "objective": "improve_ctr",
+  "product_context": "西瓜果饮广告，核心卖点是新鲜清爽、夏日解暑、真实果肉感。最终输出必须保持与商品图相同的西瓜饮品产品身份。",
+  "extra_constraints": [
+    "保留原产品身份",
+    "不要夸大功效",
+    "输出为三段独立5秒MiniMax H3片段",
+    "最终生成视频不能出现任何字幕或屏幕文字",
+    "最终输出的视频产品必须与商品图完全一致，不能继承viral_video的产品身份"
+  ],
+  "output_ratio": "9:16",
+  "output_resolution": "1080x1920_native",
+  "generate_audio": false,
+  "h3_server": "http://127.0.0.1:8189",
+  "h3_reference_images": [],
+  "h3_no_concat": true
+}
