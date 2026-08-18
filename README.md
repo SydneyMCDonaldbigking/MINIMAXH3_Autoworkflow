@@ -27,6 +27,10 @@ before the route-specific documents below.
 - `image2_first_frame.py`: OpenRouter GPT Image 2 first-frame runner.
 - `cluster_runner.py`: local SSH cluster dispatcher for batch H3 jobs.
 - `h3_sequence_runner.py`: runs 3x5s MiniMax H3 clips sequentially and stitches them.
+- `h3_accel_shim.py`: stand-in for `h3_runner.py` that turns Sage attention on for a whole
+  sequence. Pass it as `h3_sequence_runner.py --runner h3_accel_shim.py`; neither stable
+  runner is modified. Worth 11.4% per clip on sm_89+, measured. Needs SageAttention 2.x
+  built from source - PyPI ships 1.x, which lacks the entry points the node names.
 - `generate_dish_assets.py`: generates the four (or five) reference images for a dish from its
   config, chained so the cook and kitchen carry across. Replaces the per-dish PowerShell
   scripts now in `scripts/superseded/`.

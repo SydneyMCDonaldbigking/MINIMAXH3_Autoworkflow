@@ -56,8 +56,8 @@ flag.
 1. Sigma shift at a value other than 12, and why 3.0 crashes the sampler.
 2. The full Unified chain, after installing `ComfyUI-SolAttn_triton`.
 3. Whether Sage attention holds up across all three clip shapes, not just clip 01.
-4. Wiring Sage into `h3_sequence_runner.py`, which still calls `h3_runner.py` and
-   therefore produces at 471 s/clip rather than 401 s.
+4. ~~Wiring Sage into `h3_sequence_runner.py`~~ - **done 2026-08-18 without
+   touching it**, see below.
 
 ---
 
@@ -237,3 +237,43 @@ seed。** 或者在每组之间重启 ComfyUI 清缓存——但换 seed 更便�
 
 判断依据很简单：**一个 5 秒 clip 在 H100 上不可能少于 5 分钟。** 任何远低于此的
 "运行时间"都是缓存，不是加速。
+
+
+## Wiring acceleration into a whole sequence, without touching the stable runners
+
+`h3_sequence_runner.py` already accepts `--runner`, so it can be pointed at any
+script that speaks h3_runner's command line. What it does **not** do is forward
+extra flags: `build_h3_command` emits mode, size, steps, seed, turbo and the
+references, and stops there.
+
+That matters more than it looks. Pointing `--runner` straight at
+`h3_accel_runner.py` runs the accelerated runner **without `--accel`**. Every
+clip comes out normal, at exactly baseline speed, and nothing anywhere says the
+acceleration was not applied. It is the same silent no-op as the sigma shift that
+was already sitting at its own default: an honest measurement of nothing.
+
+`h3_accel_shim.py` is the fix. It takes whatever the sequence runner passes,
+appends `--accel` (and `--accel-set enable_sol_attn=false` unless
+`H3_ACCEL_SOL=1`), and delegates. Neither `h3_runner.py` nor
+`h3_sequence_runner.py` changes:
+
+```powershell
+python h3_sequence_runner.py run `
+  --sequence <sequence.json> `
+  --runner h3_accel_shim.py `
+  --output-root sequence_outputs --run-id <id>
+```
+
+**Verify the graph before spending anything.** `--save-api-json --no-submit`
+needs no GPU and answers the only question that matters:
+
+```text
+nodes: 17
+JR_H3_UnifiedAcceleration (900)
+  sage_attention  = sageattn_qk_int8_pv_fp8_cuda++
+  enable_sol_attn = False
+  tau             = 1.3
+chain: MiniMaxH3TurboLoRA(18) -> JR_H3_UnifiedAcceleration(900) -> BasicGuider(16)
+```
+
+If node 900 is absent, acceleration is off no matter what the wall clock says.

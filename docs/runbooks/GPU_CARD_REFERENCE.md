@@ -111,9 +111,17 @@ including after a stop/start of the same instance.
 That last clause is not caution, it is a measurement. On 2026-08-12 the H100 was
 stopped and restarted, and came back with the same instance id, the same disk and
 all 60 GB of models intact - but a different GPU. The UUID went from
-`GPU-ffb151f0-...` to `GPU-c945196c-...`. Vast reassigns the physical card on
-restart, so "same machine, already tested" is false, and only reading the UUID
-reveals it. Record the UUID every time and compare it to the last one.
+`GPU-ffb151f0-...` to `GPU-c945196c-...`, so "same machine, already tested" was
+false, and only reading the UUID revealed it.
+
+**It does not happen every time, which is exactly why you have to read it.** On
+2026-08-18 the H100 NVL was stopped and restarted and came back on the *same*
+card, `GPU-95575316-...` both times, with the models and
+the compiled SageAttention still in place. Two restarts, two different outcomes.
+A rule of "restart always reassigns" would have wasted an acceptance run here,
+and a rule of "restart never reassigns" cost two days in August. Neither rule is
+the point: **record the UUID every time and compare it to the last one.** If it
+changed, re-run the acceptance. If it did not, the previous PASS still stands.
 
 ## 开机那一小时真正花钱的地方（2026-08-18 实测）
 
