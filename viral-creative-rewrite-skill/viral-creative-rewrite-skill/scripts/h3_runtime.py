@@ -184,6 +184,304 @@ def _condense(items: list[str], limit: int = 560) -> str:
     return text
 
 
+def _clip_product_picture_index(refs: list[Path], *, carried_frame: bool) -> int:
+    return (2 if carried_frame else 1) + len(refs) - 1
+
+
+def _reference_transfer_scope(ref: Path) -> tuple[str, str]:
+    name = ref.stem.lower()
+    if any(token in name for token in ("glass", "ice", "pour", "stream", "liquid", "splash", "texture")):
+        return (
+            "the tumbler or vessel shape, ice placement, liquid stream geometry, splash timing, and glass refraction",
+            "the source product identity, brand text, label design, background colour, darker liquid colour, fruit props, and framing crop",
+        )
+    if any(token in name for token in ("table", "surface", "background", "backdrop", "board", "riser", "scene", "set")):
+        return (
+            "the tabletop colour, support-surface material, horizon line, light direction, shadow softness, and clean studio spacing",
+            "any products, labels, overlay text, fruit props, signage, platform UI, and camera framing that conflicts with the target clip",
+        )
+    if any(token in name for token in ("hand", "grip", "hold", "person", "character", "model")):
+        return (
+            "the hand pose, grip height, entry direction, human scale, and the relationship between hand and product",
+            "the person's identity, face, clothing, background, product brand, label text, and any unrelated props",
+        )
+    if any(token in name for token in ("final", "hero", "packshot", "cta", "end")):
+        return (
+            "the final composition spacing, product-to-prop relationship, stable endpoint pose, and clean negative space",
+            "the source brand, source product identity, source flavour story, overlay text, logo card, price, and CTA UI",
+        )
+    return (
+        "the composition geometry, physical action state, scale relationship, light direction, and material surface relationship",
+        "the source product identity, brand, label text, overlay text, unrelated props, background colour, and any product-specific claim",
+    )
+
+
+def _ingredient_grounding(plan: RewritePlan, request: RewriteRequest) -> str:
+    raw_items = [
+        *getattr(plan.prompt_package, "must_keep", []),
+        *plan.rewrite_strategy.keep_from_source,
+        request.product_context,
+    ]
+    blocked = ("字幕", "文字", "ui", "price", "tag", "identity", "包装", "label", "shape")
+    candidates: list[str] = []
+    for item in raw_items:
+        text = re.sub(r"\s+", " ", str(item).strip())
+        if not text or any(token in text.lower() for token in blocked):
+            continue
+        candidates.append(text.rstrip("。.;"))
+        if len(candidates) >= 3:
+            break
+    if candidates:
+        return (
+            "Ground the base with the product's own visible ingredient/material cues from the source image: "
+            + "; ".join(candidates)
+            + ". These cues sit low on the surface as product grounding, not extra flavours or a new product story."
+        )
+    return (
+        "Ground the base with the product's own visible ingredient or material cue from the source image. "
+        "If no separate ingredient is visible, keep the surface bare except for one neutral material cue already implied by the product."
+    )
+
+
+def _frame_inventory(plan: RewritePlan, request: RewriteRequest, product_ref: str) -> str:
+    return (
+        f"Everything in frame across all three shots: one hero product from {product_ref}, one stable support surface, "
+        f"one clean background, one adult hand when needed, one proof vessel/use object when called for, "
+        f"and the product's own ingredient/material grounding. The same object positions continue shot to shot; unlisted areas stay bare. "
+    )
+
+
+def _split_action_chunks(items: list[str]) -> list[str]:
+    chunks: list[str] = []
+    for item in items:
+        text = re.sub(r"\s+", " ", item.strip())
+        if not text:
+            continue
+        parts = [part.strip(" ,.;，。；") for part in re.split(r"[。；;，]+", text) if part.strip(" ,.;，。；")]
+        chunks.extend(parts or [text])
+    return chunks
+
+
+CAMERA_BEAT_TOKENS = (
+    "镜头", "推近", "拉远", "特写", "俯拍", "仰拍", "平视", "近景", "中景", "远景",
+    "微距", "构图", "景别", "拍摄", "camera", "push", "pull", "close-up",
+    "macro", "tilt", "pan", "dolly", "rack focus", "framing", "composition",
+)
+
+ACTION_BEAT_TOKENS = (
+    "手", "倒", "倒入", "倾倒", "注入", "放", "切", "拿", "握", "拧", "打开",
+    "开启", "举", "夹", "滴", "淋", "撒", "滚落", "落", "进入", "退出", "摆",
+    "旋转", "端", "饮用", "喝", "吞咽", "pour", "place", "drop", "lift",
+    "hold", "cut", "grab", "twist", "open", "set", "rotate", "enter", "exit",
+)
+
+RESULT_BEAT_TOKENS = (
+    "状态", "结果", "呈现", "显示", "保持", "可见", "收尾", "定格", "质感",
+    "液体", "水珠", "冰块", "果肉", "冷凝", "通透", "光泽", "成品", "悬浮",
+    "完成", "final", "result", "visible", "texture", "state", "finish", "endpoint",
+)
+
+
+def _contains_any(text: str, tokens: tuple[str, ...]) -> bool:
+    lower = text.lower()
+    return any(token.lower() in lower for token in tokens)
+
+
+def _clip_shot_beats(group: list[str]) -> dict[str, str]:
+    chunks = _split_action_chunks(group)
+    action: list[str] = []
+    camera: list[str] = []
+    result: list[str] = []
+    detail: list[str] = []
+    for chunk in chunks:
+        has_action = _contains_any(chunk, ACTION_BEAT_TOKENS)
+        has_result = _contains_any(chunk, RESULT_BEAT_TOKENS)
+        has_camera = _contains_any(chunk, CAMERA_BEAT_TOKENS)
+        if has_action:
+            action.append(chunk)
+        elif has_result:
+            result.append(chunk)
+        elif has_camera:
+            camera.append(chunk)
+        else:
+            detail.append(chunk)
+    setup = action[0] if action else (detail[0] if detail else "")
+    hand_action = action[1] if len(action) > 1 else ""
+    result_beat = result[0] if result else (action[-1] if len(action) > 1 else (detail[-1] if detail else ""))
+    return {
+        "setup": _condense([setup], limit=260) if setup else "",
+        "hand_action": _condense([hand_action], limit=260) if hand_action else "",
+        "camera": _condense(camera[:1], limit=260) if camera else "",
+        "result": _condense([result_beat], limit=320) if result_beat else "",
+    }
+
+
+def _model_facing_constraints(items: list[str]) -> str:
+    blocked = (
+        "模板", "viral", "VIRAL", "用户", "agent", "Agent", "自动", "默认",
+        "除非", "口播", "字幕逻辑", "总时长", "三段5秒", "product category",
+        "main value", "brand", "shopping",
+    )
+    constraints: list[str] = []
+    seen: set[str] = set()
+    for item in items:
+        for part in re.split(r"[；;]\s*", str(item)):
+            text = re.sub(r"\s+", " ", part.strip())
+            if not text or any(token in text for token in blocked):
+                continue
+            key = text.lower()
+            if key not in seen:
+                seen.add(key)
+                constraints.append(text)
+            if len(constraints) >= 4:
+                return "; ".join(constraints)
+    return "; ".join(constraints)
+
+
+def _model_facing_preserve(items: list[str], fallback: str) -> str:
+    blocked = (
+        "模板", "viral", "VIRAL", "用户", "agent", "Agent", "字幕", "文字", "UI",
+        "ui", "输出", "最终", "总时长", "三段", "source", "不能", "不得", "不要",
+        "无人物", "无手部", "口播", "默认", "除非",
+    )
+    keep: list[str] = []
+    seen: set[str] = set()
+    for item in items:
+        for part in re.split(r"[；;]\s*", str(item)):
+            text = re.sub(r"\s+", " ", part.strip())
+            if not text or any(token in text for token in blocked):
+                continue
+            key = text.lower()
+            if key not in seen:
+                seen.add(key)
+                keep.append(text)
+            if len(keep) >= 6:
+                return "; ".join(keep)
+    return "; ".join(keep) or fallback
+
+
+def _camera_sentence(camera_beat: str, fallback: str) -> str:
+    if not camera_beat:
+        return fallback
+    return (
+        f"Camera/framing follows this beat: {camera_beat}. "
+        "Treat it as the only camera or framing instruction for this shot; add no extra pan, tilt, rack focus, or drift."
+    )
+
+
+def _h3_shots_for_clip(
+    *,
+    clip_index: int,
+    product_ref: str,
+    product: str,
+    role: str,
+    shot_beats: dict[str, str],
+) -> tuple[str, str, str]:
+    setup_beat = shot_beats.get("setup", "")
+    hand_beat = shot_beats.get("hand_action", "")
+    camera_beat = shot_beats.get("camera", "")
+    result_beat = shot_beats.get("result", "")
+    if clip_index == 1:
+        setup_sentence = f"The action translates this template beat into one physical movement: {setup_beat}. " if setup_beat else ""
+        shot_1 = (
+            f"[Shot 1] Medium vertical commercial shot, 50mm feel. Establish {product} through the {role} beat. "
+            f"The single hero product from {product_ref} begins just outside the left edge in one adult hand, held upright around its lower third or label side. "
+            "The hand carries that same product into the centre of the stable support surface, sets it down squarely on the landing spot, and withdraws to the left out of frame. "
+            f"{setup_sentence}"
+            + _camera_sentence(camera_beat, "The camera performs one continuous slow push-in of about 4 cm across the whole shot, never pausing and never reversing.")
+            + " "
+            "The shot ends with the product standing alone, front-readable, on the surface."
+        )
+        detail_sentence = f"The concrete product-detail result for this shot is: {result_beat}. " if result_beat else ""
+        shot_2 = (
+            "[Shot 2] At 00:01.600, cut to a medium close-up product angle. "
+            f"The same product remains on the same landing spot from shot 1, and the same hand re-enters from the lower right only to rotate the product a few degrees toward camera. "
+            f"{detail_sentence}"
+            "The support surface, background, and any low ingredient/material grounding do not move. "
+            "The hand exits along the same lower-right path after the front face is readable, leaving the product upright and centred. "
+            "The camera is locked-off with shallow focus; the proof action is the controlled reveal of the exact source-product identity, not a new object or a second SKU. "
+            "The shot ends with the hand gone and the product still in the same physical place."
+        )
+        shot_3 = (
+            "[Shot 3] At 00:03.400, cut to the endpoint composition for this five-second clip. "
+            f"The same product from {product_ref} has not changed identity or position; it stands on the support surface as the packshot anchor. "
+            "One proof vessel or small material cue sits low and secondary beside it only if it was already introduced in shot 2. "
+            f"{detail_sentence}"
+            "The upper frame stays clean for later editing, while the product front, silhouette, colour, and material remain readable. "
+            "The camera does not move and the focus does not rack. "
+            "The shot ends in a stable product-visible handoff frame for clip 02."
+        )
+        return shot_1, shot_2, shot_3
+
+    if clip_index == 2:
+        setup_sentence = f"The concrete setup beat is: {setup_beat}. " if setup_beat else ""
+        shot_1 = (
+            f"[Shot 1] Medium-close vertical product-proof setup, 50mm to 70mm feel. The single product from {product_ref} starts standing on the support surface behind the proof vessel and stays there for this whole shot. "
+            "One adult hand or tool enters from the upper right and performs the setup movement at the vessel. "
+            f"{setup_sentence}"
+            "The product remains visible as the background anchor, the surface grounding remains low and still, and no second product appears in the foreground. "
+            "Camera locked-off, no pan. The shot ends with the product still standing behind the vessel and the proof vessel ready for action."
+        )
+        hand_sentence = (
+            f"The hand performs exactly this proof action, start to finish: {hand_beat}. "
+            if hand_beat
+            else "The hand performs one simple product-proof action that completes the setup, start to finish. "
+        )
+        shot_2 = (
+            "[Shot 2] At 00:01.600, cut to a tight close-up action insert. "
+            f"That same product has now been lifted off the support surface by one adult hand and enters from the upper right, so the surface behind the vessel is physically empty where it stood in shot 1. "
+            f"{hand_sentence}"
+            "The motion is directed down toward the vessel or use object. "
+            "The product label or defining front area flashes briefly so the viewer knows this is the same source product. "
+            + _camera_sentence(camera_beat, "Camera locked, shallow focus, no drift.")
+            + " The shot ends with the action completed and the product still in that same hand."
+        )
+        result_sentence = f"The vessel now shows this completed material result: {result_beat}. " if result_beat else "The vessel now shows the completed material result from shot 2. "
+        shot_3 = (
+            "[Shot 3] At 00:03.400, cut to the result state. "
+            f"The one product from {product_ref} has been set back down on the same support surface behind or beside the proof vessel, restoring the single-product layout from shot 1. "
+            f"{result_sentence}"
+            "The grounding ingredient/material cue stays low around the base and does not become a new flavour, label, or product. "
+            "The camera does not move and the focus settles on the result plus product. "
+            "The shot ends with a clean product-visible handoff frame for clip 03."
+        )
+        return shot_1, shot_2, shot_3
+
+    setup_sentence = f"The concrete preparation beat is: {setup_beat}. " if setup_beat else ""
+    shot_1 = (
+        f"[Shot 1] Tight vertical close-up, 70mm product-detail feel. The single hero product from {product_ref} begins in one adult hand near the centre-right of frame, already lifted from the support surface. "
+        "The hand grips the product at a natural use point, performs the final-use preparation, and keeps the front identity partly readable. "
+        f"{setup_sentence}"
+        "The support surface below remains clean, with only the product's own grounding cue and the proof vessel waiting in its fixed position. "
+        "Camera locked-off, shallow focus. The shot ends with the product still in hand, ready to create the final result."
+    )
+    hand_sentence = (
+        f"One continuous physical action completes this final material action: {hand_beat}. "
+        if hand_beat
+        else "One continuous physical action completes the final material result. "
+    )
+    shot_2 = (
+        "[Shot 2] At 00:01.600, cut to a low close-up action insert. "
+        f"The same product moves from the hand position in shot 1 into the upper-right action angle, aimed toward the same proof vessel or use object already waiting on the surface. "
+        f"{hand_sentence}"
+        "There is no extra handoff and no second product. "
+        "The surface point where the product will later stand is visible and empty during the action, making the single-object movement clear. "
+        + _camera_sentence(camera_beat, "Camera locked, one action only.")
+        + " The shot ends with the final result visible in the vessel or use area."
+    )
+    result_sentence = f"The concrete final memory beat is: {result_beat}. " if result_beat else ""
+    shot_3 = (
+        "[Shot 3] At 00:03.400, cut to the final hero packshot. "
+        f"The same product from {product_ref} has been placed back onto the support surface next to the completed proof result. "
+        "Its front identity faces camera, the result object sits beside it, and the grounding ingredient/material cue remains low at the base. "
+        f"{result_sentence}"
+        "The upper frame stays clean for later editing text, but no text is generated. "
+        "The camera does not move, the focus does not rack, and the product remains visible until the final frame. "
+        "The shot ends as a stable product-memory frame, not a fade or empty scene."
+    )
+    return shot_1, shot_2, shot_3
+
+
 def _reference_declarations(refs: list[Path], *, carried_frame: bool) -> tuple[str, str]:
     declarations: list[str] = []
     retention: list[str] = []
@@ -199,9 +497,13 @@ def _reference_declarations(refs: list[Path], *, carried_frame: bool) -> tuple[s
                 f"<Picture {idx}>: fully_preserved. Preserve the product type, shape, packaging, color, label placement, material, and visible design details."
             )
         else:
-            declarations.append(f"<Picture {idx}> is a supporting H3 reference image for scene, character, hand, action, or product-state continuity: {ref.name}.")
+            transfers, rejects = _reference_transfer_scope(ref)
+            declarations.append(
+                f"<Picture {idx}> is a supporting H3 reference image: {ref.name}. "
+                f"Transfer only {transfers}. Do not transfer {rejects}."
+            )
             retention.append(
-                f"<Picture {idx}>: attribute_transfer. Use only the relevant scene, character, action-state, lighting, or material attributes; do not invent text."
+                f"<Picture {idx}>: attribute_transfer. Transfer only {transfers}. Do not transfer {rejects}."
             )
     return "\n".join(declarations), "\n".join(retention)
 
@@ -219,26 +521,21 @@ def _h3_prompt_for_clip(
     group = groups[clip_index - 1]
     role = _clip_role(clip_index)
     strategy = plan.rewrite_strategy.strategy_summary
-    must_keep = "; ".join(item for item in plan.rewrite_strategy.keep_from_source if item.strip()) or request.product_context or "the source product identity"
-    borrow = "; ".join(item for item in plan.rewrite_strategy.borrow_from_viral if item.strip()) or "the template's hook, pacing, camera rhythm, and satisfaction structure"
-    risks = "; ".join(item for item in plan.rewrite_strategy.risk_controls if item.strip())
-    base_action = _condense(group)
     product = request.product_context or "the source product"
-    shot_1 = (
-        f"[Shot 1] Medium vertical commercial shot, 50mm feel. Establish {product} through the {role} beat. "
-        f"Start with the reference product readable, the scene stable, and the template function visible. {base_action} "
-        "The camera is locked-off or performs one slow push-in of about 4 cm, never both."
+    must_keep = _model_facing_preserve(plan.rewrite_strategy.keep_from_source, product)
+    borrow = "; ".join(item for item in plan.rewrite_strategy.borrow_from_viral if item.strip()) or "the template's hook, pacing, camera rhythm, and satisfaction structure"
+    model_constraints = _model_facing_constraints(plan.rewrite_strategy.risk_controls)
+    shot_beats = _clip_shot_beats(group)
+    product_ref = f"<Picture {_clip_product_picture_index(refs, carried_frame=carried)}>"
+    shot_1, shot_2, shot_3 = _h3_shots_for_clip(
+        clip_index=clip_index,
+        product_ref=product_ref,
+        product=product,
+        role=role,
+        shot_beats=shot_beats,
     )
-    shot_2 = (
-        "[Shot 2] At 00:01.600, cut to a medium close-up or close food/product angle. "
-        "Show one physical proof action only: a pour, lift, texture reveal, hand placement, use motion, or product-state change that completes inside this shot. "
-        "Keep the product identity from the source image sharp and consistent. The camera does not drift."
-    )
-    shot_3 = (
-        "[Shot 3] At 00:03.400, cut to the endpoint composition for this five-second clip. "
-        "Finish with a clean product-visible handoff: the product, its result, or its use state lands in a readable final composition. "
-        "The camera does not move and the focus does not rack."
-    )
+    frame_inventory = _frame_inventory(plan, request, product_ref)
+    ingredient_grounding = _ingredient_grounding(plan, request)
     return f"""subject_definitions:
 {declarations}
 
@@ -255,7 +552,11 @@ detailed_description:
 
 {shot_3}
 
-Preserve across all shots: {must_keep}. Avoid template product leakage, fake labels, invented text, subtitles, price tags, shopping UI, watermarks, extra fingers, warped hands, camera shake, scene jumps, and product identity drift. {risks}
+{frame_inventory}
+
+{ingredient_grounding}
+
+Preserve across all shots: {must_keep}. Avoid template product leakage, fake labels, invented text, subtitles, price tags, shopping UI, watermarks, extra fingers, warped hands, camera shake, scene jumps, and product identity drift. {model_constraints}
 
 overall_soundscape:
 Silent delivery is expected, but describe physical commercial sound for motion guidance: clean product handling, soft ambience, texture sounds, and a clear impact at the endpoint of each action.
