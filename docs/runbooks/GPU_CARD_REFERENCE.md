@@ -6,20 +6,28 @@ turbo. Nothing is taken from a spec sheet or a vendor claim.
 
 ## The table to read before renting
 
-| | A100 SXM4 40GB | A100 PCIE 40GB | H100 SXM 80GB |
-| --- | --- | --- | --- |
-| Measured | 2026-08-10 | 2026-08-11 | 2026-08-11 |
-| Rented at | $0.713/hr | $0.836/hr | $2.311/hr |
-| One 5s clip, 8 steps | 780 s | 907 s | **471 s** |
-| **$ per clip** | **$0.154** | $0.210 | $0.302 |
-| One 15s ad, 3 clips + stitch | ~39 min | ~24 min* | **~24 min** |
-| Power limit | 400 W | 250 W | 700 W |
-| Observed draw | - | 247 W, capped | 333 W idle-ish, 606-700 W under Sage |
-| VRAM peak at 1088x1920 | ~30 GB | 33.1 GB | 33.1 GB |
-| Sage attention fp8 | **impossible**, sm_80 | **impossible**, sm_80 | **yes**, 401 s (-15%) |
+| | A100 SXM4 40GB | A100 PCIE 40GB | H100 SXM 80GB | H100 NVL 94GB |
+| --- | --- | --- | --- | --- |
+| Measured | 2026-08-10 | 2026-08-11 | 2026-08-11 | 2026-08-18 |
+| Rented at | $0.713/hr | $0.836/hr | $2.311/hr | $2.712/hr |
+| One 5s clip, 8 steps | 780 s | 907 s | **471 s** | 361 s ‡ |
+| **$ per clip** | **$0.154** | $0.210 | $0.302 | $0.272 |
+| One 15s ad, 3 clips + stitch | ~39 min | ~24 min † | **~24 min** | ~18 min |
+| Power limit | 400 W | 250 W | 700 W | 400 W |
+| Observed draw | - | 247 W, capped | 333 W idle-ish, 606-700 W under Sage | 394 W under Sage |
+| VRAM peak at 1088x1920 | ~30 GB | 33.1 GB | 33.1 GB | 50 GB nvidia-smi ¶ |
+| Sage attention fp8 | **impossible**, sm_80 | **impossible**, sm_80 | **yes**, 401 s (-15%) | **yes**, 320 s (-11.4%) |
 
-\* the A100 PCIE figure is for the whole ad including model load and stitching,
-which is why it is not simply three times the clip time.
+† the whole ad including model load and stitching, which is why it is not
+simply three times the clip time.
+
+‡ **The H100 NVL clip is not the same clip as the other three columns.** It is
+`kirin_straight_tea_clip_01`, two references, seed `2608189001`, model already
+warm. Compare its 361 s only against its own 320 s sage run. Comparing it to the
+471 s beside it would be comparing two different workloads.
+
+¶ nvidia-smi total, which includes the allocator's cache; the other columns are
+torch-reported peaks. Not the same metric, do not read a regression into it.
 
 ## How to choose
 
@@ -106,3 +114,64 @@ all 60 GB of models intact - but a different GPU. The UUID went from
 `GPU-ffb151f0-...` to `GPU-c945196c-...`. Vast reassigns the physical card on
 restart, so "same machine, already tested" is false, and only reading the UUID
 reveals it. Record the UUID every time and compare it to the last one.
+
+## 开机那一小时真正花钱的地方（2026-08-18 实测）
+
+租一台机器到能跑第一条片子，钱不是花在跑图上。这天从点 RENT 到模型就位，
+GPU 时间大约 25 分钟，其中生成时间是 0。下面每一条都让那 25 分钟变长过。
+
+### 镜像 tag 要对得上 compute capability
+
+连点三次 RENT 全失败，红色 toast 一闪而过。原文是：
+
+```text
+no_compatible_tag error 400/4000: No compatible image tag found for
+vastai/pytorch with compute capability 900 and CUDA version 13.2
+```
+
+Vast 的 `PyTorch (Vast)` 模板标签只有 `ARM SSH Jupyter`，**没有 CUDA 标签**，
+它给 sm_90 解析不出镜像。换成带 `Cuda 13` 标签的 `PyTorch NGC` 之后，机器列表
+自己从 5 台收敛到 3 台，一点就成。
+
+当时页面上还挂着 Vast 自己的横幅 "adding enough credits to cover multiple days"，
+我顺着它把失败推断成余额不足，又换了两台机器才回头去读错误原文。**页面上另一
+条无关提示不是证据。**
+
+### 镜像源跟着服务器走，不跟着人走
+
+仓库里 `h3_server_setup.py` 的默认值是阿里云 PyPI + hf-mirror.com，那是给国内
+机器准备的。这台在罗马尼亚，装之前先测了一轮：
+
+| 端点 | 实测 | |
+| --- | ---: | --- |
+| pypi.org | 38.7 MB/s | 阿里云的 10 倍 |
+| mirrors.aliyun.com | 3.7 MB/s | |
+| huggingface.co | 78.0 MB/s | hf-mirror 的 1.5 倍 |
+| hf-mirror.com | 52.9 MB/s | |
+| download.pytorch.org | 119.3 MB/s | |
+
+改成上游源之后，63 GB 模型下完用了 **9 分 04 秒**。用国内镜像至少多花十几分钟，
+按 $2.712/hr 算就是白扔半美元多。这和 2026-08-11 那次 `download.pytorch.org`
+在国内 5 KB/s 是同一条规律的两面：**先花 8 秒测速，再决定用哪个源。**
+
+`--pypi-index` / `--hf-endpoint` / `--torch-index` 三个参数就是为这个留的，
+默认值只对国内机器成立。
+
+### 从 Windows 推脚本到 Linux：CRLF 会让退出码撒谎
+
+第一次装机 **退出码 0，但什么都没装**。用 `python ... > file` 生成远端脚本时，
+Windows 上 Python 的文本模式把 `\n` 写成了 `\r\n`，远端 bash 收到的第一行是
+`set -euo pipefail\r`，于是报 `set: pipefail: invalid option name` —— `set -e`
+从此没生效，后面每一行静默失败，最后照样给 0。
+
+是靠 `ls /opt/` 发现目录根本不存在才抓到的。管道推脚本一律先 `tr -d '\r'`。
+
+同一次还有 Git Bash 的 MSYS 路径转换：`--install-dir /opt/ComfyUI` 被改写成
+`D:/Git/opt/ComfyUI`。要 `MSYS_NO_PATHCONV=1`。
+
+### 一条贯穿今天的规律
+
+租机器推断成余额问题、装机退出码 0、以及更早那次靠 billing 页面推断实例还在不在——
+**三次都是拿间接信号代替直接验证。** 唯一有效的做法是每一步都去看那个东西本身：
+实例状态看 Instances 页，装没装成看 `ls` 和 `find`，torch 能不能用就真去
+`import torch; torch.cuda.is_available()`。退出码、页面横幅、进度条都不算数。

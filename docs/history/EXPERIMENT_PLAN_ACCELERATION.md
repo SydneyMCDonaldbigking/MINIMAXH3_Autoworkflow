@@ -217,3 +217,23 @@ Their Prompt Review node needs a live browser and cannot run unattended, which
 they document. Our three ads yesterday were produced by a queue with nobody
 watching. If we adopt anything from that suite, it has to be the parts that run
 headless.
+
+## ComfyUI 的执行缓存会毁掉 A/B 测量（2026-08-18）
+
+跑 A 组基线，`h3_runner.py` 报 `Waiting for ComfyUI job... 1s`，全程 33 秒。
+一个 8 步 1088x1920 的 5 秒 clip 不可能 33 秒。
+
+原因：同样的 prompt、同样的参考图、同样的 seed 在同一个 ComfyUI 进程里已经渲染过，
+**ComfyUI 按节点输入做缓存，图没变就直接把上次的结果吐回来。**
+
+这为什么致命：**A 组和 D 组的图是不一样的**（D 多一个
+`JR_H3_UnifiedAcceleration` 节点），所以 D 永远不会命中缓存。拿一个命中缓存的 A
+去比一个真跑的 D，会得出"加速让它慢了十倍"的结论，而且这个结论看起来完全合理，
+因为两个数字都是真的测出来的。
+
+**规则：任何对比实验，每一组都必须用一个此前从未提交过的 seed，A 和 D 用同一个新
+seed。** 或者在每组之间重启 ComfyUI 清缓存——但换 seed 更便宜，也不会顺便清掉
+权重缓存、把冷加载时间混进测量里。
+
+判断依据很简单：**一个 5 秒 clip 在 H100 上不可能少于 5 分钟。** 任何远低于此的
+"运行时间"都是缓存，不是加速。

@@ -13,6 +13,7 @@ marks which claims are verified.
 - `runbooks/MINIMAX_H3_15S_STORYBOARD_WORKFLOW.md`: older 10s/15s storyboard route.
 - `runbooks/IMAGE2_FIRST_FRAME_RUNBOOK.md`: first-frame generation setup.
 - `runbooks/CLUSTER_RUNNER.md`: multi-server batch runner.
+- `runbooks/H3_REFINE_VIDEO_REWRITE_EXPERIMENT_PLAN.md`: Claude handoff for native-1080 vs sigma/dual-sampler/latent-upscale experiments.
 
 ## Reference
 
