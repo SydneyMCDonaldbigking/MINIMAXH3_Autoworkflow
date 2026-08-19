@@ -213,3 +213,30 @@ H3 一次产出音视频合并的 latent（`EmptyMiniMaxH3LatentAV` 可证），
 拆成两段、中间插潜空间放大，我们那次是单段直接砍到 6 步。但潜空间放大改善的是
 细节不是语义，所以它救不了"白菜整颗没切"那类错误——那次 `check_clip_quality.py`
 还给了比 8 步更好的 flip rate。**质量门永远读不出语义错误，只能看帧。**
+
+
+## `<Video N>` 和 `<Audio N>` 是支持的（2026-08-19 探测）
+
+`MiniMaxH3ReferenceToVideo` 的 optional 输入不止 `ref_images`：
+
+```text
+ref_images        COMFY_AUTOGROW_V3
+ref_videos        COMFY_AUTOGROW_V3
+ref_video_audios  COMFY_AUTOGROW_V3
+ref_audios        COMFY_AUTOGROW_V3
+```
+
+节点原生接受**视频参考和音频参考**，也就是官方文档里的 `<Video N>` 和
+`<Audio N>` 标签，配套的 retention 词表是 `fully_copy` / `partially_copy` /
+`reference` / `weak_reference` —— `prompts/validate_prompt.py` 早就认这套词，
+我们只是从来没用过。
+
+**为什么这对复刻是条新路**：现在的做法是从模板视频里裁静帧，而裁帧会连带拖进
+水印、标题卡、别人的道具（2026-08-19 的 sample2 包就是这样：`miikubakinglab`
+水印 + `Strawberry Iced Tea` 标题卡 + 杯里漂着草莓）。绑整段视频当**时序参考**，
+让静帧只管颜色和道具，可能是更干净的分工。
+
+**要用还得改 runner**：`h3_runner.py` 只把 `--ref-image` 接到 `ref_images`，
+另外三个口没接。改动落在实验 runner 或新文件里，不动稳定生产流。
+
+先记下来，没测过。别拿它当结论。
