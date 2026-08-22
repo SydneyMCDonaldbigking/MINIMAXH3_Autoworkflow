@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "language": "en",
+  "source_clip": "clip-03",
+  "timing_basis": "clip-relative",
+  "style": "editable centered white text with subtle dark stroke/shadow, no colored box",
+  "cues": [
+    {
+      "start": 0.3,
+      "end": 1.6,
+      "text": "Bloom garlic and chilli"
+    },
+    {
+      "start": 1.8,
+      "end": 3.4,
+      "text": "Toss with salt and pepper"
+    },
+    {
+      "start": 3.6,
+      "end": 4.9,
+      "text": "Crisp, not saucy"
+    }
+  ]
+}

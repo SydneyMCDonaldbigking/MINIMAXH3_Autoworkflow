@@ -52,6 +52,7 @@ Thumbs.db
 # Runtime logs
 *.log
 *.pid
+local_artifacts/
 
 # Local cluster configs may contain hosts or private paths
 servers.yaml
@@ -59,3 +60,6 @@ jobs.yaml
 
 # Portable acceptance-test binaries, rebuilt from server_scripts/*.cu
 tools/
+
+# Skill and runner output: machine artifacts, not distilled experience.
+output/

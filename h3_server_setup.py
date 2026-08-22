@@ -20,7 +20,7 @@ from textwrap import dedent
 
 DEFAULT_INSTALL_DIR = "/opt/ComfyUI"
 DEFAULT_PYPI_INDEX = "https://mirrors.aliyun.com/pypi/simple/"
-DEFAULT_TORCH_INDEX = "https://download.pytorch.org/whl/cu124"
+DEFAULT_TORCH_INDEX = "https://download.pytorch.org/whl/cu126"
 DEFAULT_HF_ENDPOINT = "https://hf-mirror.com"
 DEFAULT_COMFY_REF = "v0.30.2"
 
@@ -43,14 +43,14 @@ def build_remote_script(args: argparse.Namespace) -> str:
         TORCH_INDEX={q(args.torch_index)}
         HF_ENDPOINT_VALUE={q(args.hf_endpoint)}
 
-        echo "[1/7] GPU status"
+        echo "[1/8] GPU status"
         if command -v nvidia-smi >/dev/null 2>&1; then
           nvidia-smi
         else
           echo "nvidia-smi not found; install NVIDIA driver/CUDA runtime first."
         fi
 
-        echo "[2/7] System tools"
+        echo "[2/8] System tools"
         if ! command -v git >/dev/null 2>&1; then
           echo "git is not installed. Please install git first, then rerun."
           exit 2
@@ -60,7 +60,7 @@ def build_remote_script(args: argparse.Namespace) -> str:
           exit 2
         fi
 
-        echo "[3/7] Clone or update ComfyUI"
+        echo "[3/8] Clone or update ComfyUI"
         if [ ! -d "$INSTALL_DIR/.git" ]; then
           mkdir -p "$(dirname "$INSTALL_DIR")"
           if git ls-remote https://gitclone.com/github.com/Comfy-Org/ComfyUI.git >/dev/null 2>&1; then
@@ -73,32 +73,31 @@ def build_remote_script(args: argparse.Namespace) -> str:
         git fetch --tags || true
         git checkout "$COMFY_REF" || git checkout master
 
-        echo "[4/7] Python virtualenv"
+        echo "[4/8] Python virtualenv"
         python3 -m venv venv
         . venv/bin/activate
         python -m pip install -U pip setuptools wheel -i "$PYPI_INDEX"
         python -m pip config set global.index-url "$PYPI_INDEX"
 
-        echo "[5/7] PyTorch and ComfyUI dependencies"
+        echo "[5/8] PyTorch and ComfyUI dependencies"
         python -m pip install torch torchvision torchaudio --index-url "$TORCH_INDEX" --extra-index-url "$PYPI_INDEX"
         python -m pip install -r requirements.txt -i "$PYPI_INDEX"
         python -m pip install -U huggingface_hub -i "$PYPI_INDEX"
 
-        echo "[6/7] MiniMax H3 models"
+        echo "[6/8] MiniMax H3 models"
         export HF_ENDPOINT="$HF_ENDPOINT_VALUE"
         export HF_HUB_DISABLE_XET=1
         {maybe_models}
 
-        echo "[7/7] Import check"
-        python - <<'PY'
-        import torch
-        print("torch:", torch.__version__)
-        print("cuda:", torch.cuda.is_available())
-        if torch.cuda.is_available():
-            print("gpu:", torch.cuda.get_device_name(0))
-            props = torch.cuda.get_device_properties(0)
-            print("vram_gb:", round(props.total_memory / 1024**3, 2))
-        PY
+        echo "[7/8] Model integrity"
+        if [ -f "$INSTALL_DIR/../check_model_integrity.sh" ]; then
+          bash "$INSTALL_DIR/../check_model_integrity.sh" || echo "integrity check reported a problem; read it before rendering"
+        else
+          echo "check_model_integrity.sh not uploaded; skipping rather than pretending to verify"
+        fi
+
+        echo "[8/8] Import check"
+        python -c 'import torch; print("torch:", torch.__version__); print("cuda:", torch.cuda.is_available()); print("gpu:", torch.cuda.get_device_name(0) if torch.cuda.is_available() else "none"); print("vram_gb:", round(torch.cuda.get_device_properties(0).total_memory / 1024**3, 2) if torch.cuda.is_available() else 0)'
 
         echo "Done. ComfyUI path: $INSTALL_DIR"
         {maybe_start}

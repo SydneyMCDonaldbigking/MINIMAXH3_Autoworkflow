@@ -1,0 +1,43 @@
+{
+  "slug": "tom_yum_goong",
+  "dish_cn": "冬阴功",
+  "dish_en": "Tom Yum Goong, Thai hot and sour prawn soup",
+  "product_dir": "冬阴功",
+  "product_file": "虾.png",
+  "seed_base": 202608130100,
+  "product_desc": "whole raw prawns resting on a bed of ordinary crushed white ice, shells translucent grey-blue with long antennae intact. The ice is plain and colourless like ice from a freezer, never blue, never tinted, and never a coloured plastic sheet or tray. No packaging anywhere in frame",
+  "cook": "a Thai cook in her forties in a plain dark apron, sleeves pushed up, quick and unfussy",
+  "kitchen": "a bright open kitchen with stainless surfaces, a gas hob at the centre, neutral daylight from a window on the left, warm only in the shadows",
+  "prep_subject": "stalks of lemongrass bruised flat and cut on the diagonal, thick coins of galangal, torn kaffir lime leaves, halved straw mushrooms, bird's eye chillies crushed once, and a small dish of dark red nam prik pao roasted chilli paste, each in its own pile on a board. Whole raw prawns sit to one side, shells on",
+  "prep_defines": "the bruised lemongrass, the galangal coins and the torn lime leaves that go into the water before anything else",
+  "cook_vessel": "a wide steel pot over a gas flame",
+  "cook_subject": "the soup partway through, a clear pale broth at a fast rolling boil with lemongrass, galangal coins and torn lime leaves turning through it, straw mushrooms sinking, and a swirl of dark red nam prik pao just stirred in and blooming orange through the liquid. No prawns are in the pot yet",
+  "cook_negatives": "coconut milk turning it white, a thick or creamy broth, a pale yellow broth in the finished dish, chilli paste added in clip 01, prawns in the pot with the aromatics, boiled-grey prawns, raw prawns dropped into a finished serving bowl, blue or tinted ice",
+  "vessel_start": "filled with plain stock coming up to a boil, nothing else in it yet",
+  "hero_subject": "the finished soup in a wide bowl, the broth a deep red-orange from the roasted chilli paste with a visible layer of red chilli oil floating on the surface, distinctly red rather than pale or yellow. Five or six whole orange prawns are crowded at the surface with their shells bright and their heads and tails showing, filling much of the bowl, with straw mushrooms, lemongrass and lime leaves visible in the liquid between them, fresh coriander scattered over and a lime wedge at the rim",
+  "hero_setting": "a plain wooden table in the same kitchen, neutral daylight",
+  "story": [
+    "bruised lemongrass, galangal and lime leaves into boiling stock",
+    "chilli paste and mushrooms in, then the prawns, and the broth turns red",
+    "ladled into the bowl, lime squeezed over, one prawn lifted"
+  ],
+  "first_heat": "The lemongrass, galangal and lime leaves drop into the clear boiling stock and turn over in it at once. The broth stays pale and clear: no chilli paste, no mushrooms and no prawns have gone in, and nothing in the pot is red.",
+  "transform": "the clear broth takes colour as the nam prik pao is stirred through it and blooms from a dark red swirl into an even amber-red, and the straw mushrooms sink and darken, all at a fast rolling boil.",
+  "lift": "The hands of <Subject 1> enter from the top of frame carrying a bowl of whole raw prawns and tip them into the boiling pot in one movement, then withdraw straight up out of frame empty. The grey translucent shells hit the red broth and begin turning orange at the edges where they land. This is the cooking pot on its burner and nothing is plated in this shot.",
+  "plate": "The hands of <Subject 1> enter from the top of frame with a ladle and fill the wide bowl from the pot in one steady pour, whole orange prawns coming over with the amber-red broth, then withdraw out of frame. The prawns are already cooked and orange before they reach the bowl.",
+  "final_lift": "A hand enters from the right holding a ladle, lifts one whole orange prawn clear of the soup on a bed of broth, and holds it steady at the centre of frame, broth running off its shell.",
+  "beats": {
+    "c1s1": "<Subject 1> draws the bruised aromatics and the dish of chilli paste toward them in one movement.",
+    "c1s2": "Both hands of <Subject 1> gather the lemongrass, galangal and lime leaves into one pile at the near edge, keeping the prawns at the far side of the board.",
+    "c1s3": "The hands of <Subject 1> enter from the top of frame carrying the bruised lemongrass, galangal and torn lime leaves alone, tip them into the boiling stock in one movement, and withdraw straight up out of frame empty. No chilli paste, no mushrooms and no prawns go in.",
+    "c3s2": "The hand of <Subject 1> enters from the top of frame and squeezes a lime wedge over the bowl in one pass, then scatters fresh coriander, and withdraws straight up out of frame. The heat is off and nothing is added to a pot in this shot."
+  },
+  "clip02_shot1": "[Shot 1] Locked-off close-up at pot height, 50mm feel, continuing directly from <Picture 1>. The pot of <Picture 4> fills the lower two thirds of frame over its flame, which stays visible at the bottom of frame throughout, the broth at a fast rolling boil with the lemongrass and galangal from clip 01 turning through it. The hands of <Subject 1> enter from the top of frame carrying the halved straw mushrooms and a spoon of dark red nam prik pao from <Picture 3>, tip them in one after the other, and withdraw straight up out of frame empty. The paste hits the surface as a dark red swirl and begins to bloom outward. No prawns are anywhere in this shot. The camera does not move at any point in this shot, and the framing does not drift.",
+  "negatives_global": "coconut milk, a white or creamy broth, a thick curry, prawns cooked with the aromatics from the start, overcooked grey prawns",
+  "sound_01": "A busy open kitchen with a low extractor hum. In the first shot, a board set down on steel. In the second shot, lemongrass being bruised flat with a dull woody knock and galangal coins sliding together. In the third shot, a gas burner at full roar and a pot at a hard boil, then the aromatics going in with a short splash. No speech.",
+  "sound_02": "A hard rolling boil throughout with the burner beneath it. In the first shot, mushrooms dropping into liquid and a spoon stirring paste through it. In the third shot, prawns going into boiling broth with a soft heavy splash. No frying and no sizzling at any point. No speech.",
+  "sound_03": "A kitchen with a low extractor hum. In the first shot, prawns going into boiling broth with a soft heavy splash. In the second shot, a lime being squeezed and coriander landing on the surface. In the third shot, a ladle touching the rim of the bowl. No speech.",
+  "music": "A bright tropical bed: hand drums and light bamboo percussion over a lifting bass line, hot and quick without being frantic.",
+  "extra_purpose": "the raw prawns going into the finished broth, which happens at the end of clip 02",
+  "extra_subject": "the wide steel pot of amber-red tom yum broth at a fast rolling boil on its flame, seen from just above the rim, with whole raw prawns dropping into it. The prawns still in the air are grey and translucent; the ones that have landed are already turning orange at the shell edges. Lemongrass, galangal and straw mushrooms turn in the broth around them. This is a cooking pot on a burner, not a serving bowl, and there is no table, no garnish and no lime wedge in frame"
+}

@@ -242,7 +242,7 @@ for name, fn in (
         print(f"{name}     : FAILED {type(exc).__name__}: {msg}")
         if "CUDNN" in msg.upper() or "cudnn" in msg:
             bad.append(f"{name} failed with a cuDNN error - check for CUDA 13 wheels "
-                       f"shadowing nvidia-cudnn-cu12 (see SERVER_H3_RUNBOOK.md section 1)")
+                       f"shadowing nvidia-cudnn-cu12 (see docs/runbooks/SERVER_H3_RUNBOOK.md section 1)")
         else:
             bad.append(f"{name} raised {type(exc).__name__}")
 

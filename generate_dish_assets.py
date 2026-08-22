@@ -55,7 +55,12 @@ COMMON_STYLE = (
 COMMON_NEG = (
     "subtitles, title cards, watermarks, floating logo, any printed card, "
     "any brand text, invented lettering, fake app UI, distorted face, "
-    "extra fingers, warped cookware, messy kitchen")
+    "extra fingers, warped cookware, messy kitchen, "
+    # "any brand text" alone was not enough: a portable gas burner came back with
+    # "Mini Max H3" printed on it, which is the model signing its own work. The
+    # surfaces have to be named.
+    "no lettering, logos or model names on burners, stoves, pots, pans, "
+    "appliances, packaging or containers, no readable text anywhere in frame")
 
 TEMPLATES = {
     "character_scene": """Create a clean high-quality vertical reference image for a premium cooking commercial, 1080x1920.
@@ -64,7 +69,7 @@ PURPOSE: character and kitchen style reference for MiniMax H3 {dish_en}.
 
 SCENE: {kitchen}.
 
-SUBJECT: {cook}, standing at a prep counter. The raw ingredient is clearly presented on the counter: {product_desc}. Keep all printed cards, packaging and brand text out of frame.
+SUBJECT: {cook}, standing at a prep counter. The raw ingredient is clearly presented on the counter: {product_desc}. The ingredient sits directly on a plate, board or bowl. There is no retail packaging anywhere in the room: no trays with labels, no boxes, no punnets, no bags, no cling film, nothing with a sticker or a barcode on it, not even at the edge of frame or out of focus in the background.
 
 COMPOSITION: vertical 9:16, medium shot from a slightly high three-quarter angle. Cook, ingredient, cooking vessel and kitchen style all legible. Leave room for hand motion.
 
@@ -100,13 +105,27 @@ COMPOSITION: vertical 9:16, close-up at vessel height looking slightly down. The
 
 NEGATIVE: {neg}, {cook_negatives}, {negatives_global}.
 """,
+    "extra_state": """Create a clean high-quality vertical reference image for a premium cooking commercial, 1080x1920.
+
+PURPOSE: an extra process-state reference for MiniMax H3 {dish_en}, covering a moment the four standard references do not: {extra_purpose}.
+
+SCENE: {cook_vessel} in the kitchen described by the character reference.
+
+SUBJECT: {extra_subject}.
+
+COMPOSITION: vertical 9:16, close-up at vessel height looking slightly down. The action and the heat source are both legible.
+
+{style}
+
+NEGATIVE: {neg}, hands in frame, a finished plated dish, a serving bowl, {negatives_global}.
+""",
     "hero_state": """Create a clean high-quality vertical reference image for a premium cooking commercial, 1080x1920.
 
 PURPOSE: finished hero state for MiniMax H3 {dish_en}. This is the final frame the whole ad lands on.
 
 SCENE: {hero_setting}.
 
-SUBJECT: {hero_subject}. Keep all printed cards, packaging and brand text out of frame.
+SUBJECT: {hero_subject}. There is no printed card, no sign, no packaging and no brand text anywhere in this image, including out of focus in the background. The only things in frame are the food, its vessel and the table it stands on.
 
 COMPOSITION: vertical 9:16, close hero food angle from about 30 degrees above. The texture and gloss of the finished dish are the subject.
 
@@ -118,6 +137,14 @@ NEGATIVE: {neg}, hands in frame, {negatives_global}.
 
 ORDER = ["character_scene", "prep_state", "cook_state", "hero_state"]
 
+# Optional fifth asset, generated only when a config defines "extra_subject".
+# COOKING_PROMPT_PRODUCTION_STANDARD.md allows extra process-state references
+# (oven_tray_state, simmer_state and so on); this is the generic hook for them.
+# Tom yum is why it exists: its prawns go in during clip 03, whose only visual
+# context is the finished bowl, so the model plated raw prawns into a finished
+# soup. A reference of the moment itself is the fix.
+EXTRA = "extra_state"
+
 
 def load(slug: str) -> dict:
     path = CONFIG_DIR / f"{slug}.json"
@@ -126,10 +153,14 @@ def load(slug: str) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def kinds_for(cfg: dict) -> list[str]:
+    return ORDER + ([EXTRA] if cfg.get("extra_subject") else [])
+
+
 def render(cfg: dict) -> dict[str, pathlib.Path]:
     PROMPT_DIR.mkdir(parents=True, exist_ok=True)
     written = {}
-    for kind in ORDER:
+    for kind in kinds_for(cfg):
         text = TEMPLATES[kind].format(style=COMMON_STYLE, neg=COMMON_NEG, **cfg)
         path = PROMPT_DIR / f"{cfg['slug']}_{kind}.md"
         path.write_text(text, encoding="utf-8", newline="\n")
@@ -145,26 +176,54 @@ def product_path(cfg: dict) -> pathlib.Path:
 
 
 def generated(cfg: dict, kind: str) -> pathlib.Path:
+    """Where an upstream asset in the chain can be read from.
+
+    Fresh output lands under _generated/. Reviewed output gets filed into the
+    numbered group directories, and the _generated copy does not survive that.
+    A partial re-render with --kinds therefore has to look in both, or the chain
+    breaks on the very reference the flag exists to preserve.
+    """
     stem = f"{cfg['slug']}_{kind}"
-    return OUT_ROOT / stem / "generated" / f"{stem}-1.png"
+    fresh = OUT_ROOT / stem / "generated" / f"{stem}-1.png"
+    if fresh.is_file():
+        return fresh
+    for group in (ROOT / "outputs" / "reference_assets").iterdir():
+        if group.is_dir():
+            filed = group / f"{stem}.png"
+            if filed.is_file():
+                return filed
+    return fresh
 
 
 def build_jobs(cfg: dict, prompts: dict[str, pathlib.Path]) -> list[dict]:
     product = product_path(cfg)
     chain = {
-        # Each asset sees the product plus whatever was already established,
-        # so the cook and kitchen carry through instead of being reinvented.
+        # Each asset sees whatever was already established, so the cook and the
+        # kitchen carry through instead of being reinvented.
+        #
+        # The product photo is deliberately NOT attached to every asset. Half the
+        # product photos are retail packs - a UMALL bag, a labelled tray, a Jongga
+        # jar - so they are themselves a flat composition of "brand mark plus
+        # product photograph". Feeding one into every generation taught the model
+        # that such an object belongs in the scene, and it kept obliging: printed
+        # cards carrying invented product shots, in ad after ad. The model was not
+        # inventing a logo, it was reproducing the picture we kept showing it.
+        #
+        # So the product goes only where the raw ingredient's identity actually
+        # has to be right, and never into the two that show cooked food.
         "character_scene": [product],
         "prep_state": [generated(cfg, "character_scene"), product],
         "cook_state": [generated(cfg, "character_scene"),
-                       generated(cfg, "prep_state"), product],
+                       generated(cfg, "prep_state")],
         "hero_state": [generated(cfg, "character_scene"),
-                       generated(cfg, "cook_state"), product],
+                       generated(cfg, "cook_state")],
     }
+    chain[EXTRA] = [generated(cfg, "character_scene"), generated(cfg, "cook_state")]
     jobs = []
-    for kind in ORDER:
+    for kind in kinds_for(cfg):
         stem = f"{cfg['slug']}_{kind}"
         jobs.append({
+            "kind": kind,
             "stem": stem,
             "prompt": prompts[kind],
             "out": OUT_ROOT / stem,
@@ -200,6 +259,11 @@ def main(argv: list[str]) -> int:
     parser.add_argument("--list", action="store_true", help="list available configs and exit")
     parser.add_argument("--print-only", action="store_true",
                         help="write the prompts and show the commands, generate nothing")
+    parser.add_argument("--kinds", default="",
+                        help="comma-separated subset to regenerate, e.g. prep_state,cook_state,"
+                             "hero_state. Default is all four. Use this when a recipe changed but "
+                             "the cook and kitchen did not, so the character reference stays put "
+                             "and the ad keeps the same face across a re-render.")
     args = parser.parse_args(argv)
 
     available = sorted(p.stem for p in CONFIG_DIR.glob("*.json"))
@@ -218,7 +282,10 @@ def main(argv: list[str]) -> int:
         print(f"\n{cfg['dish_cn']} ({slug})")
         prompts = render(cfg)
         print(f"  wrote {len(prompts)} prompts to {PROMPT_DIR.relative_to(ROOT).as_posix()}/")
+        wanted = [k.strip() for k in args.kinds.split(",") if k.strip()]
         for job in build_jobs(cfg, prompts):
+            if wanted and job["kind"] not in wanted:
+                continue
             run(job, args.print_only)
     return 0
 

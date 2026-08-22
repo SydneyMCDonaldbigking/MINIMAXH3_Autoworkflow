@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "language": "en",
+  "source_clip": "clip-01",
+  "timing_basis": "clip-relative",
+  "style": "editable centered white text with subtle dark stroke/shadow, no colored box",
+  "cues": [
+    {
+      "start": 0.4,
+      "end": 1.6,
+      "text": "Dice it all the same"
+    },
+    {
+      "start": 1.8,
+      "end": 3.2,
+      "text": "Mix the sauce first"
+    },
+    {
+      "start": 3.5,
+      "end": 4.8,
+      "text": "Chillies bloom first"
+    }
+  ]
+}

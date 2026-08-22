@@ -40,6 +40,13 @@ import pathlib
 import sys
 import tempfile
 
+# Dish names carry Chinese, Japanese and Korean. On Windows stdout defaults to the
+# system codepage, so printing a Korean dish name raised UnicodeEncodeError and
+# took the whole --check run down with it. Reconfigure rather than strip the name.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 ROOT = pathlib.Path(__file__).resolve().parent
 CONFIG_DIR = ROOT / "prompts" / "dish_configs"
 PROMPT_DIR = ROOT / "prompts" / "h3_3x5_1080"
@@ -49,8 +56,17 @@ ASSET_DIRS = {p.name.split("_", 1)[1]: p for p in (ROOT / "outputs" / "reference
 
 KINDS = ["character_scene", "prep_state", "cook_state", "hero_state"]
 
-NEG_COMMON = ("distorted faces, extra fingers, invented text, captions, watermarks, "
-              "floating logos, camera shake, and scene jumps")
+# A dish whose main ingredient goes in during clip 03 has no reference for that
+# moment: clip 03's only cooking anchor is cook_state, which shows the pot mid
+# simmer, and its other anchor is the finished bowl. Tom yum tipped raw prawns
+# into a plated soup because the bowl was the nearest picture. A config with
+# "extra_subject" gets a fifth asset of the moment itself, and clip 03 binds it
+# in place of cook_state, because what clip 03 needs to see is the action.
+EXTRA_KIND = "extra_state"
+
+NEG_COMMON = ("distorted faces, extra fingers, invented text or lettering on any surface "
+              "including burners and cookware, retail packaging, labels and barcodes, captions, "
+              "watermarks, floating logos, camera shake, and scene jumps")
 
 
 def asset_rel(cfg: dict, kind: str) -> str:
@@ -110,10 +126,18 @@ def clip01(cfg: dict) -> str:
     c1s3 = beat(c, "c1s3",
                 "The hands of <Subject 1> enter from the top of frame carrying the ingredient, "
                 "tip it in once, and withdraw straight up out of frame empty.")
+    # <Picture 3> is the working state, so the photograph shows the vessel FULL of a
+    # nearly finished dish. Pointing the model at it and saying "the vessel, already
+    # hot" got a wok of finished food with raw mince being tipped onto it - the
+    # reference beat the wording, the same way the product photo's label did. The
+    # vessel's starting state now has to be stated positively, and <Picture 3> is
+    # explicitly reduced to the vessel itself for this shot.
+    vessel_start = c.get("vessel_start", "empty and already hot, with nothing in it yet")
     shot3 = c.get("clip01_shot3") or (
         "[Shot 3] At 00:03.400, the shot cuts to a locked-off close-up at cooking height. "
-        "The vessel of <Picture 3> fills the lower two thirds of frame over its heat source, "
-        f"already hot. {c1s3} {c['first_heat']} "
+        f"The vessel of <Picture 3> fills the lower two thirds of frame over its heat source, "
+        f"{vessel_start}. <Picture 3> supplies this vessel's shape and position only, never its "
+        f"contents. {c1s3} {c['first_heat']} "
         "The camera does not move at any point in this shot.")
     return f"""subject_definitions:
 <Subject 1> is {c['cook']}, working at the counter of the kitchen in <Picture 1>.{subject2(c)}
@@ -122,7 +146,7 @@ def clip01(cfg: dict) -> str:
 <Picture 3> is the working state: {c['cook_subject']}.
 <Picture 4> is the finished hero state, used here only as a colour and texture target.
 <Picture 5> is the product image: {c['product_desc']}.
-<Picture 6> is the ASIAN GROCER ONLINE / POWERED BY UMALL brand lockup, allowed only as a real printed card standing on the counter.
+<Picture 6> is the ASIAN GROCER ONLINE / POWERED BY UMALL brand lockup, allowed only as a real printed card standing on the counter, carrying that wordmark and nothing else: no photograph, no product image, no illustration, no other graphic.
 
 summary:
 reference generation. A five-second vertical premium cooking commercial, clip 01 of a three-clip sequence for {c['dish_en']}. <Subject 1> and the kitchen of <Picture 1> establish the setting, <Picture 5> supplies the raw ingredient identity, and <Picture 2> supplies the already-prepared components that prove real preparation happened. The clip carries the ingredients from the counter to first heat, ending as {c['story'][0]}, so clip 02 can open on cooking already under way. <Picture 4> is not staged here.
@@ -131,13 +155,13 @@ retention_analysis:
 <Subject 1>: fully_preserved. Same face, build and clothing throughout.{fully_preserved2(c)}
 <Picture 1>: attribute_transfer. Kitchen layout, light direction and material palette carry over; exact framing does not.
 <Picture 2>: fully_preserved. Every component keeps the size and cut this image defines.
-<Picture 3>: partially_preserved. The cooking vessel keeps its shape and position, but holds only the beginning of the cook at this stage.
+<Picture 3>: weak_reference. Only the vessel's shape, material and position carry over. Its contents do not: the vessel is empty when this clip begins, and the food that image shows is where clip 02 ends up, not where clip 01 starts.
 <Picture 4>: weak_reference. Colour and texture target only, not composed in frame.
 <Picture 5>: fully_preserved. The raw ingredient keeps its colour and surface exactly.
 <Picture 6>: weak_reference. May appear once as a small printed card far back on the counter, never as an overlay.
 
 detailed_description:
-[Shot 1] Medium shot at eye level, 50mm feel. <Subject 1> stands at the counter of the kitchen from <Picture 1>, the cooking vessel of <Picture 3> at their right. Laid out in front of them are the raw ingredient of <Picture 5> and the prepared components of <Picture 2>, with the small printed card of <Picture 6> far back near the wall, legible but never dominant. Directional light rakes across the ingredient so its surface reads clearly. {beat(c, "c1s1", "<Subject 1> draws the ingredients toward them across the counter in one movement.")}{" " + c["cook2_open"] if c.get("cook2_open") else ""} The camera pushes in toward the counter steadily and continuously across the whole shot, one single move that never pauses or reverses. The shot ends with every component readable in frame.
+[Shot 1] Medium shot at eye level, 50mm feel. <Subject 1> stands at the counter of the kitchen from <Picture 1>, the cooking vessel of <Picture 3> at their right. Laid out in front of them are the raw ingredient of <Picture 5> and the prepared components of <Picture 2>, with the small printed card of <Picture 6> against the back wall and out of focus, never beside or among the food and never part of the food display. Directional light rakes across the ingredient. {beat(c, "c1s1", "<Subject 1> draws the ingredients toward them across the counter in one movement.")}{" " + c["cook2_open"] if c.get("cook2_open") else ""} The camera pushes in toward the counter steadily and continuously across the whole shot, one single move that never pauses or reverses. The shot ends with every component readable in frame.
 
 [Shot 2] At 00:01.600, the shot cuts to a medium-close shot over the work surface, high three-quarter angle, 50mm feel, holding both forearms of <Subject 1> and the whole surface. On it are the prepared components of <Picture 2>, exactly as that image defines them. Any knife rests flat at the far side and is never lifted. {beat(c, "c1s2", "Both hands of <Subject 1> gather the components into one pile and slide them to the near edge, beside the ingredient of <Picture 5>.")} The camera does not move and the focus does not rack. The shot ends with the prepared components and the raw ingredient together in the near half of frame, both sharp.
 
@@ -199,10 +223,9 @@ def clip03(cfg: dict) -> str:
 <Picture 1> is the final frame of clip 02, showing a piece of the dish lifted clear of the vessel with sauce or juices running from it.
 <Subject 1> is {c['cook']}.{subject2(c)}
 <Picture 2> is the cook and kitchen bible: {c['kitchen']}.
-<Picture 3> is the working state: {c['cook_subject']}.
+<Picture 3> is {c.get('extra_subject') or c['cook_subject']}.
 <Picture 4> is the finished hero state, the target of this clip: {c['hero_subject']}.
 <Picture 5> is the product image: {c['product_desc']}.
-<Picture 6> is the ASIAN GROCER ONLINE / POWERED BY UMALL brand lockup, allowed only as a real printed card standing on the table.
 
 summary:
 reference generation. A five-second vertical premium cooking commercial, clip 03 of three, the closing beat for {c['dish_en']}. It continues from <Picture 1> and carries the dish from the vessel to the table, landing on the hero state of <Picture 4>. The product job is that the ingredient of <Picture 5> stays identifiable in its finished form. The clip ends on a still composed hero frame that can be held or trimmed in the edit.
@@ -214,14 +237,13 @@ retention_analysis:
 <Picture 3>: partially_preserved. The vessel travels to the table and stays recognisable, but leaves the heat.
 <Picture 4>: fully_preserved. The plating, the surface texture and the setting are the target of this clip.
 <Picture 5>: fully_preserved. The ingredient keeps its identity in cooked form.
-<Picture 6>: weak_reference. May appear once as a small printed card at the back of the table, never as an overlay.
 
 detailed_description:
 [Shot 1] Locked-off close food angle, 50mm feel, continuing directly from <Picture 1>. The vessel of <Picture 3> sits at the left of frame, the serving dish of <Picture 4> waiting at the right on the table. {c['plate']} The camera does not move at any point in this shot. The shot ends on the filled dish with individual pieces clearly visible.
 
 [Shot 2] At 00:01.600, the shot cuts to a close hero food angle over the dish, 50mm feel. {beat(c, "c3s2", "The hand of <Subject 1> enters from the top of frame holding a small dish of garnish, scatters it once across the surface in a single pass, and withdraws straight up out of frame. The garnish lands bright against the finished dish.")} Steam rises steadily behind. The setting of <Picture 4> is established around it. The camera pushes in toward the dish steadily and continuously across the whole shot, one single move that never pauses or reverses. The shot ends with the finished dish centred and sharp.
 
-[Shot 3] At 00:03.400, the shot cuts to a locked-off medium close-up of the table. The finished dish of <Picture 4> sits in the foreground, the small printed card of <Picture 6> standing far back near the edge, legible but never dominant, <Subject 1> present behind in soft focus.{" " + c["cook2_close"] if c.get("cook2_close") else ""} {c['final_lift']} The camera does not move and the focus does not rack. The shot ends with the piece held above the finished dish.
+[Shot 3] At 00:03.400, the shot cuts to a locked-off medium close-up of the table. The finished dish of <Picture 4> sits in the foreground with <Subject 1> present behind in soft focus. The only things in this frame are the finished dish, its vessel, the table and <Subject 1> behind. No sign, board, card or lettering of any kind is in shot, including out of focus.{" " + c["cook2_close"] if c.get("cook2_close") else ""} {c['final_lift']} The camera does not move and the focus does not rack. The shot ends with the piece held above the finished dish.
 
 Preserve across all shots: the identity of <Subject 1>, realistic hands, the ingredient of <Picture 5> in finished form, the plating and setting of <Picture 4>, and one coherent colour grade. Avoid {c['negatives_global']}, {NEG_COMMON}.
 
@@ -236,7 +258,14 @@ non_diegetic_music:
 def build_sequence(cfg: dict) -> dict:
     slug = cfg["slug"]
     a = {k: asset_rel(cfg, k) for k in KINDS}
+    clip3_working = a["cook_state"]
+    if cfg.get("extra_subject"):
+        a[EXTRA_KIND] = asset_rel(cfg, EXTRA_KIND)
+        clip3_working = a[EXTRA_KIND]
     product = product_rel(cfg)
+    # Clip 01 only. "The physical sign must read in clip 1's opening reference
+    # only. Do not force logo/sign continuity in later cooking clips." Binding it
+    # to clip 03 too is what put a brand card beside the hero dish in every ad.
     logo = "../company_logo/AGO.png"
     return {
         "sequence_id": f"{slug}_3x5_native1080",
@@ -263,8 +292,8 @@ def build_sequence(cfg: dict) -> dict:
             {"id": "clip-03-serving-hero",
              "prompt_file": f"../prompts/h3_3x5_1080/{slug}_clip_03.md",
              "use_previous_last_frame_as_ref": True,
-             "ref_images": [a["character_scene"], a["cook_state"],
-                            a["hero_state"], product, logo],
+             "ref_images": [a["character_scene"], clip3_working,
+                            a["hero_state"], product],
              "seed": cfg["seed_base"] + 3,
              "prefix": f"sequence/{slug}_3x5_native1080/clip-03"},
         ],

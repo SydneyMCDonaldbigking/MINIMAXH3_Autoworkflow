@@ -1,0 +1,43 @@
+{
+  "slug": "yakiniku_don",
+  "dish_cn": "日式烤肉饭配洋葱",
+  "dish_en": "Yakiniku Don, Japanese grilled beef rice bowl with onion",
+  "product_dir": "日式烤肉饭配洋葱",
+  "product_file": "和牛.png",
+  "seed_base": 202608130700,
+  "product_desc": "thin slices of marbled wagyu beef fanned out on a pale wooden cutting board, fat marbling fine and white through deep red meat, laid directly on the wood with no tray, no packaging and no text anywhere in frame",
+  "cook": "a cook in his thirties in a dark apron, fast and confident, working at a hot pan",
+  "kitchen": "a compact modern kitchen with a stainless counter and a strong gas ring, neutral daylight from a window on the left, warm only in the shadows",
+  "prep_subject": "thin slices of marbled beef laid out flat and separated on a wooden cutting board so no two overlap, beside a mound of onion sliced into thin half-moons and a small bowl of dark yakiniku tare already mixed, with a spoon standing in it. A bowl of hot steamed rice sits behind",
+  "prep_defines": "the thinness of the beef slices and the fact that they are laid separately rather than clumped",
+  "cook_vessel": "a heavy flat pan over a strong gas ring",
+  "cook_subject": "the pan partway through, sliced onion softened and translucent while beef slices sear beside them. The meat has turned all the way through from red to an even opaque brown with no pink left in any slice, its edges curling and darkening. No sauce is in the pan yet",
+  "cook_negatives": "rare or pink beef, red centres, bloody juices, beef stewed in liquid, grey boiled meat, a thick gravy, sauce added before searing, thick steak-cut beef",
+  "vessel_start": "empty except for a film of oil just beginning to smoke, no food in it yet",
+  "hero_subject": "the finished bowl, hot rice covered with glossy dark-glazed beef slices that are cooked through and opaque brown with no pink showing anywhere, soft translucent onion among them, a raw egg yolk sitting whole in a hollow at the centre, chopped spring onion and toasted sesame scattered over, the sauce catching the light on the meat",
+  "hero_setting": "a wooden counter in the same kitchen, chopsticks resting across the bowl, neutral daylight",
+  "story": [
+    "onion into a smoking empty pan to soften",
+    "beef slices in beside it and seared fast, then the tare poured over",
+    "onto rice, egg yolk set in the centre, sesame and spring onion"
+  ],
+  "first_heat": "The sliced onion hits the smoking bare metal and begins to hiss and go translucent at the edges, and a first curl of steam lifts from the pan.",
+  "transform": "the onion softens from opaque white to translucent gold, the beef slices go in beside it and turn from red to fully opaque brown right through, curling as they cook with no pink left anywhere, and the tare is poured over and reduces immediately to a dark glossy glaze that coats every slice.",
+  "lift": "A pair of cooking chopsticks enters from the left, lifts one glazed beef slice clear of the pan and holds it at the centre of frame. The cut face is opaque warm brown all the way through with no red or pink in it, the glaze running off it slowly and catching the light.",
+  "plate": "The hands of <Subject 1> enter from the top of frame holding the pan by its handle, tip the glazed beef and onion out over the bowl of hot rice in one motion so they cover it completely, and withdraw out of frame with the empty pan.",
+  "final_lift": "A hand enters from the right holding chopsticks, lifts one glazed beef slice from the top of the bowl and holds it steady at the centre of frame, its cut face opaque brown throughout, the egg yolk visible whole below it.",
+  "beats": {
+    "c1s1": "<Subject 1> draws the wooden board of beef slices and the sliced onion toward them in one movement.",
+    "c1s2": "Both hands of <Subject 1> separate the thin beef slices on the board so none overlap and slide it to the near edge beside the sliced onion, with the bowl of mixed tare set apart.",
+    "c1s3": "The hands of <Subject 1> enter from the top of frame carrying the sliced onion, tip it into the empty smoking pan first, and withdraw straight up out of frame empty. No beef and no sauce go in during this shot.",
+    "c3s2": "The hand of <Subject 1> enters from the top of frame holding half an eggshell and slides a whole raw yolk into a hollow at the centre of the beef in one movement, then withdraws straight up out of frame. The yolk sits whole and unbroken on top."
+  },
+  "clip02_shot1": "[Shot 1] Locked-off close-up at pan height, 50mm feel, continuing directly from <Picture 1>. The pan of <Picture 4> fills the lower two thirds of frame over its gas ring, which stays visible at the bottom of frame throughout, the onion from clip 01 already softening and going translucent. The hands of <Subject 1> enter from the top of frame carrying the separated beef slices from <Picture 3>, lay them flat into the pan beside the onion one at a time so none overlap, and withdraw straight up out of frame empty. The slices sear the moment they land and the sound sharpens. No sauce is in this shot. The camera does not move at any point in this shot, and the framing does not drift.",
+  "negatives_global": "rare or pink beef, red meat centres, thick steak-cut beef, grey boiled meat, beef stewed in liquid, a thick gravy, sauce added before searing, a broken egg yolk",
+  "sound_01": "A compact kitchen with a low extractor hum. In the first shot, a tray set down on a stainless counter. In the second shot, the soft sound of thin beef slices being separated and laid flat, and a spoon stirring sauce in a bowl. In the third shot, a gas ring at full roar, then onion hitting smoking bare metal with a sharp hiss. No speech.",
+  "sound_02": "A hard fast sear throughout, sharpening as each beef slice lands, then a short violent hiss as the tare hits the hot pan and reduces. The scrape of chopsticks against metal. No speech.",
+  "sound_03": "A kitchen at full heat. In the first shot, glazed beef sliding from a pan onto rice. In the second shot, the small soft sound of an egg yolk slipping from its shell. In the third shot, chopsticks lifting a slice, and a bowl set down on wood. No speech.",
+  "music": "A tight modern bed: a clipped drum groove under a warm bass line, quick and appetising, landing on the sear.",
+  "extra_purpose": "a cooked slice held up on chopsticks, which is the beat clip 02 ends on and the state clip 03 must plate",
+  "extra_subject": "a pair of wooden chopsticks holding up a single slice of beef clear of the pan, filling the centre of frame. The slice is cooked all the way through: opaque warm brown across its whole cut face with no red and no pink anywhere in it, the fat rendered and translucent, the surface dark and glossy where the tare has reduced onto it, and one thread of sauce running off the lower edge. The pan and its softened onion are below and behind, out of focus. There is no bowl, no rice and no table in frame"
+}

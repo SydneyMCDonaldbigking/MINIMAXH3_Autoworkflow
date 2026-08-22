@@ -1,0 +1,7 @@
+interface:
+  display_name: "H3 Viral Creative Rewrite"
+  short_description: "Turn template ads into MiniMax H3 clip packages"
+  default_prompt: "Use $viral-creative-rewrite-skill to turn a template ad video and my product image into a confirmed MiniMax H3 three-clip package."
+
+policy:
+  allow_implicit_invocation: true

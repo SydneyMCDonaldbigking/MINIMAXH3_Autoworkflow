@@ -17,7 +17,7 @@ until it is.
 | Driver 550.127.08 + PyTorch cu126 is a good combination | verified, and it is what every successful run has used |
 | A `cu130 optimized CUDA operations` startup warning is harmless here | verified, present during every successful run |
 | Black clips are a NaN latent, not a weak render | verified, constant `Y=16`, zero variation |
-| The 2026-08-09 black clips have an explanation | **YES, found later on 2026-08-10.** The A100 corrupts bf16 matrix multiplication non-deterministically. H3's Turbo LoRA runs in bf16, so sampling goes NaN and decodes to a constant frame. See `H3_A100_DRIVER_DIAGNOSTIC_2026-08-10.md` |
+| The 2026-08-09 black clips have an explanation | **YES, found later on 2026-08-10.** The A100 corrupts bf16 matrix multiplication non-deterministically. H3's Turbo LoRA runs in bf16, so sampling goes NaN and decodes to a constant frame. See `docs/history/H3_A100_DRIVER_DIAGNOSTIC_2026-08-10.md` |
 | The Ref2VA prompt format produces better video than the old prose format | **UNVERIFIED.** Format and a machine repair changed together |
 | The rewritten beef clip 01 prompt fixes the jitter | **UNVERIFIED.** Not generated even once |
 
@@ -93,7 +93,7 @@ The convolution check is the important one. On 2026-08-10 matmul and attention
 were perfectly healthy while every convolution failed, because CUDA 13 wheels
 left behind by a cu130 rollback had overwritten `nvidia-cudnn-cu12` in the
 shared `site-packages/nvidia/cudnn/lib/` directory. Sampling ran, `VAEDecode`
-died. Repair is in `SERVER_H3_RUNBOOK.md` section 1.
+died. Repair is in `docs/runbooks/SERVER_H3_RUNBOOK.md` section 1.
 
 If stages 1-4 are clean, run the paid stages:
 
@@ -108,14 +108,15 @@ machine; never skip stage 5.
 ## 3. Generate references before touching the A100
 
 ```powershell
-.\generate_reference_assets.ps1 -PrintOnly   # cost preview
-.\generate_reference_assets.ps1
+python generate_dish_assets.py <slug> --print-only   # cost preview
+python generate_dish_assets.py <slug>
+python generate_dish_assets.py <slug> --kinds cook_state,hero_state   # partial re-render
 ```
 
 Every 3x5s ad needs its protagonist, scene, prep-state, mid-state and
 final-state references generated first. The sequence JSONs refuse to run when
 these are missing, which is deliberate: A100 time is far more expensive than
-Seedream time. See `MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md`.
+Seedream time. See `docs/runbooks/MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md`.
 
 The prep-state reference carries real weight. It exists so H3 does not have to
 perform knife work on camera, which it does badly - see step 5.
@@ -135,7 +136,7 @@ audio, `ref_image_size: match`. About 13 minutes per clip, 39 minutes for three
 clips plus stitching, roughly $0.46 of A100 time at $0.713/hr.
 
 Four steps is not usable: whole objects render semi-transparent and doubled. See
-the step comparison in `MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md`.
+the step comparison in `docs/runbooks/MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md`.
 
 Sampling costs about 83 seconds per step on a 40 GB A100 **with no attention
 acceleration in the graph**. `--lowvram` and `NORMAL_VRAM` measured 83.7 and
@@ -145,10 +146,55 @@ streaming. Keep `--lowvram` for the headroom.
 This was previously written here as "the floor", which was wrong. That pair of
 measurements only rules out weight movement. The graph runs plain attention with
 no Sage, no chunked feed-forward and no sigma shift, and none of those has been
-tested. See `EXPERIMENT_PLAN_ACCELERATION.md`.
+tested. See `docs/history/EXPERIMENT_PLAN_ACCELERATION.md`.
 
 Final crop to exactly `1080x1920` is `crop=1080:1920:4:0`. This is a native-detail
 render plus a small side crop, not an upscale.
+
+## 4b. The one rule that cost a whole day: a reference beats your wording
+
+Every `<Picture N>` you attach is a fact the model will render. Text that merely
+*fails to mention* what the picture contains does not remove it, and text that
+*contradicts* the picture loses. On 2026-08-11 this same law broke five separate
+things before it was recognised as one law.
+
+| What the picture actually held | What the prompt said | What rendered |
+| --- | --- | --- |
+| A UMALL bag with a label and barcode | "no bag or wrapper anywhere in frame" | a bag with a fake label and a fake barcode |
+| The working state, so a wok **full** of the finished dish | "the vessel of `<Picture 3>`, already hot" | a wok of finished food, with raw mince tipped onto it |
+| The brand lockup | "allowed only as a real printed card" | a card with an invented product photograph on it |
+| The brand lockup | "far back near the wall" | the card sitting among the ingredients like a price tag |
+| Ribs described with the word "pale" | (nothing wrong, just the word) | pink, raw-looking meat |
+
+The fixes all have the same shape, and none of them is a negative:
+
+- **Describe what the photograph actually shows**, then control the framing.
+  "Frame the meat and the bare tray rim only: the printed label and barcode sit
+  outside the shot" works. "No packaging in frame" does not.
+- **State the starting state positively.** `vessel_start` exists because "already
+  hot" said nothing about whether the pan was empty. Now each dish says: cold
+  water and not yet lit; clear oil at temperature and nothing else; a film of oil
+  and no food yet.
+- **Demote the reference explicitly where it should not apply.** Clip 01 now
+  says `<Picture 3>` supplies the vessel's shape and position only, never its
+  contents, and its retention marker dropped to `weak_reference`.
+- **Say where a thing is not.** The brand card is "against the back wall and out
+  of focus, never beside or among the food and never part of the food display."
+- **Watch your adjectives.** "Pale" is accurate for simmered pork and it invited
+  pink. "Opaque grey-brown, fibres separating, no pink anywhere" does not.
+
+Best of all, **crop the reference so the wrong thing cannot be in it.** The pork
+mince photo had two trays, one labelled and one bare; cropping to the bare one
+ended that problem permanently. A reference that cannot show text cannot have its
+text invented.
+
+### And check the footage you are keeping
+
+When a fix only re-renders one clip, the new clip must match the clips that
+survive. A change to the prawn aromatics was written as "spring onion, ginger and
+Sichuan peppercorn, no garlic and no chilli" - while the already-shot clip 01 laid
+garlic and chilli out on the counter in plain view. Pull a frame from the
+surviving clips and write against what is in it, not against the config.
 
 ## 5. Write prompts to the official format, with our house rules on top
 
@@ -167,7 +213,7 @@ with `At MM:SS.mmm` cut times.
 The content rules are ours, derived from measuring our own output, because the
 official spec was written for full-step inference and we run a distilled Turbo
 LoRA at 8 steps. All of them live in
-`MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md`:
+`docs/runbooks/MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md`:
 
 - every beat is a directional action that completes inside its window, never a
   state to hold;
@@ -220,7 +266,7 @@ audio the pipeline had already generated and thrown away.
 
 ## 7. Brand rules
 
-Non-negotiable, from `BRAND_ASSETS.md`. English-region default is
+Non-negotiable, from `docs/reference/BRAND_ASSETS.md`. English-region default is
 `company_logo/AGO.png`, brand written as `ASIAN GROCER ONLINE / POWERED BY
 UMALL`. `UMALL.png` only when Chinese-region or mother-brand output is asked for
 explicitly. The logo may appear only as a real printed prop inside the scene,
@@ -257,7 +303,9 @@ show text cannot have its text invented.
   committing to a batch on any machine.
 - The rewritten `prompts/h3_3x5_1080/shuizhu_beef_roll_clip_01.md` has never
   been generated. Validate it before converting the other 17 prompt files.
-- `sequences/*_ascii_rgb.json` point at a deleted `runtime_sanitized_refs/`
-  directory and are based on a disproved theory. They cannot run as written.
+- ~~`sequences/*_ascii_rgb.json` point at a deleted `runtime_sanitized_refs/`
+  directory~~ Deleted 2026-08-11. All seven pointed at references that no longer
+  exist and encoded a theory the bf16 work disproved. Every remaining sequence
+  resolves all of its references.
 - Other `*-cu13` wheels remain installed on that server image. Only cuDNN was
   repaired, because that was the one blocking generation.

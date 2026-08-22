@@ -1,6 +1,6 @@
 Create a clean high-quality vertical reference image for a premium cooking commercial, 1080x1920.
 
-PURPOSE: character and kitchen style reference for MiniMax H3 Kung Pao chicken.
+PURPOSE: character and kitchen style reference for MiniMax H3 home-style Kung Pao chicken with cucumber and carrot.
 
 SCENE: a warm Chinese home kitchen, wood cabinets, a gas wok range, a few jars of seasoning on an open shelf, afternoon light from the left.
 
@@ -10,4 +10,4 @@ COMPOSITION: vertical 9:16, medium shot from a slightly high three-quarter angle
 
 STYLE: photorealistic commercial food cinematography, high quality, realistic hands, natural textures, rich but clean colour grade.
 
-NEGATIVE: subtitles, title cards, watermarks, floating logo, any printed card, any brand text, invented lettering, fake app UI, distorted face, extra fingers, warped cookware, messy kitchen, sweet and sour sauce, battered chicken, broccoli, carrots, western takeaway orange chicken, cheese, ketchup colour.
+NEGATIVE: subtitles, title cards, watermarks, floating logo, any printed card, any brand text, invented lettering, fake app UI, distorted face, extra fingers, warped cookware, messy kitchen, bell peppers, onion wedges, cashews instead of peanuts, peanuts stirred in early and gone soft, cucumber gone grey and limp, a thin watery sauce, chicken pink at the centre, restaurant kitchen, plastic packaging, sealed tray, product label, printed nutrition panel, barcode.

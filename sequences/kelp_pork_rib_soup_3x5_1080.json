@@ -51,8 +51,7 @@
         "../outputs/reference_assets/02_海带排骨汤/kelp_pork_rib_soup_mom_family_scene.png",
         "../outputs/reference_assets/02_海带排骨汤/kelp_pork_rib_soup_simmer_state.png",
         "../outputs/reference_assets/02_海带排骨汤/kelp_pork_rib_soup_family_hero_state.png",
-        "../sample_pictures/Umall海带排骨汤/排骨.png",
-        "../company_logo/AGO.png"
+        "../sample_pictures/Umall海带排骨汤/排骨.png"
       ],
       "seed": 202608090403,
       "prefix": "sequence/kelp_pork_rib_soup_3x5_native1080/clip-03"

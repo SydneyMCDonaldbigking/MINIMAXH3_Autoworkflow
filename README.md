@@ -19,9 +19,7 @@ before the route-specific documents below.
 ## Files
 
 - `CURRENT_WORKFLOW.md`: the current end-to-end working path. Start here.
-- `RENTAL_CHECKLIST.md`: how to accept a rented GPU and avoid the traps that cost two days.
-- `H200_DAY_PLAN.md`: one page, in order, for the next render session.
-- `EXPERIMENT_PLAN_ACCELERATION.md`: untested acceleration and sigma-shift experiments, with the baseline to beat.
+- `check_repo.py`: one-command repository validation.
 - `check_clip_quality.py`: technical QC gate for generated clips.
 - `server_scripts/diagnose_h3_black.sh`: staged probe ladder for black or failed output.
 - `h3_server_setup.py`: SSH bootstrap for installing/updating ComfyUI and H3.
@@ -29,21 +27,29 @@ before the route-specific documents below.
 - `image2_first_frame.py`: OpenRouter GPT Image 2 first-frame runner.
 - `cluster_runner.py`: local SSH cluster dispatcher for batch H3 jobs.
 - `h3_sequence_runner.py`: runs 3x5s MiniMax H3 clips sequentially and stitches them.
-- `generate_reference_assets.ps1`: generates protagonist, scene, mid-state, and final-state Seedream references before H3.
+- `h3_accel_shim.py`: stand-in for `h3_runner.py` that turns Sage attention on for a whole
+  sequence. Pass it as `h3_sequence_runner.py --runner h3_accel_shim.py`; neither stable
+  runner is modified. Worth 11.4% per clip on sm_89+, measured. Needs SageAttention 2.x
+  built from source - PyPI ships 1.x, which lacks the entry points the node names.
+- `generate_dish_assets.py`: generates the four (or five) reference images for a dish from its
+  config, chained so the cook and kitchen carry across. Replaces the per-dish PowerShell
+  scripts now in `scripts/superseded/`.
+- `generate_clip_prompts.py`: writes the three Ref2VA prompts and the sequence JSON from the
+  same config, so reference binding is never hand-written.
 - `prompts/COOKING_PROMPT_PRODUCTION_STANDARD.md`: recipe-grounded prompt package standard, including H3 prompts, Reels caption, subtitles, and source notes.
 - `prompts/templates/preproduction_package/`: tracked skeleton for the ignored `sequence_outputs/<dish>/preproduction/` package.
-- `BRAND_ASSETS.md`: local brand/logo memory for Image2 and MiniMax H3 jobs.
-- `SERVER_H3_RUNBOOK.md`: distilled server environment and workflow runbook.
-- `MIGRATION_A100_H3.md`: short A100 migration and production cheat sheet.
-- `BENCHMARKS_2026-08-09.md`: A100/L40 MiniMax H3 Turbo setup and speed results.
-- `MINIMAX_H3_15S_STORYBOARD_WORKFLOW.md`: one-shot 10s/15s storyboard + Image2 opening-frame workflow.
-- `MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md`: A100-40G native vertical 1080 workaround using three stitched 5s clips.
-- `IMAGE2_FIRST_FRAME_RUNBOOK.md`: `.env.local` setup and first-frame commands.
-- `CLUSTER_RUNNER.md`: multi-server batch runner documentation.
+- `docs/README.md`: index for runbooks, reference docs, and historical diagnostics.
+- `docs/reference/BRAND_ASSETS.md`: local brand/logo memory for Image2 and MiniMax H3 jobs.
+- `docs/runbooks/SERVER_H3_RUNBOOK.md`: distilled server environment and workflow runbook.
+- `docs/runbooks/MINIMAX_H3_3X5_NATIVE1080_WORKFLOW.md`: A100-40G native vertical 1080 workaround using three stitched 5s clips.
+- `docs/runbooks/CLUSTER_RUNNER.md`: multi-server batch runner documentation.
 - `servers.example.yaml`, `jobs.example.yaml`: cluster config templates.
 - `server_scripts/install_h3_turbo.sh`: server-side Turbo LoRA installer.
 - `server_scripts/run_h3_turbo_probe.sh`: server-side Turbo LoRA speed probe.
 - `workflows/*.json`: generated ComfyUI API JSON examples.
+
+Ignored local-only working files live under `local_artifacts/`, `outputs/`,
+`tools/`, and non-preproduction `sequence_outputs/` run folders.
 
 ## What must exist on the server
 
@@ -104,6 +110,12 @@ Validate all generated dish configs without overwriting production prompts:
 python generate_clip_prompts.py --all --check
 ```
 
+Run the full repository check:
+
+```bash
+python check_repo.py
+```
+
 Save the ComfyUI API workflow JSON without submitting:
 
 ```bash
@@ -119,10 +131,27 @@ python -m pip config set global.index-url https://mirrors.aliyun.com/pypi/simple
 python -m pip config set global.trusted-host mirrors.aliyun.com
 ```
 
-Use the PyTorch CUDA wheel that matches the current runbook:
+Use the PyTorch CUDA wheel that matches the current runbook, from a mirror.
+**`download.pytorch.org` is not usable from inside China.** This line used to
+point at it and cost a full hour of paid rental on 2026-08-12; the wheel is about
+2.5 GB and never finished. Measured on that machine, same moment, same box:
+
+| Index | Speed |
+| --- | ---: |
+| `download.pytorch.org` | 5 KB/s |
+| `pypi.tuna.tsinghua.edu.cn` | 337 KB/s |
+| **`mirrors.aliyun.com/pytorch-wheels`** | **952 KB/s** |
 
 ```bash
-python -m pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126 --extra-index-url https://mirrors.aliyun.com/pypi/simple/
+python -m pip install torch torchvision torchaudio   --index-url https://mirrors.aliyun.com/pytorch-wheels/cu124/   --extra-index-url https://mirrors.aliyun.com/pypi/simple/
+```
+
+Match the cu-version to what the driver reports. Test the index before starting,
+which takes eight seconds and would have saved that hour:
+
+```bash
+curl -s -o /dev/null -w "%{http_code} %{speed_download} B/s
+" --max-time 8   https://mirrors.aliyun.com/pytorch-wheels/cu124/
 ```
 
 Use Hugging Face mirror for the H3 model repo:
@@ -159,8 +188,8 @@ The current production baseline is:
 - Final crop to exact `1080x1920`
 
 Older `8188`, `comfy_h3`, cu124, and 4-step timings are historical benchmark or
-diagnostic context only. See `BENCHMARKS_2026-08-09.md` and
-`SERVER_H3_RUNBOOK.md` when investigating old runs.
+diagnostic context only. See `docs/history/BENCHMARKS_2026-08-09.md` and
+`docs/runbooks/SERVER_H3_RUNBOOK.md` when investigating old runs.
 
 ## LoRA note
 

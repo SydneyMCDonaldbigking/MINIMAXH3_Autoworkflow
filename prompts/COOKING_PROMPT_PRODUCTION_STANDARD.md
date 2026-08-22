@@ -142,6 +142,14 @@ The clip body must follow local H3 rules:
 Keep `overall_soundscape` and `non_diegetic_music` even for silent output; they
 shape motion and pacing, but native audio remains off unless explicitly chosen.
 
+For motion wording, apply the local keyword guide in
+`prompts/H3_MOTION_KEYWORDS.md`. In short 5s clips, fewer actions and smaller
+amplitude are more reliable. Prefer `locked-off`, `one controlled low
+movement`, `two slow broad pushes only`, `one slow folding sweep`, `pause so
+the texture stays readable`, and `hold still for the final half-second`. Avoid
+`quick`, `rapid`, `tosses through`, `wok shaking`, `airborne food`, repeated
+tool strokes, and layered camera movement during busy food motion.
+
 ## Reels Deliverables
 
 Write these with the prompts, not after the edit:
