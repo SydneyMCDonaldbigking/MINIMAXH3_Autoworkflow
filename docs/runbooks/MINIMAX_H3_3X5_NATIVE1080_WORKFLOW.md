@@ -310,6 +310,47 @@ above 20% overall / 25% in the last third. Do not gate on sharpness: the clip
 judged bad measured *sharper* per frame than the clip judged good, so per-frame
 sharpness does not separate the cases.
 
+**Render one clip, pull it back, look at frames, then render the next.**
+Written 2026-08-31 after a night that burned two full retake rounds on
+`homestyle_double_skin_milk` alone. The pattern that wasted the money: render
+all three clips (or all clips across several dishes) back to back, then pull
+the whole batch back and inspect it. `check_clip_quality.py` is a jitter/NaN
+gate, not a content check - it passed clip-01 of that dish twice while an egg
+yolk sat in the milk pour both times. By the time a human eye caught it, the
+GPU had already rendered the next two clips on top of the bad one, and every
+fix round meant re-paying for clips that were never wrong in the first place
+because `use_previous_last_frame_as_ref` chains clip 2 and 3 off clip 1's
+actual output.
+
+The fix is procedural, not technical: after every single clip finishes,
+`scp` it back and look at 3-4 frames (0, 1/3, 2/3, last) before queuing the
+next one - inside one dish's 3-clip chain, and especially before starting the
+next dish in a multi-dish batch. A batch of N dishes is not "start N renders,
+review N outputs later"; it is "render, pull, look, then start the next." This
+costs a few minutes of wall time per clip and is cheaper than any retake
+round, which is a minimum of one full clip's GPU time plus the chain clips
+downstream of it.
+
+**A reference image built for a later clip's job can silently outrank the
+text of an earlier clip that reuses it.** Same incident. The dish's `prep_state`
+reference image was written to serve clip 2 (egg already cracked and
+separated: yolks in one bowl, whites in another, sitting next to the milk) -
+correct for that clip. But the generic sequence-builder in
+`scripts/prepare_20260830_six_recipe_campaign.py` also wires every dish's
+`prep_state` image into clip 1 as `<Picture 2>`, and clip 1's own
+`retention_analysis` line says `<Picture 2>: fully_preserved... preserves the
+exact ingredients... exactly` - an instruction that, applied literally,
+includes the yolks the image happens to contain, even though clip 1's shot
+text never mentions an egg. H3 obeyed the reference over the text, twice, on
+two different seeds. Bumping the seed does not fix a reference-driven defect;
+it only fixes a stochastic one. Before treating a defect as "try another
+seed," open every image bound to the offending clip and check whether any of
+them physically contains the thing the prompt is trying to keep out. If one
+does and that content only belongs to a later clip in the chain, drop that
+picture from the earlier clip's `ref_images` (or point it at a different,
+already-clean asset in the same reference stack, e.g. `scene_anchor`) instead
+of re-rolling the seed against it.
+
 ### Story shape
 
 Write each clip as one physical commercial beat:

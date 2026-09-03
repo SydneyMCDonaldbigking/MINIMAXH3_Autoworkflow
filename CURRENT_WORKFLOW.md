@@ -165,6 +165,7 @@ things before it was recognised as one law.
 | The brand lockup | "allowed only as a real printed card" | a card with an invented product photograph on it |
 | The brand lockup | "far back near the wall" | the card sitting among the ingredients like a price tag |
 | Ribs described with the word "pale" | (nothing wrong, just the word) | pink, raw-looking meat |
+| `prep_state` reference built for clip 2 (egg already cracked, yolks visible in a bowl next to the milk) but also wired into clip 1's `<Picture 2>` because the generic sequence builder reuses the same four references for every clip | clip 1's `retention_analysis` said `<Picture 2>: fully_preserved... preserves the exact ingredients... exactly`, and clip 1's own shot text never mentions an egg at all | an egg yolk floating in the milk mid-pour, on two different seeds (2026-08-31, `homestyle_double_skin_milk`) |
 
 The fixes all have the same shape, and none of them is a negative:
 
@@ -187,6 +188,38 @@ Best of all, **crop the reference so the wrong thing cannot be in it.** The pork
 mince photo had two trays, one labelled and one bare; cropping to the bare one
 ended that problem permanently. A reference that cannot show text cannot have its
 text invented.
+
+**The law starts before H3 even runs: a Seedream reference image can ignore its
+own text, and the next reference image in the chain inherits the mistake.**
+`xian_beef_roujiamo`'s beef was specified as "chunky 8-12 mm pieces... never
+minced" in every one of `scene_anchor`, `prep_state`, `cook_state` and the H3
+shot text (2026-08-30/31) - four independent, explicit statements. It still
+rendered as visibly minced/shredded beef starting at `scene_anchor`, the very
+first image, most likely because the supplied product photo was scoped in the
+prompt as "the visual authority for the finished bread" shape only, but its
+filling texture leaked through anyway. `prep_state` and `cook_state` each use
+the previous image as one of their own references (see `build_jobs()` in
+`generate_dish_assets.py`), so the mince texture then propagated forward
+through two more generations that each *also* said "never minced" and still
+failed, because by then the picture, not the words, was the input. Nobody
+looked at `scene_anchor` before generating `prep_state` from it, or at
+`prep_state` before generating `cook_state` from it, so a defect present in
+the very first asset silently rode through the entire four-image chain and
+then into three paid H3 clips. Look at each reference image before generating
+the next one in its chain - the same discipline as step 6a, one stage earlier
+and even cheaper to catch.
+
+**A reference generated for a later clip's job does not become safe just
+because an earlier clip's text ignores it.** A generic sequence builder that
+wires the same four-or-so references into every clip of a dish (see
+`scripts/prepare_*_campaign.py`) will happily hand clip 1 a picture that was
+written to prove clip 2's state. When a clip shows content a prompt never
+asked for, do not reach for the seed first - open every `<Picture N>` that
+clip actually binds and check whether one of them physically contains the
+thing you are trying to keep out. If it does, that is not randomness and
+another seed will not fix it: drop that picture from the clip's `ref_images`
+or repoint it at a clean asset already in the stack (`scene_anchor` is usually
+egg/meat/whatever-free where a later-stage state image is not).
 
 ### And check the footage you are keeping
 
@@ -245,6 +278,178 @@ and 100 the napa cabbage was whole and uncut, destroying the one thing clip 01
 exists to prove. The gate measures luminance and motion; it cannot read the
 picture. **Look at frames 40, 60, 75, 100 of every clip before assembling.**
 
+## 5a. No-person dishes: "an unseen hand" is not a way to remove the hand
+
+Written 2026-08-31. Every "no-person" cooking dish (the whole
+2026-08-25/27/30 no-person campaigns) needs to show hand-typical actions -
+spreading peanut butter, tossing beef in a wok, folding eggs, tilting a bowl -
+with zero visible actor. The shot-writing pattern that spread across nearly
+every dish in that campaign was to describe the action normally and then deny
+the actor: "spreads once... **from an unseen action beyond the frame**; no
+knife, utensil, hand or person is visible", "the wok gives **one small unseen
+toss**... No person or hand is visible", "**An unseen spatula** gives one
+deliberate fold... no person is revealed", "folded once by **an unseen
+utensil**". Grep `unseen` under `sequence_outputs/*/preproduction/h3_prompts/`
+to see how many dishes carry this.
+
+This is the same law as section 4b in the opposite direction: the text asks
+for an action that physically implies an actor (something has to spread,
+toss, or fold) while simultaneously telling the model that actor cannot be
+shown. The model resolves the contradiction inconsistently - sometimes it
+invents the hand anyway (the `hong_kong_french_toast` clip 01 peanut-butter
+hand, the `homestyle_double_skin_milk` clip 02 pouring hand, both 2026-08-31,
+both fixed only by re-rendering, not by adding more "no hand" text, because
+the text already said "no hand" and lost).
+
+**How to apply:** do not describe a no-person action and then negate its
+actor. Instead:
+
+- **Cut around the action instead of animating it.** Show the before-state and
+  the after-state as two shots with a hard cut, and let the transition happen
+  off-camera between them, rather than writing a continuous "X spreads /
+  tosses / folds" motion for something with no actor.
+- **Give the motion a non-manual physical cause.** Gravity, tilt, heat and
+  steam do not need a hand: a bowl already propped at an angle so its contents
+  slide out, a pan already off the heat so its liquid settles, food already
+  moving because of its own weight. If the setup requires something to *start*
+  the tilt or the toss, that start is exactly what a hard cut should skip.
+- **If a mechanism must be shown, name a real one, not an absence.** "The wok
+  is lifted and given one toss by an off-frame mechanical arm" is a physical
+  claim the model can render. "An unseen toss happens" is not - it is a
+  negative wearing a verb.
+
+## 4c. Clip 1 gets handed the finished dish as a reference, and sometimes shows it
+
+Found 2026-08-31 by pulling frames all the way to the true last frame of an
+already-delivered clip, not just frames 0-30 - the specific gap that let this
+ship. `hong_kong_french_toast` clip 1's job is only "spread peanut butter,
+close the sandwich" - it should never be fried. Its last frame instead showed
+a fully golden, plated, condensed-milk-drizzled French toast: the clip-3 hero
+shot, rendered inside clip 1. The delivered clip 2 then opened by re-spreading
+peanut butter on a slice - an action clip 1 already completed - instead of
+continuing from "dry sandwich" into the egg dip. Two symptoms, one cause.
+
+The root cause is structural, not a one-off prompt mistake, and it is present
+in every dish generated by `scripts/prepare_20260830_six_recipe_campaign.py`'s
+`h3_prompt()` (verified in `hong_kong_french_toast`, `xian_beef_roujiamo`, and
+`homestyle_double_skin_milk` clip 1 alike):
+
+- **Clip 1's `ref_images` always includes every asset in the chain, including
+  `cook_state` and `hero_state`** - pictures of stages clip 1 has not reached
+  yet - with no `retention_analysis` line assigned to them at all. An attached
+  picture with no demotion is not neutral; see [[reference-beats-wording]].
+- **The closing "Across all shots retain..." paragraph always uses `p['food']`
+  verbatim** - the dish's *finished* description - regardless of `clip_no`. On
+  clip 2 and clip 3 that's correct; on clip 1 it is an explicit instruction to
+  retain deep-fried golden bread, or filled roujiamo, or set custard, in a
+  clip that is supposed to show none of those.
+
+Once clip 1 lands on the wrong state, `use_previous_last_frame_as_ref` hands
+that wrong state to clip 2 as `<Picture 1>`, labelled "the exact final frame
+of clip 01" - while clip 2's own `Shot 1` text still describes the *correct*
+prior state ("the dry assembled sandwich"). Reference and text now disagree
+about what clip 2 is starting from, and the observed failure mode was the
+model falling back to re-performing an earlier action instead of resolving
+the contradiction.
+
+**Fix applied 2026-08-31** to all three dishes' clip 1 prompt + sequence JSON:
+dropped every `ref_images` entry more advanced than what clip 1 actually shows
+(kept only `scene_anchor` + `prep_state` for toast, `+ cook_state` for
+roujiamo since its clip 1 does begin searing, `scene_anchor` alone for the
+milk dish since its clip 1 is pre-cook end to end), and rewrote each clip 1's
+closing paragraph to assert the *absence* of the finished state explicitly
+("no custard exists yet... that state belongs only to clips 2 and 3") instead
+of reciting the finished dish. Not yet re-rendered - text-only fix, done
+without spending GPU time, pending the next render pass.
+
+**Fixed 2026-08-31** in `scripts/prepare_20260830_six_recipe_campaign.py`:
+added `ref_kinds_for(p, clip_no)` (clip 1 defaults to `scene_anchor` +
+`prep_state` only; clip 2 adds `cook_state`; `hero_state` only ever attaches
+by default to clip 3) and `food_line_for(p, clip_no)` (clip 3 keeps
+`p['food']` verbatim; clip 1/2 use a per-dish `clip_states` phrase describing
+what that clip's own shots actually show, or a generic "has not reached the
+finished dish yet" guard if `clip_states` is undefined for that clip). New
+optional per-dish keys: `clip1_cooks` (adds `cook_state` back to clip 1 for a
+dish like `xian_beef_roujiamo` whose clip 1 genuinely starts cooking),
+`clip2_near_finished` (adds `hero_state` back to clip 2 for a dish whose clip
+2 ends essentially plated), `clip1_exclude` (drops a named kind from clip 1
+even past the default - `homestyle_double_skin_milk` uses this to drop
+`prep_state`, whose image is correct for clip 2 but contains yolks that don't
+belong in clip 1). `clip_states` and the three flags are populated for the
+three dishes fixed by hand tonight; the other three dishes fall back to the
+generic guard sentence and would benefit from real `clip_states` phrases the
+next time they're touched. Verified: all 18 clip prompts across all 6 dishes
+regenerate with every `<Picture N>` used actually declared in
+`subject_definitions` (a real bug caught in this pass - `food_ref` pointed
+past the end of the picture list for `homestyle_double_skin_milk` clip 1
+before the fallback was added), and all 18 pass `prompts/validate_prompt.py`.
+Re-running `package()` for an already-hand-tuned dish still clobbers that
+tuning (see the caution comment above `package()`'s prompt-writing loop) -
+this fix changes what a *fresh* run produces, it does not make overwriting
+safe.
+
+**Also check the true last frame, not just early ones.** The QC gate and the
+earlier frame-check discipline (step 6a) sampled frames 0-30 of a 124-frame
+clip and missed this because the defect is a last-frame problem. Sample at
+minimum the actual last frame of every clip, not a fixed early offset.
+
+## 5b. Every clip uses the identical cut timing and shot-size formula, and it shows
+
+Found 2026-08-31 while checking why the finished ads feel rhythmically flat.
+Across the whole recent output (`sequence_outputs/*/preproduction/h3_prompts/`,
+87 clips checked):
+
+- **The cut points are the same two timestamps in nearly every clip, ever.**
+  87 of 87 clips cut `[Shot 2]` at `At 00:01.600` and 85 of 87 cut `[Shot 3]`
+  at `At 00:03.400`. That is `COOKING_PROMPT_PRODUCTION_STANDARD.md`'s
+  documented default, applied as if it were the only legal value.
+- **The shot-size progression is the same formula in nearly every clip.**
+  `[Shot 1]` is "a locked 45mm high three-quarter [surface]-counter shot
+  begins on..." word for word across dish after dish. `[Shot 2]` is always a
+  75-85mm insert. `[Shot 3]` is always a 60-65mm side or hero shot. Swap the
+  countertop material and the ingredient nouns and it is the same clip.
+
+The 3-shot count and the 8-step setting are real, tested reliability findings
+(see the step-count table above and "every beat must be a directional action
+that completes inside its window") - that part should not change. What was
+never tested is what happens when *every clip of every dish* uses the exact
+same internal rhythm: 1.6s wide lock-off, 1.8s medium insert, 1.6s close
+hero, forever. Watched back to back across a multi-dish batch, or even within
+one dish's own three clips, the pacing reads as mechanical because it
+literally is the same mechanism every time, regardless of what the beat
+actually needs. A hero payoff and a mid-process insert do not need the same
+shot length or the same lens jump to feel right, and right now they always
+get it.
+
+This is an open item, not yet fixed: the fix needs to vary the internal
+split (e.g. a hero-landing clip holding its final shot longer, a fast-reveal
+clip cutting earlier) and the lens progression per beat's actual content,
+while keeping shot count at 3 and keeping every beat a directional action -
+the two constraints that are actually load-bearing for quality. Do not widen
+this by adding more shots or longer holds without re-testing against
+`check_clip_quality.py`'s camera-jitter numbers; the 3-shot, fast-cut
+structure was chosen for a measured reason and any pacing fix has to keep
+that reason intact.
+
+## 6a. Render one clip, pull it, look at it, only then render the next
+
+Written 2026-08-31 after a night that spent two full retake rounds on one dish
+because this step was skipped. `check_clip_quality.py` is a jitter/NaN gate; it
+cannot see an egg yolk that should not be there. The only thing that catches a
+content defect is a human looking at frames, and that has to happen **before**
+the next clip renders, not after a whole batch finishes:
+
+- Inside one dish's 3-clip chain: clip 2 and clip 3 both carry clip 1's actual
+  last frame forward (`use_previous_last_frame_as_ref`). If clip 1 is wrong,
+  clip 2 and clip 3 are guaranteed wrong too, and you pay for all three before
+  finding out. `scp` clip 1 back and check it before clip 2 starts.
+- Across a multi-dish batch: "render N dishes, then review N outputs" turns
+  one bad reference or one bad prompt line into N re-renders instead of one.
+  Render a dish, pull it back, check it, then start the next dish.
+- This is slower per clip and cheaper overall. A retake round costs at least
+  one full clip's GPU time plus everything chained after it; a mid-batch frame
+  check costs a couple of minutes.
+
 ## 6b. Audio
 
 H3 samples audio in the same pass as video. `--no-audio` only discards it at save
@@ -299,8 +504,8 @@ show text cannot have its text invented.
 
 ## Open items
 
-- The 2026-08-09 black-video cause is unknown. Run one clip and gate it before
-  committing to a batch on any machine.
+- The 2026-08-09 black-video cause is unknown, on top of the content-defect
+  case for the same discipline: see step 6a.
 - The rewritten `prompts/h3_3x5_1080/shuizhu_beef_roll_clip_01.md` has never
   been generated. Validate it before converting the other 17 prompt files.
 - ~~`sequences/*_ascii_rgb.json` point at a deleted `runtime_sanitized_refs/`
