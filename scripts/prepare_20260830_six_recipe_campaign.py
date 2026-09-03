@@ -268,6 +268,24 @@ def write(path: Path, text: str) -> None:
     path.write_text(text.rstrip() + "\n", encoding="utf-8", newline="\n")
 
 
+# 2026-08-31: restores the per-kind framing distance that
+# generate_dish_assets.py's TEMPLATES always specified (close-up for
+# prep_state/cook_state, a ~30-degree close hero angle for hero_state) and
+# this script's generic single line had dropped, collapsing every kind to
+# "one clear food state" with no distance or angle at all. Without an
+# explicit close-up instruction the model defaults to a single wide shot for
+# every kind, which is what produced e.g. xian_beef_roujiamo's scene_anchor
+# showing the finished sandwich twice plus two spare flatbreads plus every
+# prop in one frame - correct scope for scene_anchor, wrong for the other
+# three, which is exactly why they read as cluttered.
+COMPOSITION_BY_KIND = {
+    "scene_anchor": "vertical 9:16, medium shot from a slightly high three-quarter angle - the widest shot in this dish's set. Every ingredient, vessel and kitchen surface stays legible.",
+    "prep_state": "vertical 9:16, close-up from a high three-quarter angle. Every cut size and every component fills most of the frame and is clearly legible.",
+    "cook_state": "vertical 9:16, close-up at vessel height looking slightly down. The ingredient state and the heat source fill most of the frame and stay legible.",
+    "hero_state": "vertical 9:16, close hero food angle from about 30 degrees above. The dish and its vessel fill most of the frame; the texture and gloss of the finished dish are the subject.",
+}
+
+
 def reference_prompt(p: dict, kind: str) -> str:
     source_line = ""
     if kind == "scene_anchor" and p["source_products"]:
@@ -280,10 +298,10 @@ Scene/backdrop: {p['scene']}.
 Subject: {p['states'][kind]}
 Food authority: {p['food']}.
 Style/medium: premium photorealistic grocery food-commercial still, genuine cookware, credible food texture, physically plausible heat, steam or liquid behaviour.
-Composition/framing: vertical 9:16, one clear food state, no face, body, portrait, person, hand, shadow or reflection.
+Composition/framing: {COMPOSITION_BY_KIND[kind]} No face, body, portrait, person, hand, shadow or reflection.
 Lighting/mood: precise directional food light, coherent shadows and clean high-end highlights.
 Constraints: {p['logic']} No fake labels, captions, price graphics, watermarks, invented products or unrelated dishes.
-Avoid: warped tools, melted food, excessive steam, clutter, fake app interface and any human visibility.
+Avoid: warped tools, melted food, excessive steam, clutter, fake app interface, duplicate servings of the same dish in one frame, and any human visibility.
 """
 
 
@@ -365,6 +383,25 @@ def food_line_for(p: dict, clip_no: int) -> str:
             f"preview the completed, plated dish.")
 
 
+def food_sequence_line_for(p: dict, clip_no: int) -> str:
+    """The retention_analysis 'Food sequence' line. `p['logic']` narrates the
+    whole recipe end to end and is only correct verbatim once the clip
+    actually reaches the end (clip 3). Reciting it marked fully_preserved on
+    clip 1/2 was a second place the finished-state leak fixed 2026-08-31
+    could still enter after `food_line_for()` scoped the closing paragraph -
+    this line sits inside retention_analysis carrying the same strong marker
+    every <Picture N> line uses.
+    """
+    if clip_no == 3:
+        return p["logic"]
+    interim = p.get("clip_states", {}).get(clip_no)
+    if interim:
+        return f"This clip covers only: {interim}"
+    return (f"This clip has not yet reached the finished {p['en']}; only the "
+            f"ingredient and cooking state shown in this clip's own shots is "
+            f"true here.")
+
+
 def h3_prompt(p: dict, clip_no: int) -> str:
     kinds = ref_kinds_for(p, clip_no)
     prior = [f"the exact final frame of clip {clip_no - 1:02d}"] if clip_no > 1 else []
@@ -402,7 +439,7 @@ reference generation. A five-second vertical no-person food commercial, clip {cl
 retention_analysis:
 <Subject 1>: fully_preserved. Food, ingredient sizes, cookware, liquid behaviour and all no-person restrictions remain physically coherent.
 {retention_block}
-Food sequence: fully_preserved. {p['logic']}
+Food sequence: fully_preserved. {food_sequence_line_for(p, clip_no)}
 Human visibility: fully_preserved. Never reveal a face, head, torso, arm, hand, reflection, shadow or portrait.
 
 detailed_description:

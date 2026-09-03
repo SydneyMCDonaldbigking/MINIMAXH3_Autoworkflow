@@ -278,6 +278,22 @@ and 100 the napa cabbage was whole and uncut, destroying the one thing clip 01
 exists to prove. The gate measures luminance and motion; it cannot read the
 picture. **Look at frames 40, 60, 75, 100 of every clip before assembling.**
 
+## 5a-0. Retired: the no-person rule itself, and why
+
+**Superseded 2026-09-03.** Every dish from the 2026-08-25/27/30 campaigns was
+written "no person, no hand, no reflection", and section 5a below documents
+how much damage that cost. The user's call after watching a real render put a
+celadon bowl in mid-air pouring its own milk: **stop avoiding hands.** A cook's
+hand and forearm may perform any hand-typical action; only the face, body,
+human reflection and human shadow stay out of frame.
+
+The evidence is one-sided. Under the no-hand rule, the same beat produced a
+bowl hovering unsupported with milk streaming out of it. With the wording
+changed to "one hand tilts the celadon bowl and pours", the identical beat
+came back clean on the first try - natural grip, grounded vessel, no
+artefacts. Do not reintroduce a blanket no-hand rule on a dish that has
+manual actions in it. Read 5a as the diagnosis, not as a live constraint.
+
 ## 5a. No-person dishes: "an unseen hand" is not a way to remove the hand
 
 Written 2026-08-31. Every "no-person" cooking dish (the whole
@@ -388,10 +404,41 @@ tuning (see the caution comment above `package()`'s prompt-writing loop) -
 this fix changes what a *fresh* run produces, it does not make overwriting
 safe.
 
+**Second leak found and fixed same night, after the first fix was already
+believed complete:** `retention_analysis`'s `Food sequence: fully_preserved.
+{p['logic']}` line was untouched by the first pass - `p['logic']` narrates
+the *whole* recipe end to end (for roujiamo: "...Toast the flatbread until
+golden... fill it while the bread remains visibly flaky") and was reciting
+that, marked `fully_preserved`, inside clip 1's own prompt even after
+`ref_images` and the closing paragraph were both fixed. Added
+`food_sequence_line_for()`, same `clip_states` mechanism as `food_line_for()`.
+Lesson: when a finished-state leak is found in one field, grep the rest of
+the template for the same unconditional variable before calling the fix
+complete - `p['logic']`/`p['food']` are both dish-wide, clip_no-blind strings
+and either one can leak wherever it's interpolated without a clip_no guard.
+
 **Also check the true last frame, not just early ones.** The QC gate and the
 earlier frame-check discipline (step 6a) sampled frames 0-30 of a 124-frame
 clip and missed this because the defect is a last-frame problem. Sample at
 minimum the actual last frame of every clip, not a fixed early offset.
+
+## 4d. Reference-image composition needs a distance per kind, not one line for all four
+
+Found 2026-08-31. `generate_dish_assets.py`'s `TEMPLATES` always gave each
+reference kind its own framing distance: close-up for `prep_state` and
+`cook_state`, a ~30-degree close hero angle for `hero_state`, a wider medium
+shot only for the character/scene reference. `scripts/prepare_20260830_six_recipe_campaign.py`'s
+`reference_prompt()` collapsed all four kinds to one generic line -
+"vertical 9:16, one clear food state" - with no distance or angle at all.
+Without an explicit close-up instruction the model defaults to one wide shot
+regardless of kind: `xian_beef_roujiamo`'s `scene_anchor` came back showing
+the finished filled sandwich twice (once plated, once loose) plus two spare
+unfilled flatbreads plus every prop in the kitchen in one frame - correct
+scope for `scene_anchor` (it's supposed to be the wide establishing shot),
+symptomatic everywhere else, since `prep_state`/`cook_state`/`hero_state`
+never got told to be close-ups at all. Fixed by adding `COMPOSITION_BY_KIND`
+to the campaign script, restoring the per-kind distance/angle language from
+the original templates.
 
 ## 5b. Every clip uses the identical cut timing and shot-size formula, and it shows
 
@@ -431,6 +478,46 @@ this by adding more shots or longer holds without re-testing against
 structure was chosen for a measured reason and any pacing fix has to keep
 that reason intact.
 
+## 5c. One clip, one job - and a reference image for every state it must prove
+
+Learned 2026-09-03 on `homestyle_double_skin_milk`, and it applies to H3
+exactly as it did to the model tested that day.
+
+**A 5s clip carries one transition, not four.** Segment 2 was written to hold
+the egg separation, the sugar, the whisking, the sieving, the wrapping and
+the pot - six beats in five seconds. The render silently dropped the one that
+mattered: it never separated the eggs, and tipped both whole yolks into the
+milk. Split into two clips, one for the separation and one for everything
+after, both came back correct on the first attempt. When a clip's beat list
+grows past two real state changes, split the clip; it is far cheaper than a
+retake.
+
+**Every state a clip has to prove needs its own reference image.** The
+separation failed partly because no asset in the reference library ever
+showed it: `cracked_egg_state` is before the split, `egg_white_mix_state` is
+already mixed, and nothing in between existed - the model was asked to invent
+a transition it had never been shown. Same for the unwrapping: with no image
+of "lid off, film still sealed", the render peeled the film up attached to
+the lid as one object. Generating `egg_separated_state` and
+`lid_off_film_on_state` and anchoring each clip's `last_frame`/`first_frame`
+on them fixed both. **Grep the shot list for state changes, then check the
+asset directory has a picture of each one; generate the missing ones first.**
+Image generation is a few cents, a bad clip is dollars.
+
+**Do not compare the dish to another dish, even for texture.** The hero
+prompt said the custard's top should look "like a crème caramel or panna
+cotta surface" - purely as a texture cue - and the render added crème
+caramel's browned caramel ring around the edge. Describe the target's own
+colour and finish positively ("uniform pale ivory-white, no browning, no
+caramelisation, no amber ring") instead of naming a different dish.
+
+**Lock the vessel across the whole dish.** The hero bowl was shrunk on its
+own to fix an "oversized" complaint, which broke continuity with the wide
+bowl used in every cooking shot - a bowl cannot change size mid-recipe. Every
+reference for one dish should name the same vessel explicitly ("the same wide
+crackle-glazed celadon bowl used throughout, never a smaller one") and chain
+off a reference image that already shows it.
+
 ## 6a. Render one clip, pull it, look at it, only then render the next
 
 Written 2026-08-31 after a night that spent two full retake rounds on one dish
@@ -446,6 +533,15 @@ the next clip renders, not after a whole batch finishes:
 - Across a multi-dish batch: "render N dishes, then review N outputs" turns
   one bad reference or one bad prompt line into N re-renders instead of one.
   Render a dish, pull it back, check it, then start the next dish.
+- Sample densely enough to see a *transition*, not just a state. 2026-09-03: a
+  clip was checked at ~0.6s intervals, passed, and was reported as good; the
+  user then found whole egg yolks being poured into the milk. Re-extracting at
+  0.25s intervals showed it plainly - the entire wrong action lived between
+  two sampled frames. A defect that is a motion (something entering, merging,
+  being carried, being uncovered) can hide completely in a 0.6s gap. Use
+  every 6th frame (`select='not(mod(n\,6))'`, 0.25s at 24fps) for any clip
+  whose beats involve pouring, separating, transferring or uncovering, and
+  always look at the true last frame.
 - This is slower per clip and cheaper overall. A retake round costs at least
   one full clip's GPU time plus everything chained after it; a mid-batch frame
   check costs a couple of minutes.
@@ -501,6 +597,55 @@ negatives list, so the fix is not to forbid what the image contains:
 
 Better still, crop the reference so only food is in it. A reference that cannot
 show text cannot have its text invented.
+
+## 8. Seedance: evaluated once on 2026-09-03, not the production route
+
+**MiniMax H3 remains the primary route.** This section records a one-day
+evaluation of ByteDance Seedance so the next person does not have to
+rediscover the API or the price, not a migration.
+
+What it is: `bytedance/seedance-2.0` through OpenRouter's video endpoint,
+billed on the same `OPENROUTER_API_KEY` in `.env.local` that
+`image2_first_frame.py` already uses. No GPU rental, no ComfyUI, no model
+downloads - which is the whole appeal, and the reason it was worth a test.
+
+```text
+POST https://openrouter.ai/api/v1/videos     -> 202 + {id, polling_url}
+GET  https://openrouter.ai/api/v1/videos/{id} -> poll until status=completed
+GET  .../videos/{id}/content?index=0          -> the mp4
+GET  https://openrouter.ai/api/v1/videos/models -> real capability table
+```
+
+Measured facts:
+
+| | |
+| --- | --- |
+| Native output | 1080x1920, 24fps, 5.04s - **no crop step**, unlike H3's 1088→1080 |
+| Cost | **$1.87 per 5s 1080p clip**, flat across all 10 clips run |
+| Wall time | 3-6 min per clip |
+| Duration range | 4-15s in one job (2.5 goes to 30s) |
+| Frame control | `frame_images` with `frame_type` `first_frame` / `last_frame` |
+| Style/identity refs | `input_references` array, separate from frame anchors |
+| Chaining | no `return_last_frame` passthrough on 2.0 - extract the last frame with ffmpeg yourself, same as `h3_sequence_runner.py` does |
+
+Compare on cost: seven delivered clips cost about $13 of API against roughly
+$0.15-0.46 of GPU time per H3 clip - Seedance is an order of magnitude more
+expensive per clip, and that is before counting retakes. It buys away the
+rental, the driver acceptance test, the 60GB of weights and the setup hour.
+For a two-dish one-off with the servers down it was the right call; for a
+six-dish batch it is not.
+
+One prompting difference worth keeping: **on Seedance, extra
+`input_references` did not help and detailed prose did.** The clip that poured
+whole yolks into the milk had two supporting reference images attached and
+ignored both; rewriting the same beat with the separation spelled out in
+sentences fixed it. User's rule for this model: 少量参考图,多写 prompt. H3's
+behaviour is the opposite (section 4b - a picture beats the wording), so do
+not carry this habit back into H3 prompts.
+
+Everything else learned that day - hands over unseen actors (5a-0), one clip
+one job, a reference image per state, no cross-dish metaphors, locked vessels
+(5c), dense frame sampling (6a) - is model-independent and applies to H3.
 
 ## Open items
 
