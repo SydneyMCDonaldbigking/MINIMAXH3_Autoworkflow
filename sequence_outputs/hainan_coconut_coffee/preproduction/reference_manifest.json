@@ -1,0 +1,20 @@
+{
+  "product": "椰奶咖啡",
+  "dish_identity": "a tall iced coconut coffee with clear ice cubes, dark freshly pulled coffee and smooth ivory coconut milk, finished as a natural dark-to-ivory swirl with no whipped cream, no boba and no syrupy foam cap",
+  "physical_sign_reference": "../../../company_logo/AGO.png",
+  "source_product_images": [
+    "outputs/reference_assets/48_hainan_coconut_coffee/source_products/hainan_coconut_milk_carton.png"
+  ],
+  "assets": {
+    "scene_anchor": "outputs/reference_assets/48_hainan_coconut_coffee/generated/hainan_coconut_coffee_scene_anchor-1.png",
+    "prep_state": "outputs/reference_assets/48_hainan_coconut_coffee/generated/hainan_coconut_coffee_prep_state-1.png",
+    "cook_state": "outputs/reference_assets/48_hainan_coconut_coffee/generated/hainan_coconut_coffee_cook_state-1.png",
+    "hero_state": "outputs/reference_assets/48_hainan_coconut_coffee/generated/hainan_coconut_coffee_hero_state-1.png"
+  },
+  "generation_order": [
+    "scene_anchor",
+    "prep_state",
+    "cook_state",
+    "hero_state"
+  ]
+}

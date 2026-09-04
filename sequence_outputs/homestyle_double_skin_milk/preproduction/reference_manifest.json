@@ -1,0 +1,22 @@
+{
+  "product": "家常双皮奶",
+  "dish_identity": "a warm ivory double-skin milk custard made only from full-fat milk, egg white and sugar, with a visibly delicate intact top milk skin and a glossy tender set beneath, served plain without fruit, beans, boba, cream or heavy garnish",
+  "physical_sign_reference": "../../../company_logo/AGO.png",
+  "source_product_images": [],
+  "assets": {
+    "scene_anchor": "outputs/reference_assets/53_homestyle_double_skin_milk/generated/homestyle_double_skin_milk_scene_anchor-1.png",
+    "prep_state": "outputs/reference_assets/53_homestyle_double_skin_milk/generated/homestyle_double_skin_milk_prep_state-1.png",
+    "cook_state": "outputs/reference_assets/53_homestyle_double_skin_milk/generated/homestyle_double_skin_milk_cook_state-1.png",
+    "hero_state": "outputs/reference_assets/53_homestyle_double_skin_milk/generated/homestyle_double_skin_milk_hero_state-1.png",
+    "cracked_egg_state": "outputs/reference_assets/53_homestyle_double_skin_milk/generated/homestyle_double_skin_milk_cracked_egg_state-1.png",
+    "egg_white_mix_state": "outputs/reference_assets/53_homestyle_double_skin_milk/generated/homestyle_double_skin_milk_egg_white_mix_state-1.png"
+  },
+  "generation_order": [
+    "scene_anchor",
+    "prep_state",
+    "cook_state",
+    "hero_state",
+    "cracked_egg_state",
+    "egg_white_mix_state"
+  ]
+}

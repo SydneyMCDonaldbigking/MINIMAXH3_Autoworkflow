@@ -1,0 +1,7 @@
+Use case: photorealistic-natural
+Asset type: vertical 9:16 no-person MiniMax H3 R2V reference image for a double-skin-milk cooking commercial
+Primary request: create the egg-white and milk mixing state between separated egg whites and the filtered, steam-ready bowl.
+Scene/backdrop: keep the exact Shunde dessert kitchen, honey-oak counter, milk-white enamel wall panels, brass shelf rails, pale celadon bowls, saucepan and compact stainless steaming pot from the other references.
+Subject: drained warm milk, white sugar and the previously separated raw egg white are in one clear glass mixing bowl. The raw egg white is translucent with a slight warm pale-yellow tint before mixing; after two gentle whisk turns it becomes a uniform pale ivory liquid with zero foam, bubbles or egg strands. The original wide pale celadon bowl - the same large crackle-glazed celadon bowl used throughout this dish, never a small one - with its intact first milk skin remains beside it, with a fine sieve ready. Every bowl rests statically on the counter; nothing is mid-pour, tilted or airborne.
+Composition/framing: vertical 9:16 close three-quarter food process image, with all bowls resting naturally on the counter.
+Constraints: no person, hand, floating egg, shell, package, tabletop card, caption, fruit, beans, boba, cream, opaque white egg white, colourless-water egg white, broken milk skin, a different pot or a different kitchen.

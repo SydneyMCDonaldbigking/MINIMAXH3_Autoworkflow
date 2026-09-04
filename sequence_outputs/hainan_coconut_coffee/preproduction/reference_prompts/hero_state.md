@@ -1,0 +1,12 @@
+Use case: ads-marketing
+Asset type: no-person MiniMax H3 R2V reference image for a vertical food commercial
+Primary request: create the hero state reference for Iced Hainan Coconut Coffee.
+Input image: Image 1 is the approved ASIAN GROCER ONLINE / powered by UMALL tabletop sign artwork; preserve it only where the scene asks for a physical tabletop card. 
+Scene/backdrop: a working Hainan coffee kitchen with sea-glass teal terrazzo prep surfaces, warm weathered teak shelves, pale sand plaster, a brushed stainless espresso machine and palm-filtered morning light; visible food-prep equipment, never café seating or a drink bar.
+Subject: Final no-person drink hero in the working Hainan coffee kitchen: a tall clear ribbed glass holds clear ice in an iced coconut coffee that has been stirred until the coffee and coconut milk blend into one even, glossy light-brown colour throughout - no visible layers, streaks or gradient - on a sea-glass terrazzo prep counter. A brushed-stainless espresso machine and small kitchen shelves softly blur behind. One tiny espresso bean saucer sits aside only as a subtle coffee cue. The drink remains glossy, cold and believable; no café seating, outdoor view, carton, tabletop card, people, hands, straws, boba or whipped cream.
+Food authority: a tall iced coconut coffee, stirred until the coffee and coconut milk blend into one even light-brown colour, with no whipped cream, no boba and no syrupy foam cap.
+Style/medium: premium photorealistic grocery food-commercial still, genuine cookware, credible food texture, physically plausible heat, steam or liquid behaviour.
+Composition/framing: vertical 9:16, close hero food angle from about 30 degrees above. The glass fills most of the frame; the drink's colour and gloss are the subject. No face, body, portrait, person, hand, shadow or reflection.
+Lighting/mood: precise directional food light, coherent shadows and clean high-end highlights.
+Constraints: Build the drink in a tall chilled clear glass: add clear ice cubes, pour strong cold espresso over the ice, pour the supplied coconut milk in, then stir until the two liquids blend into one even light-brown colour throughout. The finished drink must be cold, glossy and drinkable, evenly coloured rather than layered, muddy or artificially striped. No fake labels, captions, price graphics, watermarks, invented products or unrelated dishes.
+Avoid: warped tools, melted food, excessive steam, clutter, fake app interface and any human visibility.
