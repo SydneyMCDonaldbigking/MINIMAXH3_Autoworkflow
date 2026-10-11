@@ -1,0 +1,12 @@
+Use case: ads-marketing
+Asset type: no-person MiniMax H3 R2V reference image for a vertical food commercial
+Primary request: create the prep state reference for Xi'an Beef Roujiamo.
+Input image: Image 1 is the approved ASIAN GROCER ONLINE / powered by UMALL tabletop sign artwork; preserve it only where the scene asks for a physical tabletop card. 
+Scene/backdrop: a distinctive Xi'an street-food kitchen with pale limestone arch walls, charcoal-grey basalt worktops, a low black iron flatbread griddle, burnished brass spice tins, smoky olive linen and late-afternoon side light.
+Subject: Top three-quarter no-person preparation image in the Xi'an limestone-and-basalt kitchen: chunky 8–12 mm tender braised-beef pieces, fresh bright-green 8–10 mm pepper pieces and a small dark dish of light soy sauce remain clearly separate beside a smoking-hot black wok. A round layered flaky flatbread is still unfilled nearby. No tabletop card, face, body, hand, package, cheese or salad.
+Food authority: a golden flaky layered round roujiamo flatbread, split only enough to hold moist soy-glazed chopped beef and fresh bright-green pepper pieces, with crisp toasted layers and no mayonnaise, cheese, salad leaves or pulled-pork texture.
+Style/medium: premium photorealistic grocery food-commercial still, genuine cookware, credible food texture, physically plausible heat, steam or liquid behaviour.
+Composition/framing: vertical 9:16, one clear food state, no face, body, portrait, person, hand, shadow or reflection.
+Lighting/mood: precise directional food light, coherent shadows and clean high-end highlights.
+Constraints: Use the supplied product photo as the visual authority for the finished bread: it is a round, layered, pan-toasted flaky flatbread rather than a soft western bun. Start with already braised tender beef chopped into uneven 8–12 mm short pieces and fresh 8–10 mm green-pepper pieces. Sear the beef in a very hot black wok, add green pepper only when the beef is fragrant, then drizzle a small amount of light soy sauce around the hot wok edge and toss quickly until it reduces to a thin brown glaze. The peppers stay bright, crisp-tender and distinct; the beef stays chunky and moist, never minced, puréed or soupy. Toast the flatbread until golden, crisp and layered, split it partially, then fill it while the bread remains visibly flaky. No fake labels, captions, price graphics, watermarks, invented products or unrelated dishes.
+Avoid: warped tools, melted food, excessive steam, clutter, fake app interface and any human visibility.

@@ -1,0 +1,18 @@
+{
+  "product": "印尼风味烤鸡腿",
+  "dish_identity": "one fully cooked bone-in chicken leg with natural deep-mahogany kecap-manis glaze, controlled caramelised char at the edges, bright lime, a small sambal dish and a few cucumber slices, never breaded, saucy or pink inside",
+  "physical_sign_reference": "../../../company_logo/AGO.png",
+  "source_product_images": [],
+  "assets": {
+    "scene_anchor": "outputs/reference_assets/52_indonesian_grilled_chicken_leg/generated/indonesian_grilled_chicken_leg_scene_anchor-1.png",
+    "prep_state": "outputs/reference_assets/52_indonesian_grilled_chicken_leg/generated/indonesian_grilled_chicken_leg_prep_state-1.png",
+    "cook_state": "outputs/reference_assets/52_indonesian_grilled_chicken_leg/generated/indonesian_grilled_chicken_leg_cook_state-1.png",
+    "hero_state": "outputs/reference_assets/52_indonesian_grilled_chicken_leg/generated/indonesian_grilled_chicken_leg_hero_state-1.png"
+  },
+  "generation_order": [
+    "scene_anchor",
+    "prep_state",
+    "cook_state",
+    "hero_state"
+  ]
+}

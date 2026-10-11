@@ -1,0 +1,17 @@
+{
+  "product": "Silky Steamed Egg Custard",
+  "dish_identity": "a smooth pale-golden Chinese steamed egg custard made from whisked egg, warm water and light soy sauce, finished with a few drops of sesame oil and scallion",
+  "physical_sign_reference": "../../../company_logo/AGO.png",
+  "assets": {
+    "scene_anchor": "outputs/reference_assets/44_silky_steamed_egg_custard/generated/silky_steamed_egg_custard_scene_anchor-1.png",
+    "prep_state": "outputs/reference_assets/44_silky_steamed_egg_custard/generated/silky_steamed_egg_custard_prep_state-1.png",
+    "cook_state": "outputs/reference_assets/44_silky_steamed_egg_custard/generated/silky_steamed_egg_custard_cook_state-1.png",
+    "hero_state": "outputs/reference_assets/44_silky_steamed_egg_custard/generated/silky_steamed_egg_custard_hero_state-1.png"
+  },
+  "generation_order": [
+    "scene_anchor",
+    "prep_state",
+    "cook_state",
+    "hero_state"
+  ]
+}

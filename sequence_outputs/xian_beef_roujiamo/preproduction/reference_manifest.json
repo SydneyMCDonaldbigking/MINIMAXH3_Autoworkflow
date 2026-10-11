@@ -1,0 +1,20 @@
+{
+  "product": "牛肉夹馍",
+  "dish_identity": "a golden flaky layered round roujiamo flatbread, split only enough to hold moist soy-glazed chopped beef and fresh bright-green pepper pieces, with crisp toasted layers and no mayonnaise, cheese, salad leaves or pulled-pork texture",
+  "physical_sign_reference": "../../../company_logo/AGO.png",
+  "source_product_images": [
+    "outputs/reference_assets/49_xian_beef_roujiamo/source_products/beef_roujiamo_product_reference.png"
+  ],
+  "assets": {
+    "scene_anchor": "outputs/reference_assets/49_xian_beef_roujiamo/generated/xian_beef_roujiamo_scene_anchor-1.png",
+    "prep_state": "outputs/reference_assets/49_xian_beef_roujiamo/generated/xian_beef_roujiamo_prep_state-1.png",
+    "cook_state": "outputs/reference_assets/49_xian_beef_roujiamo/generated/xian_beef_roujiamo_cook_state-1.png",
+    "hero_state": "outputs/reference_assets/49_xian_beef_roujiamo/generated/xian_beef_roujiamo_hero_state-1.png"
+  },
+  "generation_order": [
+    "scene_anchor",
+    "prep_state",
+    "cook_state",
+    "hero_state"
+  ]
+}

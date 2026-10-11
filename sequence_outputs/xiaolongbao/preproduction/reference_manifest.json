@@ -1,0 +1,18 @@
+{
+  "revision": 2,
+  "product": "Soup Dumplings (Xiaolongbao)",
+  "source_product_reference": "product_references/xiaolongbao_source.png",
+  "physical_sign_reference": "../../../company_logo/AGO.png",
+  "assets": {
+    "character_scene": "outputs/reference_assets/34_xiaolongbao/generated/xiaolongbao_character_scene-1.png",
+    "prep_state": "outputs/reference_assets/34_xiaolongbao/generated/xiaolongbao_prep_state-1.png",
+    "cook_state": "outputs/reference_assets/34_xiaolongbao/generated/xiaolongbao_cook_state-1.png",
+    "hero_state": "outputs/reference_assets/34_xiaolongbao/generated/xiaolongbao_hero_state-1.png"
+  },
+  "generation_order": [
+    "character_scene",
+    "prep_state",
+    "cook_state",
+    "hero_state"
+  ]
+}

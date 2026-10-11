@@ -1,0 +1,38 @@
+{
+  "project": "salmon_nigiri_tutorial_10s",
+  "format": "single_10_second_vertical_clip",
+  "model_target": "MiniMax H3 reference-to-video",
+  "reference_order": [
+    {
+      "picture": 1,
+      "path": "references/01_prep_salmon_rice.png",
+      "role": "kitchen, cook wardrobe, steel table, salmon and sushi-rice preparation authority"
+    },
+    {
+      "picture": 2,
+      "path": "references/02_shape_rice.png",
+      "role": "sixth-piece rice-shaping action and five-piece continuity authority"
+    },
+    {
+      "picture": 3,
+      "path": "references/03_place_salmon.png",
+      "role": "one-slice-on-one-rice assembly action authority"
+    },
+    {
+      "picture": 4,
+      "path": "references/04_six_nigiri_hero.png",
+      "role": "exactly six finished salmon nigiri and final plate authority"
+    }
+  ],
+  "unused_product_sources": [
+    "product_references/salmon_sashimi_source.png"
+  ],
+  "generation_notes": [
+    "Upload only the four active references, in exactly this order.",
+    "Do not upload the original sashimi-on-ice source; its ice and parsley presentation can leak into the tutorial.",
+    "Generate one continuous 10-second 9:16 clip, not multiple clips.",
+    "The salmon is already safely pre-cut; do not ask H3 to generate knife work.",
+    "The cook makes the sixth piece while five finished pieces remain on the plate, then the final plate contains exactly six.",
+    "No packaging, captions, logos, rolls, decorative garnish or visible brand text."
+  ]
+}

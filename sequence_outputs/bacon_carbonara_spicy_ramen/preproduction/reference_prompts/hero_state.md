@@ -1,0 +1,12 @@
+Use case: ads-marketing
+Asset type: no-person MiniMax H3 R2V reference image for a vertical food commercial
+Primary request: create the hero state reference for Bacon Carbonara Spicy Ramen.
+Input image: Image 1 is the approved ASIAN GROCER ONLINE / powered by UMALL tabletop sign artwork; preserve it only where the scene asks for a physical tabletop card. 
+Scene/backdrop: a cozy late-evening Korean apartment kitchen with matte charcoal lower cabinets, small square pale-pink ceramic backsplash tiles, a black speckled quartz counter, one compact stainless saucepan, a shallow charcoal sauté pan, soft warm under-cabinet light and a blurred rain-dark window.
+Subject: Final no-person serving hero in the charcoal-and-pink Korean kitchen: a shallow matte-black bowl holds a loose natural mound of creamy pale-orange curled noodles, irregular browned bacon strips, a small amount of grated pale cheese and one intact golden egg yolk at the centre. The sauce is rich and glossy but not overly thick; no package, sign, people, face, body, chopsticks or invented garnishes.
+Food authority: springy thick curled instant noodles in a creamy pale-orange carbonara sauce, real irregular bacon strips browned at their edges, finely grated pale cheese, a light dusting of dried green herbs and a soft egg yolk only as a final unbroken garnish.
+Style/medium: high-end photorealistic food-commercial still with real cookware, natural appetising texture and physically plausible condensation or controlled steam.
+Composition/framing: vertical 9:16, one calm food state, no face, body, portrait, person or hands.
+Lighting/mood: crisp directional food light with coherent shadows and clean highlight detail.
+Constraints: Boil the noodles until springy, retain a small amount of noodle water, then drain. Render real bacon strips until their fat is glossy and their edges are browned, never dry or uniformly square. Warm the supplied spicy sauce with milk or cooking cream and the retained noodle water over low heat, fold in the noodles and carbonara seasoning until every curl is glossy pale orange. Finish with cheese; the yolk stays intact on the plated noodles and is not scrambled into the sauce. The dish must be creamy and substantial rather than a red soup, with no fake cheese pull or excessive chilli flakes. No fake labels, captions, price graphics, watermarks, invented products or extra dishes.
+Avoid: warped utensils, melted food, excessive steam, clutter, fake app interface and any visible human.

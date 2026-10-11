@@ -1,0 +1,18 @@
+{
+  "revision": 2,
+  "product": "Sau Tao Taiwanese Knife-Cut Noodles",
+  "source_product_reference": "product_references/sautao_knife_cut_noodles_source.png",
+  "physical_sign_reference": "../../../company_logo/AGO.png",
+  "assets": {
+    "character_scene": "outputs/reference_assets/32_sautao_knife_cut_noodles/generated/sautao_knife_cut_noodles_character_scene-1.png",
+    "prep_state": "outputs/reference_assets/32_sautao_knife_cut_noodles/generated/sautao_knife_cut_noodles_prep_state-1.png",
+    "cook_state": "outputs/reference_assets/32_sautao_knife_cut_noodles/generated/sautao_knife_cut_noodles_cook_state-1.png",
+    "hero_state": "outputs/reference_assets/32_sautao_knife_cut_noodles/generated/sautao_knife_cut_noodles_hero_state-1.png"
+  },
+  "generation_order": [
+    "character_scene",
+    "prep_state",
+    "cook_state",
+    "hero_state"
+  ]
+}

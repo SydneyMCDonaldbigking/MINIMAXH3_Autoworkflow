@@ -20,7 +20,7 @@ retention_analysis:
 <Picture 6>: partially_preserved. Udon noodle shape remains thick and white after cooking.
 
 detailed_description:
-[Shot 1] Locked-off close-up at pot height, 50mm feel, continuing directly from <Picture 1>. The thick frozen udon from <Picture 3> loosens in gently boiling water. <Subject 1> uses chopsticks to separate the noodles with two slow lifts, keeping them long, thick, and glossy rather than broken. Steam rises but does not hide the noodles. The camera holds steady and ends with the udon fully loosened and ready to transfer.
+[Shot 1] Locked-off close-up at pot height, 50mm feel, continuing directly from <Picture 1>. The thick frozen udon from <Picture 3> loosens in gently boiling water. One hand of <Subject 1> holds a single pair of chopsticks and lifts a portion of noodles clear of the water surface in one slow, unhurried motion, keeping the strands long, thick, and glossy rather than broken; only that one hand and that one pair of chopsticks are ever in frame, never a second hand or a second pair working at the same time. The lift stays deliberate and slow enough that individual strands stay readable rather than blurring together. Steam rises but does not hide the noodles. The camera holds steady and ends with the udon fully loosened and ready to transfer.
 
 [Shot 2] At 00:01.600, the shot cuts to a high three-quarter close-up over the small dashi saucepan. Clear light amber broth simmers gently with soy and mirin already incorporated from <Picture 3>. <Subject 1> stirs once with a small ladle, then lifts the ladle so the transparent broth sheets back into the pan. The camera pushes in slowly 4 cm toward the broth surface. The shot ends with a clean amber dashi shimmer, not cloudy ramen broth.
 
@@ -28,10 +28,10 @@ detailed_description:
 
 [Continuity guard] This clip is noodle and broth transformation, not final hero. Do not add all toppings yet except maybe a small scallion bowl in the background. Keep the broth clear amber, not milky, creamy, curry-coloured, or oily. Udon must remain thick white noodles, not ramen, soba, spaghetti, pho, rice noodle, or stir-fry. The final frame should clearly support a broth-pour start for clip 03, with the bowl, dashi saucepan, and toppings in the same kitchen position.
 
-Preserve across all shots: same pot, same bowl, thick udon noodle texture, clear dashi broth, scallion and fish cake mise en place, warm clean light, realistic hands, gentle steam. Avoid finished plate too early, heavy meat toppings, random vegetables, cloudy soup, curry, chicken wings, luffa, readable labels, subtitles, watermarks, floating logos, distorted hands, camera shake, and scene jumps.
+Preserve across all shots: same pot, same bowl, thick udon noodle texture, clear dashi broth, scallion and fish cake mise en place, warm clean light, realistic hands, gentle steam, one hand and one pair of chopsticks whenever noodles are lifted. Avoid finished plate too early, heavy meat toppings, random vegetables, cloudy soup, curry, chicken wings, luffa, readable labels, subtitles, watermarks, floating logos, distorted hands, a second hand or a second pair of chopsticks lifting noodles at the same time, fast or rushed noodle lifting, camera shake, and scene jumps.
 
 overall_soundscape:
-Boiling water, chopsticks lifting noodles, ladle stirring clear broth, soft bowl placement, gentle steam. No speech.
+Boiling water, one hand slowly lifting noodles with chopsticks, ladle stirring clear broth, soft bowl placement, gentle steam. No speech.
 
 non_diegetic_music:
 The warm IG food bed stays restrained and calm, with a small lift as the broth simmers.

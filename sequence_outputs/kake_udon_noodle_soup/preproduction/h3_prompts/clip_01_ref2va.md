@@ -30,7 +30,7 @@ detailed_description:
 
 [Continuity guard] Keep this clip as frozen-package and prep setup only. Do not show finished soup, stir-fry, ramen broth, curry, meat toppings, or a fully dressed bowl. The udon must stay thick, white, and glossy-looking, not thin ramen, soba, spaghetti, or rice noodles. Packaging should be generic clear plastic with no copied logo or readable Japanese text. Keep the counter sparse, bright, and plant-free. The last frame should preserve the same pot, dashi ingredients, and udon state for a direct cooking handoff.
 
-Preserve across all shots: same no-face cook, same kitchen, generic frozen udon package, thick white noodles, dashi ingredients, saucepan, deep bowl, chopsticks, warm clean light. Avoid readable labels, copied package art, ramen, soba, spaghetti, stir-fry, cloudy creamy broth, curry, chicken wings, luffa, distorted hands, extra fingers, subtitles, watermarks, floating logos, camera shake, and scene jumps.
+Preserve across all shots: same no-face cook, same kitchen, generic frozen udon package, thick white noodles, dashi ingredients, saucepan, deep bowl, a single pair of chopsticks resting nearby, warm clean light. Avoid readable labels, copied package art, ramen, soba, spaghetti, stir-fry, cloudy creamy broth, curry, chicken wings, luffa, distorted hands, extra fingers, multiple pairs of chopsticks in frame, subtitles, watermarks, floating logos, camera shake, and scene jumps.
 
 overall_soundscape:
 Freezer drawer slide, plastic pack handling, soft bowl placement, water beginning to simmer, quiet kitchen ambience. No speech.

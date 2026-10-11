@@ -1,0 +1,34 @@
+{
+  "project": "red_braised_lamb_ribs_potato_carrot_10s",
+  "format": "single_10_second_vertical_clip",
+  "model_target": "MiniMax H3 reference-to-video",
+  "reference_order": [
+    {
+      "picture": 1,
+      "path": "references/01_lamb_prep.png",
+      "role": "cook, kitchen, steel table, raw long-bone lamb ribs, potato and carrot prep authority"
+    },
+    {
+      "picture": 2,
+      "path": "references/02_add_potato_carrot.png",
+      "role": "browned lamb, red braising liquid, vegetable-add action, pot and gas-hob authority"
+    },
+    {
+      "picture": 3,
+      "path": "references/03_braised_lamb_hero.png",
+      "role": "fully braised lamb, tender potato and carrot, reduced sauce and final hero authority"
+    }
+  ],
+  "unused_product_sources": [
+    "product_references/raw_lamb_ribs_source.png",
+    "product_references/finished_lamb_reference.png"
+  ],
+  "generation_notes": [
+    "Upload only the three active references, in exactly this order.",
+    "The source photos have already been normalized into clean vertical Image2 references; do not upload the low-resolution originals.",
+    "Generate one continuous 10-second 9:16 clip, not multiple clips.",
+    "Preserve recognizable long-bone lamb ribs from raw prep through the final dish.",
+    "Use hard cuts for time compression; do not morph raw meat directly into the final braise.",
+    "No package, text, logo, subtitles, knife work or extra people."
+  ]
+}

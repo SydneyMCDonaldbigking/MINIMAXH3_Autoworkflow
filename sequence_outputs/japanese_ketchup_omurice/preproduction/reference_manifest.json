@@ -1,0 +1,18 @@
+{
+  "product": "日本番茄酱蛋包饭",
+  "dish_identity": "a neat oval mound of ketchup fried rice with small cooked chicken-thigh pieces, onion and mushroom, covered in a smooth thin pale-yellow omelette and finished with one unbroken modest ketchup ribbon",
+  "physical_sign_reference": "../../../company_logo/AGO.png",
+  "source_product_images": [],
+  "assets": {
+    "scene_anchor": "outputs/reference_assets/51_japanese_ketchup_omurice/generated/japanese_ketchup_omurice_scene_anchor-1.png",
+    "prep_state": "outputs/reference_assets/51_japanese_ketchup_omurice/generated/japanese_ketchup_omurice_prep_state-1.png",
+    "cook_state": "outputs/reference_assets/51_japanese_ketchup_omurice/generated/japanese_ketchup_omurice_cook_state-1.png",
+    "hero_state": "outputs/reference_assets/51_japanese_ketchup_omurice/generated/japanese_ketchup_omurice_hero_state-1.png"
+  },
+  "generation_order": [
+    "scene_anchor",
+    "prep_state",
+    "cook_state",
+    "hero_state"
+  ]
+}

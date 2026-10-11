@@ -1,0 +1,17 @@
+{
+  "product": "Chive and Egg Boiled Dumplings",
+  "dish_identity": "thin wheat-wrapper crescent dumplings filled only with finely chopped Chinese chives and fluffy scrambled egg, cooked until plump and glossy",
+  "physical_sign_reference": "../../../company_logo/AGO.png",
+  "assets": {
+    "scene_anchor": "outputs/reference_assets/41_chive_egg_boiled_dumplings/generated/chive_egg_boiled_dumplings_scene_anchor-1.png",
+    "prep_state": "outputs/reference_assets/41_chive_egg_boiled_dumplings/generated/chive_egg_boiled_dumplings_prep_state-1.png",
+    "cook_state": "outputs/reference_assets/41_chive_egg_boiled_dumplings/generated/chive_egg_boiled_dumplings_cook_state-1.png",
+    "hero_state": "outputs/reference_assets/41_chive_egg_boiled_dumplings/generated/chive_egg_boiled_dumplings_hero_state-1.png"
+  },
+  "generation_order": [
+    "scene_anchor",
+    "prep_state",
+    "cook_state",
+    "hero_state"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "product": "Classic Wagyu Sukiyaki",
+  "dish_identity": "real 1 mm paper-thin Wagyu sukiyaki slices with fine natural marbling, tofu, napa cabbage, shiitake, enoki, Japanese long onion and shirataki noodles in clear shallow sweet-savoury warishita",
+  "physical_sign_reference": "../../../company_logo/AGO.png",
+  "assets": {
+    "scene_anchor": "outputs/reference_assets/42_classic_wagyu_sukiyaki/generated/classic_wagyu_sukiyaki_scene_anchor-1.png",
+    "prep_state": "outputs/reference_assets/42_classic_wagyu_sukiyaki/generated/classic_wagyu_sukiyaki_prep_state-1.png",
+    "cook_state": "outputs/reference_assets/42_classic_wagyu_sukiyaki/generated/classic_wagyu_sukiyaki_cook_state-1.png",
+    "hero_state": "outputs/reference_assets/42_classic_wagyu_sukiyaki/generated/classic_wagyu_sukiyaki_hero_state-1.png"
+  },
+  "generation_order": [
+    "scene_anchor",
+    "prep_state",
+    "cook_state",
+    "hero_state"
+  ]
+}

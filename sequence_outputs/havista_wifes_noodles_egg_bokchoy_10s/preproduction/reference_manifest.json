@@ -1,0 +1,18 @@
+{
+  "project": "havista_wifes_noodles_egg_bokchoy_10s",
+  "format": "single_10_second_vertical_clip",
+  "reference_order": [
+    {"picture": 1, "path": "references/00_package_takeout.png", "role": "opening package and noodle take-out action only"},
+    {"picture": 2, "path": "references/01_raw_noodles_no_package.png", "role": "packaging-free raw noodles, greens, egg and kitchen authority"},
+    {"picture": 3, "path": "references/02_noodles_blanching.png", "role": "packaging-free boiling and noodle-entry state"},
+    {"picture": 4, "path": "references/03_fried_egg.png", "role": "packaging-free fried-egg state"},
+    {"picture": 5, "path": "references/04_finished_egg_noodle_bowl.png", "role": "packaging-free finished hero bowl"}
+  ],
+  "unused_source": "product_references/havista_wifes_noodles_source.png",
+  "generation_notes": [
+    "Upload only the five active references, in exactly this order.",
+    "Do not additionally upload the original product source; Picture 1 already carries the opening package identity.",
+    "The package is allowed only in Shot 1 and must disappear after the 2.4-second hard cut.",
+    "Do not split the story into multiple clips."
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "revision": 2,
+  "product": "Chaopai Premium Beef Bone Broth Hot Pot Base",
+  "source_product_reference": "product_references/chaopai_beef_bone_broth_source.png",
+  "physical_sign_reference": "../../../company_logo/AGO.png",
+  "assets": {
+    "character_scene": "outputs/reference_assets/33_chaopai_beef_bone_broth/generated/chaopai_beef_bone_broth_character_scene-1.png",
+    "prep_state": "outputs/reference_assets/33_chaopai_beef_bone_broth/generated/chaopai_beef_bone_broth_prep_state-1.png",
+    "cook_state": "outputs/reference_assets/33_chaopai_beef_bone_broth/generated/chaopai_beef_bone_broth_cook_state-1.png",
+    "hero_state": "outputs/reference_assets/33_chaopai_beef_bone_broth/generated/chaopai_beef_bone_broth_hero_state-1.png"
+  },
+  "generation_order": [
+    "character_scene",
+    "prep_state",
+    "cook_state",
+    "hero_state"
+  ]
+}

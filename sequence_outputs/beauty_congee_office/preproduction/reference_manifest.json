@@ -1,0 +1,21 @@
+{
+  "product": "办公室茯苓百合美苓粥",
+  "product_en": "Poria Lily Beauty Congee, Office Breakfast",
+  "dish_identity": "the supplied 五仁本草 茯苓百合美苓粥 (Poria Lily Beauty Congee) instant sachet - a pale ivory grain-and-fungus powder that becomes a smooth, glossy, creamy off-white congee-like drink with a few visible pale flecks of white fungus and lily bulb once stirred with hot water, thicker than milk and never a thin watery liquid",
+  "physical_sign_reference": "../../../company_logo/AGO.png",
+  "source_product_images": [
+    "outputs/reference_assets/55_beauty_congee_office/source_products/beauty_congee_office_source.png"
+  ],
+  "assets": {
+    "character_scene": "outputs/reference_assets/55_beauty_congee_office/generated/beauty_congee_office_character_scene-1.png",
+    "prep_state": "outputs/reference_assets/55_beauty_congee_office/generated/beauty_congee_office_prep_state-1.png",
+    "cook_state": "outputs/reference_assets/55_beauty_congee_office/generated/beauty_congee_office_cook_state-1.png",
+    "hero_state": "outputs/reference_assets/55_beauty_congee_office/generated/beauty_congee_office_hero_state-1.png"
+  },
+  "generation_order": [
+    "character_scene",
+    "prep_state",
+    "cook_state",
+    "hero_state"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "product": "午餐肉炒鸡蛋",
+  "dish_identity": "real pink luncheon meat cut into varied 1.5 cm chunky cubes with browned seared faces, soft glossy yellow egg curds, a few thin scallion rings and neutral cooking oil",
+  "physical_sign_reference": "../../../company_logo/AGO.png",
+  "source_product_images": [
+    "outputs/reference_assets/46_korean_luncheon_meat_scrambled_eggs/source_products/korean_luncheon_meat.png"
+  ],
+  "assets": {
+    "scene_anchor": "outputs/reference_assets/46_korean_luncheon_meat_scrambled_eggs/generated/luncheon_meat_scrambled_eggs_scene_anchor-1.png",
+    "prep_state": "outputs/reference_assets/46_korean_luncheon_meat_scrambled_eggs/generated/luncheon_meat_scrambled_eggs_prep_state-1.png",
+    "cook_state": "outputs/reference_assets/46_korean_luncheon_meat_scrambled_eggs/generated/luncheon_meat_scrambled_eggs_cook_state-1.png",
+    "hero_state": "outputs/reference_assets/46_korean_luncheon_meat_scrambled_eggs/generated/luncheon_meat_scrambled_eggs_hero_state-1.png"
+  },
+  "generation_order": [
+    "scene_anchor",
+    "prep_state",
+    "cook_state",
+    "hero_state"
+  ]
+}

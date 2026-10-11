@@ -1,0 +1,17 @@
+{
+  "product": "Green Pepper Chicken Breast Stir-Fry",
+  "dish_identity": "tender unbreaded irregular thin cross-grain chicken-breast slices of naturally varied sizes, crisp medium-cut bright-green bell-pepper chunks, garlic, ginger and a light glossy savoury sauce",
+  "physical_sign_reference": "../../../company_logo/AGO.png",
+  "assets": {
+    "scene_anchor": "outputs/reference_assets/43_green_pepper_chicken_breast_stir_fry/generated/green_pepper_chicken_breast_stir_fry_scene_anchor-1.png",
+    "prep_state": "outputs/reference_assets/43_green_pepper_chicken_breast_stir_fry/generated/green_pepper_chicken_breast_stir_fry_prep_state-1.png",
+    "cook_state": "outputs/reference_assets/43_green_pepper_chicken_breast_stir_fry/generated/green_pepper_chicken_breast_stir_fry_cook_state-1.png",
+    "hero_state": "outputs/reference_assets/43_green_pepper_chicken_breast_stir_fry/generated/green_pepper_chicken_breast_stir_fry_hero_state-1.png"
+  },
+  "generation_order": [
+    "scene_anchor",
+    "prep_state",
+    "cook_state",
+    "hero_state"
+  ]
+}

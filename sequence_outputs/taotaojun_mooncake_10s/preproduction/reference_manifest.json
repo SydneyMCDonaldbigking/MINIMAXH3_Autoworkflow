@@ -1,0 +1,40 @@
+{
+  "project": "taotaojun_mooncake_10s",
+  "format": "single_10_second_vertical_clip",
+  "reference_order": [
+    {
+      "picture": 1,
+      "path": "references/02_mooncake_only_closeup.png",
+      "role": "packaging-free mooncake, crust, filling assortment, gold trays and tea authority"
+    },
+    {
+      "picture": 2,
+      "path": "references/01_indoor_cutting_no_packaging.png",
+      "role": "packaging-free indoor cutting action and family identity"
+    },
+    {
+      "picture": 3,
+      "path": "references/04_balcony_moon_view.png",
+      "role": "same family on the home balcony looking at the full moon"
+    }
+  ],
+  "unused_product_sources": [
+    "product_references/mooncake_assortment_source.png",
+    "product_references/gift_box_source.png"
+  ],
+  "unused_alternates": [
+    "references/00_indoor_product_opening.png",
+    "references/01_indoor_mooncake_cutting.png",
+    "references/02_indoor_product_closeup.png",
+    "references/01_family_moon_opening.png",
+    "references/02_family_cut_share.png",
+    "references/03_family_final_hero.png"
+  ],
+  "generation_notes": [
+    "Upload only the three active references, in exactly this order.",
+    "Do not upload either original packaging image to H3; packaging references can leak into the food close-up.",
+    "The product close-up must show mooncakes, gold trays and tea only.",
+    "At 5.2 seconds use a hard cut from the food-only close-up to the home balcony.",
+    "Do not split the story into multiple clips."
+  ]
+}

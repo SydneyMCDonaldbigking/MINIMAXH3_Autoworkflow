@@ -1,0 +1,21 @@
+{
+  "product": "户外露营羊肉串",
+  "product_en": "Outdoor Camping Lamb Skewers",
+  "dish_identity": "the supplied raw lamb skewers - thin bamboo skewers threading alternating 3 cm cubes of deep-red lean lamb and white marbled fat, seven to eight pieces per skewer - grilled directly over glowing charcoal until the fat renders glossy and every surface turns an even sauce-brown with light char at a few edges, cooked through with no pink centre, never blackened, dried out, or confused with paler pork or coarser dark-grained beef",
+  "physical_sign_reference": "../../../company_logo/AGO.png",
+  "source_product_images": [
+    "outputs/reference_assets/54_bbq_lamb_camping/source_products/bbq_lamb_camping_source.png"
+  ],
+  "assets": {
+    "character_scene": "outputs/reference_assets/54_bbq_lamb_camping/generated/bbq_lamb_camping_character_scene-1.png",
+    "prep_state": "outputs/reference_assets/54_bbq_lamb_camping/generated/bbq_lamb_camping_prep_state-1.png",
+    "cook_state": "outputs/reference_assets/54_bbq_lamb_camping/generated/bbq_lamb_camping_cook_state-1.png",
+    "hero_state": "outputs/reference_assets/54_bbq_lamb_camping/generated/bbq_lamb_camping_hero_state-1.png"
+  },
+  "generation_order": [
+    "character_scene",
+    "prep_state",
+    "cook_state",
+    "hero_state"
+  ]
+}

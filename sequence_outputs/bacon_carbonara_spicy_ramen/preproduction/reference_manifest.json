@@ -1,0 +1,20 @@
+{
+  "product": "培根奶油火鸡面",
+  "dish_identity": "springy thick curled instant noodles in a creamy pale-orange carbonara sauce, real irregular bacon strips browned at their edges, finely grated pale cheese, a light dusting of dried green herbs and a soft egg yolk only as a final unbroken garnish",
+  "physical_sign_reference": "../../../company_logo/AGO.png",
+  "source_product_images": [
+    "outputs/reference_assets/45_bacon_carbonara_buldak/source_products/k_spicy_carbonara_ramen.png"
+  ],
+  "assets": {
+    "scene_anchor": "outputs/reference_assets/45_bacon_carbonara_buldak/generated/bacon_carbonara_spicy_ramen_scene_anchor-1.png",
+    "prep_state": "outputs/reference_assets/45_bacon_carbonara_buldak/generated/bacon_carbonara_spicy_ramen_prep_state-1.png",
+    "cook_state": "outputs/reference_assets/45_bacon_carbonara_buldak/generated/bacon_carbonara_spicy_ramen_cook_state-1.png",
+    "hero_state": "outputs/reference_assets/45_bacon_carbonara_buldak/generated/bacon_carbonara_spicy_ramen_hero_state-1.png"
+  },
+  "generation_order": [
+    "scene_anchor",
+    "prep_state",
+    "cook_state",
+    "hero_state"
+  ]
+}

@@ -1,0 +1,12 @@
+Use case: ads-marketing
+Asset type: no-person MiniMax H3 R2V reference image for a vertical cooking commercial
+Primary request: create the scene anchor reference for Green Pepper Chicken Breast Stir-Fry.
+Input image: Image 1 is the approved ASIAN GROCER ONLINE / powered by UMALL tabletop sign artwork; preserve it only where the scene asks for a physical tabletop card.
+Scene/backdrop: a clean contemporary Chinese wok kitchen with pale concrete counter, sage-green tiled splashback, black carbon-steel wok over a blue gas flame and strong daylight from the left.
+Subject: Vertical no-person wok-kitchen opening. On pale concrete counter are plain unbreaded thin cross-grain chicken-breast slices of visibly varied 2 to 5 cm natural tapered shapes, vivid green bell pepper cut into 3 cm irregular medium diamond-shaped chunks, minced garlic, grated ginger and a small bowl of light brown sauce. A black carbon-steel wok heats over a blue flame; the exact AGO sign from Image 1 is a small physical card far back on the counter.
+Food authority: tender unbreaded irregular thin cross-grain chicken-breast slices of naturally varied sizes, crisp medium-cut bright-green bell-pepper chunks, garlic, ginger and a light glossy savoury sauce.
+Style/medium: high-end photorealistic food-commercial still with real cookware, appetising texture and physically plausible steam.
+Composition/framing: vertical 9:16, one calm food action or still state, no face, torso or visible person.
+Lighting/mood: purposeful soft natural light, coherent direction and clean highlights.
+Constraints: Cut green bell pepper into 3 cm irregular medium diamond-shaped chunks, never thin strips. Slice chicken breast thinly across the grain into intentionally varied 2 to 5 cm tapered pieces—some narrow and some wider, with irregular natural edges—so it never reads as identical copied pieces. It must remain visibly plain chicken with no breadcrumb, flour, batter, crust or deep-fried texture. Stir-fry the pepper chunks first until just softened with light browning, add garlic and ginger briefly, then chicken until opaque; finish with a light sauce and toss only until glazed. No visible face, body, portrait or anonymous person; only cropped unidentifiable hands at the edge are allowed where action is indispensable. No fake labels, captions, price graphics, watermarks or invented products.
+Avoid: western cuisine substitution, warped utensils, extra fingers, melted food, excessive steam, clutter and fake app interface.

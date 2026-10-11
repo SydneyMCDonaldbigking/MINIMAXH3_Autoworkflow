@@ -1,0 +1,12 @@
+Use case: ads-marketing
+Asset type: no-person MiniMax H3 R2V reference image for a vertical food commercial
+Primary request: create the prep state reference for Luncheon Meat Scrambled Eggs.
+Input image: Image 1 is the approved ASIAN GROCER ONLINE / powered by UMALL tabletop sign artwork; preserve it only where the scene asks for a physical tabletop card. 
+Scene/backdrop: a bright Korean breakfast kitchen with creamy ivory terrazzo worktops, cornflower-blue cabinet fronts, brushed nickel hardware, a low round pale-grey wok, a compact white gas burner, thin flax curtains and crisp early-morning sunlight.
+Subject: Top three-quarter no-person preparation image in the blue-and-terrazzo Korean breakfast kitchen: varied 1.5 cm luncheon-meat cubes sit on a small plate; a clear bowl holds beaten eggs with a few scallion rings. A pale-grey wok with a thin sheen of oil heats nearby. Cubes are real meat with irregular corners and natural pink interior, not breaded or copy-pasted. No package, sign, face, body or hands.
+Food authority: real pink luncheon meat cut into varied 1.5 cm chunky cubes with browned seared faces, soft glossy yellow egg curds, a few thin scallion rings and neutral cooking oil.
+Style/medium: high-end photorealistic food-commercial still with real cookware, natural appetising texture and physically plausible condensation or controlled steam.
+Composition/framing: vertical 9:16, one calm food state, no face, body, portrait, person or hands.
+Lighting/mood: crisp directional food light with coherent shadows and clean highlight detail.
+Constraints: Cut the supplied luncheon meat into 1.5 cm irregular chunky cubes, pan-fry them first until a portion of the faces has a light golden-brown sear, then set them aside. Beat eggs with a small splash of milk or water and a few scallion rings. Cook over low-to-medium heat, folding only until soft glossy curds form; return the browned meat at the end so both ingredients stay distinct. Avoid a perfectly uniform dice, dry rubbery egg, burnt meat, breading, sauce puddles, rice, toast or unrelated breakfast dishes. No fake labels, captions, price graphics, watermarks, invented products or extra dishes.
+Avoid: warped utensils, melted food, excessive steam, clutter, fake app interface and any visible human.

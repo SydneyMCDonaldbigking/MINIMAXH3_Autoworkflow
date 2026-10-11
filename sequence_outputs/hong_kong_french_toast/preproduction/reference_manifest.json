@@ -1,0 +1,18 @@
+{
+  "product": "港式西多士",
+  "dish_identity": "two thick crust-trimmed white-bread slices filled with a thin layer of smooth peanut butter, egg-dipped and pan-fried evenly golden, finished with one square of pale butter and a restrained glossy thread of condensed milk",
+  "physical_sign_reference": "../../../company_logo/AGO.png",
+  "source_product_images": [],
+  "assets": {
+    "scene_anchor": "outputs/reference_assets/50_hong_kong_french_toast/generated/hong_kong_french_toast_scene_anchor-1.png",
+    "prep_state": "outputs/reference_assets/50_hong_kong_french_toast/generated/hong_kong_french_toast_prep_state-1.png",
+    "cook_state": "outputs/reference_assets/50_hong_kong_french_toast/generated/hong_kong_french_toast_cook_state-1.png",
+    "hero_state": "outputs/reference_assets/50_hong_kong_french_toast/generated/hong_kong_french_toast_hero_state-1.png"
+  },
+  "generation_order": [
+    "scene_anchor",
+    "prep_state",
+    "cook_state",
+    "hero_state"
+  ]
+}

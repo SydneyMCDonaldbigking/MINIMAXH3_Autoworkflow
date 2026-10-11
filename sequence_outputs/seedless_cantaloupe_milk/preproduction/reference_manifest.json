@@ -1,0 +1,20 @@
+{
+  "product": "无籽蜜瓜牛奶",
+  "dish_identity": "ripe orange cantaloupe flesh only, completely free of rind, green skin, seeds, seed cavity, fibrous membranes and strings, blended smooth with cold whole milk and a few transparent ice cubes into a pale melon-orange milk drink",
+  "physical_sign_reference": "../../../company_logo/AGO.png",
+  "source_product_images": [
+    "outputs/reference_assets/47_seedless_cantaloupe_milk/source_products/cantaloupe_reference.png"
+  ],
+  "assets": {
+    "scene_anchor": "outputs/reference_assets/47_seedless_cantaloupe_milk/generated/seedless_cantaloupe_milk_scene_anchor-1.png",
+    "prep_state": "outputs/reference_assets/47_seedless_cantaloupe_milk/generated/seedless_cantaloupe_milk_prep_state-1.png",
+    "cook_state": "outputs/reference_assets/47_seedless_cantaloupe_milk/generated/seedless_cantaloupe_milk_cook_state-1.png",
+    "hero_state": "outputs/reference_assets/47_seedless_cantaloupe_milk/generated/seedless_cantaloupe_milk_hero_state-1.png"
+  },
+  "generation_order": [
+    "scene_anchor",
+    "prep_state",
+    "cook_state",
+    "hero_state"
+  ]
+}

@@ -1,0 +1,12 @@
+Use case: ads-marketing
+Asset type: no-person MiniMax H3 R2V reference image for a vertical food commercial
+Primary request: create the scene anchor reference for Seedless Cantaloupe Milk.
+Input image: Image 1 is the approved ASIAN GROCER ONLINE / powered by UMALL tabletop sign artwork; preserve it only where the scene asks for a physical tabletop card. Image 2 is the approved supplied product pack; reproduce it faithfully only where the scene specifies it, with its package geometry and printing untouched. 
+Scene/backdrop: a sunlit summer drinks kitchen with powder-blue checkerboard wall tile, pale birch cabinetry, a cool white stone island, a clear glass blender, a ribbed glass tumbler and long clean midday shadows from a nearby window.
+Subject: Vertical no-person opening in this powder-blue summer drinks kitchen. A small physical AGO tabletop tent card from Image 1 sits far back on the white stone island. In front: one clear bowl of perfectly clean orange cantaloupe flesh cubes only, a small chilled glass milk bottle, several transparent ice cubes and an empty glass blender. There is no whole melon, rind, green skin, half melon, seed cavity, seed, fibrous membrane or string anywhere. No people.
+Food authority: ripe orange cantaloupe flesh only, completely free of rind, green skin, seeds, seed cavity, fibrous membranes and strings, blended smooth with cold whole milk and a few transparent ice cubes into a pale melon-orange milk drink.
+Style/medium: high-end photorealistic food-commercial still with real cookware, natural appetising texture and physically plausible condensation or controlled steam.
+Composition/framing: vertical 9:16, one calm food state, no face, body, portrait, person or hands.
+Lighting/mood: crisp directional food light with coherent shadows and clean highlight detail.
+Constraints: Use only ripe orange cantaloupe flesh. Before the first frame, remove the rind, every seed, the entire seed cavity and all fibrous pale membranes; none may be visible in any ingredient, blender, spill, reflection, garnish or background. Blend 250 g clean melon flesh with 250 ml cold milk and a few ice cubes until fully smooth. The colour should be a natural pale creamy melon-orange, not neon orange, green, grey, speckled, foamy or smoothie-thick. Serve simply, with a small clean seedless orange melon cube garnish if desired. No fake labels, captions, price graphics, watermarks, invented products or extra dishes.
+Avoid: warped utensils, melted food, excessive steam, clutter, fake app interface and any visible human.

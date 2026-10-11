@@ -1,0 +1,39 @@
+{
+  "project": "shui_zhu_fish_10s",
+  "format": "single_10_second_vertical_clip",
+  "model_target": "MiniMax H3 reference-to-video",
+  "reference_order": [
+    {
+      "picture": 1,
+      "path": "references/01_fish_prep.png",
+      "role": "cook, kitchen, steel table, raw marinated skin-on fish slices and seasoning prep authority"
+    },
+    {
+      "picture": 2,
+      "path": "references/02_fish_into_broth.png",
+      "role": "one-slice-at-a-time cooking action and elongated skin-edged fish-slice-only authority; no round white food"
+    },
+    {
+      "picture": 3,
+      "path": "references/03_hot_oil_finish.png",
+      "role": "hot-oil finishing action, heatproof bowl, chili and Sichuan peppercorn authority"
+    },
+    {
+      "picture": 4,
+      "path": "references/04_shui_zhu_fish_hero.png",
+      "role": "finished shui zhu fish, skin-edged fillet shape, red-oil broth and final hero authority"
+    }
+  ],
+  "unused_product_sources": [
+    "product_references/raw_fish_slices_source.png",
+    "product_references/finished_shui_zhu_fish_reference.png"
+  ],
+  "generation_notes": [
+    "Upload only the four active references, in exactly this order.",
+    "The source photos have already been normalized into clean vertical Image2 references; do not upload the low-resolution originals.",
+    "Generate one continuous 10-second 9:16 clip, not multiple clips.",
+    "Preserve broad thin elongated fish slices and the narrow silver-black skin edge; every pale protein in the wok must be a fish slice, never a ball, scallop, dumpling or tofu cube.",
+    "Raw fish must become opaque and gently curled after entering the broth.",
+    "The hot-oil pour is controlled and produces a small sizzle, never a fireball."
+  ]
+}
